@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>http://127.0.0.1:1111/</loc>
+        <loc>https://i-o-i-u.github.io/</loc>
     </url>
     <url>
-        <loc>http://127.0.0.1:1111/chanting/</loc>
+        <loc>https://i-o-i-u.github.io/chanting/</loc>
     </url>
     <url>
-        <loc>http://127.0.0.1:1111/mufadati/</loc>
+        <loc>https://i-o-i-u.github.io/mufadati/</loc>
         <lastmod>2026-01-19</lastmod>
     </url>
     <url>
-        <loc>http://127.0.0.1:1111/questions/</loc>
+        <loc>https://i-o-i-u.github.io/questions/</loc>
     </url>
     <url>
-        <loc>http://127.0.0.1:1111/saif-clan/</loc>
+        <loc>https://i-o-i-u.github.io/saif-clan/</loc>
         <lastmod>2026-01-19</lastmod>
     </url>
     <url>
-        <loc>http://127.0.0.1:1111/writings/</loc>
+        <loc>https://i-o-i-u.github.io/writings/</loc>
     </url>
 </urlset>
