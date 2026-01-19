@@ -231,11 +231,11 @@
             overflow: visible !important;
         }
 
-        .dark-mode-btn {
+        .dark-mode-btn, .search-btn {
             position: relative;
         }
 
-        .dark-mode-tooltip {
+        .dark-mode-tooltip, .search-tooltip {
             position: absolute;
             top: 100%;
             left: 50%;
@@ -258,7 +258,7 @@
             margin-top: 8px;
         }
 
-        .dark-mode-tooltip::after {
+        .dark-mode-tooltip::after, .search-tooltip::after {
             content: '';
             position: absolute;
             bottom: 100%;
@@ -269,20 +269,20 @@
             border-color: transparent transparent rgba(255, 255, 255, 0.95) transparent;
         }
 
-        .dark-mode-btn:hover .dark-mode-tooltip {
+        .dark-mode-btn:hover .dark-mode-tooltip, .search-btn:hover .search-tooltip {
             opacity: 1;
             visibility: visible;
             transform: translateX(-50%) translateY(0px);
         }
 
-        body.dark .dark-mode-tooltip {
+        body.dark .dark-mode-tooltip, body.dark .search-tooltip {
             background: linear-gradient(135deg, rgba(30, 30, 30, 0.95), rgba(40, 40, 40, 0.9));
             color: #fbbf24;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
             border: 1px solid rgba(251, 191, 36, 0.2);
         }
 
-        body.dark .dark-mode-tooltip::after {
+        body.dark .dark-mode-tooltip::after, body.dark .search-tooltip::after {
             border-color: transparent transparent rgba(30, 30, 30, 0.95) transparent;
         }
 
@@ -337,7 +337,7 @@
             height: 100vh;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
-            z-index: 100;
+            z-index: 1000;
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             padding: 120px 24px 40px;
             display: flex;
@@ -387,7 +387,7 @@
             inset: 0;
             background: rgba(0, 0, 0, 0.2);
             backdrop-filter: blur(4px);
-            z-index: 90;
+            z-index: 900;
             opacity: 0;
             visibility: hidden;
             transition: all 0.4s ease;
@@ -437,7 +437,7 @@
         .tooltip-content::after {
             content: '';
             position: absolute;
-            bottom: 100%;
+            top: 100%;
             left: 50%;
             transform: translateX(-50%);
             border-width: 8px;
@@ -492,95 +492,103 @@
             line-height: 2.2 !important;
         }
 
+        /* Search Modal Styles */
+        .search-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .search-modal.active {
+            display: flex;
+        }
+
+        .search-modal-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+        }
+
+        .search-modal-content {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            background: white;
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            z-index: 2001;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        body.dark .search-modal-content {
+            background: #1f2937;
+            color: white;
+        }
+
+        .close-search {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            background: #f3f4f6;
+            transition: all 0.3s;
+        }
+
+        body.dark .close-search {
+            background: #374151;
+        }
+
+        .close-search:hover {
+            background: #e5e7eb;
+            transform: rotate(90deg);
+        }
+
+        /* Giscus Container */
+        .giscus-container {
+            margin-top: 60px;
+            padding: 30px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(251, 146, 60, 0.1);
+        }
+
+        body.dark .giscus-container {
+            background: rgba(30, 30, 30, 0.5);
+            border-color: rgba(251, 191, 36, 0.1);
+        }
+
         @media (max-width: 768px) {
             nav {
-                padding: 0.5rem 0;
+                padding: 0.25rem 0;
             }
 
             nav .flex {
-                padding: 0.75rem 0;
+                padding: 0.5rem 0;
             }
 
             nav .w-24 {
-                width: 3rem !important;
-                height: 3rem !important;
+                width: 2.5rem !important;
+                height: 2.5rem !important;
             }
 
             nav #navLogo {
-                transform: scale(2) !important;
+                transform: scale(1.8) !important;
             }
 
             nav h1 {
-                font-size: 0.75rem !important;
-                line-height: 1.3 !important;
-                margin-bottom: 0.25rem !important;
-            }
-
-            nav p {
-                font-size: 0.65rem !important;
-            }
-
-            nav .gap-40 {
-                gap: 1rem !important;
-            }
-
-            nav .gap-4 {
-                gap: 0.5rem !important;
-            }
-
-            .menu-btn {
-                width: 36px !important;
-                height: 36px !important;
-                padding: 8px !important;
-            }
-
-            .menu-btn span {
-                width: 18px !important;
-            }
-
-            .dark-mode-btn {
-                padding: 0.5rem !important;
-            }
-
-            .dark-mode-btn svg {
-                width: 1.25rem !important;
-                height: 1.25rem !important;
-            }
-
-            main section {
-                padding-top: 8rem !important;
-                padding-bottom: 2rem !important;
-            }
-
-            .w-64 {
-                width: 10rem !important;
-                height: 10rem !important;
-            }
-
-            .content-section p {
-                font-size: 0.95rem !important;
-                line-height: 2.2 !important;
-            }
-
-            .nav-menu {
-                width: 280px !important;
-                right: -280px !important;
-                padding: 100px 20px 30px !important;
-            }
-
-            .nav-link {
-                padding: 12px 18px !important;
-                font-size: 16px !important;
-            }
-
-            nav h1 {
-                padding-bottom: 0.5rem !important;
-            }
-        }
-
-        @media (max-width: 480px) {
-            nav h1 {
-                font-size: 0.65rem !important;
+                font-size: 0.7rem !important;
+                line-height: 1.2 !important;
+                margin-bottom: 0.15rem !important;
             }
 
             nav p {
@@ -588,18 +596,74 @@
             }
 
             nav .gap-40 {
-                gap: 0.5rem !important;
+                gap: 0.75rem !important;
             }
 
-            .content-section {
-                padding: 1.5rem !important;
+            nav .gap-4 {
+                gap: 0.4rem !important;
+            }
+
+            .menu-btn {
+                width: 34px !important;
+                height: 34px !important;
+                padding: 6px !important;
+            }
+
+            .menu-btn span {
+                width: 16px !important;
+            }
+
+            .dark-mode-btn, .search-btn {
+                padding: 0.4rem !important;
+            }
+
+            .dark-mode-btn svg, .search-btn svg {
+                width: 1.1rem !important;
+                height: 1.1rem !important;
+            }
+
+            main section {
+                padding-top: 6rem !important;
+                padding-bottom: 1.5rem !important;
+            }
+
+            .w-64 {
+                width: 8rem !important;
+                height: 8rem !important;
+            }
+
+            .content-section p {
+                font-size: 0.9rem !important;
+                line-height: 2.0 !important;
+            }
+
+            .nav-menu {
+                width: 260px !important;
+                right: -260px !important;
+                padding: 80px 16px 20px !important;
+            }
+
+            .nav-link {
+                padding: 10px 14px !important;
+                font-size: 15px !important;
             }
         }
 
-        @media (min-width: 1024px) {
+        @media (max-width: 480px) {
             nav h1 {
-                line-height: 1.8 !important;
-                padding-bottom: 0.5rem !important;
+                font-size: 0.6rem !important;
+            }
+
+            nav p {
+                font-size: 0.55rem !important;
+            }
+
+            nav .gap-40 {
+                gap: 0.4rem !important;
+            }
+
+            .content-section {
+                padding: 1.25rem !important;
             }
         }
     </style>
@@ -609,7 +673,21 @@
     <div class="bg-image-overlay"></div>
     <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
 
-    <nav class="fixed top-0 left-0 right-0 z-50 glass transition-all duration-300" id="navbar">
+    <!-- Search Modal -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-overlay" onclick="toggleSearch()"></div>
+        <div class="search-modal-content">
+            <div class="close-search" onclick="toggleSearch()">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </div>
+            <h2 class="text-2xl font-bold mb-6 text-center gradient-text">ابحث في الموقع</h2>
+            <div class="gcse-search"></div>
+        </div>
+    </div>
+
+    <nav class="fixed top-0 left-0 right-0 z-[100] glass transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between py-4">
                 <div class="flex items-center gap-40">
@@ -627,6 +705,16 @@
                 </div>
                 
                 <div class="flex items-center gap-4">
+                    <!-- Search Button -->
+                    <button onclick="toggleSearch()" 
+                            class="relative p-3 rounded-xl bg-gradient-to-r from-orange-100 to-amber-100 hover:from-orange-200 hover:to-amber-200 transition-all duration-300 group search-btn" 
+                            id="searchBtn">
+                        <svg class="w-6 h-6 text-orange-600 transition-transform group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                        <span class="search-tooltip">ابحث هنا!</span>
+                    </button>
+
                     <button onclick="toggleDarkMode()" 
                             class="relative p-3 rounded-xl bg-gradient-to-r from-orange-100 to-amber-100 hover:from-orange-200 hover:to-amber-200 transition-all duration-300 group dark-mode-btn" 
                             id="darkModeBtn">
@@ -733,6 +821,30 @@
                     </div>
                 </div>
                 {% endblock content %}
+
+                <!-- Giscus Comments Section -->
+                {% if page.extra.comments %}
+                <div class="max-w-5xl mx-auto mb-20">
+                    <div class="giscus-container shadow-xl">
+                        <script src="https://giscus.app/client.js"
+                                data-repo="i-o-i-u/i-o-i-u.github.io"
+                                data-repo-id="R_kgDOQ810RA"
+                                data-category="General"
+                                data-category-id="DIC_kwDOQ810RM4C1KKc"
+                                data-mapping="pathname"
+                                data-strict="0"
+                                data-reactions-enabled="1"
+                                data-emit-metadata="0"
+                                data-input-position="bottom"
+                                data-theme="preferred_color_scheme"
+                                data-lang="ar"
+                                data-loading="lazy"
+                                crossorigin="anonymous"
+                                async>
+                        </script>
+                    </div>
+                </div>
+                {% endif %}
             </div>
         </section>
     </main>
@@ -783,6 +895,9 @@
         </div>
     </footer>
 
+    <!-- Google Search Script -->
+    <script async src="https://cse.google.com/cse.js?cx=205ddd558c0ea469c"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const savedTheme = localStorage.getItem('theme');
@@ -799,6 +914,16 @@
             menuBtn.classList.toggle('active');
             navMenu.classList.toggle('active');
             menuOverlay.classList.toggle('active');
+        }
+
+        function toggleSearch() {
+            const modal = document.getElementById('searchModal');
+            modal.classList.toggle('active');
+            if (modal.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
         }
 
         function applyDarkMode() {
@@ -822,6 +947,9 @@
             
             document.getElementById('darkModeBtn').classList.remove('bg-gradient-to-r', 'from-orange-100', 'to-amber-100');
             document.getElementById('darkModeBtn').classList.add('bg-gray-800');
+
+            document.getElementById('searchBtn').classList.remove('bg-gradient-to-r', 'from-orange-100', 'to-amber-100');
+            document.getElementById('searchBtn').classList.add('bg-gray-800');
             
             document.getElementById('menuBtn').classList.remove('bg-gradient-to-r', 'from-orange-100', 'to-amber-100');
             document.getElementById('menuBtn').classList.add('bg-gray-800');
@@ -854,6 +982,9 @@
             
             document.getElementById('darkModeBtn').classList.add('bg-gradient-to-r', 'from-orange-100', 'to-amber-100');
             document.getElementById('darkModeBtn').classList.remove('bg-gray-800');
+
+            document.getElementById('searchBtn').classList.add('bg-gradient-to-r', 'from-orange-100', 'to-amber-100');
+            document.getElementById('searchBtn').classList.remove('bg-gray-800');
             
             document.getElementById('menuBtn').classList.add('bg-gradient-to-r', 'from-orange-100', 'to-amber-100');
             document.getElementById('menuBtn').classList.remove('bg-gray-800');
