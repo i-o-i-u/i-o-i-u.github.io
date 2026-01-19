@@ -44,52 +44,6 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
-        .floating {
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-        
-        .glow {
-            box-shadow: 0 0 30px rgba(251, 146, 60, 0.3);
-        }
-        
-        .dark-glow {
-            box-shadow: 0 0 40px rgba(251, 191, 36, 0.4);
-        }
-        
-        .card-hover {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .card-hover:hover {
-            transform: translateY(-12px) scale(1.02);
-        }
-        
-        .shimmer {
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            background-size: 200% 100%;
-            animation: shimmer 2s infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-        
-        .pattern {
-            background-image: radial-gradient(circle at 1px 1px, rgba(251, 146, 60, 0.15) 1px, transparent 0);
-            background-size: 40px 40px;
-        }
-        
-        .dark-pattern {
-            background-image: radial-gradient(circle at 1px 1px, rgba(251, 191, 36, 0.1) 1px, transparent 0);
-            background-size: 40px 40px;
-        }
 
         .bg-image-overlay {
             position: fixed;
@@ -110,20 +64,7 @@
             opacity: 0.03;
         }
         
-        .animate-spin-slow {
-            animation: spin 3s linear infinite;
-        }
-
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        body.dark #navLogo {
-            filter: brightness(0) invert(1);
-        }
-
-        body.dark #heroLogo {
+        body.dark #navLogo, body.dark #heroLogo {
             filter: brightness(0) invert(1);
         }
         
@@ -300,6 +241,7 @@
             transition: all 0.3s ease;
             border-radius: 12px;
             padding: 12px;
+            z-index: 1100;
         }
 
         .menu-btn span {
@@ -339,7 +281,7 @@
             height: 100vh;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
-            z-index: 1000;
+            z-index: 1050;
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             padding: 120px 24px 40px;
             display: flex;
@@ -389,7 +331,7 @@
             inset: 0;
             background: rgba(0, 0, 0, 0.2);
             backdrop-filter: blur(4px);
-            z-index: 900;
+            z-index: 1040;
             opacity: 0;
             visibility: hidden;
             transition: all 0.4s ease;
@@ -534,139 +476,135 @@
             color: white;
         }
 
-        .close-search {
+        /* Google Search Customization */
+        .gsc-control-cse { background-color: transparent !important; border: none !important; padding: 0 !important; }
+        .gsc-search-button-v2 { background-color: #ea580c !important; border-color: #ea580c !important; border-radius: 8px !important; }
+        body.dark .gsc-search-button-v2 { background-color: #fbbf24 !important; border-color: #fbbf24 !important; }
+        .gsc-input-box { border-radius: 8px !important; border: 1px solid #e5e7eb !important; }
+        body.dark .gsc-input-box { background: #374151 !important; border-color: #4b5563 !important; }
+        body.dark .gsc-input { color: white !important; }
+        .gsc-branding { display: none !important; }
+        
+        /* Hide Google Branding Completely */
+        .gcse-searchbox-only-maybe, .gsc-branding, .gsc-adBlock { display: none !important; }
+
+        /* Question Card Style (Used in Markdown) */
+        .question-card {
+            background: linear-gradient(135deg, #fff9f2, #fff);
+            border: 1px solid #fbd38d;
+            border-radius: 20px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            display: block;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px rgba(251, 146, 60, 0.05);
+            text-decoration: none !important;
+        }
+        .question-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(251, 146, 60, 0.1);
+            border-color: #ea580c;
+        }
+        body.dark .question-card {
+            background: linear-gradient(135deg, #2d3748, #1a202c);
+            border-color: #4a5568;
+        }
+        body.dark .question-card:hover {
+            border-color: #fbbf24;
+        }
+
+        /* Sun Rotation Effect */
+        @keyframes sun-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .sun-rotate:hover #sunIcon {
+            animation: sun-spin 4s linear infinite;
+        }
+
+        /* Comments Container Style */
+        .comments-container {
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid #feebc8;
+            border-radius: 2rem;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(251, 146, 60, 0.1);
+            margin-top: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .comments-container::before {
+            content: "التعليقات";
             position: absolute;
-            top: 15px;
-            left: 15px;
-            cursor: pointer;
-            padding: 8px;
-            border-radius: 50%;
-            background: #f3f4f6;
-            transition: all 0.3s;
+            top: 0;
+            right: 2rem;
+            background: #ea580c;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 0 0 1rem 1rem;
+            font-weight: bold;
+            font-size: 0.875rem;
+        }
+        body.dark .comments-container {
+            background: rgba(31, 41, 55, 0.8);
+            border-color: #4b5563;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        body.dark .comments-container::before {
+            background: #fbbf24;
+            color: #1f2937;
         }
 
-        body.dark .close-search {
-            background: #374151;
-        }
-
-        .close-search:hover {
-            background: #e5e7eb;
-            transform: rotate(90deg);
-        }
-
-        /* Giscus Container */
-        .giscus-container {
-            margin-top: 60px;
-            padding: 30px;
-            border-radius: 24px;
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(251, 146, 60, 0.1);
-        }
-
-        body.dark .giscus-container {
-            background: rgba(30, 30, 30, 0.5);
-            border-color: rgba(251, 191, 36, 0.1);
+        @media (min-width: 769px) {
+            nav .flex-container {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                width: 100% !important;
+            }
+            nav .logo-wrapper {
+                width: 45px !important; /* Reduced size by 2x */
+                height: 45px !important;
+                flex-shrink: 0;
+                margin-right: 20px; /* Added margin to prevent sticking to edge */
+            }
+            nav #navLogo { transform: scale(2) !important; } /* Adjusted scale for smaller size */
+            
+            .nav-text-container {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                text-align: center;
+                width: auto;
+                white-space: nowrap;
+            }
         }
 
         @media (max-width: 768px) {
-            nav {
-                padding: 0.25rem 0;
+            nav .flex-container {
+                flex-direction: column !important;
+                align-items: center !important;
+                text-align: center !important;
+                gap: 10px !important;
             }
-
-            nav .flex {
-                padding: 0.5rem 0;
+            nav .logo-wrapper {
+                width: 35px !important; /* Reduced size by 2x */
+                height: 35px !important;
+                margin-bottom: 5px;
             }
-
-            nav .w-24 {
-                width: 2.5rem !important;
-                height: 2.5rem !important;
+            nav #navLogo { transform: scale(1.5) !important; }
+            nav h1 { font-size: 0.85rem !important; line-height: 1.4 !important; }
+            nav p { font-size: 0.75rem !important; }
+            
+            .nav-controls {
+                position: absolute;
+                top: 15px;
+                left: 15px;
+                display: flex;
+                gap: 8px;
             }
-
-            nav #navLogo {
-                transform: scale(1.8) !important;
-            }
-
-            nav h1 {
-                font-size: 0.7rem !important;
-                line-height: 1.2 !important;
-                margin-bottom: 0.15rem !important;
-            }
-
-            nav p {
-                font-size: 0.6rem !important;
-            }
-
-            nav .gap-40 {
-                gap: 0.75rem !important;
-            }
-
-            nav .gap-4 {
-                gap: 0.4rem !important;
-            }
-
-            .menu-btn {
-                width: 34px !important;
-                height: 34px !important;
-                padding: 6px !important;
-            }
-
-            .menu-btn span {
-                width: 16px !important;
-            }
-
-            .dark-mode-btn, .search-btn {
-                padding: 0.4rem !important;
-            }
-
-            .dark-mode-btn svg, .search-btn svg {
-                width: 1.1rem !important;
-                height: 1.1rem !important;
-            }
-
-            main section {
-                padding-top: 6rem !important;
-                padding-bottom: 1.5rem !important;
-            }
-
-            .w-64 {
-                width: 8rem !important;
-                height: 8rem !important;
-            }
-
-            .content-section p {
-                font-size: 0.9rem !important;
-                line-height: 2.0 !important;
-            }
-
-            .nav-menu {
-                width: 260px !important;
-                right: -260px !important;
-                padding: 80px 16px 20px !important;
-            }
-
-            .nav-link {
-                padding: 10px 14px !important;
-                font-size: 15px !important;
-            }
-        }
-
-        @media (max-width: 480px) {
-            nav h1 {
-                font-size: 0.6rem !important;
-            }
-
-            nav p {
-                font-size: 0.55rem !important;
-            }
-
-            nav .gap-40 {
-                gap: 0.4rem !important;
-            }
-
-            .content-section {
-                padding: 1.25rem !important;
-            }
+            
+            main section { padding-top: 180px !important; }
         }
     </style>
 </head>
@@ -679,62 +617,49 @@
     <div class="search-modal" id="searchModal">
         <div class="search-modal-overlay" onclick="toggleSearch()"></div>
         <div class="search-modal-content">
-            <div class="close-search" onclick="toggleSearch()">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold gradient-text">ابحث في الموقع</h2>
+                <button onclick="toggleSearch()" class="text-gray-500 hover:text-red-500">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
             </div>
-            <h2 class="text-2xl font-bold mb-6 text-center gradient-text">ابحث في الموقع</h2>
             <div class="gcse-search"></div>
         </div>
     </div>
 
-    <nav class="fixed top-0 left-0 right-0 z-[100] glass transition-all duration-300" id="navbar">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between py-4">
-                <div class="flex items-center gap-40">
-                    <div class="relative w-24 h-24 flex items-center justify-center">
-                        <img src="/logo.svg" alt="شعار سيف العشيرة" class="w-full h-full object-contain" id="navLogo" style="transform: scale(3);">
-                    </div>
-                    <div class="text-right">
-                        <a href="/saif-clan/" class="block">
-                            <h1 class="text-xl md:text-2xl font-black gradient-text mb-1 leading-relaxed hover:opacity-80 transition-opacity">«أنا سَيفُ العشيرة فاعرِفوني * حُميدًا قد تَذَرَّيْتُ السَّناما!»</h1>
-                        </a>
-                        <a href="/mufadati/" class="block">
-                            <p class="text-base text-gray-600 font-light hover:text-orange-600 transition-colors" id="navSubtitle">«عليَّ مُفاضَتي ومعي سِلاحي!»</p>
-                        </a>
-                    </div>
+    <nav class="fixed top-0 left-0 right-0 z-[1000] glass transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 py-3">
+            <div class="flex items-center justify-between flex-container relative">
+                <!-- Logo on the right linked to home -->
+                <a href="/" class="logo-wrapper flex items-center justify-center">
+                    <img src="/logo.svg" alt="شعار سيف العشيرة" class="w-full h-full object-contain" id="navLogo">
+                </a>
+
+                <!-- Centered Text -->
+                <div class="nav-text-container">
+                    <a href="/saif-clan/" class="block">
+                        <h1 class="text-lg md:text-xl font-black gradient-text leading-tight">«أنا سَيفُ العشيرة فاعرِفوني * حُميدًا قد تَذَرَّيْتُ السَّناما!»</h1>
+                    </a>
+                    <a href="/mufadati/" class="block">
+                        <p class="text-sm text-gray-600 font-light" id="navSubtitle">«عليَّ مُفاضَتي ومعي سِلاحي!»</p>
+                    </a>
                 </div>
                 
-                <div class="flex items-center gap-4">
-                    <!-- Search Button -->
-                    <button onclick="toggleSearch()" 
-                            class="relative p-3 rounded-xl bg-gradient-to-r from-orange-100 to-amber-100 hover:from-orange-200 hover:to-amber-200 transition-all duration-300 group search-btn" 
-                            id="searchBtn">
-                        <svg class="w-6 h-6 text-orange-600 transition-transform group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
-                        <span class="search-tooltip">ابحث هنا!</span>
+                <!-- Controls on the left -->
+                <div class="nav-controls flex items-center gap-3">
+                    <button onclick="toggleSearch()" id="searchBtn" class="search-btn p-2 rounded-lg bg-orange-100 hover:bg-orange-200 transition-colors">
+                        <svg class="w-5 h-5 text-orange-600" id="searchIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        <span class="search-tooltip">ابحث في الموقع</span>
                     </button>
 
-                    <button onclick="toggleDarkMode()" 
-                            class="relative p-3 rounded-xl bg-gradient-to-r from-orange-100 to-amber-100 hover:from-orange-200 hover:to-amber-200 transition-all duration-300 group dark-mode-btn" 
-                            id="darkModeBtn">
-                        <div class="relative">
-                            <svg class="w-6 h-6 text-orange-600 transition-transform group-hover:rotate-12" id="moonIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-                            </svg>
-                            <svg class="w-6 h-6 text-amber-500 hidden transition-transform group-hover:rotate-180" id="sunIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                            </svg>
-                        </div>
+                    <button onclick="toggleDarkMode()" class="dark-mode-btn sun-rotate p-2 rounded-lg bg-orange-100 hover:bg-orange-200 transition-colors" id="darkModeBtn">
+                        <svg class="w-5 h-5 text-orange-600" id="moonIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                        <svg class="w-5 h-5 text-amber-500 hidden" id="sunIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                         <span class="dark-mode-tooltip">أرح عينَيك!</span>
                     </button>
 
-                    <div class="menu-btn bg-gradient-to-r from-orange-100 to-amber-100 hover:from-orange-200 hover:to-amber-200" id="menuBtn" onclick="toggleMenu()">
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                    <div class="menu-btn" id="menuBtn" onclick="toggleMenu()">
+                        <span></span><span></span><span></span>
                     </div>
                 </div>
             </div>
@@ -771,10 +696,25 @@
         </h2>
         
         <div class="prose prose-orange max-w-none">
-            <p><img src="/zaqa-icon.svg" alt="شعار زاكٍ" /></p>
-<hr />
-<h3 id="hdhh-b-d-l-sy-l-lty-knt-qd-wrdatny-wr-ytu-mnsb-a-wd-ih-hn">هذه بعض الأسئلة التي كانت قد وردَتْني ورأيتُ مناسبةَ وضعِها هنا:</h3>
-<hr />
+            <div style="text-align: center; margin-bottom: 2rem;">
+    <img src="/zaqa-icon.svg" alt="شعار زاكٍ" style="width: 6rem; height: 6rem; margin: 0 auto 1rem;">
+    <hr style="border: 0; border-top: 1px solid rgba(251, 146, 60, 0.3); margin: 1.5rem 0;">
+    <p style="font-size: 1.25rem; font-weight: bold; color: #4a5568;">
+        هذه بعض الأسئلة التي كانت قد وردَتْني وأجبتُ عنها ورأيتُ مناسبةَ وضعِها هنا:
+    </p>
+    <hr style="border: 0; border-top: 1px solid rgba(251, 146, 60, 0.3); margin: 1.5rem 0;">
+</div>
+<div class="questions-list">
+    <a href="/question-1/" class="question-card">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;">
+            <h3 style="font-size: 1.25rem; font-weight: bold; color: #c05621; margin: 0;">ما الذي حبَّب إليك العربية، ولمَ لستَ متخصِّصًا فيها؟</h3>
+            <span style="font-size: 0.875rem; color: #718096; background: #fffaf0; padding: 0.25rem 0.75rem; border-radius: 9999px; white-space: nowrap;">٢١ رجب ١٤٤٦ هـ</span>
+        </div>
+        <p style="color: #4a5568; font-size: 0.875rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin: 0;">
+            اقتادَني الهوى إليها، كنتُ غِرًّا صغيرًا لا أحسن شيئًا من العِلم، وقد علَّمتْني أمي القراءة والكتابة...
+        </p>
+    </a>
+</div>
 
         </div>
 
@@ -789,7 +729,28 @@
 </div>
 
 
-                <!-- Giscus Comments Section -->
+                <!-- Giscus Comments Section (Always visible except on home page) -->
+                
+                <div class="max-w-5xl mx-auto mb-20">
+                    <div class="comments-container">
+                        <script src="https://giscus.app/client.js"
+                                data-repo="i-o-i-u/i-o-i-u.github.io"
+                                data-repo-id="R_kgDOQ810RA"
+                                data-category="General"
+                                data-category-id="DIC_kwDOQ810RM4C1KKc"
+                                data-mapping="pathname"
+                                data-strict="0"
+                                data-reactions-enabled="1"
+                                data-emit-metadata="0"
+                                data-input-position="bottom"
+                                data-theme="preferred_color_scheme"
+                                data-lang="ar"
+                                data-loading="lazy"
+                                crossorigin="anonymous"
+                                async>
+                        </script>
+                    </div>
+                </div>
                 
             </div>
         </section>
@@ -841,128 +802,69 @@
         </div>
     </footer>
 
-    <!-- Google Search Script -->
     <script async src="https://cse.google.com/cse.js?cx=205ddd558c0ea469c"></script>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
-                applyDarkMode();
-            }
+            if (savedTheme === 'dark') { applyDarkMode(); }
+            
+            setInterval(() => {
+                const googleBranding = document.querySelector('.gsc-branding');
+                if (googleBranding) googleBranding.style.display = 'none';
+            }, 500);
         });
 
         function toggleMenu() {
-            const menuBtn = document.getElementById('menuBtn');
-            const navMenu = document.getElementById('navMenu');
-            const menuOverlay = document.getElementById('menuOverlay');
-            
-            menuBtn.classList.toggle('active');
-            navMenu.classList.toggle('active');
-            menuOverlay.classList.toggle('active');
+            document.getElementById('menuBtn').classList.toggle('active');
+            document.getElementById('navMenu').classList.toggle('active');
+            document.getElementById('menuOverlay').classList.toggle('active');
         }
 
         function toggleSearch() {
             const modal = document.getElementById('searchModal');
             modal.classList.toggle('active');
-            if (modal.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = 'auto';
-            }
+            document.body.style.overflow = modal.classList.contains('active') ? 'hidden' : 'auto';
         }
 
         function applyDarkMode() {
             const body = document.getElementById('body');
             body.classList.remove('bg-gradient-to-br', 'from-orange-50', 'via-amber-50', 'to-yellow-50', 'pattern');
             body.classList.add('bg-gray-900', 'dark-pattern', 'dark');
-            
-            document.getElementById('navbar').classList.remove('glass');
-            document.getElementById('navbar').classList.add('dark-glass');
-            
-            document.getElementById('navSubtitle').classList.remove('text-gray-600');
-            document.getElementById('navSubtitle').classList.add('text-gray-400');
-            
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('text-gray-700', 'hover:text-orange-600');
-                link.classList.add('text-gray-300', 'hover:text-amber-400');
-            });
-            
+            document.getElementById('navbar').classList.replace('glass', 'dark-glass');
+            document.getElementById('navSubtitle').classList.replace('text-gray-600', 'text-gray-400');
             document.getElementById('moonIcon').classList.add('hidden');
             document.getElementById('sunIcon').classList.remove('hidden');
             
-            document.getElementById('darkModeBtn').classList.remove('bg-gradient-to-r', 'from-orange-100', 'to-amber-100');
-            document.getElementById('darkModeBtn').classList.add('bg-gray-800');
-
-            document.getElementById('searchBtn').classList.remove('bg-gradient-to-r', 'from-orange-100', 'to-amber-100');
-            document.getElementById('searchBtn').classList.add('bg-gray-800');
+            document.getElementById('searchIcon').classList.replace('text-orange-600', 'text-amber-400');
+            document.getElementById('searchBtn').classList.replace('bg-orange-100', 'bg-gray-800');
+            document.getElementById('darkModeBtn').classList.replace('bg-orange-100', 'bg-gray-800');
             
-            document.getElementById('menuBtn').classList.remove('bg-gradient-to-r', 'from-orange-100', 'to-amber-100');
-            document.getElementById('menuBtn').classList.add('bg-gray-800');
-            
-            document.getElementById('copyright').classList.remove('text-gray-600');
-            document.getElementById('copyright').classList.add('text-gray-400');
-            
-            document.getElementById('madeWith').classList.remove('text-gray-500');
-            document.getElementById('madeWith').classList.add('text-gray-400');
+            document.getElementById('copyright').classList.replace('text-gray-600', 'text-gray-400');
+            document.getElementById('madeWith').classList.replace('text-gray-500', 'text-gray-400');
         }
 
         function applyLightMode() {
             const body = document.getElementById('body');
             body.classList.add('bg-gradient-to-br', 'from-orange-50', 'via-amber-50', 'to-yellow-50', 'pattern');
             body.classList.remove('bg-gray-900', 'dark-pattern', 'dark');
-            
-            document.getElementById('navbar').classList.add('glass');
-            document.getElementById('navbar').classList.remove('dark-glass');
-            
-            document.getElementById('navSubtitle').classList.add('text-gray-600');
-            document.getElementById('navSubtitle').classList.remove('text-gray-400');
-            
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.add('text-gray-700', 'hover:text-orange-600');
-                link.classList.remove('text-gray-300', 'hover:text-amber-400');
-            });
-            
+            document.getElementById('navbar').classList.replace('dark-glass', 'glass');
+            document.getElementById('navSubtitle').classList.replace('text-gray-400', 'text-gray-600');
             document.getElementById('moonIcon').classList.remove('hidden');
             document.getElementById('sunIcon').classList.add('hidden');
             
-            document.getElementById('darkModeBtn').classList.add('bg-gradient-to-r', 'from-orange-100', 'to-amber-100');
-            document.getElementById('darkModeBtn').classList.remove('bg-gray-800');
-
-            document.getElementById('searchBtn').classList.add('bg-gradient-to-r', 'from-orange-100', 'to-amber-100');
-            document.getElementById('searchBtn').classList.remove('bg-gray-800');
+            document.getElementById('searchIcon').classList.replace('text-amber-400', 'text-orange-600');
+            document.getElementById('searchBtn').classList.replace('bg-gray-800', 'bg-orange-100');
+            document.getElementById('darkModeBtn').classList.replace('bg-gray-800', 'bg-orange-100');
             
-            document.getElementById('menuBtn').classList.add('bg-gradient-to-r', 'from-orange-100', 'to-amber-100');
-            document.getElementById('menuBtn').classList.remove('bg-gray-800');
-            
-            document.getElementById('copyright').classList.add('text-gray-600');
-            document.getElementById('copyright').classList.remove('text-gray-400');
-            
-            document.getElementById('madeWith').classList.add('text-gray-500');
-            document.getElementById('madeWith').classList.remove('text-gray-400');
+            document.getElementById('copyright').classList.replace('text-gray-400', 'text-gray-600');
+            document.getElementById('madeWith').classList.replace('text-gray-400', 'text-gray-500');
         }
 
         function toggleDarkMode() {
-            const body = document.getElementById('body');
-            const isDark = body.classList.contains('dark');
-            
-            if (!isDark) {
-                applyDarkMode();
-                localStorage.setItem('theme', 'dark');
-            } else {
-                applyLightMode();
-                localStorage.setItem('theme', 'light');
-            }
+            const isDark = document.getElementById('body').classList.contains('dark');
+            isDark ? applyLightMode() : applyDarkMode();
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
         }
-
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 20) {
-                navbar.classList.add('shadow-lg');
-            } else {
-                navbar.classList.remove('shadow-lg');
-            }
-        });
     </script>
 </body>
 </html>
