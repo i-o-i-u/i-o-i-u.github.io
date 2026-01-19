@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سيف العشيرة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @font-face {
+            font-family: 'Kitab';
+            src: url('/Kitab-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        * {
+            font-family: 'Kitab', sans-serif;
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .dark-glass {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #f59e0b, #ea580c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .dark-gradient-text {
+            background: linear-gradient(135deg, #fbbf24, #fb923c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .glow {
+            box-shadow: 0 0 30px rgba(251, 146, 60, 0.3);
+        }
+        
+        .dark-glow {
+            box-shadow: 0 0 40px rgba(251, 191, 36, 0.4);
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-12px) scale(1.02);
+        }
+        
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        
+        .pattern {
+            background-image: radial-gradient(circle at 1px 1px, rgba(251, 146, 60, 0.15) 1px, transparent 0);
+            background-size: 40px 40px;
+        }
+        
+        .dark-pattern {
+            background-image: radial-gradient(circle at 1px 1px, rgba(251, 191, 36, 0.1) 1px, transparent 0);
+            background-size: 40px 40px;
+        }
+
+        .bg-image-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('/Background.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.08;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        body.dark .bg-image-overlay {
+            opacity: 0.03;
+        }
+        
+        .animate-spin-slow {
+            animation: spin 3s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        body.dark #navLogo {
+            filter: brightness(0) invert(1);
+        }
+
+        body.dark #heroLogo {
+            filter: brightness(0) invert(1);
+        }
+        
+        .social-hover-effect {
+            position: relative;
+            overflow: visible;
+            display: inline-flex;
+        }
+
+        .social-tooltip {
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+            backdrop-filter: blur(10px);
+            color: #ea580c;
+            padding: 12px 20px;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            box-shadow: 0 10px 35px rgba(251, 146, 60, 0.25);
+            border: 1px solid rgba(251, 146, 60, 0.15);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .social-tooltip::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 8px;
+            border-style: solid;
+            border-color: rgba(255, 255, 255, 0.95) transparent transparent transparent;
+        }
+
+        .social-hover-effect:hover .social-tooltip {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0px);
+        }
+
+        body.dark .social-tooltip {
+            background: linear-gradient(135deg, rgba(30, 30, 30, 0.98), rgba(40, 40, 40, 0.95));
+            color: #fbbf24;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(251, 191, 36, 0.25);
+        }
+
+        body.dark .social-tooltip::after {
+            border-color: rgba(30, 30, 30, 0.98) transparent transparent transparent;
+        }
+
+        .social-link {
+            position: relative;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .social-hover-effect:hover .social-link {
+            transform: scale(1.1);
+        }
+
+        body.dark .social-link {
+            background: linear-gradient(135deg, rgba(55, 65, 81, 0.8), rgba(75, 85, 99, 0.7)) !important;
+        }
+
+        body.dark .social-link:hover {
+            background: linear-gradient(135deg, rgba(75, 85, 99, 0.9), rgba(55, 65, 81, 0.8)) !important;
+        }
+
+        #youtube-link:hover img {
+            transform: scale(1.2) rotate(5deg);
+            filter: drop-shadow(0 4px 12px rgba(255, 0, 0, 0.3));
+        }
+
+        #telegram-link:hover img {
+            transform: scale(1.2) rotate(-5deg);
+            filter: drop-shadow(0 4px 12px rgba(0, 136, 204, 0.3));
+        }
+
+        #zaqa-link:hover img {
+            transform: scale(1.2) rotate(3deg);
+            filter: drop-shadow(0 4px 12px rgba(106, 13, 173, 0.3));
+        }
+
+        body.dark #youtube-link:hover img {
+            filter: drop-shadow(0 4px 12px rgba(255, 50, 50, 0.4));
+        }
+
+        body.dark #telegram-link:hover img {
+            filter: drop-shadow(0 4px 12px rgba(50, 150, 255, 0.4));
+        }
+
+        body.dark #zaqa-link:hover img {
+            filter: drop-shadow(0 4px 12px rgba(150, 50, 255, 0.4));
+        }
+
+        footer {
+            position: relative;
+            overflow: visible !important;
+        }
+
+        .dark-mode-btn {
+            position: relative;
+        }
+
+        .dark-mode-tooltip {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+            backdrop-filter: blur(10px);
+            color: #ea580c;
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            box-shadow: 0 8px 32px rgba(251, 146, 60, 0.2);
+            border: 1px solid rgba(251, 146, 60, 0.1);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 99999;
+            pointer-events: none;
+            margin-top: 8px;
+        }
+
+        .dark-mode-tooltip::after {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 6px;
+            border-style: solid;
+            border-color: transparent transparent rgba(255, 255, 255, 0.95) transparent;
+        }
+
+        .dark-mode-btn:hover .dark-mode-tooltip {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0px);
+        }
+
+        body.dark .dark-mode-tooltip {
+            background: linear-gradient(135deg, rgba(30, 30, 30, 0.95), rgba(40, 40, 40, 0.9));
+            color: #fbbf24;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+        }
+
+        body.dark .dark-mode-tooltip::after {
+            border-color: transparent transparent rgba(30, 30, 30, 0.95) transparent;
+        }
+
+        .menu-btn {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            padding: 12px;
+        }
+
+        .menu-btn span {
+            width: 24px;
+            height: 2.5px;
+            background: linear-gradient(135deg, #f59e0b, #ea580c);
+            border-radius: 2px;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        body.dark .menu-btn span {
+            background: linear-gradient(135deg, #fbbf24, #fb923c);
+        }
+
+        .menu-btn:hover span {
+            width: 28px;
+        }
+
+        .menu-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .menu-btn.active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(20px);
+        }
+
+        .menu-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            right: -320px;
+            width: 320px;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 100;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 120px 24px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.05);
+        }
+
+        body.dark .nav-menu {
+            background: rgba(17, 24, 39, 0.95);
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-menu.active {
+            right: 0;
+        }
+
+        .nav-link {
+            padding: 16px 24px;
+            border-radius: 16px;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid transparent;
+        }
+
+        .nav-link:hover {
+            background: linear-gradient(135deg, rgba(251, 146, 60, 0.1), rgba(251, 191, 36, 0.1));
+            border-color: rgba(251, 146, 60, 0.2);
+            transform: translateX(-8px);
+        }
+
+        body.dark .nav-link:hover {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(251, 146, 60, 0.1));
+            border-color: rgba(251, 191, 36, 0.2);
+        }
+
+        .nav-icon {
+            font-size: 20px;
+        }
+
+        .menu-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(4px);
+            z-index: 90;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .tooltip-word {
+            position: relative;
+            cursor: help;
+            text-decoration: underline;
+            text-decoration-style: dashed;
+            text-decoration-color: #f59e0b;
+            text-underline-offset: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .tooltip-word:hover {
+            color: #ea580c;
+            text-decoration-color: #ea580c;
+        }
+
+        .tooltip-content {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            background: linear-gradient(135deg, #ffffff, #fef3c7);
+            color: #92400e;
+            padding: 12px 18px;
+            border-radius: 16px;
+            font-size: 14px;
+            font-weight: bold;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            box-shadow: 0 10px 25px rgba(251, 146, 60, 0.2);
+            border: 1px solid rgba(251, 146, 60, 0.2);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 50;
+            margin-bottom: 10px;
+        }
+
+        .tooltip-content::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 8px;
+            border-style: solid;
+            border-color: #fef3c7 transparent transparent transparent;
+        }
+
+        .tooltip-word:hover .tooltip-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0px);
+        }
+
+        body.dark .tooltip-content {
+            background: linear-gradient(135deg, #1f2937, #111827);
+            color: #fbbf24;
+            border-color: rgba(251, 191, 36, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        body.dark .tooltip-content::after {
+            border-color: #111827 transparent transparent transparent;
+        }
+
+        body.dark .tooltip-word {
+            text-decoration-color: #fbbf24;
+        }
+
+        body.dark .tooltip-word:hover {
+            color: #fbbf24;
+            text-decoration-color: #fbbf24;
+        }
+
+        body.dark .content-section p, 
+        body.dark .content-section div,
+        body.dark .content-section a:not(.link-highlight) {
+            color: #ffffff !important;
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(251, 146, 60, 0.1);
+        }
+
+        body.dark .content-section {
+            background: rgba(30, 30, 30, 0.7);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+        }
+    </style>
+</head>
+<body class="transition-all duration-500 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 pattern min-h-screen flex flex-col" id="body">
+    
+    <div class="bg-image-overlay"></div>
+    <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+
+    <nav class="fixed top-0 left-0 right-0 z-50 glass transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between py-4">
+                <div class="flex items-center gap-40">
+                    <div class="relative w-24 h-24 flex items-center justify-center">
+                        <img src="/logo.svg" alt="شعار سيف العشيرة" class="w-full h-full object-contain" id="navLogo" style="transform: scale(3);">
+                    </div>
+                    <div class="text-right">
+                        <a href="/saif-clan/" class="block">
+                            <h1 class="text-xl md:text-2xl font-black gradient-text mb-1 leading-relaxed hover:opacity-80 transition-opacity">«أنا سَيفُ العشيرة فاعرِفوني * حُميدًا قد تَذَرَّيْتُ السَّناما!»</h1>
+                        </a>
+                        <a href="/mufadati/" class="block">
+                            <p class="text-base text-gray-600 font-light hover:text-orange-600 transition-colors" id="navSubtitle">«عليَّ مُفاضَتي ومعي سِلاحي!»</p>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-4">
+                    <button onclick="toggleDarkMode()" 
+                            class="relative p-3 rounded-xl bg-gradient-to-r from-orange-100 to-amber-100 hover:from-orange-200 hover:to-amber-200 transition-all duration-300 group dark-mode-btn" 
+                            id="darkModeBtn">
+                        <div class="relative">
+                            <svg class="w-6 h-6 text-orange-600 transition-transform group-hover:rotate-12" id="moonIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                            </svg>
+                            <svg class="w-6 h-6 text-amber-500 hidden transition-transform group-hover:rotate-180" id="sunIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                            </svg>
+                        </div>
+                        <span class="dark-mode-tooltip">أرح عينَيك!</span>
+                    </button>
+
+                    <div class="menu-btn bg-gradient-to-r from-orange-100 to-amber-100 hover:from-orange-200 hover:to-amber-200" id="menuBtn" onclick="toggleMenu()">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="nav-menu" id="navMenu">
+        <a href="/" class="text-gray-700 nav-link">
+            <span class="nav-icon">🏠</span>
+            الصفحة الأُولَى
+        </a>
+        <a href="/chanting/" class="text-gray-700 nav-link">
+            <span class="nav-icon">🎤</span>
+            الإنشاد والحُداء
+        </a>
+        <a href="/questions/" class="text-gray-700 nav-link">
+            <span class="nav-icon">❓</span>
+            الأسئلة
+        </a>
+        <a href="/writings/" class="text-gray-700 nav-link">
+            <span class="nav-icon">✍️</span>
+            الكِتابات
+        </a>
+    </div>
+
+    <main class="flex-1 relative z-10">
+        <section class="pt-64 pb-20 px-4 relative">
+            <div class="max-w-5xl mx-auto relative z-10">
+                
+                <div class="text-center mb-16">
+                    <div class="flex justify-center mb-12">
+                        <div class="relative">
+                            <div class="absolute inset-0 bg-gradient-to-r from-orange-400 to-amber-500 rounded-full blur-3xl opacity-40 glow"></div>
+                            <div class="relative w-64 h-64 rounded-full flex items-center justify-center">
+                                <img src="/logo.svg" alt="شعار سيف العشيرة" class="w-full h-full object-contain" id="heroLogo">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-section rounded-3xl p-8 md:p-12 shadow-2xl mb-12 text-right">
+                        <p class="text-lg md:text-xl leading-relaxed text-gray-700 mb-6 text-justify">
+                            لكَ -ربَّنا- الحمدُ الواسِعُ الكثيرُ الجَمّ، طوَّقتَنا بسَيبٍ من جليلِ <span class="tooltip-word">أَعْطِياتِك<span class="tooltip-content">الأَعْطِيات -بفتح الهمزة- جمع عَطِيَّة</span></span> خِضَمّ، مثلِ غزيرِ وبْلِ الغَمام أو كمُتلاطِم مَوْج اليَمّ، نحمَدُكَ -إلـٰهَنا- حمدًا ينفرِجُ بهِ هَمُّ المُهتَمِّ، وتنكشِفُ غُمَّة المُغتَمّ، و<span class="tooltip-word">يَبَلُّ<span class="tooltip-content">يبرَأُ ويُشفَى</span></span> منه <span class="tooltip-word">الوَصِبُ<span class="tooltip-content">المريض</span></span> <span class="tooltip-word">المُحْتَمّ<span class="tooltip-content">المصاب بالحُمَّى -عافانا الله وإياك-</span></span>، بعثْتَ فينا -بمَحْض مِنَّتك- مَنْ هو مِن المجْد في السَّنامِ الأَرْفَعِ الأَشَمّ، في شرَفٍ أتَمَّهُ اللهُ فتَمّ، الزاكِي حَسَبُه ونسَبُهُ والخالُ والعَمّ، لا يختَطِي إليه الذَّمّ، سُنَّتُه السُّنَّةُ و<span class="tooltip-word">أَمُّهُ الأَمّ<span class="tooltip-content">هَدْيُه الهَدْي</span></span>، فأَزْهَرَتْ بكريم بَعْثَتِه أَرْجاءُ الظُّلَمِ القُتْم، وانجَلَىٰ ليلُ المَقْتِ الأَسْحَمُ المُدْلَهِمّ، عليه صلاةُ الله وسَلامُه وعلىٰ أصحابِه المَيَامِين الأَغَرِّيـْنِ الجِبالِ الصُّمّ، النافذِي العَزْم والهَمّ، ما زَخَر عُبابُ البَحرِ <span class="tooltip-word">وطَمّ<span class="tooltip-content">علا وارتفَع</span></span>، أوِ اعتَمَّ بعِمامةٍ مُعتَمّ..
+                        </p>
+
+                        <p class="text-lg md:text-xl leading-relaxed text-gray-700 mb-6 text-justify">
+                            وبعدُ: أحْمدَ اللهُ أَمْرَك، وأتمَّ عليكَ نِعمتَه، وزادَ فيها عندَك، وجعلَك نافِذَ التَّبَصُّرِ والنَّظَرِ والاعْتِبار، و<span class="tooltip-word">بَنَّكَ<span class="tooltip-content">مَكَّن ورسَّخ وثبَّت</span></span> لكَ في عِزِّك الراتِب، وشَرَفِك المُتحقِّق، ومَوطِنِك المُعتَلِي في قُنَّةِ المجْد.
+                        </p>
+
+                        <p class="text-lg md:text-xl leading-relaxed text-gray-700 mb-6 text-justify">
+                            هذا مَكانٌ حَلَلْتُه، وأرضٌ عَمَرتُها، ومَحِلَّةٌ أَنِسْتُ بها، أنا فيها مِن <span class="tooltip-word">التُّنَّاءِ لا الطُّرَّاءِ<span class="tooltip-content">يسمُّونَهما في الكلام المُعاصِر: أهل البلد الأصليين، والأجانب</span></span> إن شاء الله، أجمَعُ فيها كلَّ ما أكتُب وأنشُر، فتكونَ هيَ حاوِيَتَهُ وحافِظَتَهُ بإذن الله تعالى.
+                        </p>
+
+                        <p class="text-lg md:text-xl leading-relaxed text-gray-700 mb-6 text-justify">
+                            فدُونَك رَوْضَ دَوْحَتِي، قَلِّبْ في أرجائه طَرْفَك، وأصِخْ لخَرِيرِ جَداوِله، وتغريدِ قَمارِيِّهِ أُذُنَكَ وسَمْعَك، تأْنَقا به إن شاء الله.. ومما لهُ أيضًا نزَلتُ هذه الباءَةَ: السيرُ على سبيلِ إخوانِ صَفاءٍ هُم زِينة هذا الفَضاء ونُجوم سَمائِه، كما قال العَرْجيُّ: (لو ذهَبُوا لم يَطِبْ نَجْدٌ لساكنِه * وقد يَطِيبُ بهم نَجْدٌ إذا جَلَسُوا!).
+                        </p>
+
+                        <hr class="my-8 border-orange-200">
+                        
+                        <div class="space-y-6 text-right">
+                            <div class="flex items-start gap-4">
+                                <div class="relative flex-shrink-0">
+                                    <img src="/youtube-icon.svg" alt="يوتيوب" class="w-10 h-10">
+                                    <span class="absolute -top-1 -right-1 w-5 h-5 bg-orange-500 text-white rounded-full flex items-center justify-center text-xs font-bold">؟</span>
+                                </div>
+                                <p class="text-lg text-gray-700">قناة اليُتْيوب، فيها أُنشِد القصائد وأحْدُو بالرجَز، مع شرحِ كلِّ ذلك، وفيها كل المقاطع المرئية.</p>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="relative flex-shrink-0">
+                                    <img src="/telegram-icon.svg" alt="تلجرام" class="w-10 h-10">
+                                    <span class="absolute -top-1 -right-1 w-5 h-5 bg-orange-500 text-white rounded-full flex items-center justify-center text-xs font-bold">؟</span>
+                                </div>
+                                <div class="text-lg text-gray-700">
+                                    قناة التلجرام، فيها منشورات الفوائد، وأي شيءٍ مختصَرٍ أكتبُه. وعندي فيه ثلاث قنوات: هذه، والثانية <a href="https://t.me/Al_fosos" target="_blank" style="background: rgba(59, 130, 246, 0.15); padding: 0 4px; border-radius: 4px;">قناة الفصوص</a>، والثالثة: <a href="https://t.me/Muqaras" target="_blank" style="background: rgba(59, 130, 246, 0.15); padding: 0 4px; border-radius: 4px;">"حَلْيٌ مُقرَّص"</a> أنشُر فيها ما أنتخبه من الكُتُب المصوَّرة، مع التعريف بها، ونحو ذلك.
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="relative flex-shrink-0">
+                                    <img src="/zaqa-icon.svg" alt="Zaqa" class="w-10 h-10">
+                                    <span class="absolute -top-1 -right-1 w-5 h-5 bg-orange-500 text-white rounded-full flex items-center justify-center text-xs font-bold">؟</span>
+                                </div>
+                                <p class="text-lg text-gray-700">موقع زاكٍ (zaqa.net) موقعٌ تركيٌّ، وُضِع لأسئلة المجهولين، فتسألُني ما يَعِنُّ لك دُون أن أعرفك. فاسألني <a href="https://zaqa.net/ioiu" target="_blank" style="background: rgba(59, 130, 246, 0.15); padding: 0 4px; border-radius: 4px;">هنا</a> أو <a href="http://zaqa.net/molta3on" target="_blank" style="background: rgba(59, 130, 246, 0.15); padding: 0 4px; border-radius: 4px;">هنا</a>.</p>
+                            </div>
+                        </div>
+
+                        <hr class="my-8 border-orange-200">
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+    </main>
+
+    <footer class="glass border-t border-orange-200/50 transition-all duration-300 mt-auto w-full" id="footer">
+        <div class="w-full px-4 py-8">
+            <div class="w-full mx-auto">
+                <div class="text-center">
+                    <div class="flex justify-center gap-6 mb-6">
+                        <div class="relative social-hover-effect">
+                            <a href="https://www.youtube.com/@i_o_i_u" target="_blank" 
+                               class="w-14 h-14 rounded-xl bg-gradient-to-r from-orange-100 to-amber-100 hover:from-orange-200 hover:to-amber-200 transition-all duration-300 p-3 social-link flex items-center justify-center"
+                               id="youtube-link">
+                                <img src="/youtube-icon.svg" alt="يوتيوب" class="w-8 h-8 object-contain transition-all duration-300">
+                            </a>
+                            <span class="social-tooltip">قناة اليُتْيوب</span>
+                        </div>
+                        
+                        <div class="relative social-hover-effect">
+                            <a href="https://t.me/i_o_i_u" target="_blank" 
+                               class="w-14 h-14 rounded-xl bg-gradient-to-r from-orange-100 to-amber-100 hover:from-orange-200 hover:to-amber-200 transition-all duration-300 p-3 social-link flex items-center justify-center"
+                               id="telegram-link">
+                                <img src="/telegram-icon.svg" alt="تلجرام" class="w-8 h-8 object-contain transition-all duration-300">
+                            </a>
+                            <span class="social-tooltip">قناة التلجرام</span>
+                        </div>
+                        
+                        <div class="relative social-hover-effect">
+                            <a href="https://zaqa.net/ioiu" target="_blank" 
+                               class="w-14 h-14 rounded-xl bg-gradient-to-r from-orange-100 to-amber-100 hover:from-orange-200 hover:to-amber-200 transition-all duration-300 p-3 social-link flex items-center justify-center"
+                               id="zaqa-link">
+                                <img src="/zaqa-icon.svg" alt="Zaqa" class="w-8 h-8 object-contain transition-all duration-300">
+                            </a>
+                            <span class="social-tooltip">أسئلة المجهولين «زاكٍ»</span>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center">
+                        <p class="text-gray-600 font-light mb-2" id="copyright">
+                            سيف العشيرة - كُلُّ الحقوق محفوظة © 2026
+                        </p>
+                        <p class="text-sm text-gray-500 font-light" dir="ltr" id="madeWith">
+                            Made with ❤️ using Zola
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menuBtn = document.getElementById('menuBtn');
+            const navMenu = document.getElementById('navMenu');
+            const menuOverlay = document.getElementById('menuOverlay');
+            
+            menuBtn.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+        }
+
+        function toggleDarkMode() {
+            const body = document.getElementById('body');
+            const isDark = body.classList.contains('dark');
+            
+            if (!isDark) {
+                body.classList.remove('bg-gradient-to-br', 'from-orange-50', 'via-amber-50', 'to-yellow-50', 'pattern');
+                body.classList.add('bg-gray-900', 'dark-pattern', 'dark');
+                
+                document.getElementById('navbar').classList.remove('glass');
+                document.getElementById('navbar').classList.add('dark-glass');
+                
+                document.getElementById('navSubtitle').classList.remove('text-gray-600');
+                document.getElementById('navSubtitle').classList.add('text-gray-400');
+                
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('text-gray-700', 'hover:text-orange-600');
+                    link.classList.add('text-gray-300', 'hover:text-amber-400');
+                });
+                
+                document.getElementById('moonIcon').classList.add('hidden');
+                document.getElementById('sunIcon').classList.remove('hidden');
+                
+                document.getElementById('darkModeBtn').classList.remove('bg-gradient-to-r', 'from-orange-100', 'to-amber-100');
+                document.getElementById('darkModeBtn').classList.add('bg-gray-800');
+                
+                document.getElementById('menuBtn').classList.remove('bg-gradient-to-r', 'from-orange-100', 'to-amber-100');
+                document.getElementById('menuBtn').classList.add('bg-gray-800');
+                
+                document.getElementById('copyright').classList.remove('text-gray-600');
+                document.getElementById('copyright').classList.add('text-gray-400');
+                
+                document.getElementById('madeWith').classList.remove('text-gray-500');
+                document.getElementById('madeWith').classList.add('text-gray-400');
+            } else {
+                body.classList.add('bg-gradient-to-br', 'from-orange-50', 'via-amber-50', 'to-yellow-50', 'pattern');
+                body.classList.remove('bg-gray-900', 'dark-pattern', 'dark');
+                
+                document.getElementById('navbar').classList.add('glass');
+                document.getElementById('navbar').classList.remove('dark-glass');
+                
+                document.getElementById('navSubtitle').classList.add('text-gray-600');
+                document.getElementById('navSubtitle').classList.remove('text-gray-400');
+                
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.add('text-gray-700', 'hover:text-orange-600');
+                    link.classList.remove('text-gray-300', 'hover:text-amber-400');
+                });
+                
+                document.getElementById('moonIcon').classList.remove('hidden');
+                document.getElementById('sunIcon').classList.add('hidden');
+                
+                document.getElementById('darkModeBtn').classList.add('bg-gradient-to-r', 'from-orange-100', 'to-amber-100');
+                document.getElementById('darkModeBtn').classList.remove('bg-gray-800');
+                
+                document.getElementById('menuBtn').classList.add('bg-gradient-to-r', 'from-orange-100', 'to-amber-100');
+                document.getElementById('menuBtn').classList.remove('bg-gray-800');
+                
+                document.getElementById('copyright').classList.add('text-gray-600');
+                document.getElementById('copyright').classList.remove('text-gray-400');
+                
+                document.getElementById('madeWith').classList.add('text-gray-500');
+                document.getElementById('madeWith').classList.remove('text-gray-400');
+            }
+        }
+
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                navbar.classList.add('shadow-lg');
+            } else {
+                navbar.classList.remove('shadow-lg');
+            }
+        });
+    </script>
+</body>
+</html>
