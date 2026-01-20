@@ -678,7 +678,11 @@
             document.getElementById('moonIcon').classList.add('hidden');
             document.getElementById('sunIcon').classList.remove('hidden');
             
-            document.getElementById('darkModeBtn').classList.replace('bg-orange-100', 'bg-gray-800');
+            const darkModeBtn = document.getElementById('darkModeBtn');
+            darkModeBtn.classList.replace('bg-orange-100', 'bg-gray-800');
+            darkModeBtn.classList.remove('hover:bg-orange-200');
+            darkModeBtn.classList.add('hover:bg-gray-800');
+            
             document.getElementById('copyright').classList.replace('text-gray-600', 'text-gray-400');
         }
 
@@ -691,7 +695,11 @@
             document.getElementById('moonIcon').classList.remove('hidden');
             document.getElementById('sunIcon').classList.add('hidden');
             
-            document.getElementById('darkModeBtn').classList.replace('bg-gray-800', 'bg-orange-100');
+            const darkModeBtn = document.getElementById('darkModeBtn');
+            darkModeBtn.classList.replace('bg-gray-800', 'bg-orange-100');
+            darkModeBtn.classList.add('hover:bg-orange-200');
+            darkModeBtn.classList.remove('hover:bg-gray-800');
+            
             document.getElementById('copyright').classList.replace('text-gray-400', 'text-gray-600');
         }
 

@@ -634,7 +634,7 @@
                                     <img src="/zaqa-icon.svg" alt="Zaqa" class="w-10 h-10">
                                     <span class="absolute -top-1 -right-1 w-5 h-5 bg-orange-500 text-white rounded-full flex items-center justify-center text-xs font-bold">؟</span>
                                 </div>
-                                <p class="text-lg text-gray-700 text-justify">موقع زاكٍ (zaqa.net) موقعٌ تركيٌّ، وُضِع لأسئلة المجهولين، فتسألُني ما يَعِنُّ لك دُون أن أعرفك. فاسألني <a href="https://zaqa.net/ioiu" target="_blank" style="background: rgba(59, 130, 246, 0.15); padding: 0 4px; border-radius: 4px;">هنا</a> أو <a href="http://zaqa.net/molta3on" target="_blank" style="background: rgba(59, 130, 246, 0.15); padding: 0 4px; border-radius: 4px;">هنا</a>.</p>
+                                <p class="text-lg text-gray-700 text-justify">موقع زاكٍ (zaqa.net) موقعٌ تركيٌّ، وُضِع لأسئلة المجهولين، فتسألُني ما يَعِنُّ لك دُون أن أعرفك. فاسألني <a href="https://zaqa.net/ioiu" target="_blank" style="background: rgba(59, 130, 246, 0.15); padding: 0 4px; border-radius: 4px;">هنا</a> أو <a href="https://zaqa.net/molta3on" target="_blank" style="background: rgba(59, 130, 246, 0.15); padding: 0 4px; border-radius: 4px;">هنا</a>.</p>
                             </div>
                         </div>
 
@@ -710,7 +710,11 @@
             document.getElementById('moonIcon').classList.add('hidden');
             document.getElementById('sunIcon').classList.remove('hidden');
             
-            document.getElementById('darkModeBtn').classList.replace('bg-orange-100', 'bg-gray-800');
+            const darkModeBtn = document.getElementById('darkModeBtn');
+            darkModeBtn.classList.replace('bg-orange-100', 'bg-gray-800');
+            darkModeBtn.classList.remove('hover:bg-orange-200');
+            darkModeBtn.classList.add('hover:bg-gray-800');
+            
             document.getElementById('copyright').classList.replace('text-gray-600', 'text-gray-400');
         }
 
@@ -723,7 +727,11 @@
             document.getElementById('moonIcon').classList.remove('hidden');
             document.getElementById('sunIcon').classList.add('hidden');
             
-            document.getElementById('darkModeBtn').classList.replace('bg-gray-800', 'bg-orange-100');
+            const darkModeBtn = document.getElementById('darkModeBtn');
+            darkModeBtn.classList.replace('bg-gray-800', 'bg-orange-100');
+            darkModeBtn.classList.add('hover:bg-orange-200');
+            darkModeBtn.classList.remove('hover:bg-gray-800');
+            
             document.getElementById('copyright').classList.replace('text-gray-400', 'text-gray-600');
         }
 
