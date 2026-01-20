@@ -174,11 +174,11 @@
             overflow: visible !important;
         }
 
-        .dark-mode-btn, .search-btn {
+        .dark-mode-btn {
             position: relative;
         }
 
-        .dark-mode-tooltip, .search-tooltip {
+        .dark-mode-tooltip {
             position: absolute;
             top: 100%;
             left: 50%;
@@ -201,7 +201,7 @@
             margin-top: 8px;
         }
 
-        .dark-mode-tooltip::after, .search-tooltip::after {
+        .dark-mode-tooltip::after {
             content: '';
             position: absolute;
             bottom: 100%;
@@ -212,20 +212,20 @@
             border-color: transparent transparent rgba(255, 255, 255, 0.95) transparent;
         }
 
-        .dark-mode-btn:hover .dark-mode-tooltip, .search-btn:hover .search-tooltip {
+        .dark-mode-btn:hover .dark-mode-tooltip {
             opacity: 1;
             visibility: visible;
             transform: translateX(-50%) translateY(0px);
         }
 
-        body.dark .dark-mode-tooltip, body.dark .search-tooltip {
+        body.dark .dark-mode-tooltip {
             background: linear-gradient(135deg, rgba(30, 30, 30, 0.95), rgba(40, 40, 40, 0.9));
             color: #fbbf24;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
             border: 1px solid rgba(251, 191, 36, 0.2);
         }
 
-        body.dark .dark-mode-tooltip::after, body.dark .search-tooltip::after {
+        body.dark .dark-mode-tooltip::after {
             border-color: transparent transparent rgba(30, 30, 30, 0.95) transparent;
         }
 
@@ -436,58 +436,6 @@
             line-height: 2.2 !important;
         }
 
-        /* Search Modal Styles */
-        .search-modal {
-            position: fixed;
-            inset: 0;
-            z-index: 2000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .search-modal.active {
-            display: flex;
-        }
-
-        .search-modal-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(8px);
-        }
-
-        .search-modal-content {
-            position: relative;
-            width: 100%;
-            max-width: 700px;
-            background: white;
-            border-radius: 24px;
-            padding: 30px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            z-index: 2001;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-        body.dark .search-modal-content {
-            background: #1f2937;
-            color: white;
-        }
-
-        /* Google Search Customization */
-        .gsc-control-cse { background-color: transparent !important; border: none !important; padding: 0 !important; }
-        .gsc-search-button-v2 { background-color: #ea580c !important; border-color: #ea580c !important; border-radius: 8px !important; }
-        body.dark .gsc-search-button-v2 { background-color: #fbbf24 !important; border-color: #fbbf24 !important; }
-        .gsc-input-box { border-radius: 8px !important; border: 1px solid #e5e7eb !important; }
-        body.dark .gsc-input-box { background: #374151 !important; border-color: #4b5563 !important; }
-        body.dark .gsc-input { color: white !important; }
-        .gsc-branding { display: none !important; }
-        
-        /* Hide Google Branding Completely */
-        .gcse-searchbox-only-maybe, .gsc-branding, .gsc-adBlock { display: none !important; }
-
         /* Question Card Style (Used in Markdown) */
         .question-card {
             background: linear-gradient(135deg, #fff9f2, #fff);
@@ -522,39 +470,6 @@
             animation: sun-spin 4s linear infinite;
         }
 
-        /* Comments Container Style */
-        .comments-container {
-            background: rgba(255, 255, 255, 0.8);
-            border: 2px solid #feebc8;
-            border-radius: 2rem;
-            padding: 2rem;
-            box-shadow: 0 20px 40px rgba(251, 146, 60, 0.1);
-            margin-top: 4rem;
-            position: relative;
-            overflow: hidden;
-        }
-        .comments-container::before {
-            content: "التعليقات";
-            position: absolute;
-            top: 0;
-            right: 2rem;
-            background: #ea580c;
-            color: white;
-            padding: 0.5rem 1.5rem;
-            border-radius: 0 0 1rem 1rem;
-            font-weight: bold;
-            font-size: 0.875rem;
-        }
-        body.dark .comments-container {
-            background: rgba(31, 41, 55, 0.8);
-            border-color: #4b5563;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-        body.dark .comments-container::before {
-            background: #fbbf24;
-            color: #1f2937;
-        }
-
         @media (min-width: 769px) {
             nav .flex-container {
                 display: flex !important;
@@ -563,7 +478,7 @@
                 width: 100% !important;
             }
             nav .logo-wrapper {
-                width: 90px !important; /* Restored and adjusted size */
+                width: 90px !important;
                 height: 90px !important;
                 flex-shrink: 0;
                 margin-right: 20px;
@@ -585,10 +500,10 @@
                 flex-direction: column !important;
                 align-items: center !important;
                 text-align: center !important;
-                gap: 15px !important; /* Increased gap for mobile */
+                gap: 15px !important;
             }
             nav .logo-wrapper {
-                width: 70px !important; /* Increased size for mobile */
+                width: 70px !important;
                 height: 70px !important;
                 margin-bottom: 10px;
             }
@@ -604,7 +519,7 @@
                 gap: 8px;
             }
             
-            main section { padding-top: 220px !important; } /* Adjusted padding for mobile */
+            main section { padding-top: 220px !important; }
         }
     </style>
 </head>
@@ -612,20 +527,6 @@
     
     <div class="bg-image-overlay"></div>
     <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
-
-    <!-- Search Modal -->
-    <div class="search-modal" id="searchModal">
-        <div class="search-modal-overlay" onclick="toggleSearch()"></div>
-        <div class="search-modal-content">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-xl font-bold gradient-text">ابحث في الموقع</h2>
-                <button onclick="toggleSearch()" class="text-gray-500 hover:text-red-500">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
-            </div>
-            <div class="gcse-search"></div>
-        </div>
-    </div>
 
     <nav class="fixed top-0 left-0 right-0 z-[1000] glass transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 py-3">
@@ -647,11 +548,6 @@
                 
                 <!-- Controls on the left -->
                 <div class="nav-controls flex items-center gap-3">
-                    <button onclick="toggleSearch()" id="searchBtn" class="search-btn p-2 rounded-lg bg-orange-100 hover:bg-orange-200 transition-colors">
-                        <svg class="w-5 h-5 text-orange-600" id="searchIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                        <span class="search-tooltip">ابحث في الموقع</span>
-                    </button>
-
                     <button onclick="toggleDarkMode()" class="dark-mode-btn sun-rotate p-2 rounded-lg bg-orange-100 hover:bg-orange-200 transition-colors" id="darkModeBtn">
                         <svg class="w-5 h-5 text-orange-600" id="moonIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
                         <svg class="w-5 h-5 text-amber-500 hidden" id="sunIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
@@ -717,30 +613,6 @@
     </div>
 </div>
 
-
-                <!-- Giscus Comments Section (Always visible except on home page) -->
-                
-                <div class="max-w-5xl mx-auto mb-20">
-                    <div class="comments-container">
-                        <script src="https://giscus.app/client.js"
-                                data-repo="i-o-i-u/i-o-i-u.github.io"
-                                data-repo-id="R_kgDOQ810RA"
-                                data-category="General"
-                                data-category-id="DIC_kwDOQ810RM4C1KKc"
-                                data-mapping="pathname"
-                                data-strict="0"
-                                data-reactions-enabled="1"
-                                data-emit-metadata="0"
-                                data-input-position="bottom"
-                                data-theme="preferred_color_scheme"
-                                data-lang="ar"
-                                data-loading="lazy"
-                                crossorigin="anonymous"
-                                async>
-                        </script>
-                    </div>
-                </div>
-                
             </div>
         </section>
     </main>
@@ -788,28 +660,16 @@
         </div>
     </footer>
 
-    <script async src="https://cse.google.com/cse.js?cx=205ddd558c0ea469c"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'dark') { applyDarkMode(); }
-            
-            setInterval(() => {
-                const googleBranding = document.querySelector('.gsc-branding');
-                if (googleBranding) googleBranding.style.display = 'none';
-            }, 500);
         });
 
         function toggleMenu() {
             document.getElementById('menuBtn').classList.toggle('active');
             document.getElementById('navMenu').classList.toggle('active');
             document.getElementById('menuOverlay').classList.toggle('active');
-        }
-
-        function toggleSearch() {
-            const modal = document.getElementById('searchModal');
-            modal.classList.toggle('active');
-            document.body.style.overflow = modal.classList.contains('active') ? 'hidden' : 'auto';
         }
 
         function applyDarkMode() {
@@ -821,10 +681,7 @@
             document.getElementById('moonIcon').classList.add('hidden');
             document.getElementById('sunIcon').classList.remove('hidden');
             
-            document.getElementById('searchIcon').classList.replace('text-orange-600', 'text-amber-400');
-            document.getElementById('searchBtn').classList.replace('bg-orange-100', 'bg-gray-800');
             document.getElementById('darkModeBtn').classList.replace('bg-orange-100', 'bg-gray-800');
-            
             document.getElementById('copyright').classList.replace('text-gray-600', 'text-gray-400');
         }
 
@@ -837,10 +694,7 @@
             document.getElementById('moonIcon').classList.remove('hidden');
             document.getElementById('sunIcon').classList.add('hidden');
             
-            document.getElementById('searchIcon').classList.replace('text-amber-400', 'text-orange-600');
-            document.getElementById('searchBtn').classList.replace('bg-gray-800', 'bg-orange-100');
             document.getElementById('darkModeBtn').classList.replace('bg-gray-800', 'bg-orange-100');
-            
             document.getElementById('copyright').classList.replace('text-gray-400', 'text-gray-600');
         }
 
