@@ -1,17 +1,16 @@
 {% extends "base.html" %}
 
 {% block title %}
-{{ page.title }} | {{ config.title }}
-{% endblock title %}
+{{ page.title }} | {{ config.title }}{% endblock title %}
 
 {% block content %}
 <div class="text-right">
     <div class="content-section rounded-3xl p-8 md:p-12 shadow-2xl mb-12">
-        <h2 class="text-3xl font-black gradient-text mb-8 border-b border-orange-200 pb-4">
+        <h1 class="text-3xl font-black gradient-text mb-8 border-b border-orange-200 pb-4">
             {{ page.title }}
-        </h2>
+        </h1>
         
-        <div class="prose prose-orange max-w-none">
+        <div class="prose prose-orange max-w-none dark:prose-invert">
             {{ page.content | safe }}
         </div>
 
