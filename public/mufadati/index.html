@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-عليَّ مُفاضَتي ومعي سِلاحي | سيف العشيرة</title>
+عليَّ مُفاضَتي ومعي سِلاحي | سيف العشيرة
+</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @font-face {
@@ -228,6 +229,15 @@
             border-color: transparent transparent rgba(30, 30, 30, 0.95) transparent;
         }
 
+        .sun-rotate {
+            animation: sun-rotate 10s linear infinite;
+        }
+
+        @keyframes sun-rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
         .menu-btn {
             width: 48px;
             height: 48px;
@@ -327,13 +337,16 @@
 
         .menu-overlay {
             position: fixed;
-            inset: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: rgba(0, 0, 0, 0.2);
             backdrop-filter: blur(4px);
             z-index: 1040;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
         }
 
         .menu-overlay.active {
@@ -344,16 +357,15 @@
         .tooltip-word {
             position: relative;
             cursor: help;
-            text-decoration: underline;
-            text-decoration-style: dashed;
-            text-decoration-color: #f59e0b;
-            text-underline-offset: 4px;
+            border-bottom: 2px dotted #f59e0b;
+            padding-bottom: 1px;
             transition: all 0.3s ease;
+            display: inline-block;
         }
 
         .tooltip-word:hover {
             color: #ea580c;
-            text-decoration-color: #ea580c;
+            border-bottom-color: #ea580c;
         }
 
         .tooltip-content {
@@ -361,19 +373,21 @@
             bottom: 100%;
             left: 50%;
             transform: translateX(-50%) translateY(-10px);
-            background: linear-gradient(135deg, #ffffff, #fef3c7);
-            color: #92400e;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.95));
+            backdrop-filter: blur(10px);
+            color: #4b5563;
             padding: 12px 18px;
-            border-radius: 16px;
-            font-size: 14px;
-            font-weight: bold;
+            border-radius: 15px;
+            font-size: 15px;
+            font-weight: 500;
             white-space: nowrap;
             opacity: 0;
             visibility: hidden;
-            box-shadow: 0 10px 25px rgba(251, 146, 60, 0.2);
-            border: 1px solid rgba(251, 146, 60, 0.2);
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            z-index: 50;
+            box-shadow: 0 15px 35px rgba(251, 146, 60, 0.2);
+            border: 1px solid rgba(251, 146, 60, 0.15);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 9999;
+            pointer-events: none;
             margin-bottom: 10px;
         }
 
@@ -385,7 +399,7 @@
             transform: translateX(-50%);
             border-width: 8px;
             border-style: solid;
-            border-color: #fef3c7 transparent transparent transparent;
+            border-color: rgba(255, 255, 255, 0.98) transparent transparent transparent;
         }
 
         .tooltip-word:hover .tooltip-content {
@@ -395,130 +409,168 @@
         }
 
         body.dark .tooltip-content {
-            background: linear-gradient(135deg, #1f2937, #111827);
-            color: #fbbf24;
-            border-color: rgba(251, 191, 36, 0.3);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(135deg, rgba(31, 41, 55, 0.98), rgba(17, 24, 39, 0.95));
+            color: #f3f4f6;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(251, 191, 36, 0.2);
         }
 
         body.dark .tooltip-content::after {
-            border-color: #111827 transparent transparent transparent;
-        }
-
-        body.dark .tooltip-word {
-            text-decoration-color: #fbbf24;
-        }
-
-        body.dark .tooltip-word:hover {
-            color: #fbbf24;
-            text-decoration-color: #fbbf24;
-        }
-
-        body.dark .content-section p, 
-        body.dark .content-section div,
-        body.dark .content-section a:not(.link-highlight) {
-            color: #ffffff !important;
+            border-color: rgba(31, 41, 55, 0.98) transparent transparent transparent;
         }
 
         .content-section {
             background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(251, 146, 60, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            transition: all 0.5s ease;
         }
 
         body.dark .content-section {
-            background: rgba(30, 30, 30, 0.7);
-            border: 1px solid rgba(251, 191, 36, 0.2);
+            background: rgba(31, 41, 55, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .content-section p {
-            line-height: 2.2 !important;
+        .glow {
+            animation: glow 4s infinite alternate;
         }
 
-        /* Question Card Style (Used in Markdown) */
+        @keyframes glow {
+            from { opacity: 0.3; transform: scale(1); }
+            to { opacity: 0.5; transform: scale(1.1); }
+        }
+
+        .pattern {
+            background-image: radial-gradient(#f59e0b 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+        }
+
+        .dark-pattern {
+            background-image: radial-gradient(#fbbf24 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+        }
+
+        .logo-wrapper {
+            width: 90px;
+            height: 90px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-text-container {
+            flex: 1;
+            text-align: center;
+            padding: 0 20px;
+        }
+
         .question-card {
-            background: linear-gradient(135deg, #fff9f2, #fff);
-            border: 1px solid #fbd38d;
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(251, 146, 60, 0.1);
             border-radius: 20px;
             padding: 24px;
             transition: all 0.3s ease;
             display: block;
+            text-decoration: none;
             margin-bottom: 1.5rem;
-            box-shadow: 0 4px 6px rgba(251, 146, 60, 0.05);
-            text-decoration: none !important;
         }
+
         .question-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(251, 146, 60, 0.1);
-            border-color: #ea580c;
+            background: rgba(255, 255, 255, 0.8);
+            border-color: rgba(251, 146, 60, 0.3);
+            box-shadow: 0 10px 25px rgba(251, 146, 60, 0.1);
         }
+
         body.dark .question-card {
-            background: linear-gradient(135deg, #2d3748, #1a202c);
-            border-color: #4a5568;
+            background: rgba(31, 41, 55, 0.4);
+            border-color: rgba(251, 191, 36, 0.1);
         }
+
         body.dark .question-card:hover {
-            border-color: #fbbf24;
+            background: rgba(31, 41, 55, 0.6);
+            border-color: rgba(251, 191, 36, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
 
-        /* Sun Rotation Effect */
-        @keyframes sun-spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        .sun-rotate:hover #sunIcon {
-            animation: sun-spin 4s linear infinite;
+        .copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #f59e0b, #ea580c);
+            color: white;
+            border-radius: 12px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 14px;
         }
 
-        @media (min-width: 769px) {
-            nav .flex-container {
-                display: flex !important;
-                align-items: center !important;
-                justify-content: space-between !important;
-                width: 100% !important;
-            }
-            nav .logo-wrapper {
-                width: 90px !important;
-                height: 90px !important;
-                flex-shrink: 0;
-                margin-right: 20px;
-            }
-            nav #navLogo { transform: scale(4) !important; }
-            
-            .nav-text-container {
-                position: absolute;
-                left: 50%;
-                transform: translateX(-50%);
-                text-align: center;
-                width: auto;
-                white-space: nowrap;
-            }
+        .copy-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(234, 88, 12, 0.3);
+        }
+
+        .copy-btn:active {
+            transform: scale(0.95);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #1f2937;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 10000;
+            opacity: 0;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        body.dark .text-gray-700 {
+            color: #ffffff !important;
         }
 
         @media (max-width: 768px) {
-            nav .flex-container {
-                flex-direction: column !important;
-                align-items: center !important;
-                text-align: center !important;
-                gap: 15px !important;
+            .flex-container {
+                flex-direction: column;
+                gap: 15px;
+                padding: 10px 0;
             }
-            nav .logo-wrapper {
-                width: 70px !important;
-                height: 70px !important;
-                margin-bottom: 10px;
+            .nav-text-container {
+                padding: 0;
+                order: 2;
             }
-            nav #navLogo { transform: scale(3) !important; }
-            nav h1 { font-size: 0.85rem !important; line-height: 1.4 !important; }
-            nav p { font-size: 0.75rem !important; }
-            
+            .logo-wrapper {
+                width: 70px;
+                height: 70px;
+                order: 1;
+            }
             .nav-controls {
                 position: absolute;
-                top: 15px;
-                left: 15px;
-                display: flex;
-                gap: 8px;
+                top: 10px;
+                left: 10px;
+                order: 3;
             }
-            
-            main section { padding-top: 220px !important; }
+            main section { padding-top: 240px !important; }
+        }
+
+        @media (min-width: 1500px) {
+            .logo-wrapper {
+                width: 120px;
+                height: 120px;
+            }
+            #navLogo {
+                transform: scale(1.2);
+            }
         }
     </style>
 </head>
@@ -530,12 +582,10 @@
     <nav class="fixed top-0 left-0 right-0 z-[1000] glass transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 py-3">
             <div class="flex items-center justify-between flex-container relative">
-                <!-- Logo on the right linked to home -->
                 <a href="/" class="logo-wrapper flex items-center justify-center">
                     <img src="/logo.svg" alt="شعار سيف العشيرة" class="w-full h-full object-contain" id="navLogo">
                 </a>
 
-                <!-- Centered Text -->
                 <div class="nav-text-container">
                     <a href="/saif-clan/" class="block">
                         <h1 class="text-lg md:text-xl font-black gradient-text leading-tight">«أنا سَيفُ العشيرة فاعرِفوني * حُميدًا قد تَذَرَّيْتُ السَّناما!»</h1>
@@ -545,7 +595,6 @@
                     </a>
                 </div>
                 
-                <!-- Controls on the left -->
                 <div class="nav-controls flex items-center gap-3">
                     <button onclick="toggleDarkMode()" class="dark-mode-btn sun-rotate p-2 rounded-lg bg-orange-100 hover:bg-orange-200 transition-colors" id="darkModeBtn">
                         <svg class="w-5 h-5 text-orange-600" id="moonIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
@@ -586,11 +635,21 @@
                 
 <div class="text-right">
     <div class="content-section rounded-3xl p-8 md:p-12 shadow-2xl mb-12">
-        <h1 class="text-3xl font-black gradient-text mb-8 border-b border-orange-200 pb-4">
-            عليَّ مُفاضَتي ومعي سِلاحي
-        </h1>
+        <div class="flex justify-between items-center mb-8 border-b border-orange-200 pb-4">
+            <h2 class="text-3xl font-black gradient-text">
+                عليَّ مُفاضَتي ومعي سِلاحي
+            </h2>
+            
+            <button onclick="copyContent()" class="copy-btn">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                </svg>
+                <span>نسخ النص</span>
+            </button>
+            
+        </div>
         
-        <div class="prose prose-orange max-w-none dark:prose-invert">
+        <div id="articleContent" class="prose prose-orange max-w-none text-justify leading-relaxed text-gray-700 dark:text-white text-lg md:text-xl">
             <div style="text-align: justify; line-height: 1.8;">
 <p>هذا البيتُ لابنِ فَكْهَةَ -وهي أُمُّه- يزيدَ بنِ المُخَرِّم بنِ حَزْن الحارِثيِّ، شاعرٌ جاهليٌّ كثيرُ الشعر، من قصيدةٍ له انفردَ بروايتها تامَّةً ابنُ مَيْمون في «مُنتهى الطلَب»، يقولُها في يومٍ لهم، وأوَّلُها: (تَعَجَّبُ جارَتي لمَّا رأتْني * كذاتِ النَّوْطِ، مُخْدِرَتِي جِراحي). يقول فيها: (ولو أنِّي جمَعْتُ لهُمْ شَوَارِي * على نَهْدٍ مَراكِلُهُ، شَنَاحِ. لَأنكَرَني الذين تبادَرُوني * عليَّ مُفاضَتي ومعي سِلاحي!). الشَّوَار: مَتاع الرجُل ورَحْلُه وأَدَاتُه. والنَّهْد: الواسع، يعني الفَرَس، والمَرَاكِل: جمْع مَرْكَل، وهو موضع الركل، ومَوْضِع الرَّكْل من الفَرَسِ: جوفُه. والشَّنَاح: الطويلُ التَّامُّ الخَلْق. والمُفَاضة -بضمِّ المِيم-: الدرع الواسعة. فتمثَّلْتُ بهذا الشطْر، عنَيتُ به دَوَام الاستِعداد والتَّيَقُّظ.</p>
 <hr style="border-color: rgba(251, 146, 60, 0.2); margin: 2rem 0;">
@@ -611,6 +670,19 @@
         </div>
     </div>
 </div>
+
+<style>
+    body.dark #articleContent {
+        color: #ffffff !important;
+    }
+    body.dark #articleContent p, 
+    body.dark #articleContent span, 
+    body.dark #articleContent h1, 
+    body.dark #articleContent h2, 
+    body.dark #articleContent h3 {
+        color: #ffffff !important;
+    }
+</style>
 
             </div>
         </section>
@@ -658,6 +730,8 @@
             </div>
         </div>
     </footer>
+
+    <div id="toast" class="toast">تم نسخ النص بنجاح!</div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -709,6 +783,17 @@
             const isDark = document.getElementById('body').classList.contains('dark');
             isDark ? applyLightMode() : applyDarkMode();
             localStorage.setItem('theme', isDark ? 'light' : 'dark');
+        }
+
+        function copyContent() {
+            const content = document.getElementById('articleContent').innerText;
+            navigator.clipboard.writeText(content).then(() => {
+                const toast = document.getElementById('toast');
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            });
         }
     </script>
 </body>

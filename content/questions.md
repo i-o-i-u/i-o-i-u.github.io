@@ -3,23 +3,27 @@ title = "الأسئلة"
 slug = "questions"
 +++
 
-<div style="text-align: center; margin-bottom: 2rem;">
-    <img src="/zaqa-icon.svg" alt="شعار زاكٍ" style="width: 6rem; height: 6rem; margin: 0 auto 1rem;">
-    <hr style="border: 0; border-top: 1px solid rgba(251, 146, 60, 0.3); margin: 1.5rem 0;">
-    <p style="font-size: 1.25rem; font-weight: bold; color: #4a5568;">
-        هذه بعض الأسئلة التي كانت قد وردَتْني وأجبتُ عنها ورأيتُ مناسبةَ وضعِها هنا:
+<div class="text-center mb-12">
+    <img src="/zaqa-icon.svg" alt="شعار زاكٍ" class="mx-auto w-32 h-32 mb-6">
+    <hr class="my-8 border-orange-200">
+    <p class="text-2xl font-bold text-gray-700 dark:text-gray-200 mb-8">
+        هذه بعض الأسئلة التي كانت قد وردَتْني ورأيتُ مناسبةَ وضعِها هنا:
     </p>
-    <hr style="border: 0; border-top: 1px solid rgba(251, 146, 60, 0.3); margin: 1.5rem 0;">
+    <hr class="my-8 border-orange-200">
 </div>
 
-<div class="questions-list">
+<div class="grid gap-6">
     <a href="/question-1/" class="question-card">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;">
-            <h3 style="font-size: 1.25rem; font-weight: bold; color: #c05621; margin: 0;">ما الذي حبَّب إليك العربية، ولمَ لستَ متخصِّصًا فيها؟</h3>
-            <span style="font-size: 0.875rem; color: #718096; background: #fffaf0; padding: 0.25rem 0.75rem; border-radius: 9999px; white-space: nowrap;">٢١ رجب ١٤٤٦ هـ</span>
+        <div class="flex justify-between items-center">
+            <h3 class="text-xl font-bold text-orange-600 dark:text-amber-400">السؤال الأول: ما الذي حبَّب إليك العربية، ولمَ لستَ متخصِّصًا فيها؟</h3>
+            <span class="text-gray-400 text-sm">📅 19 يناير 2026 م</span>
         </div>
-        <p style="color: #4a5568; font-size: 0.875rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin: 0;">
-            اقتادَني الهوى إليها، كنتُ غِرًّا صغيرًا لا أحسن شيئًا من العِلم، وقد علَّمتْني أمي القراءة والكتابة...
-        </p>
+    </a>
+
+    <a href="/question-2/" class="question-card">
+        <div class="flex justify-between items-center">
+            <h3 class="text-xl font-bold text-orange-600 dark:text-amber-400">نصيحةٌ لمن يحبُّ علوم اللغة، ويستبطئ الإتقان</h3>
+            <span class="text-gray-400 text-sm">📅 5 جمادى الثاني 1446 هـ</span>
+        </div>
     </a>
 </div>
