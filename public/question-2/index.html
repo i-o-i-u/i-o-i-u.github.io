@@ -18,6 +18,26 @@
         * {
             font-family: 'Kitab', sans-serif;
         }
+
+body {
+    line-height: 2 !important;
+}
+
+p, div, span, a, li {
+    line-height: 2 !important;
+}
+
+.content-section p {
+    line-height: 2.2 !important;
+}
+
+#articleContent {
+    line-height: 2.2 !important;
+}
+
+#articleContent p {
+    line-height: 2.2 !important;
+}
         
         .glass {
             background: rgba(255, 255, 255, 0.1);
@@ -233,11 +253,14 @@
             animation: sun-rotate 10s linear infinite;
         }
 
-        @keyframes sun-rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
+@keyframes sun-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
 
+.dark-mode-btn:hover #sunIcon {
+    animation: sun-spin 4s linear infinite;
+}
         .menu-btn {
             width: 48px;
             height: 48px;
@@ -535,11 +558,72 @@
             opacity: 1;
         }
 
-        body.dark .text-gray-700 {
-            color: #ffffff !important;
-        }
+body.dark .text-gray-700 {
+    color: #ffffff !important;
+}
 
-        @media (max-width: 768px) {
+body {
+    color: #1f2937;
+}
+
+body.dark {
+    color: #ffffff !important;
+}
+
+body.dark p,
+body.dark div,
+body.dark span,
+body.dark h1,
+body.dark h2,
+body.dark h3,
+body.dark h4,
+body.dark h5,
+body.dark h6,
+body.dark li,
+body.dark a:not(.gradient-text) {
+    color: #ffffff !important;
+}
+
+body p,
+body div,
+body span,
+body h1,
+body h2,
+body h3,
+body h4,
+body h5,
+body h6,
+body li {
+    color: #1f2937;
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #f59e0b, #ea580c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+body.dark .gradient-text {
+    background: linear-gradient(135deg, #fbbf24, #fb923c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    scroll-margin-top: 120px;
+    line-height: 2 !important;
+}
+
+.content-section h2:first-child,
+.content-section h1:first-child {
+    margin-top: 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+@media (max-width: 768px) {
             .flex-container {
                 flex-direction: column;
                 gap: 15px;
@@ -651,10 +735,15 @@
         
         <div id="articleContent" class="prose prose-orange max-w-none text-justify leading-relaxed text-gray-700 dark:text-white text-lg md:text-xl">
             <p><strong>السؤال:</strong></p>
-<p>نصيحتُك لمن يُحِبُّ عُلومَ اللغة، ولكنَّه يستبطئ الإتقان والتَّقَدُّم، ويَغبِط المُتمكِّنين ويرى أن الوُصولَ لِمَا وصَلُوا لِمَا وصلوا له مُمكِنٌ لكنه بعيدٌ، لا أقصِدُ عُلماءَ اللغة ومَن مِثلَهُم، بل بعضَ رُوَّاد هذه المنصة، أتمنى الوُصول لنصف ما وصلُوا له.</p>
+<p>نصيحتُك لمن يُحِبُّ عُلومَ اللغة، ولكنَّه يستبطئ الإتقان والتَّقَدُّم، ويَغبِط المُتمكِّنين ويرى أن الوُصولَ لِمَا وصَلُوا له مُمكِنٌ لكنه بعيدٌ، لا أقصِدُ عُلماءَ اللغة ومَن مِثلَهُم، بل بعضَ رُوَّاد هذه المنصة، أتمنى الوُصول لنصف ما وصلُوا له.</p>
 <hr />
 <p><strong>الجواب:</strong></p>
-<p>أقول: إذا أردتَّ أمرًا فجمِّعْ له جَرَاميزَك، وشُدَّ له حَيَازِيمَك، واقْرَعْ لهُ ظَنابِيبَك، وأَوِّبْ ولا تُغَوِّرْ..</p>
+<p>أقول: إذا أردتَّ أمرًا فجمِّعْ له جَرَاميزَك، وشُدَّ له حَيَازِيمَك، واقْرَعْ لهُ ظَنابِيبَك، وأَوِّبْ ولا تُغَوِّرْ، وأَسْئِدْ ولا تُعرِّسْ، ولا تذخَرْ طاقةً ولا تألُ جهدًا، فإذا استنفَدتَّ وُسْعَك، وأردَيْتَ نِضْوَك، فعندئذٍ فعَداك عَتْبٌ وخَلاك ذَمٌّ (ومُبْلِغُ نَفْسٍ عُذْرَها مِثْلُ مُنجِحِ!). أمَّا أن تُخلِدَ إلى الدَّعة، وتركنَ إلى الخَفْض، لم تُعَنِّ نفسَك في تحصيل الوسائل ودَرْك الغايات، ثم تنتظرَ أن يجريَ على لسانك الشعر البليغ، والكلام العالي، وأن يتهادى إلى قلَمك وَشْي البُلغاء وتطريز مُبرِّزي الأدباء، ويستقيمَ بيانُك على الطريقة! فلا!</p>
+<p>(حبُّ السلامة يثني عزمَ صاحبه * عن المعالي ويُغرِي المرء بالكسَلِ</p>
+<p>فإن جنَحتَ إليه فاتَّخِذْ نَفَقًا * في الأرض أو سلَّمًا في الجوِّ فاعتزِلِ</p>
+<p>ودَعْ غِمار العُلى للمُقدِمين على * رُكوبها، واقتنع منهنَّ بالبلَلِ</p>
+<p>رضى الذليل بخَفْض العيش مسكنةٌ * والعِزُّ عند رسيم الأَينُقِ الذُّلُلِ!)</p>
+<p>وهذا الكلام بعْثٌ للعزيمة، وحثٌّ للهمَّة فقط :) والحمد لله، فالأمور الآن مُتيسِّرة، والصعب مُذلَّل، فليس عليك سِوى أن تُشمِّر الذيل وتدَّرِعَ الليل، (والمرء يعجِز لا المَحالة!).</p>
 <hr />
 
         </div>
@@ -733,7 +822,7 @@
         </div>
     </footer>
 
-    <div id="toast" class="toast">تم نسخ النص بنجاح!</div>
+    <div id="toast" class="toast">نُسِخ النَّصُّ!</div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

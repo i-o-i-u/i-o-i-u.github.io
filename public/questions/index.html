@@ -18,6 +18,26 @@
         * {
             font-family: 'Kitab', sans-serif;
         }
+
+body {
+    line-height: 2 !important;
+}
+
+p, div, span, a, li {
+    line-height: 2 !important;
+}
+
+.content-section p {
+    line-height: 2.2 !important;
+}
+
+#articleContent {
+    line-height: 2.2 !important;
+}
+
+#articleContent p {
+    line-height: 2.2 !important;
+}
         
         .glass {
             background: rgba(255, 255, 255, 0.1);
@@ -233,11 +253,14 @@
             animation: sun-rotate 10s linear infinite;
         }
 
-        @keyframes sun-rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
+@keyframes sun-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
 
+.dark-mode-btn:hover #sunIcon {
+    animation: sun-spin 4s linear infinite;
+}
         .menu-btn {
             width: 48px;
             height: 48px;
@@ -535,11 +558,72 @@
             opacity: 1;
         }
 
-        body.dark .text-gray-700 {
-            color: #ffffff !important;
-        }
+body.dark .text-gray-700 {
+    color: #ffffff !important;
+}
 
-        @media (max-width: 768px) {
+body {
+    color: #1f2937;
+}
+
+body.dark {
+    color: #ffffff !important;
+}
+
+body.dark p,
+body.dark div,
+body.dark span,
+body.dark h1,
+body.dark h2,
+body.dark h3,
+body.dark h4,
+body.dark h5,
+body.dark h6,
+body.dark li,
+body.dark a:not(.gradient-text) {
+    color: #ffffff !important;
+}
+
+body p,
+body div,
+body span,
+body h1,
+body h2,
+body h3,
+body h4,
+body h5,
+body h6,
+body li {
+    color: #1f2937;
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #f59e0b, #ea580c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+body.dark .gradient-text {
+    background: linear-gradient(135deg, #fbbf24, #fb923c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    scroll-margin-top: 120px;
+    line-height: 2 !important;
+}
+
+.content-section h2:first-child,
+.content-section h1:first-child {
+    margin-top: 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+@media (max-width: 768px) {
             .flex-container {
                 flex-direction: column;
                 gap: 15px;
@@ -654,17 +738,17 @@
 <div class="grid gap-6">
     <a href="/question-1/" class="question-card">
         <div class="flex justify-between items-center">
-            <h3 class="text-xl font-bold text-orange-600 dark:text-amber-400">السؤال الأول: ما الذي حبَّب إليك العربية، ولمَ لستَ متخصِّصًا فيها؟</h3>
-            <span class="text-gray-400 text-sm">📅 19 يناير 2026 م</span>
+            <h3 class="text-xl font-bold text-orange-600 dark:text-amber-400">ما الذي حبَّب إليك العربية، ولمَ لستَ متخصِّصًا فيها؟</h3>
+            <span class="text-gray-400 text-sm">📅 16 رجب 1446 هـ</span>
         </div>
     </a>
-<pre><code>&lt;a href=&quot;/question-2/&quot; class=&quot;question-card&quot;&gt;
-    &lt;div class=&quot;flex justify-between items-center&quot;&gt;
-        &lt;h3 class=&quot;text-xl font-bold text-orange-600 dark:text-amber-400&quot;&gt;نصيحةٌ لمن يحبُّ علوم اللغة، ويستبطئ الإتقان&lt;/h3&gt;
-        &lt;span class=&quot;text-gray-400 text-sm&quot;&gt;📅 5 جمادى الثاني 1446 هـ&lt;/span&gt;
-    &lt;/div&gt;
-&lt;/a&gt;
-</code></pre>
+<div class="grid gap-6">
+    <a href="/question-2/" class="question-card">
+        <div class="flex justify-between items-center">
+            <h3 class="text-xl font-bold text-orange-600 dark:text-amber-400">نصيحةٌ لمن يحبُّ علوم اللغة، ويستبطئ الإتقان</h3>
+            <span class="text-gray-400 text-sm">📅 5 جمادى الآخِر 1446 هـ</span>
+        </div>
+    </a>
 </div>
 
         </div>
@@ -739,7 +823,7 @@
         </div>
     </footer>
 
-    <div id="toast" class="toast">تم نسخ النص بنجاح!</div>
+    <div id="toast" class="toast">نُسِخ النَّصُّ!</div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

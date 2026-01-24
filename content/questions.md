@@ -15,15 +15,16 @@ slug = "questions"
 <div class="grid gap-6">
     <a href="/question-1/" class="question-card">
         <div class="flex justify-between items-center">
-            <h3 class="text-xl font-bold text-orange-600 dark:text-amber-400">السؤال الأول: ما الذي حبَّب إليك العربية، ولمَ لستَ متخصِّصًا فيها؟</h3>
-            <span class="text-gray-400 text-sm">📅 19 يناير 2026 م</span>
+            <h3 class="text-xl font-bold text-orange-600 dark:text-amber-400">ما الذي حبَّب إليك العربية، ولمَ لستَ متخصِّصًا فيها؟</h3>
+            <span class="text-gray-400 text-sm">📅 16 رجب 1446 هـ</span>
         </div>
     </a>
 
+<div class="grid gap-6">
     <a href="/question-2/" class="question-card">
         <div class="flex justify-between items-center">
             <h3 class="text-xl font-bold text-orange-600 dark:text-amber-400">نصيحةٌ لمن يحبُّ علوم اللغة، ويستبطئ الإتقان</h3>
-            <span class="text-gray-400 text-sm">📅 5 جمادى الثاني 1446 هـ</span>
+            <span class="text-gray-400 text-sm">📅 5 جمادى الآخِر 1446 هـ</span>
         </div>
     </a>
 </div>
