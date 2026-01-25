@@ -78,9 +78,18 @@ p, div, span, a, li {
             pointer-events: none;
         }
 
-        body.dark .bg-image-overlay {
-            opacity: 0.03;
-        }
+body.dark .bg-image-overlay {
+    opacity: 0.02;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+@media (max-width: 768px) {
+    body.dark .bg-image-overlay {
+        opacity: 0.01;
+        filter: blur(2px);
+    }
+}
         
         body.dark #navLogo, body.dark #heroLogo {
             filter: brightness(0) invert(1);
@@ -668,14 +677,14 @@ h1, h2, h3, h4, h5, h6 {
                     <img src="/logo.svg" alt="شعار سيف العشيرة" class="w-full h-full object-contain" id="navLogo">
                 </a>
 
-                <div class="nav-text-container">
-                    <a href="/saif-clan/" class="block">
-                        <h1 class="text-lg md:text-xl font-black gradient-text leading-tight">«أنا سَيفُ العشيرة فاعرِفوني * حُميدًا قد تَذَرَّيْتُ السَّناما!»</h1>
-                    </a>
-                    <a href="/mufadati/" class="block">
-                        <p class="text-sm text-gray-600 font-light" id="navSubtitle">«عليَّ مُفاضَتي ومعي سِلاحي!»</p>
-                    </a>
-                </div>
+<div class="nav-text-container" id="headerPoetry" style="transition: all 0.4s ease; overflow: hidden;">
+    <a href="/saif-clan/" class="block">
+        <h1 class="text-lg md:text-xl font-black gradient-text leading-tight">«أنا سَيفُ العشيرة فاعرِفوني * حُميدًا قد تَذَرَّيْتُ السَّناما!»</h1>
+    </a>
+    <a href="/mufadati/" class="block">
+        <p class="text-sm text-gray-600 font-light" id="navSubtitle">«عليَّ مُفاضَتي ومعي سِلاحي!»</p>
+    </a>
+</div>
                 
                 <div class="nav-controls flex items-center gap-3">
                     <button onclick="toggleDarkMode()" class="dark-mode-btn sun-rotate p-2 rounded-lg bg-orange-100 hover:bg-orange-200 transition-colors" id="darkModeBtn">
@@ -724,6 +733,14 @@ h1, h2, h3, h4, h5, h6 {
                             </div>
                         </div>
                     </div>
+
+<nav class="flex flex-wrap justify-center gap-4 mb-12">
+    <a href="/" class="px-6 py-3 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold hover:from-amber-600 hover:to-orange-600 transition-all shadow-lg hover:shadow-xl hover:scale-105">الصفحة الأُولَى</a>
+    <a href="/chanting/" class="px-6 py-3 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold hover:from-amber-600 hover:to-orange-600 transition-all shadow-lg hover:shadow-xl hover:scale-105">الإنشاد والحُداء</a>
+    <a href="/questions/" class="px-6 py-3 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold hover:from-amber-600 hover:to-orange-600 transition-all shadow-lg hover:shadow-xl hover:scale-105">الأسئلة</a>
+    <a href="/writings/" class="px-6 py-3 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold hover:from-amber-600 hover:to-orange-600 transition-all shadow-lg hover:shadow-xl hover:scale-105">الكِتابات</a>
+</nav>
+
 
                     <div class="content-section rounded-3xl p-8 md:p-12 shadow-2xl mb-12 text-right">
                         <div class="text-center mb-10">
@@ -889,6 +906,24 @@ h1, h2, h3, h4, h5, h6 {
                 }, 3000);
             });
         }
+
+window.addEventListener('scroll', function() {
+    const headerPoetry = document.getElementById('headerPoetry');
+    if (window.scrollY > 50) {
+        headerPoetry.style.opacity = '0';
+        headerPoetry.style.maxHeight = '0';
+        headerPoetry.style.marginTop = '0';
+        headerPoetry.style.marginBottom = '0';
+        headerPoetry.style.padding = '0';
+    } else {
+        headerPoetry.style.opacity = '1';
+        headerPoetry.style.maxHeight = '200px';
+        headerPoetry.style.marginTop = '';
+        headerPoetry.style.marginBottom = '';
+        headerPoetry.style.padding = '';
+    }
+});
+
     </script>
 </body>
 </html>
