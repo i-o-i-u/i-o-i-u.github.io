@@ -11,14 +11,14 @@
             <h2 class="text-3xl font-black gradient-text">
                 {{ page.title }}
             </h2>
-            {% if page.slug != "questions" %}
-            <button onclick="copyContent()" class="copy-btn">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
-                </svg>
-                <span>نسخ النص</span>
-            </button>
-            {% endif %}
+{% if page.slug != "questions" %}
+<button onclick="copyContent()" class="copy-btn">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+    </svg>
+    <span class="copy-tooltip">نسْخ النص</span>
+</button>
+{% endif %}
         </div>
         
         <div id="articleContent" class="prose prose-orange max-w-none text-justify leading-relaxed text-gray-700 dark:text-white text-lg md:text-xl">
