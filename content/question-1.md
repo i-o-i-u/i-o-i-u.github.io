@@ -25,4 +25,6 @@ date = 2026-01-19
 فمنه فريقٌ بالحَرامِ، وبعضُهُ * بوَجٍّ، وبعضٌ بالمدينة مُوثَقُ!
 
 
+
+
 <div class="w-24 h-1 bg-gradient-to-r from-transparent via-amber-500 to-transparent mx-auto my-6"></div>
