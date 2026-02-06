@@ -244,7 +244,9 @@ body.dark .bg-image-overlay {
             transform: translateX(-50%) translateY(0px);
         }
 
-        body.dark .dark-mode-tooltip {
+body.dark .dark-mode-tooltip {
+    display: none !important;
+}
             background: linear-gradient(135deg, rgba(30, 30, 30, 0.95), rgba(40, 40, 40, 0.9));
             color: #fbbf24;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
@@ -458,6 +460,48 @@ body.dark .bg-image-overlay {
         body.dark .content-section {
             background: rgba(31, 41, 55, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+/* Target only the main card containers in listings */
+        body.dark a.block > div.rounded-3xl,
+        body.dark a.block > div[class*="shadow"],
+        body.dark a > div.bg-gradient-to-br {
+            background: #1f2937 !important;
+            background-image: none !important;
+        }
+        
+        body.dark a.block:hover > div.rounded-3xl,
+        body.dark a.block:hover > div[class*="shadow"] {
+            background: #374151 !important;
+        }
+        
+        /* Fix input fields */
+        body.dark input,
+        body.dark textarea {
+            background-color: #374151 !important;
+            color: #ffffff !important;
+            border-color: #4b5563 !important;
+        }
+
+        body.dark input::placeholder,
+        body.dark textarea::placeholder {
+            color: #9ca3af !important;
+        }
+        
+        body.dark input:focus,
+        body.dark textarea:focus {
+            background-color: #4b5563 !important;
+        }
+
+body.dark input,
+        body.dark textarea {
+            background-color: #374151 !important;
+            color: #ffffff !important;
+        }
+
+        body.dark input::placeholder,
+        body.dark textarea::placeholder {
+            color: #9ca3af !important;
         }
 
         .glow {
@@ -778,15 +822,28 @@ h1, h2, h3, h4, h5, h6 {
         <p class="text-sm text-gray-600 font-light" id="navSubtitle">«عليَّ مُفاضَتي ومعي سِلاحي!»</p>
     </a>
 </div>
-                
-                <div class="nav-controls flex items-center gap-3">
-                    <button onclick="toggleDarkMode()" class="dark-mode-btn sun-rotate p-2 rounded-lg bg-orange-100 hover:bg-orange-200 transition-colors" id="darkModeBtn">
-                        <svg class="w-5 h-5 text-orange-600" id="moonIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-                        <svg class="w-5 h-5 text-amber-500 hidden" id="sunIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                        <span class="dark-mode-tooltip">أرح عينَيك!</span>
-                    </button>
 
-                    <div class="menu-btn" id="menuBtn" onclick="toggleMenu()">
+<div class="nav-text-container" id="quickNavLinks" style="display: none; transition: all 0.4s ease;">
+    <div class="flex items-center justify-center gap-2 md:gap-4 lg:gap-6">
+        <a href="/" class="text-xs md:text-sm lg:text-base text-gray-700 hover:text-orange-600 font-semibold transition-colors whitespace-nowrap quick-nav-link">الصفحة الأُولَى</a>
+        <span class="text-orange-400/50">|</span>
+        <a href="/chanting/" class="text-xs md:text-sm lg:text-base text-gray-700 hover:text-orange-600 font-semibold transition-colors whitespace-nowrap quick-nav-link">الإنشاد والحُداء</a>
+        <span class="text-orange-400/50">|</span>
+        <a href="/questions/" class="text-xs md:text-sm lg:text-base text-gray-700 hover:text-orange-600 font-semibold transition-colors whitespace-nowrap quick-nav-link">الأسئلة</a>
+        <span class="text-orange-400/50">|</span>
+        <a href="/writings/" class="text-xs md:text-sm lg:text-base text-gray-700 hover:text-orange-600 font-semibold transition-colors whitespace-nowrap quick-nav-link">الكِتابات</a>
+    </div>
+</div>
+
+                
+<div class="nav-controls flex items-center gap-3">
+    <button onclick="toggleDarkMode()" class="dark-mode-btn sun-rotate p-2 rounded-lg bg-orange-100 hover:bg-orange-200 transition-colors" id="darkModeBtn">
+        <svg class="w-5 h-5 text-orange-600" id="moonIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+        <svg class="w-5 h-5 text-amber-500 hidden" id="sunIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+        <span class="dark-mode-tooltip">أرح عينَيك!</span>
+    </button>
+
+    <div class="menu-btn" id="menuBtn" onclick="toggleMenu()">
                         <span></span><span></span><span></span>
                     </div>
                 </div>
@@ -857,7 +914,7 @@ h1, h2, h3, h4, h5, h6 {
                         </p>
 
                         <p class="text-lg md:text-xl leading-relaxed text-gray-700 mb-6 text-justify">
-                            فدُونَك رَوْضَ دَوْحَتِي، قَلِّبْ في أرجائه طَرْفَك، وأصِخْ لخَرِيرِ جَداوِله، وتغريدِ قَمارِيِّهِ أُذُنَكَ وسَمْعَك، تأْنَقا به إن شاء الله.. ومما لهُ أيضًا نزَلتُ هذه بَاءَةَ: السيرُ على سبيلِ إخوانِ صَفاءٍ هُم زِينة هذا الفَضاء ونُجوم سَمائِه، كما قال العَرْجيُّ: (لو ذهَبُوا لم يَطِبْ نَجْدٌ لساكنِه * وقد يَطِيبُ بهم نَجْدٌ إذا جَلَسُوا!).
+                            فدُونَك رَوْضَ دَوْحَتِي، قَلِّبْ في أرجائه طَرْفَك، وأصِخْ لخَرِيرِ جَداوِله، وتغريدِ قَمارِيِّهِ أُذُنَكَ وسَمْعَك، تأْنَقا به إن شاء الله.. ومما لهُ أيضًا نزَلتُ هذه البَاءَةَ: السيرُ على سبيلِ إخوانِ صَفاءٍ هُم زِينة هذا الفَضاء ونُجوم سَمائِه، كما قال العَرْجيُّ: (لو ذهَبُوا لم يَطِبْ نَجْدٌ لساكنِه * وقد يَطِيبُ بهم نَجْدٌ إذا جَلَسُوا!).
                         </p>
 
                         <hr class="my-8 border-orange-200">
@@ -930,9 +987,13 @@ h1, h2, h3, h4, h5, h6 {
                     </div>
                     
                     <div class="text-center">
-                        <p class="text-gray-600 font-light mb-2" id="copyright">
-                            سيف العشيرة - كُلُّ الحقوق محفوظة © 2026
-                        </p>
+<p class="text-gray-600 font-light mb-2" id="copyright">
+    <span class="font-bold" style="color: rgba(31, 41, 55, 0.8);">سيف العشيرة</span>
+    <span class="text-orange-500 mx-2">•</span>
+    <span>كُلُّ الحقوق محفوظة ©</span>
+    <span class="text-orange-500 mx-2">•</span>
+    <span style="color: rgba(251, 146, 60, 0.8);">١٤٤٧هـ</span>
+</p>
                     </div>
                 </div>
             </div>
@@ -968,7 +1029,13 @@ h1, h2, h3, h4, h5, h6 {
             darkModeBtn.classList.add('hover:bg-gray-800');
             
             document.getElementById('copyright').classList.replace('text-gray-600', 'text-gray-400');
-        }
+            const quickNavLinks = document.querySelectorAll('.quick-nav-link');
+            quickNavLinks.forEach(link => {
+                link.classList.replace('text-gray-700', 'text-gray-300');
+                link.classList.replace('hover:text-orange-600', 'hover:text-amber-400');
+            });
+     
+   }
 
         function applyLightMode() {
             const body = document.getElementById('body');
@@ -985,7 +1052,13 @@ h1, h2, h3, h4, h5, h6 {
             darkModeBtn.classList.remove('hover:bg-gray-800');
             
             document.getElementById('copyright').classList.replace('text-gray-400', 'text-gray-600');
-        }
+            const quickNavLinks = document.querySelectorAll('.quick-nav-link');
+            quickNavLinks.forEach(link => {
+                link.classList.replace('text-gray-300', 'text-gray-700');
+                link.classList.replace('hover:text-amber-400', 'hover:text-orange-600');
+            });
+       
+ }
 
         function toggleDarkMode() {
             const isDark = document.getElementById('body').classList.contains('dark');
@@ -1006,21 +1079,84 @@ h1, h2, h3, h4, h5, h6 {
 
 window.addEventListener('scroll', function() {
     const headerPoetry = document.getElementById('headerPoetry');
+    const quickNavLinks = document.getElementById('quickNavLinks');
     if (window.scrollY > 50) {
         headerPoetry.style.opacity = '0';
         headerPoetry.style.maxHeight = '0';
-        headerPoetry.style.marginTop = '0';
-        headerPoetry.style.marginBottom = '0';
-        headerPoetry.style.padding = '0';
+        headerPoetry.style.display = 'none';
+        quickNavLinks.style.display = 'block';
+        quickNavLinks.style.opacity = '1';
     } else {
         headerPoetry.style.opacity = '1';
         headerPoetry.style.maxHeight = '200px';
-        headerPoetry.style.marginTop = '';
-        headerPoetry.style.marginBottom = '';
-        headerPoetry.style.padding = '';
+        headerPoetry.style.display = 'block';
+        quickNavLinks.style.display = 'none';
+        quickNavLinks.style.opacity = '0';
     }
 });
 
+const searchData = [
+    { title: "الصفحة الأُولَى", description: "الصفحة الرئيسية", path: "/", keywords: ["رئيسية", "بداية"] },
+    { title: "الإنشاد والحُداء", description: "صفحة الإنشاد", path: "/chanting/", keywords: ["إنشاد", "حداء"] },
+    { title: "الأسئلة", description: "أسئلة وأجوبة", path: "/questions/", keywords: ["سؤال", "جواب"] },
+    { title: "الكِتابات", description: "المقالات", path: "/writings/", keywords: ["كتابة", "مقال"] },
+    { title: "الإنشاد عند العرب", description: "مقال حول الإنشاد", path: "/inshad/", keywords: ["تطريب", "تغريد"] },
+    { title: "ما الذي حبَّب إليك العربية", description: "سؤال عن حب اللغة", path: "/question-1/", keywords: ["عربية", "لغة"] },
+    { title: "نصيحة لمحب اللغة", description: "نصيحة للمتعلم", path: "/question-2/", keywords: ["نصيحة", "تعلم"] }
+];
+
+function openSearch() {
+    document.getElementById('searchModal').classList.remove('hidden');
+    document.getElementById('searchInput').focus();
+}
+
+function closeSearch() {
+    document.getElementById('searchModal').classList.add('hidden');
+    document.getElementById('searchInput').value = '';
+}
+
+function handleSearch(query) {
+    const results = document.getElementById('searchResults');
+    if (!query.trim()) {
+        results.innerHTML = '<p class="text-center text-gray-500">اكتب للبحث...</p>';
+        return;
+    }
+    const filtered = searchData.filter(item => 
+        item.title.includes(query) || item.description.includes(query) || item.keywords.some(k => k.includes(query))
+    );
+    if (filtered.length === 0) {
+        results.innerHTML = '<p class="text-center text-gray-500">لا توجد نتائج</p>';
+        return;
+    }
+    results.innerHTML = filtered.map(item => `
+        <a href="${item.path}" class="block p-3 mb-2 rounded-xl hover:bg-orange-50 dark:hover:bg-gray-700 transition-colors text-right">
+            <div class="font-semibold text-gray-800 dark:text-white">${item.title}</div>
+            <div class="text-sm text-gray-500">${item.description}</div>
+        </a>
+    `).join('');
+}
+
+document.getElementById('searchButton').addEventListener('click', openSearch);
+document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); openSearch(); }
+    if (e.key === 'Escape') closeSearch();
+});
+
+
     </script>
+
+<div id="searchModal" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="closeSearch()"></div>
+    <div class="relative top-20 mx-auto max-w-xl bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden">
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+            <input type="text" id="searchInput" placeholder="ابحث في الموقع..." class="w-full px-4 py-3 text-right bg-gray-100 dark:bg-gray-700 rounded-xl outline-none focus:ring-2 focus:ring-orange-500" dir="rtl" oninput="handleSearch(this.value)">
+        </div>
+        <div id="searchResults" class="max-h-80 overflow-y-auto p-4">
+            <p class="text-center text-gray-500">اكتب للبحث...</p>
+        </div>
+    </div>
+</div>
+
+
 </body>
 </html>

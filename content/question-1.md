@@ -5,7 +5,9 @@ date = 2026-01-19
 
 <div class="my-10 p-8 bg-gradient-to-br from-orange-100/50 to-amber-100/50 dark:from-orange-900/20 dark:to-amber-900/20 rounded-2xl border border-orange-200 dark:border-orange-800/50 shadow-lg">
 <p class="text-xl md:text-2xl leading-loose text-gray-800 dark:text-white font-semibold">
-السؤال: ما الذي حبَّب إليك العربية، ورغَّبك في الغوص على دُرَرِها، والبحث عن كنوزها، ولمَ لستَ متخصِّصًا فيها؟
+السؤال: 
+
+ما الذي حبَّب إليك العربية، ورغَّبك في الغوص على دُرَرِها، والبحث عن كنوزها، ولمَ لستَ متخصِّصًا فيها؟
 </div>
 
 ---
