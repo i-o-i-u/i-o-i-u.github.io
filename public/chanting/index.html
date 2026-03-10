@@ -1280,6 +1280,7 @@ body.dark .char-counter { color: #6b7280; }
 }
 .btn-submit-glass:active { transform: translateY(0); }
 .btn-submit-glass:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+.btn-submit-glass, .btn-submit-glass span { color: #ffffff !important; }
 body.dark .btn-submit-glass {
     background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
     box-shadow: 0 4px 16px rgba(251,191,36,0.3);
@@ -1719,10 +1720,9 @@ async function loadComments() {
             list.innerHTML = `<div class="empty-comments">${TXT.empty}</div>`;
             return;
         }
-        list.innerHTML = '';
+list.innerHTML = '';
         top.forEach(c => {
-            const cardReplies = replies.filter(r => r.parent_id === c.id);
-            list.appendChild(buildCard(c, cardReplies, false));
+            list.appendChild(buildCard(c, replies, false));
         });
     } catch(e) {
         list.innerHTML = `<div class="empty-comments">${TXT.loadError}</div>`;
@@ -1770,10 +1770,11 @@ function buildCard(c, replies, isReply) {
         <div id="reply-form-${c.id}"></div>
     `;
 
-    if (replies && replies.length > 0) {
+const directReplies = replies.filter(r => r.parent_id === c.id);
+    if (directReplies.length > 0) {
         const rd = document.createElement('div');
         rd.className = 'replies-container';
-        replies.forEach(r => rd.appendChild(buildCard(r, [], true)));
+        directReplies.forEach(r => rd.appendChild(buildCard(r, replies, true)));
         div.appendChild(rd);
     }
     return div;
