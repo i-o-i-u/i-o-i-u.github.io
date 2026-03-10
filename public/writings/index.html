@@ -1412,6 +1412,101 @@ body.dark .edit-wrap textarea { background: rgba(31,41,55,0.8); color: #f3f4f6; 
     border: 1px dashed rgba(234,88,12,0.2);
 }
 body.dark .empty-comments { background: rgba(31,41,55,0.4); color:#6b7280; }
+
+/* تعليق مخفي — يظهر للمدير فقط بشكل مميز */
+.comment-hidden {
+    opacity: 0.7;
+    border-color: rgba(107,114,128,0.3) !important;
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(107,114,128,0.03),
+        rgba(107,114,128,0.03) 4px,
+        transparent 4px,
+        transparent 12px
+    ) !important;
+    position: relative;
+}
+.comment-hidden::after {
+    content: '🙈 مخفي عن الزوار';
+    position: absolute;
+    top: 0.6rem; left: 0.8rem;
+    font-size: 0.68rem; font-weight: 700;
+    color: #9ca3af;
+    background: rgba(107,114,128,0.12);
+    padding: 0.1rem 0.5rem;
+    border-radius: 999px;
+    border: 1px solid rgba(107,114,128,0.2);
+}
+body.dark .comment-hidden { border-color: rgba(107,114,128,0.25) !important; }
+
+.btn-unhide { color: #059669; border-color: rgba(5,150,105,0.25); background: rgba(5,150,105,0.06); }
+.btn-unhide:hover { background: rgba(5,150,105,0.12); }
+
+/* ===== DARK MODE للتعليقات ===== */
+body.dark .comments-glass-section {
+    border-top-color: rgba(251,146,60,0.15);
+}
+body.dark .comment-form-glass {
+    background: linear-gradient(135deg,
+        rgba(17,24,39,0.85) 0%,
+        rgba(24,32,44,0.8) 50%,
+        rgba(31,41,55,0.75) 100%);
+    border-color: rgba(251,146,60,0.15);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+body.dark .comment-form-glass::before {
+    background: linear-gradient(90deg, transparent, rgba(251,146,60,0.2), transparent);
+}
+body.dark .glass-input {
+    background: rgba(255,255,255,0.05) !important;
+    border-color: rgba(251,146,60,0.15) !important;
+    color: #f3f4f6 !important;
+}
+body.dark .glass-input:focus {
+    background: rgba(255,255,255,0.09) !important;
+    border-color: #f97316 !important;
+    box-shadow: 0 0 0 3px rgba(249,115,22,0.12) !important;
+}
+body.dark .glass-input::placeholder { color: #4b5563 !important; }
+body.dark .comment-card {
+    background: linear-gradient(135deg, rgba(17,24,39,0.8), rgba(31,41,55,0.75));
+    border-color: rgba(251,146,60,0.12);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.03);
+}
+body.dark .comment-card:hover {
+    border-color: rgba(249,115,22,0.28);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+}
+body.dark .reply-card {
+    background: rgba(10,14,23,0.7);
+    border-color: rgba(251,146,60,0.1);
+}
+body.dark .reply-form-wrap {
+    background: rgba(17,24,39,0.7);
+    border-color: rgba(251,146,60,0.15);
+}
+body.dark .reply-form-wrap input {
+    background: rgba(255,255,255,0.05) !important;
+    border-color: rgba(251,146,60,0.15) !important;
+    color: #f3f4f6 !important;
+}
+body.dark .reply-form-wrap input:focus {
+    background: rgba(255,255,255,0.09) !important;
+    border-color: #f97316 !important;
+}
+body.dark .reply-form-wrap input::placeholder { color: #4b5563 !important; }
+body.dark .btn-action.btn-reply { border-color: rgba(234,88,12,0.2); background: rgba(234,88,12,0.08); }
+body.dark .btn-action.btn-edit-c { border-color: rgba(107,114,128,0.2); background: rgba(107,114,128,0.08); color: #9ca3af; }
+body.dark .btn-action.btn-hide { border-color: rgba(107,114,128,0.2); background: rgba(107,114,128,0.08); color: #9ca3af; }
+body.dark .btn-action.btn-delete { border-color: rgba(220,38,38,0.2); background: rgba(220,38,38,0.08); }
+body.dark .btn-action.btn-unhide { border-color: rgba(5,150,105,0.2); background: rgba(5,150,105,0.08); }
+body.dark .edit-wrap textarea {
+    background: rgba(17,24,39,0.8) !important;
+    color: #f3f4f6 !important;
+    border-color: #f97316 !important;
+}
+body.dark .btn-cancel { border-color: rgba(107,114,128,0.3); color: #9ca3af; }
+body.dark .btn-cancel:hover { background: rgba(107,114,128,0.12); }
 </style>
 
 <script>
@@ -1499,12 +1594,14 @@ async function loadComments() {
         const data = await sbFetch(
             `comments?page_slug=eq.${encodeURIComponent(PAGE_SLUG)}&order=created_at.asc&select=*`
         );
-        const visible = data.filter(c => !c.is_hidden);
+        // المدير يرى الكل، الزوار يرون الظاهرة فقط
+        const visible = isAdmin ? data : data.filter(c => !c.is_hidden);
         const top = visible.filter(c => !c.parent_id);
         const replies = visible.filter(c => c.parent_id);
 
         const badge = document.getElementById('commentsCount');
-        if (badge) badge.textContent = top.length ? `${top.length} تعليق` : '';
+        const publicCount = data.filter(c => !c.parent_id && !c.is_hidden).length;
+        if (badge) badge.textContent = publicCount ? `${publicCount} تعليق` : '';
 
         if (top.length === 0) {
             list.innerHTML = `<div class="empty-comments">${TXT.empty}</div>`;
@@ -1525,7 +1622,8 @@ function buildCard(c, replies, isReply) {
     const myComment = c.author_uid === MY_UID;
     const isOwner = c.author_name === ADMIN_NAME;
     const div = document.createElement('div');
-    div.className = isReply ? 'reply-card' : 'comment-card';
+    const hiddenClass = c.is_hidden ? ' comment-hidden' : '';
+    div.className = (isReply ? 'reply-card' : 'comment-card') + hiddenClass;
     div.id = 'comment-' + c.id;
 
     const initial = (c.author_name || ANONYMOUS)[0];
@@ -1551,7 +1649,8 @@ function buildCard(c, replies, isReply) {
         <div class="comment-actions">
             <button class="btn-action btn-reply" onclick="toggleReplyForm('${c.id}', '${c.parent_id||''}')">${icoReply} ${TXT.btnReply}</button>
             ${myComment ? `<button class="btn-action btn-edit-c" onclick="toggleEdit('${c.id}',\`${escJs(c.body)}\`)">${icoEdit} ${TXT.btnEdit}</button>` : ''}
-            ${myComment ? `<button class="btn-action btn-hide" onclick="hideComment('${c.id}')">${icoHide} ${TXT.btnHide}</button>` : ''}
+            ${myComment && !c.is_hidden ? `<button class="btn-action btn-hide" onclick="hideComment('${c.id}')">${icoHide} ${TXT.btnHide}</button>` : ''}
+            ${isAdmin && c.is_hidden ? `<button class="btn-action btn-unhide" onclick="unhideComment('${c.id}')"><svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg> إظهار</button>` : ''}
             ${(myComment||isAdmin) ? `<button class="btn-action btn-delete" onclick="deleteComment('${c.id}')">${icoDelete} ${TXT.btnDelete}</button>` : ''}
         </div>
         <div id="edit-form-${c.id}"></div>
@@ -1653,6 +1752,24 @@ async function hideComment(id) {
         }
         await loadComments();
     } catch(e) { alert(TXT.hideError + ': ' + e.message); }
+}
+
+// إلغاء الإخفاء (مدير)
+async function unhideComment(id) {
+    try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/comments?id=eq.${id}`, {
+            method: 'PATCH',
+            headers: {
+                'apikey': SUPABASE_KEY,
+                'Authorization': 'Bearer ' + SUPABASE_KEY,
+                'Content-Type': 'application/json',
+                'Prefer': 'return=minimal'
+            },
+            body: JSON.stringify({ is_hidden: false })
+        });
+        if (!res.ok && res.status !== 204) throw new Error('خطأ');
+        await loadComments();
+    } catch(e) { alert('حدث خطأ أثناء الإظهار.'); }
 }
 
 // حذف
