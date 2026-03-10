@@ -1212,7 +1212,7 @@ function buildCard(c, myComment, replies = [], isReply = false) {
             ${!isReply ? `<button class="btn-sm btn-reply" onclick="toggleReplyForm('${c.id}')">↩ رد</button>` : ''}
             ${myComment ? `<button class="btn-sm btn-edit-c" onclick="toggleEdit('${c.id}', \`${escJs(c.body)}\`)">✏️ تعديل</button>` : ''}
             ${myComment ? `<button class="btn-sm btn-hide" onclick="hideComment('${c.id}')">🙈 إخفاء</button>` : ''}
-            ${isAdmin ? `<button class="btn-sm btn-delete" onclick="deleteComment('${c.id}')">🗑 حذف</button>` : ''}
+            ${(myComment || isAdmin) ? `<button class="btn-sm btn-delete" onclick="deleteComment('${c.id}')">🗑 حذف</button>` : ''}
         </div>
         <div id="edit-form-${c.id}"></div>
         <div id="reply-form-${c.id}"></div>
@@ -1249,12 +1249,13 @@ function toggleReplyForm(parentId) {
 async function submitReply(parentId) {
     const name = document.getElementById('reply-name-' + parentId).value.trim();
     const body = document.getElementById('reply-body-' + parentId).value.trim();
-    if (!name || !body) { alert('الاسم والرد مطلوبان.'); return; }
+    if (!body) { alert('الرد لا يمكن أن يكون فارغاً.'); return; }
+    const finalName = name || 'مجهول';
     try {
         await sbFetch('comments', {
             method: 'POST',
-            prefer: 'return=minimal',
-            body: JSON.stringify({ page_slug: PAGE_SLUG, author_name: name, author_uid: MY_UID, body, parent_id: parentId })
+            headers: { 'Prefer': 'return=representation' },
+            body: JSON.stringify({ page_slug: PAGE_SLUG, author_name: finalName, author_uid: MY_UID, body, parent_id: parentId })
         });
         document.getElementById('reply-form-' + parentId).innerHTML = '';
         await loadComments();
@@ -1297,11 +1298,11 @@ async function hideComment(id) {
     try {
         await sbFetch(`comments?id=eq.${id}`, {
             method: 'PATCH',
-            prefer: 'return=minimal',
+            headers: { 'Prefer': 'return=representation' },
             body: JSON.stringify({ is_hidden: true })
         });
         await loadComments();
-    } catch(e) { alert('حدث خطأ.'); }
+    } catch(e) { alert('حدث خطأ: ' + e.message); }
 }
 
 // ====== حذف التعليق (المدير فقط) ======
@@ -1321,7 +1322,8 @@ document.getElementById('commentForm')?.addEventListener('submit', async functio
     const btn  = document.getElementById('submitBtn');
     const msg  = document.getElementById('formMsg');
 
-    if (!name || !body) return;
+    if (!body) return;
+    const finalName = name || 'مجهول';
 
     btn.disabled = true;
     btn.querySelector('span').textContent = 'جارٍ الإرسال...';
@@ -1330,8 +1332,8 @@ document.getElementById('commentForm')?.addEventListener('submit', async functio
     try {
         await sbFetch('comments', {
             method: 'POST',
-            prefer: 'return=minimal',
-            body: JSON.stringify({ page_slug: PAGE_SLUG, author_name: name, author_uid: MY_UID, body })
+            headers: { 'Prefer': 'return=representation' },
+            body: JSON.stringify({ page_slug: PAGE_SLUG, author_name: finalName, author_uid: MY_UID, body })
         });
         document.getElementById('commentBody').value = '';
         document.getElementById('charCount').textContent = '0';
