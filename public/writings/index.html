@@ -894,7 +894,7 @@ h1, h2, h3, h4, h5, h6 {
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
                         </svg>
                     </button>
-                    <span class="button-tooltip">نسّخ النص</span>
+                    <span class="button-tooltip">نسْخ النص</span>
                 </div>
             </div>
             
@@ -989,552 +989,242 @@ body.dark .icon-btn:hover { background: linear-gradient(135deg,rgba(55,65,81,.9)
 body.dark .button-tooltip { background:linear-gradient(135deg,rgba(30,30,30,.98),rgba(40,40,40,.95)); color:#fbbf24; box-shadow:0 10px 35px rgba(0,0,0,.5); border:1px solid rgba(251,191,36,.25); }
 body.dark .button-tooltip::before { border-color:transparent transparent rgba(30,30,30,.98) transparent; }
 
-/* ===== COMMENTS GLASS SECTION ===== */
+/* ===== COMMENTS SECTION ===== */
 .comments-glass-section {
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(251, 146, 60, 0.2);
+    margin-top: 3rem; padding-top: 2rem;
+    border-top: 1px solid rgba(251,146,60,0.2);
 }
-
-/* Header */
 .comments-header {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-    direction: rtl;
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-bottom: 1.5rem; direction: rtl;
 }
 .comments-header-icon {
     width: 40px; height: 40px;
     background: linear-gradient(135deg, #f59e0b, #ea580c);
-    border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    color: white;
-    box-shadow: 0 4px 12px rgba(234,88,12,0.35);
-    flex-shrink: 0;
+    border-radius: 12px; display: flex; align-items: center; justify-content: center;
+    color: white; box-shadow: 0 4px 12px rgba(234,88,12,0.35); flex-shrink: 0;
 }
-.comments-title {
-    font-size: 1.2rem;
-    font-weight: 800;
-    color: #1a1a1a;
-    letter-spacing: -0.02em;
-}
+.comments-title { font-size: 1.2rem; font-weight: 800; color: #1a1a1a; letter-spacing: -0.02em; }
 body.dark .comments-title { color: #f9fafb; }
 .comments-count-badge {
-    background: linear-gradient(135deg, rgba(251,146,60,0.15), rgba(234,88,12,0.1));
-    border: 1px solid rgba(234,88,12,0.25);
-    color: #ea580c;
-    font-size: 0.78rem;
-    font-weight: 700;
-    padding: 0.2rem 0.7rem;
-    border-radius: 999px;
+    background: linear-gradient(135deg,rgba(251,146,60,0.15),rgba(234,88,12,0.1));
+    border: 1px solid rgba(234,88,12,0.25); color: #ea580c;
+    font-size: 0.78rem; font-weight: 700; padding: 0.2rem 0.7rem; border-radius: 999px;
 }
 body.dark .comments-count-badge { background: rgba(234,88,12,0.15); border-color: rgba(234,88,12,0.3); }
 
 /* Form glass */
 .comment-form-glass {
-    background: linear-gradient(135deg,
-        rgba(255,255,255,0.7) 0%,
-        rgba(255,248,240,0.6) 50%,
-        rgba(255,237,213,0.5) 100%);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(251,146,60,0.25);
-    border-radius: 1.5rem;
-    padding: 1.5rem;
-    margin-bottom: 1.75rem;
-    box-shadow:
-        0 8px 32px rgba(234,88,12,0.08),
-        inset 0 1px 0 rgba(255,255,255,0.8),
-        inset 0 -1px 0 rgba(251,146,60,0.1);
-    position: relative;
-    overflow: hidden;
+    background: linear-gradient(135deg, rgba(255,255,255,0.7), rgba(255,248,240,0.6), rgba(255,237,213,0.5));
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(251,146,60,0.25); border-radius: 1.5rem;
+    padding: 1.5rem; margin-bottom: 1.75rem;
+    box-shadow: 0 8px 32px rgba(234,88,12,0.08), inset 0 1px 0 rgba(255,255,255,0.8);
+    position: relative; overflow: hidden;
 }
 .comment-form-glass::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(251,146,60,0.4), transparent);
+    content:''; position:absolute; top:0; left:0; right:0; height:1px;
+    background: linear-gradient(90deg,transparent,rgba(251,146,60,0.4),transparent);
 }
 body.dark .comment-form-glass {
-    background: linear-gradient(135deg,
-        rgba(31,41,55,0.8) 0%,
-        rgba(24,32,44,0.75) 50%,
-        rgba(17,24,39,0.7) 100%);
-    border-color: rgba(251,146,60,0.2);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
-}
-
-/* Form fields */
-.form-field {
-    position: relative;
-    margin-bottom: 0.85rem;
-    direction: rtl;
-}
-.field-icon {
-    position: absolute;
-    right: 0.9rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #f97316;
-    pointer-events: none;
-    z-index: 1;
-}
-.textarea-field .field-icon { top: 0.9rem; transform: none; }
-
-.glass-input {
-    width: 100%;
-    padding: 0.8rem 2.5rem 0.8rem 1rem;
-    background: rgba(255,255,255,0.6);
-    backdrop-filter: blur(10px);
-    border: 1.5px solid rgba(251,146,60,0.2);
-    border-radius: 0.875rem;
-    font-family: inherit;
-    font-size: 0.95rem;
-    color: #1a1a1a;
-    outline: none;
-    text-align: right;
-    transition: all 0.25s ease;
-    box-sizing: border-box;
-}
-.glass-input:focus {
-    border-color: #ea580c;
-    background: rgba(255,255,255,0.85);
-    box-shadow: 0 0 0 3px rgba(234,88,12,0.12), 0 4px 16px rgba(234,88,12,0.08);
-}
-.glass-input::placeholder { color: #c4a882; }
-body.dark .glass-input {
-    background: rgba(255,255,255,0.06);
-    border-color: rgba(251,146,60,0.2);
-    color: #f3f4f6;
-}
-body.dark .glass-input:focus {
-    background: rgba(255,255,255,0.1);
-    border-color: #f97316;
-    box-shadow: 0 0 0 3px rgba(249,115,22,0.15);
-}
-body.dark .glass-input::placeholder { color: #6b7280; }
-
-.glass-textarea { min-height: 120px; resize: none; padding-top: 0.85rem; }
-
-/* Form footer */
-.form-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-    direction: rtl;
-    flex-wrap: wrap;
-}
-.char-counter {
-    font-size: 0.8rem;
-    color: #b0a090;
-    font-variant-numeric: tabular-nums;
-}
-body.dark .char-counter { color: #6b7280; }
-
-.btn-submit-glass {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 0.7rem 1.4rem;
-    background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
-    color: #ffffff !important;
-    border: none;
-    border-radius: 0.875rem;
-    font-family: inherit;
-    font-size: 0.95rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.25s ease;
-    box-shadow: 0 4px 16px rgba(234,88,12,0.35), inset 0 1px 0 rgba(255,255,255,0.2);
-    position: relative;
-    overflow: hidden;
-}
-.btn-submit-glass::before {
-    content: '';
-    position: absolute;
-    top: 0; left: -100%;
-    width: 100%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-    transition: left 0.4s ease;
-}
-.btn-submit-glass:hover::before { left: 100%; }
-.btn-submit-glass:hover {
-    background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(234,88,12,0.45);
-}
-.btn-submit-glass:active { transform: translateY(0); }
-.btn-submit-glass:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-.btn-submit-glass, .btn-submit-glass span { color: #ffffff !important; }
-body.dark .btn-submit-glass {
-    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-    box-shadow: 0 4px 16px rgba(251,191,36,0.3);
-}
-body.dark .btn-submit-glass:hover {
-    background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
-    box-shadow: 0 8px 24px rgba(251,191,36,0.4);
-}
-
-/* Form message */
-.form-msg {
-    margin-top: 0.6rem;
-    padding: 0.6rem 1rem;
-    border-radius: 0.75rem;
-    font-size: 0.88rem;
-    text-align: center;
-    font-weight: 500;
-}
-.form-msg.success { background: rgba(16,185,129,0.12); color: #059669; border: 1px solid rgba(16,185,129,0.25); }
-.form-msg.error { background: rgba(239,68,68,0.1); color: #dc2626; border: 1px solid rgba(239,68,68,0.2); }
-.form-msg.hidden { display: none; }
-
-/* Loading */
-.loading-state {
-    display: flex; align-items: center; justify-content: center;
-    gap: 0.75rem; padding: 2rem;
-    color: #b0a090; font-size: 0.9rem;
-}
-.loading-spinner {
-    width: 20px; height: 20px;
-    border: 2px solid rgba(234,88,12,0.2);
-    border-top-color: #ea580c;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-
-/* ===== COMMENT CARDS ===== */
-.comment-card {
-    background: linear-gradient(135deg,
-        rgba(255,255,255,0.65),
-        rgba(255,248,240,0.55));
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(251,146,60,0.18);
-    border-radius: 1.25rem;
-    padding: 1.1rem 1.25rem;
-    margin-bottom: 0.85rem;
-    direction: rtl;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 12px rgba(234,88,12,0.05), inset 0 1px 0 rgba(255,255,255,0.7);
-    position: relative;
-    overflow: hidden;
-}
-.comment-card::before {
-    content: '';
-    position: absolute;
-    top: 0; right: 0;
-    width: 3px; height: 100%;
-    background: linear-gradient(180deg, #f59e0b, #ea580c);
-    border-radius: 0 1.25rem 1.25rem 0;
-    opacity: 0;
-    transition: opacity 0.2s;
-}
-.comment-card:hover { border-color: rgba(234,88,12,0.3); box-shadow: 0 6px 24px rgba(234,88,12,0.1); }
-.comment-card:hover::before { opacity: 1; }
-body.dark .comment-card {
-    background: linear-gradient(135deg, rgba(31,41,55,0.75), rgba(17,24,39,0.7));
-    border-color: rgba(251,146,60,0.15);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.04);
-}
-body.dark .comment-card:hover { border-color: rgba(249,115,22,0.35); box-shadow: 0 6px 24px rgba(0,0,0,0.3); }
-
-/* comment meta */
-.comment-meta {
-    display: flex; align-items: center; gap: 0.5rem;
-    margin-bottom: 0.65rem; flex-wrap: wrap;
-}
-.comment-avatar {
-    width: 34px; height: 34px; border-radius: 50%;
-    background: linear-gradient(135deg, #fed7aa, #ea580c);
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 800; font-size: 0.85rem; color: white;
-    flex-shrink: 0; box-shadow: 0 2px 8px rgba(234,88,12,0.3);
-}
-.comment-avatar.admin-av {
-    background: linear-gradient(135deg, #f59e0b, #ea580c);
-    box-shadow: 0 2px 8px rgba(234,88,12,0.5);
-}
-.comment-author { font-weight: 700; font-size: 0.92rem; color: #1a1a1a; }
-body.dark .comment-author { color: #f3f4f6; }
-.comment-uid {
-    font-size: 0.7rem; color: #ea580c;
-    background: rgba(234,88,12,0.1);
-    padding: 0.1rem 0.45rem; border-radius: 999px;
-    border: 1px solid rgba(234,88,12,0.2);
-    flex-shrink: 0; font-weight: 600; letter-spacing: 0.03em;
-}
-body.dark .comment-uid { background: rgba(234,88,12,0.15); border-color: rgba(234,88,12,0.25); }
-.owner-badge {
-    font-size: 0.68rem; font-weight: 800;
-    background: linear-gradient(135deg, #f59e0b, #ea580c);
-    color: white; padding: 0.15rem 0.55rem;
-    border-radius: 999px; flex-shrink: 0;
-    box-shadow: 0 2px 6px rgba(234,88,12,0.3);
-    letter-spacing: 0.02em;
-}
-.comment-time {
-    font-size: 0.73rem; color: #b0a090;
-    margin-right: auto;
-}
-body.dark .comment-time { color: #6b7280; }
-
-.comment-body {
-    font-size: 0.93rem; color: #374151;
-    line-height: 1.8; margin-bottom: 0.65rem;
-    word-break: break-word;
-}
-body.dark .comment-body { color: #d1d5db; }
-
-/* Action buttons */
-.comment-actions { display: flex; gap: 0.35rem; flex-wrap: wrap; }
-.btn-action {
-    display: flex; align-items: center; gap: 0.3rem;
-    font-size: 0.75rem; padding: 0.28rem 0.65rem;
-    border-radius: 0.55rem;
-    border: 1px solid transparent;
-    cursor: pointer; background: transparent;
-    font-family: inherit; font-weight: 600;
-    transition: all 0.15s ease;
-}
-.btn-action svg { flex-shrink: 0; }
-.btn-reply { color: #ea580c; border-color: rgba(234,88,12,0.25); background: rgba(234,88,12,0.05); }
-.btn-reply:hover { background: rgba(234,88,12,0.12); border-color: rgba(234,88,12,0.4); }
-.btn-edit-c { color: #6b7280; border-color: rgba(107,114,128,0.2); background: rgba(107,114,128,0.05); }
-.btn-edit-c:hover { background: rgba(107,114,128,0.1); }
-.btn-hide { color: #6b7280; border-color: rgba(107,114,128,0.2); background: rgba(107,114,128,0.05); }
-.btn-hide:hover { background: rgba(107,114,128,0.1); }
-.btn-delete { color: #dc2626; border-color: rgba(220,38,38,0.2); background: rgba(220,38,38,0.05); }
-.btn-delete:hover { background: rgba(220,38,38,0.12); border-color: rgba(220,38,38,0.35); }
-body.dark .btn-edit-c, body.dark .btn-hide { border-color: rgba(107,114,128,0.3); color: #9ca3af; }
-body.dark .btn-edit-c:hover, body.dark .btn-hide:hover { background: rgba(107,114,128,0.15); }
-
-/* Replies */
-.replies-container {
-    margin-top: 0.75rem; margin-right: 1.5rem;
-    padding-right: 1rem;
-    border-right: 2px solid rgba(234,88,12,0.25);
-}
-body.dark .replies-container { border-color: rgba(234,88,12,0.2); }
-
-.reply-card {
-    background: rgba(255,255,255,0.5);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(251,146,60,0.15);
-    border-radius: 1rem;
-    padding: 0.8rem 1rem;
-    margin-top: 0.5rem;
-    direction: rtl;
-    transition: all 0.2s;
-}
-.reply-card:hover { border-color: rgba(234,88,12,0.25); }
-body.dark .reply-card {
-    background: rgba(17,24,39,0.6);
-    border-color: rgba(251,146,60,0.12);
-}
-
-/* Reply form */
-.reply-form-wrap {
-    margin-top: 0.75rem;
-    background: rgba(255,248,240,0.6);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(234,88,12,0.2);
-    border-radius: 1rem;
-    padding: 0.85rem;
-    display: flex; flex-direction: column; gap: 0.5rem;
-}
-body.dark .reply-form-wrap {
-    background: rgba(31,41,55,0.6);
-    border-color: rgba(234,88,12,0.18);
-}
-.reply-form-wrap input {
-    width: 100%; padding: 0.6rem 0.9rem;
-    background: rgba(255,255,255,0.65);
-    border: 1px solid rgba(234,88,12,0.2);
-    border-radius: 0.75rem;
-    font-family: inherit; font-size: 0.88rem;
-    color: #1a1a1a; outline: none;
-    text-align: right; direction: rtl;
-    transition: all 0.2s; box-sizing: border-box;
-}
-.reply-form-wrap input:focus { border-color: #ea580c; background: white; box-shadow: 0 0 0 3px rgba(234,88,12,0.1); }
-body.dark .reply-form-wrap input { background: rgba(255,255,255,0.07); border-color: rgba(234,88,12,0.2); color: #f3f4f6; }
-body.dark .reply-form-wrap input:focus { background: rgba(255,255,255,0.12); }
-.reply-form-wrap input::placeholder { color: #c4a882; }
-body.dark .reply-form-wrap input::placeholder { color: #6b7280; }
-
-.btn-send-reply {
-    align-self: flex-end;
-    display: flex; align-items: center; gap: 0.4rem;
-    padding: 0.55rem 1.1rem;
-    background: linear-gradient(135deg, #f59e0b, #ea580c);
-    color: white; border: none; border-radius: 0.75rem;
-    font-family: inherit; font-size: 0.85rem; font-weight: 700;
-    cursor: pointer; transition: all 0.2s;
-    box-shadow: 0 3px 10px rgba(234,88,12,0.3);
-}
-.btn-send-reply:hover { background: linear-gradient(135deg, #ea580c, #c2410c); box-shadow: 0 5px 14px rgba(234,88,12,0.4); transform: translateY(-1px); }
-
-/* Edit form */
-.edit-wrap { margin-top: 0.5rem; }
-.edit-wrap textarea {
-    width: 100%; padding: 0.7rem 1rem;
-    background: rgba(255,255,255,0.7);
-    border: 1.5px solid #ea580c;
-    border-radius: 0.875rem;
-    font-family: inherit; font-size: 0.92rem;
-    color: #1a1a1a; outline: none;
-    text-align: right; direction: rtl;
-    resize: none; min-height: 80px; box-sizing: border-box;
-    box-shadow: 0 0 0 3px rgba(234,88,12,0.1);
-}
-body.dark .edit-wrap textarea { background: rgba(31,41,55,0.8); color: #f3f4f6; }
-.edit-actions { display: flex; gap: 0.5rem; margin-top: 0.5rem; justify-content: flex-end; }
-.btn-save {
-    display: flex; align-items: center; gap: 0.3rem;
-    background: linear-gradient(135deg,#f59e0b,#ea580c); color:white;
-    border:none; border-radius:0.6rem; padding:0.4rem 0.9rem;
-    font-family:inherit; font-size:0.82rem; font-weight:700; cursor:pointer;
-}
-.btn-cancel {
-    display: flex; align-items: center; gap: 0.3rem;
-    background:transparent; color:#6b7280;
-    border:1px solid rgba(107,114,128,0.3); border-radius:0.6rem;
-    padding:0.4rem 0.9rem; font-family:inherit; font-size:0.82rem; cursor:pointer;
-}
-.empty-comments {
-    text-align:center; padding:2.5rem 1rem;
-    color:#b0a090; font-size:0.92rem;
-    background: rgba(255,248,240,0.4);
-    border-radius: 1rem;
-    border: 1px dashed rgba(234,88,12,0.2);
-}
-body.dark .empty-comments { background: rgba(31,41,55,0.4); color:#6b7280; }
-
-/* تعليق مخفي — يظهر للمدير فقط بشكل مميز */
-.comment-hidden {
-    opacity: 0.72;
-    border-color: rgba(107,114,128,0.3) !important;
-    background: repeating-linear-gradient(
-        45deg,
-        rgba(107,114,128,0.03),
-        rgba(107,114,128,0.03) 4px,
-        transparent 4px,
-        transparent 12px
-    ) !important;
-}
-.comment-hidden-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    font-size: 0.68rem; font-weight: 700;
-    color: #9ca3af;
-    background: rgba(107,114,128,0.12);
-    padding: 0.2rem 0.55rem;
-    border-radius: 999px;
-    border: 1px solid rgba(107,114,128,0.2);
-    margin-bottom: 0.5rem;
-}
-body.dark .comment-hidden { border-color: rgba(107,114,128,0.25) !important; }
-
-.btn-unhide { color: #059669; border-color: rgba(5,150,105,0.25); background: rgba(5,150,105,0.06); }
-.btn-unhide:hover { background: rgba(5,150,105,0.12); }
-
-/* ===== DARK MODE للتعليقات ===== */
-body.dark .comments-glass-section {
-    border-top-color: rgba(251,146,60,0.15);
-}
-body.dark .comment-form-glass {
-    background: linear-gradient(135deg,
-        rgba(17,24,39,0.85) 0%,
-        rgba(24,32,44,0.8) 50%,
-        rgba(31,41,55,0.75) 100%);
+    background: linear-gradient(135deg, rgba(17,24,39,0.85), rgba(24,32,44,0.8), rgba(31,41,55,0.75));
     border-color: rgba(251,146,60,0.15);
     box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.04);
 }
 body.dark .comment-form-glass::before {
-    background: linear-gradient(90deg, transparent, rgba(251,146,60,0.2), transparent);
+    background: linear-gradient(90deg,transparent,rgba(251,146,60,0.2),transparent);
 }
-body.dark .glass-input {
-    background: rgba(255,255,255,0.05) !important;
-    border-color: rgba(251,146,60,0.15) !important;
-    color: #f3f4f6 !important;
+
+.form-field { position: relative; margin-bottom: 0.85rem; direction: rtl; }
+.field-icon { position:absolute; right:0.9rem; top:50%; transform:translateY(-50%); color:#f97316; pointer-events:none; z-index:1; }
+.textarea-field .field-icon { top:0.9rem; transform:none; }
+
+.glass-input {
+    width:100%; padding:0.8rem 2.5rem 0.8rem 1rem;
+    background:rgba(255,255,255,0.6); backdrop-filter:blur(10px);
+    border:1.5px solid rgba(251,146,60,0.2); border-radius:0.875rem;
+    font-family:inherit; font-size:0.95rem; color:#1a1a1a;
+    outline:none; text-align:right; transition:all 0.25s ease; box-sizing:border-box;
 }
-body.dark .glass-input:focus {
-    background: rgba(255,255,255,0.09) !important;
-    border-color: #f97316 !important;
-    box-shadow: 0 0 0 3px rgba(249,115,22,0.12) !important;
+.glass-input:focus {
+    border-color:#ea580c; background:rgba(255,255,255,0.85);
+    box-shadow:0 0 0 3px rgba(234,88,12,0.12),0 4px 16px rgba(234,88,12,0.08);
 }
-body.dark .glass-input::placeholder { color: #4b5563 !important; }
-body.dark .comment-card {
-    background: linear-gradient(135deg, rgba(17,24,39,0.8), rgba(31,41,55,0.75));
-    border-color: rgba(251,146,60,0.12);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.03);
+.glass-input::placeholder { color:#c4a882; }
+body.dark .glass-input { background:rgba(255,255,255,0.05)!important; border-color:rgba(251,146,60,0.15)!important; color:#f3f4f6!important; }
+body.dark .glass-input:focus { background:rgba(255,255,255,0.09)!important; border-color:#f97316!important; box-shadow:0 0 0 3px rgba(249,115,22,0.12)!important; }
+body.dark .glass-input::placeholder { color:#4b5563!important; }
+.glass-textarea { min-height:120px; resize:none; padding-top:0.85rem; }
+
+.form-footer { display:flex; justify-content:space-between; align-items:center; gap:1rem; direction:rtl; flex-wrap:wrap; }
+.char-counter { font-size:0.8rem; color:#b0a090; font-variant-numeric:tabular-nums; }
+body.dark .char-counter { color:#6b7280; }
+
+/* زر الإرسال — نفس تصميم أزرار المشاركة والنسخ */
+.btn-submit-glass {
+    display: flex; align-items: center; gap: 0.6rem;
+    padding: 0.7rem 1.4rem;
+    background: linear-gradient(135deg, #fed7aa, #fdba74);
+    color: #ea580c !important;
+    border: none; border-radius: 0.75rem;
+    font-family: inherit; font-size: 0.95rem; font-weight: 700;
+    cursor: pointer; transition: all 0.3s ease;
+    position: relative; overflow: hidden;
 }
-body.dark .comment-card:hover {
-    border-color: rgba(249,115,22,0.28);
-    box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+.btn-submit-glass:hover { background: linear-gradient(135deg, #fdba74, #fb923c); transform: scale(1.05); }
+.btn-submit-glass:active { transform: scale(1); }
+.btn-submit-glass:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.btn-submit-glass, .btn-submit-glass span { color: #ea580c !important; }
+.btn-submit-glass.btn-dim { opacity: 0.4; cursor: not-allowed; }
+body.dark .btn-submit-glass { background: linear-gradient(135deg,rgba(75,85,99,0.8),rgba(55,65,81,0.7)); color:#fbbf24!important; }
+body.dark .btn-submit-glass span { color:#fbbf24!important; }
+body.dark .btn-submit-glass:hover { background: linear-gradient(135deg,rgba(55,65,81,0.9),rgba(75,85,99,0.8)); }
+body.dark .btn-submit-glass.btn-dim { opacity: 0.35; }
+
+.form-msg { margin-top:0.6rem; padding:0.6rem 1rem; border-radius:0.75rem; font-size:0.88rem; text-align:center; font-weight:500; }
+.form-msg.success { background:rgba(16,185,129,0.12); color:#059669; border:1px solid rgba(16,185,129,0.25); }
+.form-msg.error { background:rgba(239,68,68,0.1); color:#dc2626; border:1px solid rgba(239,68,68,0.2); }
+.form-msg.hidden { display:none; }
+
+.loading-state { display:flex; align-items:center; justify-content:center; gap:0.75rem; padding:2rem; color:#b0a090; font-size:0.9rem; }
+.loading-spinner { width:20px; height:20px; border:2px solid rgba(234,88,12,0.2); border-top-color:#ea580c; border-radius:50%; animation:spin 0.8s linear infinite; }
+@keyframes spin { to { transform:rotate(360deg); } }
+
+/* ===== COMMENT CARDS ===== */
+.comment-card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.65), rgba(255,248,240,0.55));
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(251,146,60,0.18); border-radius: 1.25rem;
+    padding: 1.1rem 1.25rem; margin-bottom: 0.85rem;
+    direction: rtl; transition: all 0.2s ease;
+    box-shadow: 0 2px 12px rgba(234,88,12,0.05), inset 0 1px 0 rgba(255,255,255,0.7);
+    position: relative;
 }
-body.dark .reply-card {
-    background: rgba(10,14,23,0.7);
-    border-color: rgba(251,146,60,0.1);
+.comment-card::before {
+    content:''; position:absolute; top:0; right:0; width:3px; height:100%;
+    background:linear-gradient(180deg,#f59e0b,#ea580c); border-radius:0 1.25rem 1.25rem 0;
+    opacity:0; transition:opacity 0.2s;
 }
-body.dark .reply-form-wrap {
-    background: rgba(17,24,39,0.7);
-    border-color: rgba(251,146,60,0.15);
+.comment-card:hover { border-color:rgba(234,88,12,0.3); box-shadow:0 6px 24px rgba(234,88,12,0.1); }
+.comment-card:hover::before { opacity:1; }
+body.dark .comment-card { background:linear-gradient(135deg,rgba(17,24,39,0.8),rgba(31,41,55,0.75)); border-color:rgba(251,146,60,0.12); box-shadow:0 2px 12px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.03); }
+body.dark .comment-card:hover { border-color:rgba(249,115,22,0.28); box-shadow:0 6px 24px rgba(0,0,0,0.4); }
+
+/* تعليق مخفي */
+.comment-hidden {
+    opacity: 0.72;
+    border-color: rgba(107,114,128,0.3) !important;
+    background: repeating-linear-gradient(45deg, rgba(107,114,128,0.03), rgba(107,114,128,0.03) 4px, transparent 4px, transparent 12px) !important;
 }
-body.dark .reply-form-wrap input {
-    background: rgba(255,255,255,0.05) !important;
-    border-color: rgba(251,146,60,0.15) !important;
-    color: #f3f4f6 !important;
+body.dark .comment-hidden { border-color:rgba(107,114,128,0.25)!important; }
+.comment-hidden-label {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    font-size: 0.68rem; font-weight: 700; color: #9ca3af;
+    background: rgba(107,114,128,0.12); padding: 0.2rem 0.55rem;
+    border-radius: 999px; border: 1px solid rgba(107,114,128,0.2);
+    margin-bottom: 0.5rem;
 }
-body.dark .reply-form-wrap input:focus {
-    background: rgba(255,255,255,0.09) !important;
-    border-color: #f97316 !important;
+
+.comment-meta { display:flex; align-items:center; gap:0.5rem; margin-bottom:0.65rem; flex-wrap:wrap; }
+.comment-avatar {
+    width:34px; height:34px; border-radius:50%;
+    background:linear-gradient(135deg,#fed7aa,#ea580c);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:0.85rem; color:white;
+    flex-shrink:0; box-shadow:0 2px 8px rgba(234,88,12,0.3);
 }
-body.dark .reply-form-wrap input::placeholder { color: #4b5563 !important; }
-body.dark .btn-action.btn-reply { border-color: rgba(234,88,12,0.2); background: rgba(234,88,12,0.08); }
-body.dark .btn-action.btn-edit-c { border-color: rgba(107,114,128,0.2); background: rgba(107,114,128,0.08); color: #9ca3af; }
-body.dark .btn-action.btn-hide { border-color: rgba(107,114,128,0.2); background: rgba(107,114,128,0.08); color: #9ca3af; }
-body.dark .btn-action.btn-delete { border-color: rgba(220,38,38,0.2); background: rgba(220,38,38,0.08); }
-body.dark .btn-action.btn-unhide { border-color: rgba(5,150,105,0.2); background: rgba(5,150,105,0.08); }
-body.dark .edit-wrap textarea {
-    background: rgba(17,24,39,0.8) !important;
-    color: #f3f4f6 !important;
-    border-color: #f97316 !important;
+.comment-avatar.admin-av { background:linear-gradient(135deg,#f59e0b,#ea580c); box-shadow:0 2px 8px rgba(234,88,12,0.5); }
+.comment-author { font-weight:700; font-size:0.92rem; color:#1a1a1a; }
+body.dark .comment-author { color:#f3f4f6; }
+.comment-uid { font-size:0.7rem; color:#ea580c; background:rgba(234,88,12,0.1); padding:0.1rem 0.45rem; border-radius:999px; border:1px solid rgba(234,88,12,0.2); flex-shrink:0; font-weight:600; }
+body.dark .comment-uid { background:rgba(234,88,12,0.15); border-color:rgba(234,88,12,0.25); }
+.owner-badge { font-size:0.68rem; font-weight:800; background:linear-gradient(135deg,#f59e0b,#ea580c); color:white; padding:0.15rem 0.55rem; border-radius:999px; flex-shrink:0; box-shadow:0 2px 6px rgba(234,88,12,0.3); }
+.comment-time { font-size:0.73rem; color:#b0a090; margin-right:auto; }
+body.dark .comment-time { color:#6b7280; }
+.comment-body { font-size:0.93rem; color:#374151; line-height:1.8; margin-bottom:0.65rem; word-break:break-word; }
+body.dark .comment-body { color:#d1d5db; }
+
+.comment-actions { display:flex; gap:0.35rem; flex-wrap:wrap; }
+.btn-action {
+    display:flex; align-items:center; gap:0.3rem;
+    font-size:0.75rem; padding:0.28rem 0.65rem;
+    border-radius:0.55rem; border:1px solid transparent;
+    cursor:pointer; background:transparent; font-family:inherit; font-weight:600;
+    transition:all 0.15s ease;
 }
-body.dark .btn-cancel { border-color: rgba(107,114,128,0.3); color: #9ca3af; }
-body.dark .btn-cancel:hover { background: rgba(107,114,128,0.12); }
+.btn-reply { color:#ea580c; border-color:rgba(234,88,12,0.25); background:rgba(234,88,12,0.05); }
+.btn-reply:hover { background:rgba(234,88,12,0.12); border-color:rgba(234,88,12,0.4); }
+.btn-edit-c { color:#6b7280; border-color:rgba(107,114,128,0.2); background:rgba(107,114,128,0.05); }
+.btn-edit-c:hover { background:rgba(107,114,128,0.1); }
+.btn-hide { color:#6b7280; border-color:rgba(107,114,128,0.2); background:rgba(107,114,128,0.05); }
+.btn-hide:hover { background:rgba(107,114,128,0.1); }
+.btn-delete { color:#dc2626; border-color:rgba(220,38,38,0.2); background:rgba(220,38,38,0.05); }
+.btn-delete:hover { background:rgba(220,38,38,0.12); border-color:rgba(220,38,38,0.35); }
+.btn-unhide { color:#059669; border-color:rgba(5,150,105,0.25); background:rgba(5,150,105,0.06); }
+.btn-unhide:hover { background:rgba(5,150,105,0.12); }
+body.dark .btn-edit-c, body.dark .btn-hide { border-color:rgba(107,114,128,0.2); color:#9ca3af; }
+body.dark .btn-edit-c:hover, body.dark .btn-hide:hover { background:rgba(107,114,128,0.15); }
+body.dark .btn-reply { border-color:rgba(234,88,12,0.2); background:rgba(234,88,12,0.08); }
+body.dark .btn-delete { border-color:rgba(220,38,38,0.2); background:rgba(220,38,38,0.08); }
+body.dark .btn-unhide { border-color:rgba(5,150,105,0.2); background:rgba(5,150,105,0.08); }
+
+/* الردود */
+.replies-container { margin-top:0.75rem; margin-right:1.5rem; padding-right:1rem; border-right:2px solid rgba(234,88,12,0.25); }
+body.dark .replies-container { border-color:rgba(234,88,12,0.2); }
+.reply-card { background:rgba(255,255,255,0.5); backdrop-filter:blur(10px); border:1px solid rgba(251,146,60,0.15); border-radius:1rem; padding:0.8rem 1rem; margin-top:0.5rem; direction:rtl; transition:all 0.2s; }
+.reply-card:hover { border-color:rgba(234,88,12,0.25); }
+body.dark .reply-card { background:rgba(10,14,23,0.7); border-color:rgba(251,146,60,0.1); }
+
+/* نموذج الرد */
+.reply-form-wrap { margin-top:0.75rem; background:rgba(255,248,240,0.6); backdrop-filter:blur(10px); border:1px solid rgba(234,88,12,0.2); border-radius:1rem; padding:0.85rem; display:flex; flex-direction:column; gap:0.5rem; }
+body.dark .reply-form-wrap { background:rgba(17,24,39,0.7); border-color:rgba(234,88,12,0.18); }
+.reply-form-wrap input { width:100%; padding:0.6rem 0.9rem; background:rgba(255,255,255,0.65); border:1px solid rgba(234,88,12,0.2); border-radius:0.75rem; font-family:inherit; font-size:0.88rem; color:#1a1a1a; outline:none; text-align:right; direction:rtl; transition:all 0.2s; box-sizing:border-box; }
+.reply-form-wrap input:focus { border-color:#ea580c; background:white; box-shadow:0 0 0 3px rgba(234,88,12,0.1); }
+body.dark .reply-form-wrap input { background:rgba(255,255,255,0.05)!important; border-color:rgba(234,88,12,0.2)!important; color:#f3f4f6!important; }
+body.dark .reply-form-wrap input:focus { background:rgba(255,255,255,0.09)!important; border-color:#f97316!important; }
+.reply-form-wrap input::placeholder { color:#c4a882; }
+body.dark .reply-form-wrap input::placeholder { color:#4b5563!important; }
+.btn-send-reply { align-self:flex-end; display:flex; align-items:center; gap:0.4rem; padding:0.55rem 1.1rem; background:linear-gradient(135deg,#f59e0b,#ea580c); color:white; border:none; border-radius:0.75rem; font-family:inherit; font-size:0.85rem; font-weight:700; cursor:pointer; transition:all 0.2s; box-shadow:0 3px 10px rgba(234,88,12,0.3); }
+.btn-send-reply:hover { background:linear-gradient(135deg,#ea580c,#c2410c); transform:translateY(-1px); }
+
+/* تعديل */
+.edit-wrap { margin-top:0.5rem; }
+.edit-wrap textarea { width:100%; padding:0.7rem 1rem; background:rgba(255,255,255,0.7); border:1.5px solid #ea580c; border-radius:0.875rem; font-family:inherit; font-size:0.92rem; color:#1a1a1a; outline:none; text-align:right; direction:rtl; resize:none; min-height:80px; box-sizing:border-box; box-shadow:0 0 0 3px rgba(234,88,12,0.1); }
+body.dark .edit-wrap textarea { background:rgba(17,24,39,0.8)!important; color:#f3f4f6!important; border-color:#f97316!important; }
+.edit-actions { display:flex; gap:0.5rem; margin-top:0.5rem; justify-content:flex-end; }
+.btn-save { display:flex; align-items:center; gap:0.3rem; background:linear-gradient(135deg,#f59e0b,#ea580c); color:white; border:none; border-radius:0.6rem; padding:0.4rem 0.9rem; font-family:inherit; font-size:0.82rem; font-weight:700; cursor:pointer; }
+.btn-cancel { display:flex; align-items:center; gap:0.3rem; background:transparent; color:#6b7280; border:1px solid rgba(107,114,128,0.3); border-radius:0.6rem; padding:0.4rem 0.9rem; font-family:inherit; font-size:0.82rem; cursor:pointer; }
+body.dark .btn-cancel { border-color:rgba(107,114,128,0.3); color:#9ca3af; }
+body.dark .btn-cancel:hover { background:rgba(107,114,128,0.12); }
+
+.empty-comments { text-align:center; padding:2.5rem 1rem; color:#b0a090; font-size:0.92rem; background:rgba(255,248,240,0.4); border-radius:1rem; border:1px dashed rgba(234,88,12,0.2); }
+body.dark .empty-comments { background:rgba(31,41,55,0.4); color:#6b7280; }
 </style>
 
 <script>
 // ====================================================
-// ⚙️ الإعدادات — عدّل ما تشاء هنا
+// الإعدادات — عدّل ما تشاء هنا
 // ====================================================
 const SUPABASE_URL = 'https://eoccraiykkgefxgnoqvb.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_1xUC_60erYhjnL3u294qVg_UZ7rBXto';
-const ADMIN_SECRET = 'admin2025';      // كلمة سر المدير في الرابط
-const ADMIN_NAME   = 'سيف العشيرة';  // اسمك كمدير
-const ADMIN_BADGE  = 'صاحب الصفحة';  // نص الشارة
-const ANONYMOUS    = 'مجهول';         // اسم من لا يكتب اسمه
-
-const PAGE_SLUG = window.location.pathname.replace(/\//g,'_').replace(/^_|_$/g,'') || 'home';
+const ADMIN_SECRET = 'admin2025';
+const ADMIN_NAME   = 'سيف العشيرة';
+const ADMIN_BADGE  = 'صاحب الصفحة';
+const ANONYMOUS    = 'مجهول';
+const PAGE_SLUG    = window.location.pathname.replace(/\//g,'_').replace(/^_|_$/g,'') || 'home';
 
 const TXT = {
     loading:       'جارٍ تحميل التعليقات...',
-    empty:         'كن أوَّلَ المُعلِّقين! 🌟',
+    empty:         'كن أوَّلَ مُعلِّق! 🌟',
     loadError:     'تعذّر تحميل التعليقات.',
     sending:       'جارٍ الإرسال...',
     sent:          '✅ نُشر تعليقك!',
     sendError:     '❌ حدث خطأ، حاول مرة أخرى.',
-    replyEmpty:    'لا يمكن أن يكون الرَّدُّ فارغًا!',
+    replyEmpty:    'كيف يكون الردُّ فارغًا؟ إذا أردتَّه فارغًا فلا تَرُدّ!',
     replyError:    'حدث خطأ أثناء إرسال الرد.',
-    hideConfirm:   'إذا أخفيتَ تعليقَك فلن يراه إلا صاحب الموقع',
+    hideConfirm:   'إذا أخفيتَ تعليقك، فلن يراهُ إلا صاحب الموقع.',
     hideError:     'حدث خطأ أثناء الإخفاء.',
-    deleteConfirm: 'سيُحذَف هذا التعليق، فتأكَّد أن تكون مخطئًا!',
+    deleteConfirm: 'سيُحذَف هذا التعليق، تأكَّدْ أنْ تكون مُخطِئًا!',
     deleteError:   'حدث خطأ أثناء الحذف.',
     saveError:     'حدث خطأ أثناء الحفظ.',
     btnReply:      'رد',
@@ -1559,7 +1249,6 @@ function getMyUid() {
 }
 const MY_UID = getMyUid();
 
-// وضع المدير
 let isAdmin = false;
 const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.get('admin') === ADMIN_SECRET) { isAdmin = true; sessionStorage.setItem('is_admin','1'); }
@@ -1570,7 +1259,6 @@ if (isAdmin) {
     if (ni) { ni.value = ADMIN_NAME; ni.readOnly = true; ni.style.opacity = '0.75'; }
 }
 
-// API
 async function sbFetch(path, opts = {}) {
     const headers = {
         'apikey': SUPABASE_KEY,
@@ -1587,99 +1275,92 @@ async function sbFetch(path, opts = {}) {
     return res.json();
 }
 
-// تحميل التعليقات
 async function loadComments() {
     const list = document.getElementById('commentsList');
     try {
-        // نجلب الكل ونفلتر المخفية في الكود
-        const data = await sbFetch(
-            `comments?page_slug=eq.${encodeURIComponent(PAGE_SLUG)}&order=created_at.asc&select=*`
-        );
-        // المدير يرى الكل، الزوار يرون الظاهرة فقط
+        const data = await sbFetch(`comments?page_slug=eq.${encodeURIComponent(PAGE_SLUG)}&order=created_at.asc&select=*`);
         const visible = isAdmin ? data : data.filter(c => !c.is_hidden);
         const top = visible.filter(c => !c.parent_id);
-        const replies = visible.filter(c => c.parent_id);
+        const allReplies = visible.filter(c => c.parent_id);
 
         const badge = document.getElementById('commentsCount');
         const publicCount = data.filter(c => !c.parent_id && !c.is_hidden).length;
-        if (badge) { if (publicCount) { badge.textContent = `${publicCount} تعليق`; badge.style.display=''; } else { badge.style.display='none'; } }
-
-        if (top.length === 0) {
-            list.innerHTML = `<div class="empty-comments">${TXT.empty}</div>`;
-            return;
+        if (badge) {
+            if (publicCount) { badge.textContent = `${publicCount} تعليق`; badge.style.display = ''; }
+            else { badge.style.display = 'none'; }
         }
-list.innerHTML = '';
-        top.forEach(c => {
-            list.appendChild(buildCard(c, replies, false));
-        });
+
+        if (top.length === 0) { list.innerHTML = `<div class="empty-comments">${TXT.empty}</div>`; return; }
+        list.innerHTML = '';
+        top.forEach(c => list.appendChild(buildCard(c, allReplies, false)));
     } catch(e) {
         list.innerHTML = `<div class="empty-comments">${TXT.loadError}</div>`;
     }
 }
 
-// بناء بطاقة
-function buildCard(c, replies, isReply) {
+function buildCard(c, allReplies, isReply) {
     const myComment = c.author_uid === MY_UID;
-    const isOwner = c.author_name === ADMIN_NAME;
-    const div = document.createElement('div');
+    const isOwner   = c.author_name === ADMIN_NAME;
     const hiddenClass = c.is_hidden ? ' comment-hidden' : '';
+    const div = document.createElement('div');
     div.className = (isReply ? 'reply-card' : 'comment-card') + hiddenClass;
     div.id = 'comment-' + c.id;
 
     const initial = (c.author_name || ANONYMOUS)[0];
     const timeStr = relativeTime(c.created_at);
-    const badgeHtml = isOwner ? `<span class="owner-badge">⭐ ${ADMIN_BADGE}</span>` : '';
-    const avClass = isOwner ? 'comment-avatar admin-av' : 'comment-avatar';
+    const badgeHtml  = isOwner ? `<span class="owner-badge">⭐ ${ADMIN_BADGE}</span>` : '';
+    const uidHtml    = !isOwner ? `<span class="comment-uid">#${c.author_uid}</span>` : '';
+    const avClass    = isOwner ? 'comment-avatar admin-av' : 'comment-avatar';
+    const hiddenLbl  = c.is_hidden ? `<div class="comment-hidden-label"><svg width="11" height="11" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/></svg> مخفي عن الزوار</div>` : '';
 
-    // أيقونات الأزرار
     const icoReply  = `<svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/></svg>`;
     const icoEdit   = `<svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>`;
     const icoHide   = `<svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/></svg>`;
+    const icoShow   = `<svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>`;
     const icoDelete = `<svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>`;
 
     div.innerHTML = `
         <div class="comment-meta">
             <div class="${avClass}">${initial}</div>
             <span class="comment-author">${escHtml(c.author_name || ANONYMOUS)}</span>
-            ${c.author_name !== ADMIN_NAME ? `<span class="comment-uid">#${c.author_uid}</span>` : ""}
+            ${uidHtml}
             ${badgeHtml}
             <span class="comment-time">${timeStr}</span>
         </div>
-        ${c.is_hidden ? `<div class="comment-hidden-label"><svg width="11" height="11" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/></svg> مخفي عن الزوار</div>` : ""}
-        <div class="comment-body" id="body-${c.id}">${escHtml(c.body)}</div>
+        ${hiddenLbl}
+        <div class="comment-body" id="body-${c.id}" style="white-space:pre-wrap">${escHtml(c.body)}</div>
         <div class="comment-actions">
-            <button class="btn-action btn-reply" onclick="toggleReplyForm('${c.id}', '${c.parent_id||''}')">${icoReply} ${TXT.btnReply}</button>
+            <button class="btn-action btn-reply" onclick="toggleReplyForm('${c.id}')">${icoReply} ${TXT.btnReply}</button>
             ${myComment ? `<button class="btn-action btn-edit-c" onclick="toggleEdit('${c.id}',\`${escJs(c.body)}\`)">${icoEdit} ${TXT.btnEdit}</button>` : ''}
             ${myComment && !c.is_hidden ? `<button class="btn-action btn-hide" onclick="hideComment('${c.id}')">${icoHide} ${TXT.btnHide}</button>` : ''}
-            ${isAdmin && c.is_hidden ? `<button class="btn-action btn-unhide" onclick="unhideComment('${c.id}')"><svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg> إظهار</button>` : ''}
-            ${(myComment||isAdmin) ? `<button class="btn-action btn-delete" onclick="deleteComment('${c.id}')">${icoDelete} ${TXT.btnDelete}</button>` : ''}
+            ${isAdmin && c.is_hidden ? `<button class="btn-action btn-unhide" onclick="unhideComment('${c.id}')">${icoShow} إظهار</button>` : ''}
+            ${(myComment || isAdmin) ? `<button class="btn-action btn-delete" onclick="deleteComment('${c.id}')">${icoDelete} ${TXT.btnDelete}</button>` : ''}
         </div>
         <div id="edit-form-${c.id}"></div>
         <div id="reply-form-${c.id}"></div>
     `;
 
-const directReplies = replies.filter(r => r.parent_id === c.id);
+    // الردود المباشرة فقط لهذا التعليق
+    const directReplies = allReplies.filter(r => r.parent_id === c.id);
     if (directReplies.length > 0) {
         const rd = document.createElement('div');
         rd.className = 'replies-container';
-        directReplies.forEach(r => rd.appendChild(buildCard(r, replies, true)));
+        directReplies.forEach(r => rd.appendChild(buildCard(r, allReplies, true)));
         div.appendChild(rd);
     }
     return div;
 }
 
-// نموذج الرد — يدعم الرد على الرد (يُرسل للتعليق الأصلي)
-function toggleReplyForm(commentId, parentId) {
-    const rootId = commentId; // الرد يذهب للتعليق الذي ضغطت عليه
+function toggleReplyForm(commentId) {
     const container = document.getElementById('reply-form-' + commentId);
     if (container.innerHTML) { container.innerHTML = ''; return; }
     const defName = isAdmin ? ADMIN_NAME : '';
     const roAttr  = isAdmin ? 'readonly style="opacity:0.75"' : '';
     container.innerHTML = `
         <div class="reply-form-wrap">
-            <input type="text" id="rn-${commentId}" placeholder="اسمك (إن أردتَّ)" maxlength="50" value="${defName}" ${roAttr}>
+            <input type="text" id="rn-${commentId}" placeholder="اسمك (اختياري)" maxlength="50" value="${defName}" ${roAttr}>
             <input type="text" id="rb-${commentId}" placeholder="اكتب ردك..." maxlength="500">
-            <button class="btn-send-reply" onclick="submitReply('${commentId}','${rootId}')">
+            <button class="btn-send-reply" onclick="submitReply('${commentId}')">
                 <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
                 ${TXT.btnSendReply}
             </button>
@@ -1688,26 +1369,24 @@ function toggleReplyForm(commentId, parentId) {
     document.getElementById('rb-' + commentId).focus();
 }
 
-async function submitReply(commentId, rootId) {
+async function submitReply(commentId) {
     const name = document.getElementById('rn-' + commentId).value.trim();
     const body = document.getElementById('rb-' + commentId).value.trim();
     if (!body) { alert(TXT.replyEmpty); return; }
     try {
         await sbFetch('comments', {
-            method: 'POST',
-            headers: { 'Prefer': 'return=representation' },
-            body: JSON.stringify({ page_slug:PAGE_SLUG, author_name:name||ANONYMOUS, author_uid:MY_UID, body, parent_id:rootId })
+            method: 'POST', headers: { 'Prefer': 'return=representation' },
+            body: JSON.stringify({ page_slug: PAGE_SLUG, author_name: name || ANONYMOUS, author_uid: MY_UID, body, parent_id: commentId })
         });
         document.getElementById('reply-form-' + commentId).innerHTML = '';
         await loadComments();
     } catch(e) { alert(TXT.replyError); }
 }
 
-// تعديل
 function toggleEdit(id, cur) {
     const con = document.getElementById('edit-form-' + id);
     const bod = document.getElementById('body-' + id);
-    if (con.innerHTML) { con.innerHTML=''; bod.style.display=''; return; }
+    if (con.innerHTML) { con.innerHTML = ''; bod.style.display = ''; return; }
     bod.style.display = 'none';
     const icoSave   = `<svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>`;
     const icoCancel = `<svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>`;
@@ -1726,47 +1405,29 @@ async function saveEdit(id) {
     const v = document.getElementById('et-' + id).value.trim();
     if (!v) return;
     try {
-        await sbFetch(`comments?id=eq.${id}`, {
-            method:'PATCH', headers:{'Prefer':'return=representation'},
-            body: JSON.stringify({ body:v })
-        });
+        await sbFetch(`comments?id=eq.${id}`, { method: 'PATCH', headers: { 'Prefer': 'return=representation' }, body: JSON.stringify({ body: v }) });
         await loadComments();
     } catch(e) { alert(TXT.saveError); }
 }
 
-// إخفاء
 async function hideComment(id) {
     if (!confirm(TXT.hideConfirm)) return;
     try {
         const res = await fetch(`${SUPABASE_URL}/rest/v1/comments?id=eq.${id}`, {
             method: 'PATCH',
-            headers: {
-                'apikey': SUPABASE_KEY,
-                'Authorization': 'Bearer ' + SUPABASE_KEY,
-                'Content-Type': 'application/json',
-                'Prefer': 'return=minimal'
-            },
+            headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
             body: JSON.stringify({ is_hidden: true })
         });
-        if (!res.ok && res.status !== 204) {
-            const e = await res.json().catch(()=>({}));
-            throw new Error(e.message||'خطأ');
-        }
+        if (!res.ok && res.status !== 204) { const e = await res.json().catch(()=>({})); throw new Error(e.message||'خطأ'); }
         await loadComments();
     } catch(e) { alert(TXT.hideError + ': ' + e.message); }
 }
 
-// إلغاء الإخفاء (مدير)
 async function unhideComment(id) {
     try {
         const res = await fetch(`${SUPABASE_URL}/rest/v1/comments?id=eq.${id}`, {
             method: 'PATCH',
-            headers: {
-                'apikey': SUPABASE_KEY,
-                'Authorization': 'Bearer ' + SUPABASE_KEY,
-                'Content-Type': 'application/json',
-                'Prefer': 'return=minimal'
-            },
+            headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
             body: JSON.stringify({ is_hidden: false })
         });
         if (!res.ok && res.status !== 204) throw new Error('خطأ');
@@ -1774,16 +1435,14 @@ async function unhideComment(id) {
     } catch(e) { alert('حدث خطأ أثناء الإظهار.'); }
 }
 
-// حذف
 async function deleteComment(id) {
     if (!confirm(TXT.deleteConfirm)) return;
     try {
-        await sbFetch(`comments?id=eq.${id}`, { method:'DELETE', headers:{'Prefer':'return=minimal'} });
+        await sbFetch(`comments?id=eq.${id}`, { method: 'DELETE', headers: { 'Prefer': 'return=minimal' } });
         await loadComments();
     } catch(e) { alert(TXT.deleteError); }
 }
 
-// إرسال
 document.getElementById('commentForm')?.addEventListener('submit', async function(e) {
     e.preventDefault();
     const name = document.getElementById('authorName').value.trim();
@@ -1796,31 +1455,49 @@ document.getElementById('commentForm')?.addEventListener('submit', async functio
     msg.className = 'form-msg hidden';
     try {
         await sbFetch('comments', {
-            method:'POST', headers:{'Prefer':'return=representation'},
-            body: JSON.stringify({ page_slug:PAGE_SLUG, author_name:name||ANONYMOUS, author_uid:MY_UID, body })
+            method: 'POST', headers: { 'Prefer': 'return=representation' },
+            body: JSON.stringify({ page_slug: PAGE_SLUG, author_name: name || ANONYMOUS, author_uid: MY_UID, body })
         });
         document.getElementById('commentBody').value = '';
         document.getElementById('charCount').textContent = '0';
-        msg.textContent = TXT.sent;
-        msg.className = 'form-msg success';
-        setTimeout(()=>{ msg.className='form-msg hidden'; }, 3500);
+        document.getElementById('submitBtn').classList.add('btn-dim');
+        msg.textContent = TXT.sent; msg.className = 'form-msg success';
+        setTimeout(() => { msg.className = 'form-msg hidden'; }, 3500);
         await loadComments();
     } catch(e) {
-        msg.textContent = TXT.sendError;
-        msg.className = 'form-msg error';
+        msg.textContent = TXT.sendError; msg.className = 'form-msg error';
     } finally {
         btn.disabled = false; lbl.textContent = TXT.btnSend;
     }
 });
 
-function escHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-function escJs(s){ return String(s||'').replace(/`/g,'\\`').replace(/\$/g,'\\$'); }
-function relativeTime(iso){
-    const d=Math.floor((Date.now()-new Date(iso))/1000);
-    if(d<60) return TXT.now;
-    if(d<3600) return TXT.minutesAgo.replace('{n}',Math.floor(d/60));
-    if(d<86400) return TXT.hoursAgo.replace('{n}',Math.floor(d/3600));
-    return TXT.daysAgo.replace('{n}',Math.floor(d/86400));
+function escHtml(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function escJs(s)   { return String(s||'').replace(/`/g,'\\`').replace(/\$/g,'\\$'); }
+function relativeTime(iso) {
+    const date = new Date(iso);
+    const d = Math.floor((Date.now() - date) / 1000);
+
+    const months = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+    const days   = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+
+    const year  = date.getFullYear();
+    const month = date.getMonth();
+    const day   = date.getDate();
+    const dow   = date.getDay();
+const hours24 = date.getHours();
+    const ampm    = hours24 >= 12 ? 'م' : 'ص';
+    const hh      = String(hours24 % 12 || 12).padStart(2,'0');
+    const mm      = String(date.getMinutes()).padStart(2,'0');
+
+    const fullDate = ` مـ ${year} / ${month+1} (${months[month]}) / ${day} (${days[dow]}) — ${hh}:${mm} ${ampm}`;
+
+    let relative = '';
+    if (d < 60)           relative = TXT.now;
+    else if (d < 3600)    relative = TXT.minutesAgo.replace('{n}', Math.floor(d/60));
+    else if (d < 86400)   relative = TXT.hoursAgo.replace('{n}', Math.floor(d/3600));
+    else if (d < 604800)  relative = TXT.daysAgo.replace('{n}', Math.floor(d/86400));
+
+    return relative ? `${fullDate} &nbsp;·&nbsp; ${relative}` : fullDate;
 }
 
 loadComments();
