@@ -89,6 +89,8 @@ body.dark .dark-white-text {
   padding: 1.5rem 2rem;
   border-radius: 1rem;
   max-width: 680px;
+  width: 100%;
+  box-sizing: border-box;
   background: linear-gradient(135deg, rgba(255,237,213,0.5), rgba(253,230,138,0.5));
   border: 1px solid #fed7aa;
   box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
@@ -129,12 +131,20 @@ body.dark .shatr.first {
   border-left-color: rgba(255,255,255,0.15);
 }
 @media (max-width: 640px) {
+  .glass-premium-box {
+    padding: 1rem;
+    margin: 1.5rem auto;
+  }
   .poetry-table,
   .poetry-table tbody,
   .poetry-table tr,
   .poetry-table td { display: block; width: 100%; }
+  .shatr {
+    font-size: 1rem;
+    white-space: normal;
+    padding: 0.3rem 0.4rem;
+  }
   .shatr.first { border-left: none; border-bottom: 1px solid rgba(180,130,50,0.25); }
-  .shatr { white-space: normal; }
 }
 </style>
 
@@ -168,6 +178,8 @@ function getBestInsertPos(tokens) {
   while (lastValid > 0 && PUNCT.has(tokens[lastValid].base)) lastValid--;
   for (let i = lastValid - 1; i >= 1; i--) {
     if (PUNCT.has(tokens[i + 1]?.base)) continue;
+    const nextBase = tokens[i + 1]?.base;
+    if (tokens[i].base === 'ل' && nextBase && 'اأإآٱ'.includes(nextBase)) continue;
     if (canConnectAfter(tokens[i].base)) return i + 1;
   }
   return -1;
@@ -222,4 +234,3 @@ if (document.readyState === 'loading') {
 }
 window.addEventListener('resize', stretchAll);
 </script>
-

@@ -456,7 +456,7 @@ async function loadComments() {
         const badge = document.getElementById('commentsCount');
         const publicCount = data.filter(c => !c.parent_id && !c.is_hidden).length;
         if (badge) {
-            if (publicCount) { badge.textContent = `${publicCount} تعليق`; badge.style.display = ''; }
+            if (publicCount) { badge.textContent = arabicCount(publicCount, 'تعليق', 'تعليقان', 'تعليقات'); badge.style.display = ''; }
             else { badge.style.display = 'none'; }
         }
 
@@ -500,7 +500,7 @@ function buildCard(c, allReplies, isReply) {
         ${hiddenLbl}
         <div class="comment-body" id="body-${c.id}" style="white-space:pre-wrap">${escHtml(c.body)}</div>
         <div class="comment-actions">
-            <button class="btn-action btn-reply" onclick="toggleReplyForm('${c.id}')">${icoReply} ${TXT.btnReply}</button>
+            ${!isReply ? `<button class="btn-action btn-reply" onclick="toggleReplyForm('${c.id}')">${icoReply} ${TXT.btnReply}</button>` : ''}
             ${myComment ? `<button class="btn-action btn-edit-c" onclick="toggleEdit('${c.id}',\`${escJs(c.body)}\`)">${icoEdit} ${TXT.btnEdit}</button>` : ''}
             ${myComment && !c.is_hidden ? `<button class="btn-action btn-hide" onclick="hideComment('${c.id}')">${icoHide} ${TXT.btnHide}</button>` : ''}
             ${isAdmin && c.is_hidden ? `<button class="btn-action btn-unhide" onclick="unhideComment('${c.id}')">${icoShow} إظهار</button>` : ''}
@@ -643,12 +643,21 @@ document.getElementById('commentForm')?.addEventListener('submit', async functio
 
 function escHtml(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function escJs(s)   { return String(s||'').replace(/`/g,'\\`').replace(/\$/g,'\\$'); }
+function arabicCount(n, one, two, few, many) {
+    // one = نص المفرد (1)، two = نص المثنى (2)، few = جمع القلة (3-10)، many = جمع الكثرة (11+)
+    // إذا لم يُمرَّر many فنستخدم one لـ 11+
+    if (!many) many = one;
+    if (n === 1) return one;
+    if (n === 2) return two;
+    if (n >= 3 && n <= 10) return `${n} ${few}`;
+    return `${n} ${many}`;
+}
 function relativeTime(iso) {
     const date = new Date(iso);
     const d = Math.floor((Date.now() - date) / 1000);
 
     const months = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
-    const days   = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+    const dayNames = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
 
     const year  = date.getFullYear();
     const month = date.getMonth();
@@ -659,13 +668,16 @@ const hours24 = date.getHours();
     const hh      = String(hours24 % 12 || 12).padStart(2,'0');
     const mm      = String(date.getMinutes()).padStart(2,'0');
 
-    const fullDate = ` مـ ${year} / ${month+1} (${months[month]}) / ${day} (${days[dow]}) — ${hh}:${mm} ${ampm}`;
+    const fullDate = ` مـ ${year} / ${month+1} (${months[month]}) / ${day} (${dayNames[dow]}) — ${hh}:${mm} ${ampm}`;
 
-    let relative = '';
-    if (d < 60)           relative = TXT.now;
-    else if (d < 3600)    relative = TXT.minutesAgo.replace('{n}', Math.floor(d/60));
-    else if (d < 86400)   relative = TXT.hoursAgo.replace('{n}', Math.floor(d/3600));
-    else if (d < 604800)  relative = TXT.daysAgo.replace('{n}', Math.floor(d/86400));
+let relative = '';
+    const mins  = Math.floor(d/60);
+    const hours = Math.floor(d/3600);
+    const dys   = Math.floor(d/86400);
+    if (d < 60)          relative = 'الآن';
+    else if (d < 3600)   relative = 'منذ ' + arabicCount(mins,  'دقيقة واحدة',  'دقيقتين',  'دقائق',  'دقيقة');
+    else if (d < 86400)  relative = 'منذ ' + arabicCount(hours, 'ساعة واحدة',   'ساعتين',   'ساعات',  'ساعة');
+    else if (d < 604800) relative = 'منذ ' + arabicCount(dys,  'يوم واحد',     'يومين',    'أيام',   'يوم');
 
     return relative ? `${fullDate} &nbsp;·&nbsp; ${relative}` : fullDate;
 }
