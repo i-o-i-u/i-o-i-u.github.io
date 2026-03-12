@@ -1624,6 +1624,24 @@ loadComments();
 </script>
 
 <script>
+function copyContent() {
+  const article = document.getElementById('articleContent');
+  if (!article) return;
+
+  const text = article.innerText
+    .replace(/ـ/g, '')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+
+  navigator.clipboard.writeText(text).then(() => {
+    const toast = document.getElementById('toast');
+    if (toast) {
+      toast.textContent = 'نُسِخ النص!';
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+  });
+}
 function shareContent() {
     const title = document.querySelector('h2.gradient-text').innerText;
     const url = window.location.href;
