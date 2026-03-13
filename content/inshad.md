@@ -95,65 +95,85 @@ date = 2026-02-02
 
 ولأجْل ذلك ما ضربَ الشُّعراء المَثَل، وتفاخَروا بقصائدِهم وحَلاوتِها على الأُذُن عند إنشادِها، قال مُزَرِّد:
 
-<p class="text-lg md:text-xl leading-relaxed text-gray-800 dark:text-white mb-6">
+<div class="glass-premium-box">
+  <table class="poetry-table">
+    <tr>
+      <td class="shatr first">وقد عَلِموا في سالفِ الدهرِ أنني</td>
+      <td class="shatr last">مِعَنٌّ إذا جَدَّ الجِرَاءُ ونَابِلُ</td>
+    </tr>
+    <tr>
+      <td class="shatr first">زَعِيمٌ لِمَنْ قَاذَفْتُهُ بأوابدٍ</td>
+      <td class="shatr last">يُغَنِّي بها الساري وتُحْدَى الرواحلُ</td>
+    </tr>
+    <tr>
+      <td class="shatr first">تُكَرُّ فما تزدادُ إلا استِنارةً</td>
+      <td class="shatr last"> إذا ‌رَازَتِ ‌الشِّعْرَ الشِّفَاهُ العواملُ!</td>
+    </tr>
+  </table>
+</div>
 
-وقد عَلِموا في سالفِ الدهرِ أنني \* مِعَنٌّ إذا جَدَّ الجِرَاءُ ونَابِلُ
-
-<p class="text-lg md:text-xl leading-relaxed text-gray-800 dark:text-white mb-6">
-
-زَعِيمٌ لِمَنْ قَاذَفْتُهُ بأوابدٍ \* يُغَنِّي بها الساري وتُحْدَى الرواحلُ
-
-<p class="text-lg md:text-xl leading-relaxed text-gray-800 dark:text-white mb-6">
-
-تُكَرُّ فما تزدادُ إلا استِنارةً \* إذا ‌رَازَتِ ‌الشِّعْرَ الشِّفَاهُ العواملُ!
-
-<p class="text-lg md:text-xl leading-relaxed text-gray-800 dark:text-white mb-6">
 
 وقال آخَرُ:
 
-<p class="text-lg md:text-xl leading-relaxed text-gray-800 dark:text-white mb-6">
-
-أليسَ إذا ما قلتُ بَيْتًا تَنَاوَحَتْ \* بهِ الرِّيْحُ في شَرْقِيِّها والمَغارِبِ
-<p class="text-lg md:text-xl leading-relaxed text-gray-800 dark:text-white mb-6">
-
-يُقَصِّرُ للسارين من ليلة السُّرَىٰ \* ويُغْدَىٰ عَلَيْهِ بِالقِيانِ الضَّوَارِبِ
-
-<p class="text-lg md:text-xl leading-relaxed text-gray-800 dark:text-white mb-6">
+<div class="glass-premium-box">
+  <table class="poetry-table">
+    <tr>
+      <td class="shatr first">أليسَ إذا ما قُلتُ بيتًا تناوَحتْ</td>
+      <td class="shatr last">بهِ الرِّيْحُ في شَرْقِيِّها والمَغارِبِ</td>
+    </tr>
+    <tr>
+      <td class="shatr first">يُقصِّر للسارين من ليلة السُّرَىٰ</td>
+      <td class="shatr last">ويُغْدَىٰ عَلَيْهِ بِالقِيانِ الضَّوَارِبِ</td>
+    </tr>
+  </table>
+</div>
 
 وفي مثلِه قال أبو تمَّامٍ:
 
-<p class="text-lg md:text-xl leading-relaxed text-gray-800 dark:text-white mb-6">
+<div class="glass-premium-box">
+  <table class="poetry-table">
+    <tr>
+      <td class="shatr first">كشَفْتُ قِناعَ الشِّعرِ عن حُرِّ وَجْهِه</td>
+      <td class="shatr last">وطيَّرْتُه عن وَكْرِه وهْو واقع</td>
+    </tr>
+    <tr>
+      <td class="shatr first">بِغُرٍّ يراها مَن يراها بسَمْعه</td>
+      <td class="shatr last">ويدْنو إليها ذُو الحِجَىٰ وهْو شاسِعُ</td>
+    </tr>
+    <tr>
+      <td class="shatr first">يَوَدُّ وِدادًا أنَّ أعضاءَ جِسمه</td>
+      <td class="shatr last">إذا أُنْشِدَتْ -شوقًا إليها- مَسامِعُ!</td>
+    </tr>
+  </table>
+</div>
 
-كشَفْتُ قِناعَ الشِّعرِ عن حُرِّ وَجْهِه \* وطيَّرْتُه عن وَكْرِه وهْو واقع
-<p class="text-lg md:text-xl leading-relaxed text-gray-800 dark:text-white mb-6">
-
-بِغُرٍّ يراها مَن يراها بسَمْعه \* ويدْنو إليها ذُو الحِجَىٰ وهْو شاسِعُ
-<p class="text-lg md:text-xl leading-relaxed text-gray-800 dark:text-white mb-6">
-
-يَوَدُّ وِدادًا أنَّ أعضاءَ جِسمه \* إذا أُنْشِدَتْ -شوقًا إليها- مَسامِعُ!
-
-<p class="text-lg md:text-xl leading-relaxed text-gray-800 dark:text-white mb-6">
 
 وقال البُحتُريُّ:
 
-<p class="text-lg md:text-xl leading-relaxed text-gray-800 dark:text-white mb-6">
+<div class="glass-premium-box">
+  <table class="poetry-table">
+    <tr>
+      <td class="shatr first">تَطُوعُ القوافي فِيكمُ فكأنَّما</td>
+      <td class="shatr last">يَسِيلُ إليكُمْ مِن عُلُوٍّ قَصِيدُها</td>
+    </tr>
+    <tr>
+      <td class="shatr first">فكم ليَ من محبوكةِ الوَشْي فيكمُ</td>
+      <td class="shatr last">إذا أُنْشِدَتْ قامَ امْرُؤٌ يَسْتَعِيدُها!</td>
+    </tr>
+  </table>
+</div>
 
-تَطُوعُ القوافي فِيكمُ فكأنَّما \* يَسِيلُ إليكُمْ مِن عُلُوٍّ قَصِيدُها
-
-<p class="text-lg md:text-xl leading-relaxed text-gray-800 dark:text-white mb-6">
-
-فكم ليَ من محبوكةِ الوَشْي فيكمُ \* إذا أُنْشِدَتْ قامَ امْرُؤٌ يَسْتَعِيدُها!
-
-<p class="text-lg md:text-xl leading-relaxed text-gray-800 dark:text-white mb-6">
 
 وقال إسحاقُ المَوصِليُّ:
 
-<p class="text-lg md:text-xl leading-relaxed text-gray-800 dark:text-white mb-6">
-
-وأبياتِ شِعْرٍ رائعاتٍ كأنَّها \* ‌إذا ‌أُنْشِدَتْ في القوم حَسَّنَها سِحْرُ
-
-
-<p class="text-lg md:text-xl leading-relaxed text-gray-800 dark:text-white mb-6">
+<div class="glass-premium-box">
+  <table class="poetry-table">
+    <tr>
+      <td class="shatr first">وأبياتِ شِعْرٍ رائعاتٍ كأنَّها </td>
+      <td class="shatr last">إذا ‌أُنْشِدَتْ في القوم حَسَّنَها سِحْرُ</td>
+    </tr>
+  </table>
+</div>
 
 وللعرَب عاداتٌ وأَحْوال في إنشاد الشعر، ذكرَ أبو القاسم الراغبُ الأصْفهانيُّ (ت502هـ) أنه كان يُقال: (إذا أنشَدتَّ المديحَ ففخِّمْ، أو المَرَاثِيَ فحَزِّنْ، أو مِن النَّسِيبِ فأَخْضِعْ، أو مِن الهِجاء فسَدِّدْ وبالِغْ). وكانوا يعرِفون بعضَ الشُّعراء أو الرواة بحُسن الإنشاد، قال أبو القاسم أيضًا: (قال الفرزدقُ لِعَبَّادٍ العَنبَرِيِّ: ‌حُسْنُ ‌إنشادِك يَزِيْنُ الشِّعْرَ في فَهْمي). وقال أبو عُثمان في العَكَوَّك الشاعر: (كان ‌أحسنَ خلقِ الله ‌إنشادًا، ما رأيتُ مثله بَدَوِيًّا ولا حَضَرِيًّا). وقال الزُّبَيْر بنُ بَكَّار (ت256هـ) في مُحَمَّدٍ البَيْذَق الشَّيْباني: (كان أحسنَ ‌الناس ‌إنشادًا، وكان إنشادُه أحسنَ من الغِناء). وقال القِفْطِيُّ (646هـ) عنه: (وكان الرشيد يُحضِره لينشدَه مدائح الناس فيه، بتطريبٍ كإنشاد الشاميِّين، فيقوم مَقام الغِناء!). وغيرُ هؤلاء وُصِفوا بنحو ذلك.
 

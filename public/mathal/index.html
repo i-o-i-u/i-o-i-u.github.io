@@ -364,9 +364,12 @@ body.dark .dark-mode-tooltip {
             border-color: rgba(251, 191, 36, 0.2);
         }
 
-        .nav-icon {
-            font-size: 20px;
-        }
+.nav-icon {
+    width: 28px;
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+}
 
         .menu-overlay {
             position: fixed;
@@ -851,19 +854,27 @@ h1, h2, h3, h4, h5, h6 {
 
     <div class="nav-menu" id="navMenu">
         <a href="/" class="text-gray-700 nav-link">
-            <span class="nav-icon">🏠</span>
+            <span class="nav-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+            </span>
             الصفحة الأُولَى
         </a>
         <a href="/chanting/" class="text-gray-700 nav-link">
-            <span class="nav-icon">🎤</span>
+            <span class="nav-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18.5a6 6 0 0 0 6-6V7a6 6 0 0 0-12 0v5.5a6 6 0 0 0 6 6z"/><path d="M19 10v2.5a7 7 0 0 1-14 0V10"/><line x1="12" y1="22" x2="12" y2="18.5"/><path d="M8 22h8"/></svg>
+            </span>
             الإنشاد والحُداء
         </a>
         <a href="/questions/" class="text-gray-700 nav-link">
-            <span class="nav-icon">❓</span>
+            <span class="nav-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17" stroke-width="2.5"/></svg>
+            </span>
             الأسئلة
         </a>
         <a href="/writings/" class="text-gray-700 nav-link">
-            <span class="nav-icon">✍️</span>
+            <span class="nav-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            </span>
             الكِتابات
         </a>
     </div>
@@ -872,6 +883,37 @@ h1, h2, h3, h4, h5, h6 {
         <section class="pt-64 pb-20 px-4 relative">
             <div class="max-w-5xl mx-auto relative z-10">
                 
+
+<!-- ===== Floating Action Buttons ===== -->
+<div id="floatingActions" class="floating-actions" style="display:none;">
+    
+    <div class="relative button-tooltip-wrapper">
+        <button onclick="shareContent()" class="icon-btn floating-btn" aria-label="شارك">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
+            </svg>
+        </button>
+        <span class="button-tooltip">شارك</span>
+    </div>
+    <div class="relative button-tooltip-wrapper">
+        <button onclick="copyContent()" class="icon-btn floating-btn" aria-label="نسخ النص">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+            </svg>
+        </button>
+        <span class="button-tooltip">نسْخ النص</span>
+    </div>
+    
+</div>
+
+<!-- ===== Floating Back Button ===== -->
+<a href="javascript:history.back()" id="floatingBack" class="floating-back" aria-label="عُد إلى الصفحة السابقة">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
+    </svg>
+    <span class="floating-back-label">السابقة</span>
+</a>
+
 <div class="text-right">
     <div class="content-section rounded-3xl p-6 md:p-8 lg:p-12 shadow-2xl mb-12">
         <div class="flex justify-between items-center mb-8 border-b border-orange-200 pb-4">
@@ -1062,8 +1104,104 @@ body.dark .icon-btn:hover { background: linear-gradient(135deg,rgba(55,65,81,.9)
     border-width:8px; border-style:solid; border-color:transparent transparent rgba(255,255,255,.95) transparent;
 }
 .button-tooltip-wrapper:hover .button-tooltip { opacity:1; visibility:visible; transform:translateX(-50%) translateY(0); }
+
+/* تلميح خاص بالأزرار العائمة — يظهر عن اليمين (نحو وسط الشاشة) */
+.floating-actions .button-tooltip {
+    top: 50%; left: calc(100% + 12px); right: auto;
+    transform: translateX(-10px) translateY(-50%);
+}
+.floating-actions .button-tooltip::before {
+    top: 50%; left: -14px; right: auto; transform: translateY(-50%);
+    border-color: transparent rgba(255,255,255,.95) transparent transparent;
+}
+.floating-actions .button-tooltip-wrapper:hover .button-tooltip {
+    opacity: 1; visibility: visible; transform: translateX(0) translateY(-50%);
+}
+body.dark .floating-actions .button-tooltip::before {
+    border-color: transparent rgba(30,30,30,.98) transparent transparent;
+}
 body.dark .button-tooltip { background:linear-gradient(135deg,rgba(30,30,30,.98),rgba(40,40,40,.95)); color:#fbbf24; box-shadow:0 10px 35px rgba(0,0,0,.5); border:1px solid rgba(251,191,36,.25); }
 body.dark .button-tooltip::before { border-color:transparent transparent rgba(30,30,30,.98) transparent; }
+
+/* ===== Floating Action Buttons ===== */
+.floating-actions {
+    position: fixed;
+    bottom: 1.75rem;
+    left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    z-index: 1000;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    pointer-events: none;
+}
+.floating-actions.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+.floating-btn {
+    width: 2.75rem !important;
+    height: 2.75rem !important;
+    border-radius: 50% !important;
+    box-shadow: 0 4px 16px rgba(234,88,12,0.3) !important;
+}
+.floating-btn:hover {
+    transform: scale(1.12) !important;
+    box-shadow: 0 6px 20px rgba(234,88,12,0.4) !important;
+}
+body.dark .floating-btn {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5) !important;
+}
+
+/* ===== Floating Back Button ===== */
+.floating-back {
+    position: fixed;
+    bottom: 1.75rem;
+    right: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.6rem 1rem 0.6rem 0.75rem;
+    background: linear-gradient(135deg, #fed7aa, #fdba74);
+    color: #ea580c;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(234,88,12,0.3);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    direction: rtl;
+}
+.floating-back:hover {
+    background: linear-gradient(135deg, #fdba74, #fb923c);
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(234,88,12,0.4);
+    color: #c2410c;
+}
+.floating-back-label { line-height: 1; }
+body.dark .floating-back {
+    background: linear-gradient(135deg, rgba(75,85,99,0.9), rgba(55,65,81,0.85));
+    color: #fbbf24;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+}
+body.dark .floating-back:hover {
+    background: linear-gradient(135deg, rgba(55,65,81,0.95), rgba(75,85,99,0.9));
+    color: #f59e0b;
+}
+
+/* تقليص على الشاشات الصغيرة */
+@media (max-width: 480px) {
+    .floating-back-label { display: none; }
+    .floating-back { padding: 0.65rem; border-radius: 50%; }
+    .floating-actions { bottom: 1.25rem; left: 0.85rem; }
+    .floating-back { bottom: 1.25rem; right: 0.85rem; }
+}
 
 /* ===== COMMENTS SECTION ===== */
 .comments-glass-section {
@@ -1592,6 +1730,23 @@ loadComments();
 </script>
 
 <script>
+// ===== Floating buttons scroll logic =====
+(function() {
+    const actions = document.getElementById('floatingActions');
+    if (!actions) return;
+    const THRESHOLD = 200;
+    function onScroll() {
+        if (window.scrollY > THRESHOLD) {
+            actions.style.display = 'flex';
+            requestAnimationFrame(() => actions.classList.add('visible'));
+        } else {
+            actions.classList.remove('visible');
+            setTimeout(() => { if (window.scrollY <= THRESHOLD) actions.style.display = 'none'; }, 350);
+        }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+})();
+
 function copyContent() {
   const article = document.getElementById('articleContent');
   if (!article) return;
@@ -1742,8 +1897,22 @@ function shareContent() {
             localStorage.setItem('theme', isDark ? 'light' : 'dark');
         }
 
-        function copyContent() {
-            const content = document.getElementById('articleContent').innerText;
+function copyContent() {
+            const article = document.getElementById('articleContent');
+            if (!article) return;
+            const saved = [];
+            article.querySelectorAll('.shatr, .rajaz-shatr').forEach(cell => {
+                saved.push({ cell, current: cell.textContent });
+                if (cell.dataset.original) cell.textContent = cell.dataset.original;
+            });
+            const clone = article.cloneNode(true);
+clone.querySelectorAll('style, script, [hidden], .hidden').forEach(el => el.remove());
+const commentsSection = clone.querySelector('#comments-section');
+if (commentsSection) commentsSection.remove();
+const footer = clone.querySelector('.mt-12');
+if (footer) footer.remove();
+const content = clone.innerText.replace(/ـ/g, '').trim();
+            saved.forEach(({ cell, current }) => { cell.textContent = current; });
             navigator.clipboard.writeText(content).then(() => {
                 const toast = document.getElementById('toast');
                 toast.classList.add('show');
@@ -1833,6 +2002,671 @@ document.addEventListener('keydown', (e) => {
     </div>
 </div>
 
+<style>
+/* ===== القصيدة العمودية ===== */
+.glass-premium-box {
+  margin: 2.5rem auto;
+  padding: 1.5rem 2rem;
+  border-radius: 1rem;
+  max-width: 680px;
+  width: 100%;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, rgba(255,237,213,0.5), rgba(253,230,138,0.5));
+  border: 1px solid #fed7aa;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+  color: #1f2937;
+}
+body.dark .glass-premium-box {
+  background: rgba(18,18,22,0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 20px 40px -10px rgba(0,0,0,0.4);
+  color: #f3f4f6;
+}
+.poetry-table {
+  width: 100%;
+  border-collapse: collapse;
+  direction: rtl;
+  font-family: 'Amiri', 'Traditional Arabic', 'Scheherazade', serif;
+  font-size: 1.25rem;
+  table-layout: fixed;
+}
+.shatr {
+  width: 50%;
+  padding: 0.4rem 0.6rem;
+  line-height: 2.2;
+  vertical-align: baseline;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.shatr.first {
+  border-left: 2px solid rgba(180,130,50,0.4);
+  text-align: right;
+}
+.shatr.last {
+  text-align: right;
+}
+body.dark .shatr.first {
+  border-left-color: rgba(255,255,255,0.15);
+}
+
+/* ===== الرجز ===== */
+.glass-rajaz-box {
+  margin: 2.5rem auto;
+  padding: 1.5rem 2rem;
+  border-radius: 1rem;
+  max-width: 400px;
+  width: 100%;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, rgba(255,237,213,0.5), rgba(253,230,138,0.5));
+  border: 1px solid #fed7aa;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+  color: #1f2937;
+}
+body.dark .glass-rajaz-box {
+  background: rgba(18,18,22,0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 20px 40px -10px rgba(0,0,0,0.4);
+  color: #f3f4f6;
+}
+.rajaz-table {
+  width: 100%;
+  border-collapse: collapse;
+  direction: rtl;
+  font-family: 'Amiri', 'Traditional Arabic', 'Scheherazade', serif;
+  font-size: 1.25rem;
+  table-layout: fixed;
+}
+.rajaz-shatr {
+  width: 100%;
+  padding: 0.3rem 0.6rem;
+  line-height: 2.2;
+  vertical-align: baseline;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: right;
+}
+
+/* ===== الجوال ===== */
+@media (max-width: 640px) {
+  .glass-premium-box, .glass-rajaz-box {
+    padding: 0.75rem;
+    margin: 1rem auto;
+  }
+  .poetry-table, .rajaz-table {
+    font-size: 1rem;
+  }
+  .poetry-table, .poetry-table tbody,
+  .poetry-table tr, .poetry-table td {
+    display: block;
+    width: 100%;
+  }
+  .shatr {
+    white-space: normal;
+    overflow: visible;
+    padding: 0.2rem 0.4rem;
+    line-height: 2;
+    width: 100%;
+    text-align: right !important;
+  }
+  .shatr.first {
+    border-left: none;
+    border-bottom: 1px solid rgba(180,130,50,0.25);
+    padding-bottom: 0.3rem;
+  }
+  .rajaz-shatr {
+    padding: 0.25rem 0.4rem;
+    line-height: 2;
+    white-space: normal;
+  }
+}
+</style>
+
+<script>
+const TASHKEEL = /[\u064B-\u065F\u0670]/;
+const NO_CONNECT_AFTER = new Set(['ا','أ','إ','آ','ٱ','و','ؤ','ز','ذ','د','ر','ى','ة']);
+const PUNCT = new Set(['،','؛','؟','!','.',',',':','-','–','—','«','»','"','"','(',')','/']);
+const FORBIDDEN_WORDS = new Set(['الله','اللهم','بالله','تالله','والله','فالله','لله']);
+
+function tokenize(word) {
+  const tokens = [];
+  for (let i = 0; i < word.length; i++) {
+    if (TASHKEEL.test(word[i])) {
+      if (tokens.length) tokens[tokens.length - 1].marks += word[i];
+    } else {
+      tokens.push({ base: word[i], marks: '' });
+    }
+  }
+  return tokens;
+}
+
+function tokensToString(tokens) {
+  return tokens.map(t => t.base + t.marks).join('');
+}
+
+function canConnectAfter(base) {
+  return !NO_CONNECT_AFTER.has(base) && !PUNCT.has(base) && /[\u0600-\u06FF]/.test(base);
+}
+
+function getBestInsertPos(tokens) {
+  let lastValid = tokens.length - 1;
+  while (lastValid > 0 && PUNCT.has(tokens[lastValid].base)) lastValid--;
+  for (let i = lastValid - 1; i >= 1; i--) {
+    if (PUNCT.has(tokens[i + 1]?.base)) continue;
+    const nextBase = tokens[i + 1]?.base;
+    if (tokens[i].base === 'ل' && nextBase && 'اأإآٱ'.includes(nextBase)) continue;
+    if (canConnectAfter(tokens[i].base)) return i + 1;
+  }
+  return -1;
+}
+
+function measureText(text, font) {
+  const c = measureText._canvas || (measureText._canvas = document.createElement('canvas'));
+  const ctx = c.getContext('2d');
+  ctx.font = font;
+  return ctx.measureText(text).width;
+}
+
+function stretchCell(cell, font) {
+  const available = cell.clientWidth
+    - parseFloat(getComputedStyle(cell).paddingLeft)
+    - parseFloat(getComputedStyle(cell).paddingRight);
+  if (!cell.dataset.original) cell.dataset.original = cell.textContent.trim();
+  const originalWords = cell.dataset.original.split(/\s+/);
+  const words = originalWords.map(w => ({ tokens: tokenize(w), tatweels: 0 }));
+  for (let round = 0; round < 80; round++) {
+    const currentText = words.map(w => tokensToString(w.tokens)).join(' ');
+    const gap = available - measureText(currentText, font);
+    if (gap <= 0.5) break;
+    const candidates = words
+      .map((w, i) => ({
+        i,
+        pos: getBestInsertPos(w.tokens),
+        tatweels: w.tatweels,
+        len: w.tokens.length,
+        orig: originalWords[i].replace(/[\u064B-\u065F\u0670]/g, '')
+      }))
+      .filter(c => c.pos !== -1 && ![...FORBIDDEN_WORDS].some(fw => c.orig.includes(fw)))
+      .sort((a, b) => a.tatweels - b.tatweels || b.len - a.len);
+    if (!candidates.length) break;
+    const best = candidates[0];
+    words[best.i].tokens.splice(best.pos, 0, { base: 'ـ', marks: '' });
+    words[best.i].tatweels++;
+  }
+  cell.textContent = words.map(w => tokensToString(w.tokens)).join(' ');
+}
+
+function stretchAll() {
+  document.querySelectorAll('.poetry-table').forEach(table => {
+    table.querySelectorAll('.shatr').forEach(cell => {
+      if (cell.dataset.original) cell.textContent = cell.dataset.original;
+    });
+    const sample = table.querySelector('.shatr');
+    if (!sample) return;
+    const cs = getComputedStyle(sample);
+    const font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize}/${cs.lineHeight} ${cs.fontFamily}`;
+    table.querySelectorAll('.shatr').forEach(cell => stretchCell(cell, font));
+  });
+  document.querySelectorAll('.rajaz-table').forEach(table => {
+    table.querySelectorAll('.rajaz-shatr').forEach(cell => {
+      if (cell.dataset.original) cell.textContent = cell.dataset.original;
+    });
+    const sample = table.querySelector('.rajaz-shatr');
+    if (!sample) return;
+    const cs = getComputedStyle(sample);
+    const font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize}/${cs.lineHeight} ${cs.fontFamily}`;
+    table.querySelectorAll('.rajaz-shatr').forEach(cell => stretchCell(cell, font));
+  });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', stretchAll);
+} else {
+  stretchAll();
+}
+window.addEventListener('resize', stretchAll);
+</script>
+
+
+<style>
+/* ===== صندوق السؤال (برتقالي) ===== */
+.box-question {
+  margin: 2rem auto;
+  padding: 1.25rem 1.5rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(255,237,213,0.5), rgba(253,230,138,0.5));
+  border: 1px solid #fed7aa;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+  color: #1f2937;
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  direction: rtl;
+}
+body.dark .box-question {
+  background: rgba(18,18,22,0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 20px 40px -10px rgba(0,0,0,0.4);
+  color: #f3f4f6;
+}
+.box-question .box-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+ 
+/* ===== صندوق المعلومة المؤكدة (أخضر) ===== */
+.box-confirmed {
+  margin: 2rem auto;
+  padding: 1.25rem 1.5rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(209,250,229,0.5), rgba(167,243,208,0.4));
+  border: 1px solid #6ee7b7;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.07);
+  color: #1f2937;
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  direction: rtl;
+}
+body.dark .box-confirmed {
+  background: rgba(6,78,59,0.35);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(110,231,183,0.25);
+  color: #f3f4f6;
+}
+ 
+/* ===== صندوق التنبيه (أصفر) ===== */
+.box-warning {
+  margin: 2rem auto;
+  padding: 1.25rem 1.5rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(254,249,195,0.6), rgba(253,230,138,0.4));
+  border: 1px solid #fde047;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.07);
+  color: #1f2937;
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  direction: rtl;
+}
+body.dark .box-warning {
+  background: rgba(78,63,6,0.4);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(253,224,71,0.25);
+  color: #f3f4f6;
+}
+ 
+/* ===== صندوق الخطأ / التحذير (أحمر) ===== */
+.box-error {
+  margin: 2rem auto;
+  padding: 1.25rem 1.5rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(254,226,226,0.5), rgba(252,165,165,0.3));
+  border: 1px solid #fca5a5;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.07);
+  color: #1f2937;
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  direction: rtl;
+}
+body.dark .box-error {
+  background: rgba(127,29,29,0.35);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(252,165,165,0.25);
+  color: #f3f4f6;
+}
+ 
+/* ===== صندوق الفائدة / النكتة (أزرق) ===== */
+.box-info {
+  margin: 2rem auto;
+  padding: 1.25rem 1.5rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(219,234,254,0.5), rgba(191,219,254,0.4));
+  border: 1px solid #93c5fd;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.07);
+  color: #1f2937;
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  direction: rtl;
+}
+body.dark .box-info {
+  background: rgba(23,37,84,0.45);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(147,197,253,0.25);
+  color: #f3f4f6;
+}
+ 
+/* ===== صندوق الاقتباس / الشاهد (بنفسجي) ===== */
+.box-quote {
+  margin: 2rem auto;
+  padding: 1.25rem 1.5rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(237,233,254,0.5), rgba(221,214,254,0.4));
+  border: 1px solid #c4b5fd;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.07);
+  color: #1f2937;
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  direction: rtl;
+  font-style: italic;
+}
+body.dark .box-quote {
+  background: rgba(46,16,101,0.35);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(196,181,253,0.25);
+  color: #f3f4f6;
+}
+ 
+/* ===== صندوق القاعدة / الضابط (رمادي فخم) ===== */
+.box-rule {
+  margin: 2rem auto;
+  padding: 1.25rem 1.5rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(243,244,246,0.7), rgba(229,231,235,0.5));
+  border-right: 4px solid #f97316;
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+  border-left: 1px solid #e5e7eb;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.07);
+  color: #1f2937;
+  direction: rtl;
+}
+body.dark .box-rule {
+  background: rgba(31,41,55,0.7);
+  backdrop-filter: blur(12px);
+  border-right: 4px solid #f97316;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-left: 1px solid rgba(255,255,255,0.08);
+  color: #f3f4f6;
+}
+.box-rule .box-rule-title {
+  font-weight: 800;
+  font-size: 1rem;
+  color: #f97316;
+  margin-bottom: 0.5rem;
+}
+ 
+/* ===== فاصل زخرفي ===== */
+.divider-ornament {
+  text-align: center;
+  color: #f97316;
+  font-size: 1.3rem;
+  letter-spacing: 0.5em;
+  margin: 2rem auto;
+  opacity: 0.6;
+}
+body.dark .divider-ornament { color: #fbbf24; }
+ 
+/* ===== نص بارز (هايلايت) ===== */
+.highlight-text {
+  display: inline;
+  background: linear-gradient(120deg, rgba(253,230,138,0.6) 0%, rgba(253,230,138,0.6) 100%);
+  border-radius: 0.25rem;
+  padding: 0.05rem 0.3rem;
+}
+body.dark .highlight-text {
+  background: linear-gradient(120deg, rgba(120,80,0,0.5) 0%, rgba(120,80,0,0.5) 100%);
+}
+
+.box-new {
+  position: relative;
+  margin: 2rem auto;
+  padding: 1.5rem 1.75rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(254,243,199,0.6), rgba(253,230,138,0.4), rgba(255,237,213,0.5));
+  border: 1px solid #fbbf24;
+  box-shadow: 0 10px 40px -10px rgba(251,191,36,0.3);
+  color: #1f2937;
+  direction: rtl;
+  overflow: hidden;
+}
+body.dark .box-new {
+  background: linear-gradient(135deg, rgba(78,63,6,0.5), rgba(55,40,0,0.4));
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(251,191,36,0.35);
+  color: #f3f4f6;
+}
+.box-new::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #f59e0b, #ea580c, #f59e0b);
+}
+.box-new-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #d97706;
+  margin-bottom: 0.4rem;
+}
+body.dark .box-new-title { color: #fbbf24; }
+.box-new-body {
+  font-size: 1rem;
+  line-height: 1.9;
+  color: #374151;
+}
+body.dark .box-new-body { color: #d1d5db; }
+
+/* ===== شارات جديد ===== */
+.badge-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #fff7ed;
+  border: .5px solid #fed7aa;
+  color: #c2410c;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: .75rem;
+}
+body.dark .badge-inline {
+  background: #431407;
+  border-color: #7c2d12;
+  color: #fb923c;
+}
+.badge-corner {
+  position: absolute;
+  top: 14px;
+  left: -22px;
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 28px;
+  transform: rotate(-45deg);
+  transform-origin: center;
+  letter-spacing: .05em;
+}
+.badge-strip {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #f97316;
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 6px 14px 6px 10px;
+  border-radius: 0 var(--border-radius-lg, 12px) 0 var(--border-radius-lg, 12px);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+body.dark .badge-strip { background: #c2410c; }
+.badge-pulse {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fff7ed;
+  border: .5px solid #fed7aa;
+  color: #c2410c;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: .75rem;
+}
+body.dark .badge-pulse {
+  background: #431407;
+  border-color: #7c2d12;
+  color: #fb923c;
+}
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #f97316;
+  position: relative;
+  flex-shrink: 0;
+}
+.pulse-dot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1.5px solid #f97316;
+  animation: pulse-ring 1.5s ease-out infinite;
+  opacity: 0;
+}
+@keyframes pulse-ring {
+  0% { transform: scale(.8); opacity: .8; }
+  100% { transform: scale(2); opacity: 0; }
+}
+.badge-float {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: linear-gradient(135deg, #f59e0b, #ea580c);
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: .75rem;
+  animation: badge-float 3s ease-in-out infinite;
+}
+@keyframes badge-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+.badge-dot {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #c2410c;
+  margin-bottom: .75rem;
+}
+body.dark .badge-dot { color: #fb923c; }
+.red-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #f97316;
+  flex-shrink: 0;
+  animation: blink-dot 1.2s ease-in-out infinite;
+}
+@keyframes blink-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .3; }
+}
+.card-accent {
+  border-right: 3px solid #f97316 !important;
+  border-radius: 0 1rem 1rem 0 !important;
+}
+.new-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: .75rem;
+  font-size: 13px;
+  color: #ea580c;
+  text-decoration: none;
+  font-weight: 600;
+  transition: gap .2s;
+}
+.new-card-link:hover { gap: 10px; }
+body.dark .new-card-link { color: #fb923c; }
+.new-card-ico { width: 12px; height: 12px; flex-shrink: 0; }
+
+/* ===== بطاقة كتابة ===== */
+.writing-card {
+  display: block;
+  position: relative;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  border: 1px solid #fed7aa;
+  background: linear-gradient(135deg, rgba(255,237,213,0.5), rgba(253,230,138,0.3));
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow .3s, transform .3s;
+  margin: 2rem auto;
+}
+.writing-card:hover {
+  box-shadow: 0 20px 40px -10px rgba(251,191,36,0.25);
+  transform: translateY(-2px);
+}
+body.dark .writing-card {
+  background: rgba(18,18,22,0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+body.dark .writing-card:hover {
+  box-shadow: 0 20px 40px -10px rgba(251,191,36,0.15);
+}
+.writing-card-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #f59e0b, #ea580c, #f59e0b);
+}
+.writing-card-body {
+  padding: 1.75rem 2rem;
+  direction: rtl;
+}
+.writing-card-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #c2410c;
+  margin-bottom: .6rem;
+  transition: color .2s;
+}
+body.dark .writing-card-title { color: #fbbf24; }
+.writing-card:hover .writing-card-title { color: #9a3412; }
+body.dark .writing-card:hover .writing-card-title { color: #fde68a; }
+.writing-card-date {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: .85rem;
+  color: #6b7280;
+  margin-bottom: 1rem;
+}
+body.dark .writing-card-date { color: #9ca3af; }
+.writing-card-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: .85rem;
+  color: #ea580c;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity .2s, gap .2s;
+}
+body.dark .writing-card-arrow { color: #fbbf24; }
+.writing-card:hover .writing-card-arrow { opacity: 1; gap: .7rem; }
+</style>
 
 </body>
 </html>
