@@ -2203,16 +2203,17 @@ function stretchCell(cell, font) {
     const currentText = words.map(w => tokensToString(w.tokens)).join(' ');
     const gap = available - measureText(currentText, font);
     if (gap <= 0.5) break;
-    const candidates = words
-      .map((w, i) => ({
-        i,
-        pos: getBestInsertPos(w.tokens),
-        tatweels: w.tatweels,
-        len: w.tokens.length,
-        orig: originalWords[i].replace(/[\u064B-\u065F\u0670]/g, '')
-      }))
-      .filter(c => c.pos !== -1 && ![...FORBIDDEN_WORDS].some(fw => c.orig.includes(fw)))
-      .sort((a, b) => a.tatweels - b.tatweels || b.len - a.len);
+const candidates = words
+  .map((w, i) => ({
+    i,
+    pos: getBestInsertPos(w.tokens),
+    tatweels: w.tatweels,
+    len: w.tokens.length,
+    orig: originalWords[i].replace(/[\u064B-\u065F\u0670]/g, ''),
+    ratio: w.tatweels / Math.max(w.tokens.length, 1)
+  }))
+  .filter(c => c.pos !== -1 && ![...FORBIDDEN_WORDS].some(fw => c.orig.includes(fw)))
+  .sort((a, b) => a.ratio - b.ratio || b.len - a.len);
     if (!candidates.length) break;
     const best = candidates[0];
     words[best.i].tokens.splice(best.pos, 0, { base: 'ـ', marks: '' });
@@ -2244,10 +2245,21 @@ function stretchAll() {
   });
 }
 
+function initStretch() {
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => {
+      stretchAll();
+      setTimeout(stretchAll, 300);
+    });
+  } else {
+    setTimeout(stretchAll, 500);
+  }
+}
+
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', stretchAll);
+  document.addEventListener('DOMContentLoaded', initStretch);
 } else {
-  stretchAll();
+  initStretch();
 }
 window.addEventListener('resize', stretchAll);
 </script>

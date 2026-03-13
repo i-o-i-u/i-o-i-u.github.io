@@ -1,5 +1,6 @@
 +++
 title = "الإنشاد"
+slug = "inshad"
 date = 2026-02-02
 +++
 

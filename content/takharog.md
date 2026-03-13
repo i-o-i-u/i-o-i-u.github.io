@@ -134,16 +134,6 @@ body.dark .dark-white-text {
 
 وهكذا، والله أعلم.
 
-<!-- نمط ٢: شارة مائلة — مع رابط -->
-<div class="box-new" style="overflow:hidden;padding-top:1.5rem">
-  <div class="badge-corner">جديد</div>
-  <div class="box-new-title">عنوان المحتوى</div>
-  <div class="box-new-body">نص توضيحي هنا</div>
-  <a href="/رابط/" class="new-card-link">
-    اقرأ المقالة
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-  </a>
-</div>
 
 <!-- فاصل زخرفي -->
 <div class="divider-ornament">❧ ❦ ❧</div>
