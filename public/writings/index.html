@@ -887,23 +887,6 @@ h1, h2, h3, h4, h5, h6 {
 <!-- ===== Floating Action Buttons ===== -->
 <div id="floatingActions" class="floating-actions" style="display:none;">
     
-    <div class="relative button-tooltip-wrapper">
-        <button onclick="shareContent()" class="icon-btn floating-btn" aria-label="شارك">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
-            </svg>
-        </button>
-        <span class="button-tooltip">شارك</span>
-    </div>
-    <div class="relative button-tooltip-wrapper">
-        <button onclick="copyContent()" class="icon-btn floating-btn" aria-label="نسخ النص">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
-            </svg>
-        </button>
-        <span class="button-tooltip">نسْخ النص</span>
-    </div>
-    
 </div>
 
 <!-- ===== Floating Back Button ===== -->
@@ -921,25 +904,6 @@ h1, h2, h3, h4, h5, h6 {
                 الكِتابات
             </h2>
             
-            <div class="flex items-center gap-2">
-                <div class="relative button-tooltip-wrapper">
-                    <button onclick="shareContent()" class="icon-btn">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
-                        </svg>
-                    </button>
-                    <span class="button-tooltip">شارك</span>
-                </div>
-                <div class="relative button-tooltip-wrapper">
-                    <button onclick="copyContent()" class="icon-btn">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
-                        </svg>
-                    </button>
-                    <span class="button-tooltip">نسْخ النص</span>
-                </div>
-            </div>
-            
         </div>
 
         <div id="articleContent" class="prose prose-orange max-w-none text-justify leading-relaxed text-gray-700 dark:text-white text-base md:text-lg lg:text-xl">
@@ -950,6 +914,20 @@ h1, h2, h3, h4, h5, h6 {
     <div class="writing-card-date">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
       14 شعبان 1447 هـ
+    </div>
+    <div class="writing-card-arrow">
+      اقرأ
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </div>
+</a>
+<a href="/metrab/" class="writing-card">
+  <div class="writing-card-bar"></div>
+  <div class="writing-card-body">
+    <div class="writing-card-title">تفسير بعضِ قصيدةٍ لأبي المِطراب</div>
+    <div class="writing-card-date">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      23 رجب 1446 هـ
     </div>
     <div class="writing-card-arrow">
       اقرأ
@@ -2010,30 +1988,22 @@ body.dark .glass-rajaz-box {
     margin: 1rem auto;
   }
   .poetry-table, .rajaz-table {
-    font-size: 1rem;
-  }
-  .poetry-table, .poetry-table tbody,
-  .poetry-table tr, .poetry-table td {
-    display: block;
-    width: 100%;
+    font-size: 0.72rem;
   }
   .shatr {
-    white-space: normal;
-    overflow: visible;
+    white-space: nowrap;
+    overflow: hidden;
     padding: 0.2rem 0.4rem;
     line-height: 2;
-    width: 100%;
-    text-align: right !important;
   }
   .shatr.first {
-    border-left: none;
-    border-bottom: 1px solid rgba(180,130,50,0.25);
-    padding-bottom: 0.3rem;
+    border-left: 1px solid rgba(180,130,50,0.25);
   }
   .rajaz-shatr {
     padding: 0.25rem 0.4rem;
     line-height: 2;
-    white-space: normal;
+    white-space: nowrap;
+    overflow: hidden;
   }
 }
 </style>

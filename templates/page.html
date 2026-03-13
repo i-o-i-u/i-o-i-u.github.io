@@ -12,7 +12,7 @@
 
 <!-- ===== Floating Action Buttons ===== -->
 <div id="floatingActions" class="floating-actions" style="display:none;">
-    {% if page.slug != "questions" %}
+    {% if page.slug != "questions" and page.slug != "writings" %}
     <div class="relative button-tooltip-wrapper">
         <button onclick="shareContent()" class="icon-btn floating-btn" aria-label="شارك">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -46,7 +46,7 @@
             <h2 class="text-xl md:text-2xl lg:text-3xl font-black gradient-text">
                 {{ page.title }}
             </h2>
-            {% if page.slug != "questions" %}
+            {% if page.slug != "questions" and page.slug != "writings" %}
             <div class="flex items-center gap-2">
                 <div class="relative button-tooltip-wrapper">
                     <button onclick="shareContent()" class="icon-btn">
