@@ -6,6 +6,8 @@
     <title>
 نَظْم الشعر وفَهْمُه | سيف العشيرة
 </title>
+    <link rel="icon" type="image/svg+xml" href="/icon.svg">
+    <link rel="shortcut icon" href="/icon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @font-face {
@@ -56,6 +58,7 @@ p, div, span, a, li {
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            color: #ea580c;
         }
         
         .dark-gradient-text {
@@ -63,6 +66,12 @@ p, div, span, a, li {
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            color: #fb923c;
+        }
+
+        @supports not (-webkit-background-clip: text) {
+            .gradient-text { color: #ea580c; background: none; -webkit-text-fill-color: #ea580c; }
+            .dark-gradient-text { color: #fb923c; background: none; -webkit-text-fill-color: #fb923c; }
         }
 
 .bg-image-overlay {
@@ -83,6 +92,48 @@ p, div, span, a, li {
 body.dark .bg-image-overlay {
     opacity: 0;
     display: none;
+}
+
+/* خلفية الوضع الليلي */
+.bg-night-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: url('/Night mode background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    z-index: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+body.dark .bg-night-overlay {
+    opacity: 0.07;
+}
+
+/* النجوم */
+.stars-container {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+body.dark .stars-container {
+    opacity: 1;
+}
+.star {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.55);
+    animation: twinkle var(--dur, 3s) ease-in-out infinite var(--delay, 0s);
+}
+@keyframes twinkle {
+    0%, 100% { opacity: 0.15; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.3); }
 }
 
 @media (max-width: 768px) {
@@ -397,6 +448,10 @@ body.dark .dark-mode-tooltip {
             padding-bottom: 1px;
             transition: all 0.3s ease;
             display: inline-block;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
 
         .tooltip-word:hover {
@@ -411,6 +466,7 @@ body.dark .dark-mode-tooltip {
             transform: translateX(-50%) translateY(-10px);
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.95));
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             color: #4b5563;
             padding: 12px 18px;
             border-radius: 15px;
@@ -438,7 +494,8 @@ body.dark .dark-mode-tooltip {
             border-color: rgba(255, 255, 255, 0.98) transparent transparent transparent;
         }
 
-        .tooltip-word:hover .tooltip-content {
+        .tooltip-word:hover .tooltip-content,
+        .tooltip-word.active .tooltip-content {
             opacity: 1;
             visibility: visible;
             transform: translateX(-50%) translateY(0px);
@@ -806,6 +863,8 @@ h1, h2, h3, h4, h5, h6 {
 <body class="transition-all duration-500 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 pattern min-h-screen flex flex-col" id="body">
     
     <div class="bg-image-overlay"></div>
+    <div class="bg-night-overlay"></div>
+    <div class="stars-container" id="starsContainer"></div>
     <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
 
     <nav class="fixed top-0 left-0 right-0 z-[1000] glass transition-all duration-300" id="navbar">
@@ -2123,16 +2182,40 @@ function canConnectAfter(base) {
   return !NO_CONNECT_AFTER.has(base) && !PUNCT.has(base) && /[\u0600-\u06FF]/.test(base);
 }
 
-function getBestInsertPos(tokens) {
+function getAllInsertPositions(tokens) {
+  const positions = [];
   let lastValid = tokens.length - 1;
   while (lastValid > 0 && PUNCT.has(tokens[lastValid].base)) lastValid--;
   for (let i = lastValid - 1; i >= 1; i--) {
     if (PUNCT.has(tokens[i + 1]?.base)) continue;
     const nextBase = tokens[i + 1]?.base;
     if (tokens[i].base === 'ل' && nextBase && 'اأإآٱ'.includes(nextBase)) continue;
-    if (canConnectAfter(tokens[i].base)) return i + 1;
+    if (canConnectAfter(tokens[i].base)) positions.push(i + 1);
   }
-  return -1;
+  return positions;
+}
+
+function getBestInsertPos(tokens, font, ctx) {
+  const positions = getAllInsertPositions(tokens);
+  if (!positions.length) return -1;
+  // نقيس عرض كل فجوة ونختار الأوسع
+  // الفجوة = المسافة بين موضعين متتاليين في الكلمة
+  // نضيف حدود وهمية للبداية والنهاية
+  const boundaries = [0, ...positions, tokens.length];
+  let bestPos = positions[0];
+  let bestWidth = -1;
+  for (let i = 0; i < positions.length; i++) {
+    const start = boundaries[i];
+    const end = boundaries[i + 2] ?? tokens.length;
+    const segTokens = tokens.slice(start, end);
+    const segText = tokensToString(segTokens);
+    const w = ctx.measureText(segText).width;
+    if (w > bestWidth) {
+      bestWidth = w;
+      bestPos = positions[i];
+    }
+  }
+  return bestPos;
 }
 
 function measureText(text, font) {
@@ -2142,6 +2225,13 @@ function measureText(text, font) {
   return ctx.measureText(text).width;
 }
 
+function getCtx(font) {
+  const c = measureText._canvas || (measureText._canvas = document.createElement('canvas'));
+  const ctx = c.getContext('2d');
+  ctx.font = font;
+  return ctx;
+}
+
 function stretchCell(cell, font) {
   const available = cell.clientWidth
     - parseFloat(getComputedStyle(cell).paddingLeft)
@@ -2149,14 +2239,15 @@ function stretchCell(cell, font) {
   if (!cell.dataset.original) cell.dataset.original = cell.textContent.trim();
   const originalWords = cell.dataset.original.split(/\s+/);
   const words = originalWords.map(w => ({ tokens: tokenize(w), tatweels: 0 }));
+  const ctx = getCtx(font);
   for (let round = 0; round < 80; round++) {
     const currentText = words.map(w => tokensToString(w.tokens)).join(' ');
-    const gap = available - measureText(currentText, font);
+    const gap = available - ctx.measureText(currentText).width;
     if (gap <= 0.5) break;
 const candidates = words
   .map((w, i) => ({
     i,
-    pos: getBestInsertPos(w.tokens),
+    pos: getBestInsertPos(w.tokens, font, ctx),
     tatweels: w.tatweels,
     len: w.tokens.length,
     orig: originalWords[i].replace(/[\u064B-\u065F\u0670]/g, ''),
@@ -2196,13 +2287,16 @@ function stretchAll() {
 }
 
 function initStretch() {
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(() => {
-      stretchAll();
-      setTimeout(stretchAll, 300);
-    });
-  } else {
+  function run() {
+    stretchAll();
+    // تأكيد إضافي بعد 500ms و1000ms للجوال
     setTimeout(stretchAll, 500);
+    setTimeout(stretchAll, 1000);
+  }
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(run);
+  } else {
+    setTimeout(run, 300);
   }
 }
 
@@ -2212,6 +2306,46 @@ if (document.readyState === 'loading') {
   initStretch();
 }
 window.addEventListener('resize', stretchAll);
+
+/* ===== التلميحات في الجوال ===== */
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.tooltip-word').forEach(function(el) {
+    el.addEventListener('touchstart', function(e) {
+      e.preventDefault();
+      document.querySelectorAll('.tooltip-word.active').forEach(function(other) {
+        if (other !== el) other.classList.remove('active');
+      });
+      el.classList.toggle('active');
+    }, { passive: false });
+  });
+  document.addEventListener('touchstart', function(e) {
+    if (!e.target.closest('.tooltip-word')) {
+      document.querySelectorAll('.tooltip-word.active').forEach(function(el) {
+        el.classList.remove('active');
+      });
+    }
+  });
+
+  /* ===== توليد النجوم ===== */
+  const container = document.getElementById('starsContainer');
+  if (container) {
+    const count = 90;
+    for (let i = 0; i < count; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      const size = Math.random() * 2 + 1;
+      star.style.cssText = [
+        'width:' + size + 'px',
+        'height:' + size + 'px',
+        'top:' + Math.random() * 100 + '%',
+        'left:' + Math.random() * 100 + '%',
+        '--dur:' + (Math.random() * 3 + 2) + 's',
+        '--delay:-' + (Math.random() * 4) + 's'
+      ].join(';');
+      container.appendChild(star);
+    }
+  }
+});
 </script>
 
 
