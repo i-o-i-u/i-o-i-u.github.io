@@ -20,21 +20,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
-      
+
+      - name: Install Zola
+        run: |
+          curl -sSL https://github.com/getzola/zola/releases/download/v0.18.0/zola-v0.18.0-x86_64-unknown-linux-gnu.tar.gz -o zola.tar.gz
+          tar -xzf zola.tar.gz
+          chmod +x zola
+
       - name: Build with Zola
-        uses: shalzz/zola-deploy-action@v0.18.0
-        env:
-          PAGES_BRANCH: gh-pages
-          BUILD_ONLY: true
+        run: ./zola build
+
+      - name: Install Pagefind
+        run: npm install -g pagefind
 
       - name: Index with Pagefind
-        run: |
-          curl -sSL https://github.com/CloudCannon/pagefind/releases/download/v1.3.0/pagefind-v1.3.0-x86_64-unknown-linux-musl.tar.gz -o pagefind.tar.gz
-          tar -xzf pagefind.tar.gz
-          ./pagefind --site public
+        run: pagefind --site public
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
