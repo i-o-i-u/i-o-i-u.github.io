@@ -2,11 +2,13 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
     <title>{% block title %}{{ config.title }}{% endblock title %}</title>
     <link rel="icon" type="image/svg+xml" href="/icon.svg">
     <link rel="shortcut icon" href="/icon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { darkMode: 'class' }</script>
     <style>
         @font-face {
             font-family: 'Kitab';
@@ -336,6 +338,43 @@ body.dark .stars-container {
 
         body.dark .search-btn-tooltip::after {
             border-color: transparent transparent rgba(30, 30, 30, 0.98) transparent;
+        }
+
+        /* تلاميح الجوال — تُثبَّت على حافة الزر لتبقى داخل الشاشة */
+        @media (max-width: 768px) {
+            .search-btn-tooltip {
+                left: auto;
+                right: 0;
+                transform: translateY(-10px);
+            }
+            .search-btn:hover .search-btn-tooltip {
+                transform: translateY(0);
+            }
+            .search-btn-tooltip::after {
+                left: auto;
+                right: 12px;
+                transform: none;
+            }
+
+            .dark-mode-tooltip {
+                left: auto;
+                right: 0;
+                transform: translateY(-10px);
+            }
+            .dark-mode-btn:hover .dark-mode-tooltip {
+                transform: translateY(0);
+            }
+            .dark-mode-tooltip::after {
+                left: auto;
+                right: 12px;
+                transform: none;
+            }
+
+            .social-tooltip {
+                white-space: normal;
+                width: 100px;
+                text-align: center;
+            }
         }
 
         .dark-mode-tooltip {
@@ -836,9 +875,14 @@ body h3,
 body h4,
 body h5,
 body h6,
-body li {
+body li,
+body a:not(.gradient-text):not(.dark-gradient-text) {
     color: #1f2937;
 }
+
+/* إخبار المتصفح (وiOS Safari تحديدًا) بوضع الألوان الفعلي — يمنع التعديل التلقائي */
+:root { color-scheme: light; }
+body.dark { color-scheme: dark; }
 
 .gradient-text {
     background: linear-gradient(135deg, #f59e0b, #ea580c);
@@ -991,8 +1035,8 @@ h1, h2, h3, h4, h5, h6 {
 
 <div class="nav-text-container" id="quickNavLinks" style="display: none; transition: all 0.4s ease;">
     <div class="flex items-center justify-center gap-2 md:gap-4 lg:gap-6">
-        <a href="/" class="text-xs md:text-sm lg:text-base text-gray-700 hover:text-orange-600 font-semibold transition-colors whitespace-nowrap quick-nav-link">الصفحة الأُولَى</a>
-        <span class="text-orange-400/50">|</span>
+        {% if page %}<a href="/" class="text-xs md:text-sm lg:text-base text-gray-700 hover:text-orange-600 font-semibold transition-colors whitespace-nowrap quick-nav-link">الصفحة الأُولَى</a>
+        <span class="text-orange-400/50">|</span>{% endif %}
         <a href="/chanting/" class="text-xs md:text-sm lg:text-base text-gray-700 hover:text-orange-600 font-semibold transition-colors whitespace-nowrap quick-nav-link">الإنشاد والحُداء</a>
         <span class="text-orange-400/50">|</span>
         <a href="/questions/" class="text-xs md:text-sm lg:text-base text-gray-700 hover:text-orange-600 font-semibold transition-colors whitespace-nowrap quick-nav-link">الأسئلة</a>
@@ -1067,8 +1111,6 @@ h1, h2, h3, h4, h5, h6 {
                     </div>
 
 <div class="flex flex-wrap justify-center gap-6 mb-12 text-lg">
-    <a href="/" class="text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-amber-400 font-semibold transition-colors">الصفحة الأُولَى</a>
-    <span class="text-gray-300 dark:text-gray-600">|</span>
     <a href="/chanting/" class="text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-amber-400 font-semibold transition-colors">الإنشاد والحُداء</a>
     <span class="text-gray-300 dark:text-gray-600">|</span>
     <a href="/questions/" class="text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-amber-400 font-semibold transition-colors">الأسئلة</a>
@@ -1291,50 +1333,167 @@ window.addEventListener('scroll', function() {
     }
 });
 
-let _pagefind = null;
-async function getPagefind() {
-    if (!_pagefind) {
-        _pagefind = await import('/pagefind/pagefind.js');
-        await _pagefind.init();
+// ── فهرس الصفحات ─────────────────────────────────────────
+const SITE_PAGES = [
+    { url: '/', title: 'سيف العشيرة', breadcrumb: null },
+    { url: '/chanting/', title: 'الإنشاد والحُداء', breadcrumb: null },
+    { url: '/writings/', title: 'الكِتابات', breadcrumb: null },
+    { url: '/questions/', title: 'الأسئلة', breadcrumb: null },
+    { url: '/inshad/', title: 'الإنشاد عند العرب', breadcrumb: 'الكِتابات' },
+    { url: '/metrab/', title: 'تفسير بعض قصيدةٍ لأبي المِطراب', breadcrumb: 'الكِتابات' },
+    { url: '/question-1/', title: 'ما الذي حبَّب إليك العربية؟', breadcrumb: 'الأسئلة' },
+    { url: '/question-2/', title: 'نصيحةٌ لمن يحبُّ علوم اللغة', breadcrumb: 'الأسئلة' },
+    { url: '/nathm/', title: 'نَظْم الشعر وفَهْمُه', breadcrumb: 'الأسئلة' },
+    { url: '/mathal/', title: 'الأمثال من الشعر', breadcrumb: 'الأسئلة' },
+    { url: '/ibn-duraid/', title: 'مقصورة ابن دُرَيد', breadcrumb: 'الأسئلة' },
+    { url: '/takharog/', title: 'بيتٌ للتخرُّج', breadcrumb: 'الأسئلة' },
+    { url: '/saif-clan/', title: 'أنا سيف العشيرة فاعرفوني', breadcrumb: null },
+    { url: '/mufadati/', title: 'عليَّ مُفاضَتي ومعي سِلاحي', breadcrumb: null },
+];
+
+// ── تخزين محتوى الصفحات ─────────────────────────────────
+const _cc = {};
+async function _getText(url) {
+    if (_cc[url] !== undefined) return _cc[url];
+    try {
+        const r = await fetch(url);
+        const html = await r.text();
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        const el = doc.getElementById('articleContent') || doc.querySelector('.content-section');
+        if (!el) { _cc[url] = ''; return ''; }
+        const clone = el.cloneNode(true);
+        clone.querySelectorAll('style, script, svg, button, [data-pagefind-ignore]').forEach(n => n.remove());
+        _cc[url] = (clone.textContent || '').replace(/\s+/g, ' ').trim();
+    } catch { _cc[url] = ''; }
+    return _cc[url];
+}
+
+// ── معالجة النص العربي ──────────────────────────────────
+const _D = '[\\u064B-\\u065F\\u0670]*';
+function _hasDiac(s) { return /[\u064B-\u065F\u0670]/.test(s); }
+function _escR(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+function _escH(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function _normalize(s) {
+    return s.replace(/[\u064B-\u065F\u0670]/g, '')
+            .replace(/[أإآٱ]/g, 'ا')
+            .replace(/ة/g, 'ه')
+            .replace(/ى/g, 'ي');
+}
+const _AV = { 'ا':'[اأإآٱ]','أ':'[اأإآٱ]','إ':'[اأإآٱ]','آ':'[اأإآٱ]','ه':'[هة]','ة':'[هة]','ي':'[يى]','ى':'[يى]' };
+
+function _buildPat(q, mode) {
+    // مطابق مع تشكيل: نص حرفي تام
+    if (mode === 'exact' && _hasDiac(q))
+        return new RegExp(_escR(q));
+    // مطابق بدون تشكيل: يسمح بوجود حركات بين الحروف
+    if (mode === 'exact')
+        return new RegExp(q.split('').map(c => c === ' ' ? '\\s+' : (_escR(c) + _D)).join(''));
+    // تقريبي: يطبّع الحروف (الهمزات، التاء المربوطة، الألف المقصورة)
+    return new RegExp(_normalize(q).split('').map(c =>
+        c === ' ' ? '\\s+' : ((_AV[c] || _escR(c)) + _D)
+    ).join(''));
+}
+
+function _excerpt(q, text, mode, ctx = 90) {
+    let pat;
+    try { pat = _buildPat(q, mode); } catch { return ''; }
+    const m = text.match(pat);
+    if (!m) return '';
+    const idx = text.indexOf(m[0]);
+    const s = Math.max(0, idx - ctx);
+    const e = Math.min(text.length, idx + m[0].length + ctx);
+    let ex = text.slice(s, e).trim();
+    if (s > 0) ex = '...' + ex;
+    if (e < text.length) ex += '...';
+    const safe = _escH(ex);
+    const sm   = _escH(m[0]);
+    const si   = safe.indexOf(sm);
+    return si >= 0
+        ? safe.slice(0, si) + '<mark>' + sm + '</mark>' + safe.slice(si + sm.length)
+        : safe;
+}
+
+// ── حالة البحث ───────────────────────────────────────────
+let _sMode = 'exact';
+let _sTimer = null;
+let _prefetched = false;
+
+function _prefetchAll() {
+    if (_prefetched) return;
+    _prefetched = true;
+    SITE_PAGES.forEach(p => _getText(p.url));
+}
+
+function setSearchMode(mode) {
+    _sMode = mode;
+    document.getElementById('searchModeExact').classList.toggle('search-mode-active', mode === 'exact');
+    document.getElementById('searchModeApprox').classList.toggle('search-mode-active', mode !== 'exact');
+    const q = document.getElementById('searchInput').value;
+    if (q.trim()) _doSearch(q);
+}
+
+function performSearch(q) {
+    if (_sTimer) clearTimeout(_sTimer);
+    _sTimer = setTimeout(() => _doSearch(q), 220);
+}
+
+async function _doSearch(q) {
+    const results = document.getElementById('searchResults');
+    if (!q.trim()) {
+        results.innerHTML = '<p class="text-center text-gray-500 py-4">اكتب للبحث...</p>';
+        return;
     }
-    return _pagefind;
+    results.innerHTML = '<p class="text-center text-gray-400 py-4">جارٍ البحث...</p>';
+    let pat;
+    try { pat = _buildPat(q, _sMode); } catch {
+        results.innerHTML = '<p class="text-center text-gray-500 py-4">خطأ في صياغة البحث</p>';
+        return;
+    }
+    const found = [];
+    await Promise.all(SITE_PAGES.map(async p => {
+        const text = await _getText(p.url);
+        if (text && pat.test(text))
+            found.push({ ...p, excerpt: _excerpt(q, text, _sMode) });
+    }));
+    if (!found.length) {
+        results.innerHTML = '<p class="text-center text-gray-500 py-4">لا توجد نتائج</p>';
+        return;
+    }
+    const n = found.length;
+    const nStr = n === 1 ? 'نتيجة واحدة' : n === 2 ? 'نتيجتان' : (n >= 3 && n <= 10) ? n + ' نتائج' : n + ' نتيجة';
+    // group by breadcrumb, preserve site order
+    const GROUP_ORDER = [null, 'الكِتابات', 'الأسئلة'];
+    const groups = {};
+    GROUP_ORDER.forEach(k => { groups[k] = []; });
+    found.forEach(m => {
+        const key = GROUP_ORDER.includes(m.breadcrumb) ? m.breadcrumb : null;
+        groups[key].push(m);
+    });
+    let html = '<div class="search-result-count">' + nStr + '</div>';
+    GROUP_ORDER.forEach(key => {
+        if (!groups[key] || !groups[key].length) return;
+        if (key !== null)
+            html += '<div class="search-result-group-header">' + _escH(key) + '</div>';
+        groups[key].forEach(m => {
+            html += '<a href="' + m.url + '" class="search-result-item" onclick="closeSearch()">'
+                + '<div class="search-result-path"><strong>' + _escH(m.title) + '</strong></div>'
+                + '<div class="search-result-excerpt">' + m.excerpt + '</div>'
+                + '</a>';
+        });
+    });
+    results.innerHTML = html;
 }
 
 function openSearch() {
     document.getElementById('searchModal').classList.remove('hidden');
     document.getElementById('searchInput').focus();
+    _prefetchAll();
 }
 
 function closeSearch() {
     document.getElementById('searchModal').classList.add('hidden');
     document.getElementById('searchInput').value = '';
-    document.getElementById('searchResults').innerHTML = '<p class="text-center text-gray-500">اكتب للبحث...</p>';
-}
-
-async function handleSearch(query) {
-    const results = document.getElementById('searchResults');
-    if (!query.trim()) {
-        results.innerHTML = '<p class="text-center text-gray-500">اكتب للبحث...</p>';
-        return;
-    }
-    results.innerHTML = '<p class="text-center text-gray-500">جارٍ البحث...</p>';
-    try {
-        const pf = await getPagefind();
-        const search = await pf.search(query);
-        if (search.results.length === 0) {
-            results.innerHTML = '<p class="text-center text-gray-500">لا توجد نتائج</p>';
-            return;
-        }
-        const data = await Promise.all(search.results.slice(0, 8).map(r => r.data()));
-        results.innerHTML = data.map(item => `
-            <a href="${item.url}" class="block p-3 mb-2 rounded-xl hover:bg-orange-50 dark:hover:bg-gray-700 transition-colors text-right">
-                <div class="font-semibold text-gray-800 dark:text-white">${item.meta.title || ''}</div>
-                <div class="text-sm text-gray-500 mt-1 leading-relaxed">${item.excerpt}</div>
-            </a>
-        `).join('');
-    } catch(e) {
-        results.innerHTML = '<p class="text-center text-gray-500">تعذَّر البحث.</p>';
-    }
+    document.getElementById('searchResults').innerHTML = '<p class="text-center text-gray-500 py-4">اكتب للبحث...</p>';
 }
 
 document.getElementById('searchButton').addEventListener('click', openSearch);
@@ -1349,8 +1508,9 @@ document.addEventListener('keydown', (e) => {
 <style>
 #searchModal {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
+    padding-top: 145px;
     background: rgba(0, 0, 0, 0.55);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
@@ -1360,6 +1520,9 @@ document.addEventListener('keydown', (e) => {
     position: relative;
     width: 90%;
     max-width: 640px;
+    max-height: calc(100vh - 145px);
+    display: flex;
+    flex-direction: column;
     background: rgba(255, 255, 255, 0.97);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -1385,6 +1548,7 @@ body.dark .search-panel {
     padding: 0.85rem 1.25rem;
     border-bottom: 1px solid rgba(251,146,60,0.15);
     direction: rtl;
+    flex-shrink: 0;
 }
 body.dark .search-panel-header { border-bottom-color: rgba(255,255,255,0.08); }
 .search-panel-input {
@@ -1408,18 +1572,109 @@ body.dark .search-panel-input { color: #f3f4f6; }
 }
 .search-close-btn:hover { background: rgba(234,88,12,0.1); color: #ea580c; }
 body.dark .search-close-btn:hover { background: rgba(255,255,255,0.1); color: #fbbf24; }
+/* أزرار وضع البحث */
+.search-mode-tabs {
+    display: flex;
+    gap: 6px;
+    padding: 8px 14px;
+    border-bottom: 1px solid rgba(251,146,60,0.1);
+    direction: rtl;
+    flex-shrink: 0;
+}
+body.dark .search-mode-tabs { border-bottom-color: rgba(255,255,255,0.06); }
+.search-mode-btn {
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid rgba(251,146,60,0.3);
+    background: transparent;
+    color: #9ca3af;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+.search-mode-btn:hover { color: #ea580c; border-color: rgba(234,88,12,0.5); }
+.search-mode-active {
+    background: linear-gradient(135deg, rgba(251,146,60,0.12), rgba(251,191,36,0.12));
+    color: #ea580c !important;
+    border-color: rgba(234,88,12,0.4) !important;
+}
+body.dark .search-mode-btn { color: #6b7280; border-color: rgba(255,255,255,0.1); }
+body.dark .search-mode-btn:hover { color: #fbbf24; border-color: rgba(251,191,36,0.4); }
+body.dark .search-mode-active {
+    background: rgba(251,191,36,0.1);
+    color: #fbbf24 !important;
+    border-color: rgba(251,191,36,0.4) !important;
+}
+/* منطقة النتائج */
 .search-panel-results {
-    max-height: 60vh;
+    flex: 1;
     overflow-y: auto;
-    padding: 0.75rem;
+    -webkit-overflow-scrolling: touch;
+    padding: 0.5rem 0.75rem;
     direction: rtl;
 }
-.search-panel-results a { display: block; padding: 0.65rem 0.9rem; margin-bottom: 0.35rem; border-radius: 0.875rem; text-decoration: none; transition: background 0.15s; }
-.search-panel-results a:hover { background: rgba(251,146,60,0.09); }
-body.dark .search-panel-results a:hover { background: rgba(255,255,255,0.07); }
+.search-result-count {
+    font-size: 0.78rem;
+    color: #9ca3af;
+    text-align: right;
+    padding: 4px 6px 8px;
+    border-bottom: 1px solid rgba(251,146,60,0.1);
+    margin-bottom: 4px;
+}
+body.dark .search-result-count { border-bottom-color: rgba(255,255,255,0.06); }
+.search-result-group-header {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #ea580c;
+    text-align: right;
+    padding: 10px 10px 4px;
+    margin-top: 6px;
+    border-top: 1px solid rgba(251,146,60,0.15);
+    direction: rtl;
+}
+.search-result-group-header:first-of-type { margin-top: 0; border-top: none; }
+body.dark .search-result-group-header { color: #fbbf24; border-top-color: rgba(255,255,255,0.07); }
+.search-result-item {
+    display: block;
+    padding: 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: background 0.15s;
+    margin-bottom: 4px;
+}
+.search-result-item:hover { background: rgba(251,146,60,0.08); }
+body.dark .search-result-item:hover { background: rgba(255,255,255,0.06); }
+.search-result-path {
+    font-size: 0.87rem;
+    font-weight: 700;
+    color: #ea580c;
+    margin-bottom: 4px;
+    direction: rtl;
+}
+body.dark .search-result-path { color: #fbbf24; }
+.search-result-excerpt {
+    font-size: 0.88rem;
+    color: #4b5563;
+    line-height: 1.8;
+    direction: rtl;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+body.dark .search-result-excerpt { color: #d1d5db; }
+.search-result-excerpt mark {
+    background: rgba(251,146,60,0.3);
+    color: inherit;
+    border-radius: 2px;
+    padding: 0 1px;
+    font-weight: bold;
+}
+body.dark .search-result-excerpt mark { background: rgba(251,191,36,0.25); }
 @media (max-width: 768px) {
-    .search-panel { width: 95%; }
-    .search-panel-results { max-height: 55vh; }
+    #searchModal { padding-top: 130px; }
+    .search-panel { width: 95%; max-height: calc(100vh - 150px); }
     .search-panel-input { font-size: 0.95rem; }
 }
 </style>
@@ -1429,10 +1684,14 @@ body.dark .search-panel-results a:hover { background: rgba(255,255,255,0.07); }
     <div class="search-panel">
         <div class="search-panel-header">
             <svg class="w-5 h-5 text-orange-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-            <input type="text" id="searchInput" placeholder="ابحث في الموقع..." class="search-panel-input" dir="rtl" oninput="handleSearch(this.value)">
+            <input type="text" id="searchInput" placeholder="ابحث في الموقع..." class="search-panel-input" dir="rtl" oninput="performSearch(this.value)" autocomplete="off">
             <button onclick="closeSearch()" class="search-close-btn" aria-label="إغلاق">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
             </button>
+        </div>
+        <div class="search-mode-tabs">
+            <button id="searchModeExact" class="search-mode-btn search-mode-active" onclick="setSearchMode('exact')">بحثٌ مُطابِق</button>
+            <button id="searchModeApprox" class="search-mode-btn" onclick="setSearchMode('approx')">بحثٌ تقريبيٌّ</button>
         </div>
         <div id="searchResults" class="search-panel-results">
             <p class="text-center text-gray-500 py-4">اكتب للبحث...</p>
