@@ -41,14 +41,22 @@ p, div, span, a, li {
         
         .glass {
             background: rgba(255, 255, 255, 0.1);
+            -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
         .dark-glass {
             background: rgba(0, 0, 0, 0.3);
+            -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* احتياط للمتصفحات التي لا تدعم backdrop-filter */
+        @supports not (backdrop-filter: blur(1px)) {
+            .glass { background: rgba(255, 255, 240, 0.97); }
+            .dark-glass { background: rgba(15, 15, 25, 0.97); }
         }
         
         .gradient-text {
@@ -251,8 +259,83 @@ body.dark .stars-container {
             overflow: visible !important;
         }
 
+        .search-btn {
+            position: relative;
+        }
+
+        body.dark .search-btn {
+            background-color: #1f2937;
+        }
+        body.dark .search-btn:hover {
+            background-color: #374151;
+        }
+        body.dark .search-btn svg {
+            color: #f59e0b;
+        }
+
+        .nav-btn-stack {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
         .dark-mode-btn {
             position: relative;
+        }
+
+        .search-btn {
+            position: relative;
+        }
+
+        .search-btn-tooltip {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+            backdrop-filter: blur(10px);
+            color: #ea580c;
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            box-shadow: 0 8px 32px rgba(251, 146, 60, 0.2);
+            border: 1px solid rgba(251, 146, 60, 0.1);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 99999;
+            pointer-events: none;
+            margin-top: 8px;
+        }
+
+        .search-btn-tooltip::after {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 6px;
+            border-style: solid;
+            border-color: transparent transparent rgba(255, 255, 255, 0.95) transparent;
+        }
+
+        .search-btn:hover .search-btn-tooltip {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0px);
+        }
+
+        body.dark .search-btn-tooltip {
+            background: linear-gradient(135deg, rgba(30, 30, 30, 0.98), rgba(40, 40, 40, 0.95));
+            color: #fbbf24;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            border-color: rgba(251, 191, 36, 0.2);
+        }
+
+        body.dark .search-btn-tooltip::after {
+            border-color: transparent transparent rgba(30, 30, 30, 0.98) transparent;
         }
 
         .dark-mode-tooltip {
@@ -298,11 +381,6 @@ body.dark .stars-container {
 body.dark .dark-mode-tooltip {
     display: none !important;
 }
-            background: linear-gradient(135deg, rgba(30, 30, 30, 0.95), rgba(40, 40, 40, 0.9));
-            color: #fbbf24;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(251, 191, 36, 0.2);
-        }
 
         body.dark .dark-mode-tooltip::after {
             border-color: transparent transparent rgba(30, 30, 30, 0.95) transparent;
@@ -512,14 +590,21 @@ body.dark .dark-mode-tooltip {
 
         .content-section {
             background: rgba(255, 255, 255, 0.7);
+            -webkit-backdrop-filter: blur(20px);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.4);
             transition: all 0.5s ease;
+        }
+        @supports not (backdrop-filter: blur(1px)) {
+            .content-section { background: rgba(255, 255, 255, 0.97); }
         }
 
         body.dark .content-section {
             background: rgba(31, 41, 55, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        @supports not (backdrop-filter: blur(1px)) {
+            body.dark .content-section { background: #1f2937; }
         }
 
 /* Target only the main card containers in listings */
@@ -802,8 +887,14 @@ h1, h2, h3, h4, h5, h6 {
     }
     .nav-controls {
         display: flex;
+        align-items: flex-start;
         gap: 6px;
         order: 1;
+    }
+    .nav-btn-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
     }
     main section { 
         padding-top: 200px !important; 
@@ -856,16 +947,33 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
+        /* Pagefind — تمييز الكلمات في نتائج البحث */
+        #searchResults mark {
+            background: rgba(251, 146, 60, 0.3);
+            color: inherit;
+            border-radius: 0.2rem;
+            padding: 0 0.1rem;
+        }
+        body.dark #searchResults mark {
+            background: rgba(251, 191, 36, 0.25);
+        }
     </style>
 </head>
 <body class="transition-all duration-500 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 pattern min-h-screen flex flex-col" id="body">
-    
+<script>(function(){
+  if(localStorage.getItem('theme')==='dark'){
+    var b=document.body;
+    b.classList.remove('bg-gradient-to-br','from-orange-50','via-amber-50','to-yellow-50','pattern');
+    b.classList.add('bg-gray-900','dark-pattern','dark');
+  }
+})();</script>
+
     <div class="bg-image-overlay"></div>
     <div class="bg-night-overlay"></div>
     <div class="stars-container" id="starsContainer"></div>
     <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
 
-    <nav class="fixed top-0 left-0 right-0 z-[1000] glass transition-all duration-300" id="navbar">
+    <nav class="fixed top-0 left-0 right-0 z-[1000] glass transition-all duration-300" id="navbar" data-pagefind-ignore>
         <div class="max-w-7xl mx-auto px-4 py-3">
             <div class="flex items-center justify-between flex-container relative">
                 <a href="/" class="logo-wrapper flex items-center justify-center">
@@ -895,15 +1003,23 @@ h1, h2, h3, h4, h5, h6 {
 
                 
 <div class="nav-controls flex items-center gap-3">
-    <button onclick="toggleDarkMode()" class="dark-mode-btn sun-rotate p-2 rounded-lg bg-orange-100 hover:bg-orange-200 transition-colors" id="darkModeBtn">
-        <svg class="w-5 h-5 text-orange-600" id="moonIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-        <svg class="w-5 h-5 text-amber-500 hidden" id="sunIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-        <span class="dark-mode-tooltip">أرح عينَيك!</span>
+
+    <button id="searchButton" onclick="openSearch()" class="search-btn p-2 rounded-lg bg-orange-100 hover:bg-orange-200 transition-colors" aria-label="بحث في الموقع">
+        <svg class="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <span class="search-btn-tooltip">ابحَثْ في الموقع</span>
     </button>
 
-    <div class="menu-btn" id="menuBtn" onclick="toggleMenu()">
-                        <span></span><span></span><span></span>
-                    </div>
+    <div class="nav-btn-stack">
+        <button onclick="toggleDarkMode()" class="dark-mode-btn sun-rotate p-2 rounded-lg bg-orange-100 hover:bg-orange-200 transition-colors" id="darkModeBtn">
+            <svg class="w-5 h-5 text-orange-600" id="moonIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+            <svg class="w-5 h-5 text-amber-500 hidden" id="sunIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+            <span class="dark-mode-tooltip">أرح عينَيك!</span>
+        </button>
+        <div class="menu-btn" id="menuBtn" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+
                 </div>
             </div>
         </div>
@@ -1019,7 +1135,7 @@ h1, h2, h3, h4, h5, h6 {
         </section>
     </main>
 
-    <footer class="glass border-t border-orange-200/50 transition-all duration-300 mt-auto w-full" id="footer">
+    <footer class="glass border-t border-orange-200/50 transition-all duration-300 mt-auto w-full" id="footer" data-pagefind-ignore>
         <div class="w-full px-4 py-8">
             <div class="w-full mx-auto">
                 <div class="text-center">
@@ -1175,15 +1291,14 @@ window.addEventListener('scroll', function() {
     }
 });
 
-const searchData = [
-    { title: "الصفحة الأُولَى", description: "الصفحة الرئيسية", path: "/", keywords: ["رئيسية", "بداية"] },
-    { title: "الإنشاد والحُداء", description: "صفحة الإنشاد", path: "/chanting/", keywords: ["إنشاد", "حداء"] },
-    { title: "الأسئلة", description: "أسئلة وأجوبة", path: "/questions/", keywords: ["سؤال", "جواب"] },
-    { title: "الكِتابات", description: "المقالات", path: "/writings/", keywords: ["كتابة", "مقال"] },
-    { title: "الإنشاد عند العرب", description: "مقال حول الإنشاد", path: "/inshad/", keywords: ["تطريب", "تغريد"] },
-    { title: "ما الذي حبَّب إليك العربية", description: "سؤال عن حب اللغة", path: "/question-1/", keywords: ["عربية", "لغة"] },
-    { title: "نصيحة لمحب اللغة", description: "نصيحة للمتعلم", path: "/question-2/", keywords: ["نصيحة", "تعلم"] }
-];
+let _pagefind = null;
+async function getPagefind() {
+    if (!_pagefind) {
+        _pagefind = await import('/pagefind/pagefind.js');
+        await _pagefind.init();
+    }
+    return _pagefind;
+}
 
 function openSearch() {
     document.getElementById('searchModal').classList.remove('hidden');
@@ -1193,27 +1308,33 @@ function openSearch() {
 function closeSearch() {
     document.getElementById('searchModal').classList.add('hidden');
     document.getElementById('searchInput').value = '';
+    document.getElementById('searchResults').innerHTML = '<p class="text-center text-gray-500">اكتب للبحث...</p>';
 }
 
-function handleSearch(query) {
+async function handleSearch(query) {
     const results = document.getElementById('searchResults');
     if (!query.trim()) {
         results.innerHTML = '<p class="text-center text-gray-500">اكتب للبحث...</p>';
         return;
     }
-    const filtered = searchData.filter(item => 
-        item.title.includes(query) || item.description.includes(query) || item.keywords.some(k => k.includes(query))
-    );
-    if (filtered.length === 0) {
-        results.innerHTML = '<p class="text-center text-gray-500">لا توجد نتائج</p>';
-        return;
+    results.innerHTML = '<p class="text-center text-gray-500">جارٍ البحث...</p>';
+    try {
+        const pf = await getPagefind();
+        const search = await pf.search(query);
+        if (search.results.length === 0) {
+            results.innerHTML = '<p class="text-center text-gray-500">لا توجد نتائج</p>';
+            return;
+        }
+        const data = await Promise.all(search.results.slice(0, 8).map(r => r.data()));
+        results.innerHTML = data.map(item => `
+            <a href="${item.url}" class="block p-3 mb-2 rounded-xl hover:bg-orange-50 dark:hover:bg-gray-700 transition-colors text-right">
+                <div class="font-semibold text-gray-800 dark:text-white">${item.meta.title || ''}</div>
+                <div class="text-sm text-gray-500 mt-1 leading-relaxed">${item.excerpt}</div>
+            </a>
+        `).join('');
+    } catch(e) {
+        results.innerHTML = '<p class="text-center text-gray-500">تعذَّر البحث.</p>';
     }
-    results.innerHTML = filtered.map(item => `
-        <a href="${item.path}" class="block p-3 mb-2 rounded-xl hover:bg-orange-50 dark:hover:bg-gray-700 transition-colors text-right">
-            <div class="font-semibold text-gray-800 dark:text-white">${item.title}</div>
-            <div class="text-sm text-gray-500">${item.description}</div>
-        </a>
-    `).join('');
 }
 
 document.getElementById('searchButton').addEventListener('click', openSearch);
@@ -1225,14 +1346,96 @@ document.addEventListener('keydown', (e) => {
 
     </script>
 
-<div id="searchModal" class="fixed inset-0 z-50 hidden">
-    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="closeSearch()"></div>
-    <div class="relative top-20 mx-auto max-w-xl bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden">
-        <div class="p-4 border-b border-gray-200 dark:border-gray-700">
-            <input type="text" id="searchInput" placeholder="ابحث في الموقع..." class="w-full px-4 py-3 text-right bg-gray-100 dark:bg-gray-700 rounded-xl outline-none focus:ring-2 focus:ring-orange-500" dir="rtl" oninput="handleSearch(this.value)">
+<style>
+#searchModal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+#searchModal.hidden { display: none; }
+.search-panel {
+    position: relative;
+    width: 90%;
+    max-width: 640px;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(251, 146, 60, 0.3);
+    border-radius: 1.25rem;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.20), 0 4px 20px rgba(234,88,12,0.10);
+    overflow: hidden;
+    animation: search-pop 0.2s ease;
+}
+@keyframes search-pop {
+    from { opacity: 0; transform: scale(0.96) translateY(-10px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+body.dark .search-panel {
+    background: rgba(17, 24, 39, 0.97);
+    border-color: rgba(255,255,255,0.1);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.55);
+}
+.search-panel-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.85rem 1.25rem;
+    border-bottom: 1px solid rgba(251,146,60,0.15);
+    direction: rtl;
+}
+body.dark .search-panel-header { border-bottom-color: rgba(255,255,255,0.08); }
+.search-panel-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: 1rem;
+    color: #1f2937;
+    text-align: right;
+}
+body.dark .search-panel-input { color: #f3f4f6; }
+.search-panel-input::placeholder { color: #9ca3af; }
+.search-close-btn {
+    display: flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px;
+    border: none; border-radius: 0.5rem;
+    background: transparent; color: #9ca3af;
+    cursor: pointer; transition: all 0.2s; flex-shrink: 0;
+}
+.search-close-btn:hover { background: rgba(234,88,12,0.1); color: #ea580c; }
+body.dark .search-close-btn:hover { background: rgba(255,255,255,0.1); color: #fbbf24; }
+.search-panel-results {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding: 0.75rem;
+    direction: rtl;
+}
+.search-panel-results a { display: block; padding: 0.65rem 0.9rem; margin-bottom: 0.35rem; border-radius: 0.875rem; text-decoration: none; transition: background 0.15s; }
+.search-panel-results a:hover { background: rgba(251,146,60,0.09); }
+body.dark .search-panel-results a:hover { background: rgba(255,255,255,0.07); }
+@media (max-width: 768px) {
+    .search-panel { width: 95%; }
+    .search-panel-results { max-height: 55vh; }
+    .search-panel-input { font-size: 0.95rem; }
+}
+</style>
+
+<div id="searchModal" class="fixed inset-0 z-[999] hidden">
+    <div class="absolute inset-0" onclick="closeSearch()"></div>
+    <div class="search-panel">
+        <div class="search-panel-header">
+            <svg class="w-5 h-5 text-orange-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <input type="text" id="searchInput" placeholder="ابحث في الموقع..." class="search-panel-input" dir="rtl" oninput="handleSearch(this.value)">
+            <button onclick="closeSearch()" class="search-close-btn" aria-label="إغلاق">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
         </div>
-        <div id="searchResults" class="max-h-80 overflow-y-auto p-4">
-            <p class="text-center text-gray-500">اكتب للبحث...</p>
+        <div id="searchResults" class="search-panel-results">
+            <p class="text-center text-gray-500 py-4">اكتب للبحث...</p>
         </div>
     </div>
 </div>
@@ -1246,18 +1449,22 @@ document.addEventListener('keydown', (e) => {
   max-width: 680px;
   width: 100%;
   box-sizing: border-box;
-  background: linear-gradient(135deg, rgba(255,237,213,0.5), rgba(253,230,138,0.5));
+  background: linear-gradient(135deg, rgba(255,237,213,0.92), rgba(253,230,138,0.88));
   border: 1px solid #fed7aa;
   box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
   color: #1f2937;
 }
+@supports not (backdrop-filter: blur(1px)) {
+  .glass-premium-box { background: #fff3e0; }
+}
 body.dark .glass-premium-box {
-  background: rgba(18,18,22,0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: #0d1117;
   border: 1px solid rgba(255,255,255,0.12);
   box-shadow: 0 20px 40px -10px rgba(0,0,0,0.4);
   color: #f3f4f6;
+}
+@supports not (backdrop-filter: blur(1px)) {
+  body.dark .glass-premium-box { background: #0d1117; }
 }
 .poetry-table {
   width: 100%;
@@ -1294,18 +1501,22 @@ body.dark .shatr.first {
   max-width: 400px;
   width: 100%;
   box-sizing: border-box;
-  background: linear-gradient(135deg, rgba(255,237,213,0.5), rgba(253,230,138,0.5));
+  background: linear-gradient(135deg, rgba(255,237,213,0.92), rgba(253,230,138,0.88));
   border: 1px solid #fed7aa;
   box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
   color: #1f2937;
 }
+@supports not (backdrop-filter: blur(1px)) {
+  .glass-rajaz-box { background: #fff3e0; }
+}
 body.dark .glass-rajaz-box {
-  background: rgba(18,18,22,0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: #0d1117;
   border: 1px solid rgba(255,255,255,0.12);
   box-shadow: 0 20px 40px -10px rgba(0,0,0,0.4);
   color: #f3f4f6;
+}
+@supports not (backdrop-filter: blur(1px)) {
+  body.dark .glass-rajaz-box { background: #0d1117; }
 }
 .rajaz-table {
   width: 100%;
@@ -1391,29 +1602,6 @@ function getAllInsertPositions(tokens) {
   return positions;
 }
 
-function getBestInsertPos(tokens, font, ctx) {
-  const positions = getAllInsertPositions(tokens);
-  if (!positions.length) return -1;
-  // نقيس عرض كل فجوة ونختار الأوسع
-  // الفجوة = المسافة بين موضعين متتاليين في الكلمة
-  // نضيف حدود وهمية للبداية والنهاية
-  const boundaries = [0, ...positions, tokens.length];
-  let bestPos = positions[0];
-  let bestWidth = -1;
-  for (let i = 0; i < positions.length; i++) {
-    const start = boundaries[i];
-    const end = boundaries[i + 2] ?? tokens.length;
-    const segTokens = tokens.slice(start, end);
-    const segText = tokensToString(segTokens);
-    const w = ctx.measureText(segText).width;
-    if (w > bestWidth) {
-      bestWidth = w;
-      bestPos = positions[i];
-    }
-  }
-  return bestPos;
-}
-
 function measureText(text, font) {
   const c = measureText._canvas || (measureText._canvas = document.createElement('canvas'));
   const ctx = c.getContext('2d');
@@ -1428,35 +1616,81 @@ function getCtx(font) {
   return ctx;
 }
 
+// تبني الكلمة من نقاط الإدراج وعدد الوصلات لكل موضع
+function buildWordFromSlots(tokens, slots) {
+  // slots: Map من موضع => عدد وصلات
+  // نبني من اليمين إلى اليسار (ترتيب tokens)
+  const result = [];
+  for (let i = 0; i < tokens.length; i++) {
+    result.push(tokens[i]);
+    const count = slots.get(i + 1) || 0;
+    for (let k = 0; k < count; k++) result.push({ base: 'ـ', marks: '' });
+  }
+  return result;
+}
+
+// توزّع n وصلة على positions بشكل دوري (round-robin) فتكون موزّعة بالتساوي
+function distributeEvenly(positions, n) {
+  const slots = new Map();
+  if (!positions.length || n <= 0) return slots;
+  for (let k = 0; k < n; k++) {
+    const pos = positions[k % positions.length];
+    slots.set(pos, (slots.get(pos) || 0) + 1);
+  }
+  return slots;
+}
+
 function stretchCell(cell, font) {
   const available = cell.clientWidth
     - parseFloat(getComputedStyle(cell).paddingLeft)
     - parseFloat(getComputedStyle(cell).paddingRight);
+  // إذا كانت الخلية غير مرئية بعد (الجوال يؤخر الرسم) نتجاهلها
+  if (available <= 10) return;
   if (!cell.dataset.original) cell.dataset.original = cell.textContent.trim();
   const originalWords = cell.dataset.original.split(/\s+/);
-  const words = originalWords.map(w => ({ tokens: tokenize(w), tatweels: 0 }));
   const ctx = getCtx(font);
-  for (let round = 0; round < 80; round++) {
-    const currentText = words.map(w => tokensToString(w.tokens)).join(' ');
-    const gap = available - ctx.measureText(currentText).width;
-    if (gap <= 0.5) break;
-const candidates = words
-  .map((w, i) => ({
-    i,
-    pos: getBestInsertPos(w.tokens, font, ctx),
-    tatweels: w.tatweels,
-    len: w.tokens.length,
-    orig: originalWords[i].replace(/[\u064B-\u065F\u0670]/g, ''),
-    ratio: w.tatweels / Math.max(w.tokens.length, 1)
-  }))
-  .filter(c => c.pos !== -1 && ![...FORBIDDEN_WORDS].some(fw => c.orig.includes(fw)))
-  .sort((a, b) => a.ratio - b.ratio || b.len - a.len);
-    if (!candidates.length) break;
-    const best = candidates[0];
-    words[best.i].tokens.splice(best.pos, 0, { base: 'ـ', marks: '' });
-    words[best.i].tatweels++;
+
+  // نجمع الكلمات القابلة للمدّ مع مواضعها
+  const wordData = originalWords.map(w => {
+    const orig = w.replace(/[\u064B-\u065F\u0670]/g, '');
+    const forbidden = [...FORBIDDEN_WORDS].some(fw => orig.includes(fw));
+    const tokens = tokenize(w);
+    const positions = forbidden ? [] : getAllInsertPositions(tokens);
+    return { tokens, positions, forbidden, baseWidth: ctx.measureText(tokensToString(tokens)).width };
+  });
+
+  // العرض الحالي بدون أي وصلات
+  const tatweelWidth = ctx.measureText('ـ').width;
+  const spaceWidth = ctx.measureText(' ').width;
+  const baseTotal = wordData.reduce((s, w) => s + w.baseWidth, 0)
+    + spaceWidth * Math.max(0, wordData.length - 1);
+
+  const totalGap = available - baseTotal;
+  if (totalGap <= 0.5) {
+    cell.textContent = originalWords.join(' ');
+    return;
   }
-  cell.textContent = words.map(w => tokensToString(w.tokens)).join(' ');
+
+  // إجمالي المواضع الصالحة في الشطر كله
+  const totalSlots = wordData.reduce((s, w) => s + w.positions.length, 0);
+  if (totalSlots === 0) {
+    cell.textContent = originalWords.join(' ');
+    return;
+  }
+
+  // عدد الوصلات الإجمالي المطلوب
+  const totalTatweels = Math.floor(totalGap / tatweelWidth);
+
+  // نوزّع الوصلات على الكلمات بنسبة عدد مواضعها (كلمة بمواضع أكثر تأخذ وصلات أكثر)
+  // ثم داخل كل كلمة توزّع بالتساوي على مواضعها
+  const result = wordData.map(w => {
+    if (!w.positions.length) return tokensToString(w.tokens);
+    const share = Math.round(totalTatweels * w.positions.length / totalSlots);
+    const slots = distributeEvenly(w.positions, share);
+    return tokensToString(buildWordFromSlots(w.tokens, slots));
+  });
+
+  cell.textContent = result.join(' ');
 }
 
 function stretchAll() {
@@ -1485,14 +1719,28 @@ function stretchAll() {
 function initStretch() {
   function run() {
     stretchAll();
-    // تأكيد إضافي بعد 500ms و1000ms للجوال
-    setTimeout(stretchAll, 500);
-    setTimeout(stretchAll, 1000);
+    // محاولات متكررة للجوال الذي يؤخر رسم العناصر
+    setTimeout(stretchAll, 300);
+    setTimeout(stretchAll, 700);
+    setTimeout(stretchAll, 1500);
+    setTimeout(stretchAll, 3000);
   }
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(run);
   } else {
     setTimeout(run, 300);
+  }
+  // ResizeObserver: يُعيد الحساب عند تغيير حجم أي جدول (موثوق على الجوال)
+  if (window.ResizeObserver) {
+    const ro = new ResizeObserver(() => stretchAll());
+    document.querySelectorAll('.glass-premium-box, .glass-rajaz-box').forEach(el => ro.observe(el));
+    // نراقب أيضًا الجداول التي ستُضاف لاحقًا
+    const mo = new MutationObserver(() => {
+      document.querySelectorAll('.glass-premium-box, .glass-rajaz-box').forEach(el => {
+        if (!el._roObserved) { ro.observe(el); el._roObserved = true; }
+      });
+    });
+    mo.observe(document.body, { childList: true, subtree: true });
   }
 }
 
@@ -1575,133 +1823,89 @@ body.dark .box-question {
  
 /* ===== صندوق المعلومة المؤكدة (أخضر) ===== */
 .box-confirmed {
-  margin: 2rem auto;
-  padding: 1.25rem 1.5rem;
-  border-radius: 1rem;
-  background: linear-gradient(135deg, rgba(209,250,229,0.5), rgba(167,243,208,0.4));
-  border: 1px solid #6ee7b7;
-  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.07);
-  color: #1f2937;
-  display: flex;
-  gap: 0.75rem;
-  align-items: flex-start;
-  direction: rtl;
+  margin: 2rem auto; padding: 1.25rem 1.5rem; border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(209,250,229,0.92), rgba(167,243,208,0.88));
+  border: 1px solid #6ee7b7; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.07);
+  color: #1f2937; display: flex; gap: 0.75rem; align-items: flex-start; direction: rtl;
 }
+@supports not (backdrop-filter: blur(1px)) { .box-confirmed { background: #d1fae5; } }
 body.dark .box-confirmed {
-  background: rgba(6,78,59,0.35);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(110,231,183,0.25);
-  color: #f3f4f6;
+  background: rgba(6,78,59,0.92); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border: 1px solid rgba(110,231,183,0.25); color: #f3f4f6;
 }
+@supports not (backdrop-filter: blur(1px)) { body.dark .box-confirmed { background: #064e3b; } }
  
 /* ===== صندوق التنبيه (أصفر) ===== */
 .box-warning {
-  margin: 2rem auto;
-  padding: 1.25rem 1.5rem;
-  border-radius: 1rem;
-  background: linear-gradient(135deg, rgba(254,249,195,0.6), rgba(253,230,138,0.4));
-  border: 1px solid #fde047;
-  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.07);
-  color: #1f2937;
-  display: flex;
-  gap: 0.75rem;
-  align-items: flex-start;
-  direction: rtl;
+  margin: 2rem auto; padding: 1.25rem 1.5rem; border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(254,249,195,0.92), rgba(253,230,138,0.88));
+  border: 1px solid #fde047; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.07);
+  color: #1f2937; display: flex; gap: 0.75rem; align-items: flex-start; direction: rtl;
 }
+@supports not (backdrop-filter: blur(1px)) { .box-warning { background: #fef9c3; } }
 body.dark .box-warning {
-  background: rgba(78,63,6,0.4);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(253,224,71,0.25);
-  color: #f3f4f6;
+  background: rgba(78,63,6,0.92); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border: 1px solid rgba(253,224,71,0.25); color: #f3f4f6;
 }
+@supports not (backdrop-filter: blur(1px)) { body.dark .box-warning { background: #4e3f06; } }
  
 /* ===== صندوق الخطأ / التحذير (أحمر) ===== */
 .box-error {
-  margin: 2rem auto;
-  padding: 1.25rem 1.5rem;
-  border-radius: 1rem;
-  background: linear-gradient(135deg, rgba(254,226,226,0.5), rgba(252,165,165,0.3));
-  border: 1px solid #fca5a5;
-  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.07);
-  color: #1f2937;
-  display: flex;
-  gap: 0.75rem;
-  align-items: flex-start;
-  direction: rtl;
+  margin: 2rem auto; padding: 1.25rem 1.5rem; border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(254,226,226,0.92), rgba(252,165,165,0.88));
+  border: 1px solid #fca5a5; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.07);
+  color: #1f2937; display: flex; gap: 0.75rem; align-items: flex-start; direction: rtl;
 }
+@supports not (backdrop-filter: blur(1px)) { .box-error { background: #fee2e2; } }
 body.dark .box-error {
-  background: rgba(127,29,29,0.35);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(252,165,165,0.25);
-  color: #f3f4f6;
+  background: rgba(127,29,29,0.92); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border: 1px solid rgba(252,165,165,0.25); color: #f3f4f6;
 }
+@supports not (backdrop-filter: blur(1px)) { body.dark .box-error { background: #7f1d1d; } }
  
 /* ===== صندوق الفائدة / النكتة (أزرق) ===== */
 .box-info {
-  margin: 2rem auto;
-  padding: 1.25rem 1.5rem;
-  border-radius: 1rem;
-  background: linear-gradient(135deg, rgba(219,234,254,0.5), rgba(191,219,254,0.4));
-  border: 1px solid #93c5fd;
-  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.07);
-  color: #1f2937;
-  display: flex;
-  gap: 0.75rem;
-  align-items: flex-start;
-  direction: rtl;
+  margin: 2rem auto; padding: 1.25rem 1.5rem; border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(219,234,254,0.92), rgba(191,219,254,0.88));
+  border: 1px solid #93c5fd; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.07);
+  color: #1f2937; display: flex; gap: 0.75rem; align-items: flex-start; direction: rtl;
 }
+@supports not (backdrop-filter: blur(1px)) { .box-info { background: #dbeafe; } }
 body.dark .box-info {
-  background: rgba(23,37,84,0.45);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(147,197,253,0.25);
-  color: #f3f4f6;
+  background: rgba(23,37,84,0.92); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border: 1px solid rgba(147,197,253,0.25); color: #f3f4f6;
 }
+@supports not (backdrop-filter: blur(1px)) { body.dark .box-info { background: #172554; } }
  
 /* ===== صندوق الاقتباس / الشاهد (بنفسجي) ===== */
 .box-quote {
-  margin: 2rem auto;
-  padding: 1.25rem 1.5rem;
-  border-radius: 1rem;
-  background: linear-gradient(135deg, rgba(237,233,254,0.5), rgba(221,214,254,0.4));
-  border: 1px solid #c4b5fd;
-  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.07);
-  color: #1f2937;
-  display: flex;
-  gap: 0.75rem;
-  align-items: flex-start;
-  direction: rtl;
-  font-style: italic;
+  margin: 2rem auto; padding: 1.25rem 1.5rem; border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(237,233,254,0.92), rgba(221,214,254,0.88));
+  border: 1px solid #c4b5fd; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.07);
+  color: #1f2937; display: flex; gap: 0.75rem; align-items: flex-start; direction: rtl; font-style: italic;
 }
+@supports not (backdrop-filter: blur(1px)) { .box-quote { background: #ede9fe; } }
 body.dark .box-quote {
-  background: rgba(46,16,101,0.35);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(196,181,253,0.25);
-  color: #f3f4f6;
+  background: rgba(46,16,101,0.92); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border: 1px solid rgba(196,181,253,0.25); color: #f3f4f6;
 }
+@supports not (backdrop-filter: blur(1px)) { body.dark .box-quote { background: #2e1065; } }
  
 /* ===== صندوق القاعدة / الضابط (رمادي فخم) ===== */
 .box-rule {
-  margin: 2rem auto;
-  padding: 1.25rem 1.5rem;
-  border-radius: 1rem;
-  background: linear-gradient(135deg, rgba(243,244,246,0.7), rgba(229,231,235,0.5));
-  border-right: 4px solid #f97316;
-  border-top: 1px solid #e5e7eb;
-  border-bottom: 1px solid #e5e7eb;
-  border-left: 1px solid #e5e7eb;
-  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.07);
-  color: #1f2937;
-  direction: rtl;
+  margin: 2rem auto; padding: 1.25rem 1.5rem; border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(243,244,246,0.95), rgba(229,231,235,0.92));
+  border-right: 4px solid #f97316; border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb; border-left: 1px solid #e5e7eb;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.07); color: #1f2937; direction: rtl;
 }
+@supports not (backdrop-filter: blur(1px)) { .box-rule { background: #f3f4f6; } }
 body.dark .box-rule {
-  background: rgba(31,41,55,0.7);
-  backdrop-filter: blur(12px);
-  border-right: 4px solid #f97316;
-  border-top: 1px solid rgba(255,255,255,0.08);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  border-left: 1px solid rgba(255,255,255,0.08);
-  color: #f3f4f6;
+  background: rgba(31,41,55,0.95); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border-right: 4px solid #f97316; border-top: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08); border-left: 1px solid rgba(255,255,255,0.08); color: #f3f4f6;
 }
+@supports not (backdrop-filter: blur(1px)) { body.dark .box-rule { background: #1f2937; } }
 .box-rule .box-rule-title {
   font-weight: 800;
   font-size: 1rem;

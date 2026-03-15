@@ -1,6 +1,6 @@
 base_url = "https://i-o-i-u.github.io"
 title = "سيف العشيرة"
-description = "مدونة تقنية فاخرة"
+description = "مدونة شخصية في اللغة والأدب"
 default_language = "ar"
 
 compile_sass = true

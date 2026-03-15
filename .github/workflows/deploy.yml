@@ -29,7 +29,10 @@ jobs:
         env:
           PAGES_BRANCH: gh-pages
           BUILD_ONLY: true
-      
+
+      - name: Index with Pagefind
+        run: npx -y pagefind --site public
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

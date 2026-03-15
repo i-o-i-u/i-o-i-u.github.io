@@ -68,7 +68,7 @@
             {% endif %}
         </div>
 
-        <div id="articleContent" class="prose prose-orange max-w-none text-justify leading-relaxed text-gray-700 dark:text-white text-base md:text-lg lg:text-xl">
+        <div id="articleContent" class="prose prose-orange max-w-none text-justify leading-relaxed text-gray-700 dark:text-white text-base md:text-lg lg:text-xl" data-pagefind-body>
             {{ page.content | safe }}
         </div>
 
@@ -502,10 +502,10 @@ body.dark .empty-comments { background:rgba(31,41,55,0.4); color:#6b7280; }
 // ====================================================
 // الإعدادات — عدّل ما تشاء هنا
 // ====================================================
-const SUPABASE_URL = 'https://eoccraiykkgefxgnoqvb.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_1xUC_60erYhjnL3u294qVg_UZ7rBXto';
-const ADMIN_SECRET = 'admin2025';
-const ADMIN_NAME   = 'سيف العشيرة';
+const SUPABASE_URL  = 'https://eoccraiykkgefxgnoqvb.supabase.co';
+const SUPABASE_KEY  = 'sb_publishable_1xUC_60erYhjnL3u294qVg_UZ7rBXto';
+const ADMIN_HASH    = 'e8cde359ae5242c5022ba199a0aebbb351bc154acdd79449ee6e71520861ae20';
+const ADMIN_NAME    = 'سيف العشيرة';
 const ADMIN_BADGE  = 'صاحب الصفحة';
 const ANONYMOUS    = 'مجهول';
 const PAGE_SLUG    = window.location.pathname.replace(/\//g,'_').replace(/^_|_$/g,'') || 'home';
@@ -547,14 +547,33 @@ function getMyUid() {
 const MY_UID = getMyUid();
 
 let isAdmin = false;
-const urlParams = new URLSearchParams(window.location.search);
-if (urlParams.get('admin') === ADMIN_SECRET) { isAdmin = true; sessionStorage.setItem('is_admin','1'); }
-if (sessionStorage.getItem('is_admin') === '1') isAdmin = true;
 
-if (isAdmin) {
-    const ni = document.getElementById('authorName');
-    if (ni) { ni.value = ADMIN_NAME; ni.readOnly = true; ni.style.opacity = '0.75'; }
+async function sha256(text) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
 }
+
+async function initAdmin() {
+    if (sessionStorage.getItem('is_admin') === '1') {
+        isAdmin = true;
+    } else {
+        const param = new URLSearchParams(window.location.search).get('admin');
+        if (param && await sha256(param) === ADMIN_HASH) {
+            isAdmin = true;
+            sessionStorage.setItem('is_admin', '1');
+            // نحذف كلمة السر من شريط العنوان دون تحديث الصفحة
+            const clean = window.location.pathname + window.location.hash;
+            history.replaceState(null, '', clean);
+        }
+    }
+    if (isAdmin) {
+        const ni = document.getElementById('authorName');
+        if (ni) { ni.value = ADMIN_NAME; ni.readOnly = true; ni.style.opacity = '0.75'; }
+    }
+    loadComments();
+}
+
+initAdmin();
 
 async function sbFetch(path, opts = {}) {
     const headers = {
@@ -808,8 +827,6 @@ let relative = '';
 
     return relative ? `${fullDate} &nbsp;·&nbsp; ${relative}` : fullDate;
 }
-
-loadComments();
 </script>
 
 <script>

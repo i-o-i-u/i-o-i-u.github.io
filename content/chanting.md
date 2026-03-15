@@ -39,7 +39,7 @@ slug = "chanting"
        rel="noopener noreferrer" 
        class="flex items-center gap-3 p-4 rounded-xl bg-orange-50 dark:bg-orange-900/20 hover:bg-orange-100 dark:hover:bg-orange-900/30 border-2 border-orange-200 dark:border-orange-800 hover:border-orange-400 dark:hover:border-orange-600 transition-all duration-300 group">
       <span class="text-orange-600 dark:text-orange-400 font-bold text-lg">1-</span>
-      <span class="flex-1 text-lg">إنا لجهال من الجهال</span>
+      <span class="flex-1 text-lg">«إنَّا لَجُهَّالٌ مِن الجُهَّالِ»</span>
       <svg class="w-5 h-5 text-gray-400 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
       </svg>
@@ -51,7 +51,7 @@ slug = "chanting"
        rel="noopener noreferrer" 
        class="flex items-center gap-3 p-4 rounded-xl bg-orange-50 dark:bg-orange-900/20 hover:bg-orange-100 dark:hover:bg-orange-900/30 border-2 border-orange-200 dark:border-orange-800 hover:border-orange-400 dark:hover:border-orange-600 transition-all duration-300 group">
       <span class="text-orange-600 dark:text-orange-400 font-bold text-lg">2-</span>
-      <span class="flex-1 text-lg">قالت سليمى لست بالحادي المدل</span>
+      <span class="flex-1 text-lg">«قالَت سُلَيمى لستَ بالحادي المُدِلْ»</span>
       <svg class="w-5 h-5 text-gray-400 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
       </svg>
@@ -63,7 +63,7 @@ slug = "chanting"
        rel="noopener noreferrer" 
        class="flex items-center gap-3 p-4 rounded-xl bg-orange-50 dark:bg-orange-900/20 hover:bg-orange-100 dark:hover:bg-orange-900/30 border-2 border-orange-200 dark:border-orange-800 hover:border-orange-400 dark:hover:border-orange-600 transition-all duration-300 group">
       <span class="text-orange-600 dark:text-orange-400 font-bold text-lg">3-</span>
-      <span class="flex-1 text-lg">قل للقوافل والغَزِيِّ إذا غَزَوْا</span>
+      <span class="flex-1 text-lg">«قُل للقوافل والغَزِيِّ إذا غَزَوْا»</span>
       <svg class="w-5 h-5 text-gray-400 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
       </svg>
@@ -75,7 +75,7 @@ slug = "chanting"
        rel="noopener noreferrer" 
        class="flex items-center gap-3 p-4 rounded-xl bg-orange-50 dark:bg-orange-900/20 hover:bg-orange-100 dark:hover:bg-orange-900/30 border-2 border-orange-200 dark:border-orange-800 hover:border-orange-400 dark:hover:border-orange-600 transition-all duration-300 group">
       <span class="text-orange-600 dark:text-orange-400 font-bold text-lg">4-</span>
-      <span class="flex-1 text-lg">أبا نِزارٍ تفسد القوم النعم</span>
+      <span class="flex-1 text-lg">«أبا نِزارٍ تُفْسِدُ القومَ النِّعَمْ»</span>
       <svg class="w-5 h-5 text-gray-400 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
       </svg>
@@ -87,7 +87,7 @@ slug = "chanting"
        rel="noopener noreferrer" 
        class="flex items-center gap-3 p-4 rounded-xl bg-orange-50 dark:bg-orange-900/20 hover:bg-orange-100 dark:hover:bg-orange-900/30 border-2 border-orange-200 dark:border-orange-800 hover:border-orange-400 dark:hover:border-orange-600 transition-all duration-300 group">
       <span class="text-orange-600 dark:text-orange-400 font-bold text-lg">5-</span>
-      <span class="flex-1 text-lg">إني امرؤ أصفي الخليل الخله</span>
+      <span class="flex-1 text-lg">«إنِّي امْرؤٌ أُصْفِي الخليلَ الخُلَّهْ»</span>
       <svg class="w-5 h-5 text-gray-400 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
       </svg>
