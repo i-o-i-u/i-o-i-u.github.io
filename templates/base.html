@@ -1521,6 +1521,7 @@ document.addEventListener('keydown', (e) => {
     width: 90%;
     max-width: 640px;
     max-height: calc(100vh - 145px);
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     background: rgba(255, 255, 255, 0.97);
@@ -1673,8 +1674,8 @@ body.dark .search-result-excerpt { color: #d1d5db; }
 }
 body.dark .search-result-excerpt mark { background: rgba(251,191,36,0.25); }
 @media (max-width: 768px) {
-    #searchModal { padding-top: 130px; }
-    .search-panel { width: 95%; max-height: calc(100vh - 150px); }
+    #searchModal { padding-top: 130px; padding-left: 12px; padding-right: 12px; box-sizing: border-box; }
+    .search-panel { width: 100%; max-width: min(580px, calc(100vw - 24px)); max-height: calc(100vh - 150px); }
     .search-panel-input { font-size: 0.95rem; }
 }
 </style>

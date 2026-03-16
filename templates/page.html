@@ -424,18 +424,52 @@ body.dark .comment-hidden { border-color:rgba(107,114,128,0.25)!important; }
 
 .comment-meta { display:flex; align-items:center; gap:0.5rem; margin-bottom:0.65rem; flex-wrap:wrap; }
 .comment-avatar {
-    width:34px; height:34px; border-radius:50%;
-    background:linear-gradient(135deg,#fed7aa,#ea580c);
+    width:46px; height:46px; border-radius:50%;
+    background: linear-gradient(135deg, #fed7aa, #fdba74);
     display:flex; align-items:center; justify-content:center;
-    font-weight:800; font-size:0.85rem; color:white;
-    flex-shrink:0; box-shadow:0 2px 8px rgba(234,88,12,0.3);
+    font-weight:800; font-size:1rem; color:#ea580c;
+    flex-shrink:0; box-shadow:0 2px 8px rgba(234,88,12,0.2);
 }
-.comment-avatar.admin-av { background:linear-gradient(135deg,#f59e0b,#ea580c); box-shadow:0 2px 8px rgba(234,88,12,0.5); }
+body.dark .comment-avatar {
+    background: linear-gradient(135deg, rgba(75,85,99,0.8), rgba(55,65,81,0.7));
+    color: #fbbf24;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.comment-avatar.admin-av {
+    padding: 0;
+}
+body.dark .comment-avatar.admin-av {
+    padding: 0;
+}
+.comment-avatar.admin-av img {
+    width: 100%; height: 100%; object-fit: contain;
+}
+body.dark .comment-avatar.admin-av img {
+    filter: brightness(0) invert(1);
+}
 .comment-author { font-weight:700; font-size:0.92rem; color:#1a1a1a; }
 body.dark .comment-author { color:#f3f4f6; }
 .comment-uid { font-size:0.7rem; color:#ea580c; background:rgba(234,88,12,0.1); padding:0.1rem 0.45rem; border-radius:999px; border:1px solid rgba(234,88,12,0.2); flex-shrink:0; font-weight:600; }
 body.dark .comment-uid { background:rgba(234,88,12,0.15); border-color:rgba(234,88,12,0.25); }
-.owner-badge { font-size:0.68rem; font-weight:800; background:linear-gradient(135deg,#f59e0b,#ea580c); color:white; padding:0.15rem 0.55rem; border-radius:999px; flex-shrink:0; box-shadow:0 2px 6px rgba(234,88,12,0.3); }
+.owner-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.22rem 0.65rem 0.22rem 0.5rem;
+    border-radius: 0.55rem;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #fed7aa, #fdba74);
+    color: #ea580c;
+    box-shadow: 0 2px 6px rgba(234,88,12,0.18);
+    border: none;
+}
+body.dark .owner-badge {
+    background: linear-gradient(135deg, rgba(75,85,99,0.8), rgba(55,65,81,0.7));
+    color: #fbbf24;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
 .comment-time { font-size:0.73rem; color:#b0a090; margin-right:auto; }
 body.dark .comment-time { color:#6b7280; }
 .comment-body { font-size:0.93rem; color:#374151; line-height:1.8; margin-bottom:0.65rem; word-break:break-word; }
@@ -540,8 +574,8 @@ const TXT = {
 // ====================================================
 
 function getMyUid() {
-    let uid = sessionStorage.getItem('comment_uid');
-    if (!uid) { uid = Math.random().toString(36).substr(2,4); sessionStorage.setItem('comment_uid', uid); }
+    let uid = localStorage.getItem('comment_uid');
+    if (!uid) { uid = Math.random().toString(36).substr(2,4); localStorage.setItem('comment_uid', uid); }
     return uid;
 }
 const MY_UID = getMyUid();
@@ -624,7 +658,7 @@ function buildCard(c, allReplies, isReply) {
 
     const initial = (c.author_name || ANONYMOUS)[0];
     const timeStr = relativeTime(c.created_at);
-    const badgeHtml  = isOwner ? `<span class="owner-badge">⭐ ${ADMIN_BADGE}</span>` : '';
+    const badgeHtml  = isOwner ? `<span class="owner-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;opacity:0.9"><path d="M5 16L3 6l5.5 4.5L12 3l3.5 7.5L21 6l-2 10H5zm0 2h14v2H5v-2z"/></svg>${ADMIN_BADGE}</span>` : '';
     const uidHtml    = !isOwner ? `<span class="comment-uid">#${c.author_uid}</span>` : '';
     const avClass    = isOwner ? 'comment-avatar admin-av' : 'comment-avatar';
     const hiddenLbl  = c.is_hidden ? `<div class="comment-hidden-label"><svg width="11" height="11" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/></svg> مخفي عن الزوار</div>` : '';
@@ -635,9 +669,13 @@ function buildCard(c, allReplies, isReply) {
     const icoShow   = `<svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>`;
     const icoDelete = `<svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>`;
 
+    const avContent = isOwner
+        ? `<img src="/icon.svg" alt="صاحب الموقع">`
+        : initial;
+
     div.innerHTML = `
         <div class="comment-meta">
-            <div class="${avClass}">${initial}</div>
+            <div class="${avClass}">${avContent}</div>
             <span class="comment-author">${escHtml(c.author_name || ANONYMOUS)}</span>
             ${uidHtml}
             ${badgeHtml}
@@ -689,6 +727,7 @@ async function submitReply(commentId) {
     const name = document.getElementById('rn-' + commentId).value.trim();
     const body = document.getElementById('rb-' + commentId).value.trim();
     if (!body) { alert(TXT.replyEmpty); return; }
+    if (!isAdmin && name === ADMIN_NAME) { alert('هذا الاسم محجوز لصاحب الموقع.'); return; }
     try {
         await sbFetch('comments', {
             method: 'POST', headers: { 'Prefer': 'return=representation' },
@@ -767,6 +806,12 @@ document.getElementById('commentForm')?.addEventListener('submit', async functio
     const lbl  = document.getElementById('submitLabel');
     const msg  = document.getElementById('formMsg');
     if (!body) return;
+    if (!isAdmin && name === ADMIN_NAME) {
+        msg.textContent = 'هذا الاسم محجوز لصاحب الموقع.';
+        msg.className = 'form-msg error';
+        setTimeout(() => { msg.className = 'form-msg hidden'; }, 3500);
+        return;
+    }
     btn.disabled = true; lbl.textContent = TXT.sending;
     msg.className = 'form-msg hidden';
     try {
@@ -802,19 +847,21 @@ function relativeTime(iso) {
     const date = new Date(iso);
     const d = Math.floor((Date.now() - date) / 1000);
 
-    const months = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
-    const dayNames = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+    const HIJRI_MONTHS = ['محرم','صفر','ربيع الأول','ربيع الآخر','جمادى الأولى','جمادى الآخرة','رجب','شعبان','رمضان','شوال','ذو القعدة','ذو الحجة'];
+    const WEEKDAYS = {Sunday:'الأحد',Monday:'الاثنين',Tuesday:'الثلاثاء',Wednesday:'الأربعاء',Thursday:'الخميس',Friday:'الجمعة',Saturday:'السبت'};
 
-    const year  = date.getFullYear();
-    const month = date.getMonth();
-    const day   = date.getDate();
-    const dow   = date.getDay();
-const hours24 = date.getHours();
-    const ampm    = hours24 >= 12 ? 'م' : 'ص';
-    const hh      = String(hours24 % 12 || 12).padStart(2,'0');
-    const mm      = String(date.getMinutes()).padStart(2,'0');
+    const toWestern = s => String(s).replace(/[٠-٩]/g, d => d.charCodeAt(0) - 0x0660);
 
-    const fullDate = ` مـ ${year} / ${month+1} (${months[month]}) / ${day} (${dayNames[dow]}) — ${hh}:${mm} ${ampm}`;
+    const p = Object.fromEntries(
+        new Intl.DateTimeFormat('ar-SA-u-ca-islamic-umalqura', {
+            weekday:'long', day:'numeric', month:'numeric', year:'numeric',
+            hour:'2-digit', minute:'2-digit', hour12:true
+        }).formatToParts(date).map(({type,value}) => [type,value])
+    );
+
+    const hMonth   = parseInt(toWestern(p.month));
+    const hAmPm    = date.getHours() < 12 ? 'صباحًا' : 'مساءًا';
+    const fullDate = `${p.year} هـ / ${p.month} (${HIJRI_MONTHS[hMonth-1]}) / ${p.day} (${WEEKDAYS[p.weekday]||p.weekday}) — ${p.hour}:${p.minute} ${hAmPm}`;
 
 let relative = '';
     const mins  = Math.floor(d/60);
