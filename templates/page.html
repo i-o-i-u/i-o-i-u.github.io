@@ -910,7 +910,7 @@ function copyContent() {
       toast.classList.add('show');
       setTimeout(() => toast.classList.remove('show'), 3000);
     }
-  });
+  }).catch(err => console.warn('فشل النسخ:', err));
 }
 function shareContent() {
     const title = document.querySelector('h2.gradient-text').innerText;
@@ -921,7 +921,7 @@ function shareContent() {
         navigator.clipboard.writeText(url).then(() => {
             const toast = document.getElementById('toast');
             if (toast) { toast.textContent = 'نُسِخ الرابط!'; toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'),3000); }
-        });
+        }).catch(err => console.warn('فشل النسخ:', err));
     }
 }
 </script>

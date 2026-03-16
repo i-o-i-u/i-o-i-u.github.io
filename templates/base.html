@@ -715,6 +715,30 @@ body.dark input,
             padding: 0 20px;
         }
 
+        #headerPoetry {
+            transition: opacity 0.4s ease, transform 0.4s ease, filter 0.4s ease;
+        }
+
+        #quickNavLinks {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            flex: none;
+            padding: 0;
+            opacity: 0;
+            visibility: hidden;
+            filter: blur(6px);
+            transition: opacity 0.4s ease, filter 0.4s ease, visibility 0s 0.4s;
+        }
+        #quickNavLinks.nav-visible {
+            opacity: 1;
+            visibility: visible;
+            filter: blur(0px);
+            transition: opacity 0.4s ease, filter 0.4s ease, visibility 0s 0s;
+        }
+
+
         .question-card {
             background: rgba(255, 255, 255, 0.5);
             border: 1px solid rgba(251, 146, 60, 0.1);
@@ -926,14 +950,14 @@ h1, h2, h3, h4, h5, h6 {
     .logo-wrapper {
         width: 80px !important;
         height: 80px !important;
-        order: 3;
+        order: 1;
         margin-left: 15px;
     }
     .nav-controls {
         display: flex;
         align-items: flex-start;
         gap: 6px;
-        order: 1;
+        order: 3;
     }
     .nav-btn-stack {
         display: flex;
@@ -1024,7 +1048,7 @@ h1, h2, h3, h4, h5, h6 {
                     <img src="/logo.svg" alt="شعار سيف العشيرة" class="w-full h-full object-contain" id="navLogo">
                 </a>
 
-<div class="nav-text-container" id="headerPoetry" style="transition: all 0.4s ease; overflow: hidden;">
+<div class="nav-text-container" id="headerPoetry">
     <a href="/saif-clan/" class="block">
         <h1 class="text-lg md:text-xl font-black gradient-text leading-tight">«أنا سَيفُ العشيرة فاعرِفوني * حُميدًا قد تَذَرَّيْتُ السَّناما!»</h1>
     </a>
@@ -1033,15 +1057,15 @@ h1, h2, h3, h4, h5, h6 {
     </a>
 </div>
 
-<div class="nav-text-container" id="quickNavLinks" style="display: none; transition: all 0.4s ease;">
-    <div class="flex items-center justify-center gap-2 md:gap-4 lg:gap-6">
-        {% if page %}<a href="/" class="text-xs md:text-sm lg:text-base text-gray-700 hover:text-orange-600 font-semibold transition-colors whitespace-nowrap quick-nav-link">الصفحة الأُولَى</a>
+<div class="nav-text-container" id="quickNavLinks">
+    <div class="flex items-center justify-center gap-6">
+        {% if page %}<a href="/" class="text-base md:text-lg text-gray-700 hover:text-orange-600 font-semibold transition-colors whitespace-nowrap quick-nav-link">الصفحة الأُولَى</a>
         <span class="text-orange-400/50">|</span>{% endif %}
-        <a href="/chanting/" class="text-xs md:text-sm lg:text-base text-gray-700 hover:text-orange-600 font-semibold transition-colors whitespace-nowrap quick-nav-link">الإنشاد والحُداء</a>
+        <a href="/chanting/" class="text-base md:text-lg text-gray-700 hover:text-orange-600 font-semibold transition-colors whitespace-nowrap quick-nav-link">الإنشاد والحُداء</a>
         <span class="text-orange-400/50">|</span>
-        <a href="/questions/" class="text-xs md:text-sm lg:text-base text-gray-700 hover:text-orange-600 font-semibold transition-colors whitespace-nowrap quick-nav-link">الأسئلة</a>
+        <a href="/questions/" class="text-base md:text-lg text-gray-700 hover:text-orange-600 font-semibold transition-colors whitespace-nowrap quick-nav-link">الأسئلة</a>
         <span class="text-orange-400/50">|</span>
-        <a href="/writings/" class="text-xs md:text-sm lg:text-base text-gray-700 hover:text-orange-600 font-semibold transition-colors whitespace-nowrap quick-nav-link">الكِتابات</a>
+        <a href="/writings/" class="text-base md:text-lg text-gray-700 hover:text-orange-600 font-semibold transition-colors whitespace-nowrap quick-nav-link">الكِتابات</a>
     </div>
 </div>
 
@@ -1293,26 +1317,50 @@ h1, h2, h3, h4, h5, h6 {
 function copyContent() {
             const article = document.getElementById('articleContent');
             if (!article) return;
+            // استعادة النص الأصلي مؤقتًا (بدون وصلات المنسِّق) قبل الاستنساخ
             const saved = [];
             article.querySelectorAll('.shatr, .rajaz-shatr').forEach(cell => {
                 saved.push({ cell, current: cell.textContent });
                 if (cell.dataset.original) cell.textContent = cell.dataset.original;
             });
             const clone = article.cloneNode(true);
-clone.querySelectorAll('style, script, [hidden], .hidden').forEach(el => el.remove());
-const commentsSection = clone.querySelector('#comments-section');
-if (commentsSection) commentsSection.remove();
-const footer = clone.querySelector('.mt-12');
-if (footer) footer.remove();
-const content = clone.innerText.replace(/ـ/g, '').trim();
+            // استعادة العرض الأصلي فورًا
             saved.forEach(({ cell, current }) => { cell.textContent = current; });
+            // إزالة العناصر غير المرغوبة
+            clone.querySelectorAll('style, script, [hidden], .hidden').forEach(el => el.remove());
+            const commentsSection = clone.querySelector('#comments-section');
+            if (commentsSection) commentsSection.remove();
+            const footer = clone.querySelector('.mt-12');
+            if (footer) footer.remove();
+            // تحويل أبيات الشعر العمودي إلى نص نظيف (سطر لكل بيت)
+            clone.querySelectorAll('.glass-premium-box').forEach(box => {
+                const lines = [];
+                box.querySelectorAll('tr').forEach(row => {
+                    const parts = [...row.querySelectorAll('.shatr')].map(c => c.textContent.trim()).filter(Boolean);
+                    if (parts.length === 2) lines.push(parts[0] + '  ' + parts[1]);
+                    else if (parts.length === 1) lines.push(parts[0]);
+                });
+                const p = document.createElement('p');
+                p.textContent = lines.join('\n');
+                box.replaceWith(p);
+            });
+            // تحويل أبيات الرجز إلى نص نظيف
+            clone.querySelectorAll('.glass-rajaz-box').forEach(box => {
+                const lines = [];
+                box.querySelectorAll('.rajaz-shatr').forEach(cell => {
+                    const text = cell.textContent.trim();
+                    if (text) lines.push(text);
+                });
+                const p = document.createElement('p');
+                p.textContent = lines.join('\n');
+                box.replaceWith(p);
+            });
+            const content = clone.innerText.trim();
             navigator.clipboard.writeText(content).then(() => {
                 const toast = document.getElementById('toast');
                 toast.classList.add('show');
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 3000);
-            });
+                setTimeout(() => { toast.classList.remove('show'); }, 3000);
+            }).catch(err => console.warn('فشل النسخ:', err));
         }
 
 window.addEventListener('scroll', function() {
@@ -1320,18 +1368,18 @@ window.addEventListener('scroll', function() {
     const quickNavLinks = document.getElementById('quickNavLinks');
     if (window.scrollY > 50) {
         headerPoetry.style.opacity = '0';
-        headerPoetry.style.maxHeight = '0';
-        headerPoetry.style.display = 'none';
-        quickNavLinks.style.display = 'block';
-        quickNavLinks.style.opacity = '1';
+        headerPoetry.style.transform = 'translateY(-10px)';
+        headerPoetry.style.filter = 'blur(6px)';
+        headerPoetry.style.pointerEvents = 'none';
+        quickNavLinks.classList.add('nav-visible');
     } else {
         headerPoetry.style.opacity = '1';
-        headerPoetry.style.maxHeight = '200px';
-        headerPoetry.style.display = 'block';
-        quickNavLinks.style.display = 'none';
-        quickNavLinks.style.opacity = '0';
+        headerPoetry.style.transform = 'translateY(0)';
+        headerPoetry.style.filter = 'blur(0px)';
+        headerPoetry.style.pointerEvents = 'auto';
+        quickNavLinks.classList.remove('nav-visible');
     }
-});
+}, { passive: true });
 
 // ── فهرس الصفحات ─────────────────────────────────────────
 const SITE_PAGES = [
@@ -1399,7 +1447,7 @@ function _excerpt(q, text, mode, ctx = 90) {
     try { pat = _buildPat(q, mode); } catch { return ''; }
     const m = text.match(pat);
     if (!m) return '';
-    const idx = text.indexOf(m[0]);
+    const idx = m.index;
     const s = Math.max(0, idx - ctx);
     const e = Math.min(text.length, idx + m[0].length + ctx);
     let ex = text.slice(s, e).trim();
@@ -1674,8 +1722,8 @@ body.dark .search-result-excerpt { color: #d1d5db; }
 }
 body.dark .search-result-excerpt mark { background: rgba(251,191,36,0.25); }
 @media (max-width: 768px) {
-    #searchModal { padding-top: 130px; padding-left: 12px; padding-right: 12px; box-sizing: border-box; }
-    .search-panel { width: 100%; max-width: min(580px, calc(100vw - 24px)); max-height: calc(100vh - 150px); }
+    #searchModal { padding-top: 130px; }
+    .search-panel { width: calc(100vw - 24px); max-width: 580px; max-height: calc(100vh - 150px); }
     .search-panel-input { font-size: 0.95rem; }
 }
 </style>
@@ -1802,8 +1850,15 @@ body.dark .glass-rajaz-box {
     padding: 0.75rem;
     margin: 1rem auto;
   }
-  .poetry-table, .rajaz-table {
+  .glass-rajaz-box {
+    padding: 0.5rem 0.6rem;
+    margin: 0.75rem auto;
+  }
+  .poetry-table {
     font-size: 0.72rem;
+  }
+  .rajaz-table {
+    font-size: 0.65rem;
   }
   .shatr {
     white-space: nowrap;
@@ -1815,8 +1870,8 @@ body.dark .glass-rajaz-box {
     border-left: 1px solid rgba(180,130,50,0.25);
   }
   .rajaz-shatr {
-    padding: 0.25rem 0.4rem;
-    line-height: 2;
+    padding: 0.15rem 0.3rem;
+    line-height: 1.85;
     white-space: nowrap;
     overflow: hidden;
   }
@@ -1825,7 +1880,7 @@ body.dark .glass-rajaz-box {
 
 <script>
 const TASHKEEL = /[\u064B-\u065F\u0670]/;
-const NO_CONNECT_AFTER = new Set(['ا','أ','إ','آ','ٱ','و','ؤ','ز','ذ','د','ر','ى','ة']);
+const NO_CONNECT_AFTER = new Set(['ا','أ','إ','آ','ٱ','و','ؤ','ز','ذ','د','ر','ى','ة','ء','ئ']);
 const PUNCT = new Set(['،','؛','؟','!','.',',',':','-','–','—','«','»','"','"','(',')','/']);
 const FORBIDDEN_WORDS = new Set(['الله','اللهم','بالله','تالله','والله','فالله','لله']);
 
@@ -1859,7 +1914,8 @@ function getAllInsertPositions(tokens) {
     if (tokens[i].base === 'ل' && nextBase && 'اأإآٱ'.includes(nextBase)) continue;
     if (canConnectAfter(tokens[i].base)) positions.push(i + 1);
   }
-  return positions;
+  // ترتيب تصاعدي: يبدأ التوزيع من مطلع الكلمة (يمين) فتتوزع الزيادة بالتساوي
+  return positions.sort((a, b) => a - b);
 }
 
 function measureText(text, font) {
@@ -1925,7 +1981,8 @@ function stretchCell(cell, font) {
   const baseTotal = wordData.reduce((s, w) => s + w.baseWidth, 0)
     + spaceWidth * Math.max(0, wordData.length - 1);
 
-  const totalGap = available - baseTotal;
+  // هامش أمان 2% لتجنب فيضان النص بسبب فوارق قياس الخطوط
+  const totalGap = (available - baseTotal) * 0.98;
   if (totalGap <= 0.5) {
     cell.textContent = originalWords.join(' ');
     return;
@@ -1940,13 +1997,23 @@ function stretchCell(cell, font) {
 
   // عدد الوصلات الإجمالي المطلوب
   const totalTatweels = Math.floor(totalGap / tatweelWidth);
+  if (totalTatweels <= 0) {
+    cell.textContent = originalWords.join(' ');
+    return;
+  }
 
-  // نوزّع الوصلات على الكلمات بنسبة عدد مواضعها (كلمة بمواضع أكثر تأخذ وصلات أكثر)
-  // ثم داخل كل كلمة توزّع بالتساوي على مواضعها
-  const result = wordData.map(w => {
+  // توزيع بطريقة "أكبر باقٍ" لضمان أن مجموع الوصلات الموزَّعة = totalTatweels بالضبط
+  const exactShares = wordData.map(w => totalTatweels * w.positions.length / totalSlots);
+  const floors = exactShares.map(v => Math.floor(v));
+  let remainder = totalTatweels - floors.reduce((a, b) => a + b, 0);
+  const order = exactShares
+    .map((v, i) => ({ i, frac: v - floors[i] }))
+    .sort((a, b) => b.frac - a.frac);
+  for (let k = 0; k < remainder; k++) floors[order[k].i]++;
+
+  const result = wordData.map((w, idx) => {
     if (!w.positions.length) return tokensToString(w.tokens);
-    const share = Math.round(totalTatweels * w.positions.length / totalSlots);
-    const slots = distributeEvenly(w.positions, share);
+    const slots = distributeEvenly(w.positions, floors[idx]);
     return tokensToString(buildWordFromSlots(w.tokens, slots));
   });
 
@@ -2001,6 +2068,14 @@ function initStretch() {
       });
     });
     mo.observe(document.body, { childList: true, subtree: true });
+  }
+  // IntersectionObserver: يُشغّل التنسيق حين تدخل مربعات الشعر نطاق الرؤية
+  // يحلّ مشكلة الأبيات التي تكون أسفل الصفحة عند التحميل فتُتجاهل أولاً
+  if (window.IntersectionObserver) {
+    const io = new IntersectionObserver(entries => {
+      if (entries.some(e => e.isIntersecting)) stretchAll();
+    }, { threshold: 0.05 });
+    document.querySelectorAll('.glass-premium-box, .glass-rajaz-box').forEach(el => io.observe(el));
   }
 }
 

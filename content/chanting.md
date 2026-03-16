@@ -19,7 +19,7 @@ slug = "chanting"
     فإن أعجبَك صوتي وإنشادي وحَسُن موقعه منك فالحمدُ لله، وإن لَّا فاقرأ القصيدةَ مكتوبةً -وأنا أرفقها غالبًا في وصف المقطع-، ومن كلام شيخنا أبي عبد الله -وقد أنشدَ قصيدةً ثم ذكر بعض الكلام في الإنشاد-:
   </p>
 
-  <blockquote class="border-r-4 border-orange-400 pr-4 my-6 italic text-gray-600 dark:text-gray-400 bg-orange-50 dark:bg-orange-900/20 p-4 rounded-lg">
+  <blockquote class="border-r-4 border-orange-400 pr-4 my-6 not-italic text-gray-800 dark:text-gray-200 bg-orange-50 dark:bg-orange-900/20 p-4 rounded-lg">
     وتلك نكات في الإنشاد وذَلاقة اللسان وذَرابة المنطق أسردها عليك متى ما أنشدتُّ لأجتنب الملامة والإسقاط، فإما أن يعجبك صوتي وإما أن يعجبك لساني. فإن رجعت منك صفرًا فما ذاك الذي تعوَّدت آنفًا.
   </blockquote>
 
