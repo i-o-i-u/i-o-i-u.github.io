@@ -9,8 +9,7 @@
 </title>
     <link rel="icon" type="image/svg+xml" href="/icon.svg">
     <link rel="shortcut icon" href="/icon.svg">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>tailwind.config = { darkMode: 'class' }</script>
+    <link rel="stylesheet" href="/tailwind.css">
     <style>
         @font-face {
             font-family: 'Kitab';
@@ -640,6 +639,62 @@ body.dark .dark-mode-tooltip {
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.4);
             transition: all 0.5s ease;
+            animation: fadeInUp 0.55s ease both;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(22px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .glass-premium-box,
+        .glass-rajaz-box,
+        .writing-card,
+        .question-card,
+        .box-question,
+        .box-confirmed,
+        .box-warning,
+        .box-error,
+        .box-info,
+        .box-quote,
+        .box-rule {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .glass-premium-box.aos-visible,
+        .glass-rajaz-box.aos-visible,
+        .writing-card.aos-visible,
+        .question-card.aos-visible,
+        .box-question.aos-visible,
+        .box-confirmed.aos-visible,
+        .box-warning.aos-visible,
+        .box-error.aos-visible,
+        .box-info.aos-visible,
+        .box-quote.aos-visible,
+        .box-rule.aos-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .content-section { animation: none; }
+            .glass-premium-box,
+            .glass-rajaz-box,
+            .writing-card,
+            .question-card,
+            .box-question,
+            .box-confirmed,
+            .box-warning,
+            .box-error,
+            .box-info,
+            .box-quote,
+            .box-rule {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
         }
         @supports not (backdrop-filter: blur(1px)) {
             .content-section { background: rgba(255, 255, 255, 0.97); }
@@ -705,8 +760,17 @@ body.dark input,
         }
 
         .pattern {
-            background-image: radial-gradient(#f59e0b 0.5px, transparent 0.5px);
-            background-size: 24px 24px;
+            background-image:
+                radial-gradient(#f59e0b 0.5px, transparent 0.5px),
+                linear-gradient(to bottom right, #fff7ed, #fffbeb, #fefce8);
+            background-size: 24px 24px, 100% 100%;
+        }
+
+        @media (max-width: 768px) {
+            .pattern {
+                background-image: linear-gradient(to bottom right, #fff7ed, #fffbeb, #fefce8);
+                background-size: 100% 100%;
+            }
         }
 
 
@@ -1072,8 +1136,6 @@ h1, h2, h3, h4, h5, h6 {
 
 <div class="nav-text-container" id="quickNavLinks">
     <div class="flex items-center justify-center gap-6">
-        <a href="/" class="text-base md:text-lg text-gray-700 hover:text-orange-600 font-semibold transition-colors whitespace-nowrap quick-nav-link">الصفحة الأُولَى</a>
-        <span class="text-orange-400/50">|</span>
         <a href="/chanting/" class="text-base md:text-lg text-gray-700 hover:text-orange-600 font-semibold transition-colors whitespace-nowrap quick-nav-link">الإنشاد والحُداء</a>
         <span class="text-orange-400/50">|</span>
         <a href="/questions/" class="text-base md:text-lg text-gray-700 hover:text-orange-600 font-semibold transition-colors whitespace-nowrap quick-nav-link">الأسئلة</a>
@@ -1085,7 +1147,7 @@ h1, h2, h3, h4, h5, h6 {
                 
 <div class="nav-controls flex items-center gap-3">
 
-    <button id="searchButton" onclick="openSearch()" class="search-btn p-2 rounded-lg bg-orange-100 hover:bg-orange-200 transition-colors" aria-label="بحث في الموقع">
+    <button id="searchButton" class="search-btn p-2 rounded-lg bg-orange-100 hover:bg-orange-200 transition-colors" aria-label="بحث في الموقع">
         <svg class="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
         <span class="search-btn-tooltip">ابحَثْ في الموقع</span>
     </button>
@@ -2264,6 +2326,7 @@ const SITE_PAGES = [
     { url: '/mathal/', title: 'الأمثال من الشعر', breadcrumb: 'الأسئلة' },
     { url: '/ibn-duraid/', title: 'مقصورة ابن دُرَيد', breadcrumb: 'الأسئلة' },
     { url: '/takharog/', title: 'بيتٌ للتخرُّج', breadcrumb: 'الأسئلة' },
+    { url: '/question-3/', title: 'أشباه ونظائر في النساء', breadcrumb: 'الأسئلة' },
     { url: '/saif-clan/', title: 'أنا سيف العشيرة فاعرفوني', breadcrumb: null },
     { url: '/mufadati/', title: 'عليَّ مُفاضَتي ومعي سِلاحي', breadcrumb: null },
 ];
@@ -2407,13 +2470,18 @@ function openSearch() {
     _prefetchAll();
 }
 
+const SEARCH_HINT = '<p class="search-hint-text">البحثُ المُطابِق يُراعي الهمزات والنقاط والتشكيل إن وُجِد. أما التقريبيُّ فبحثٌ مُقارِبٌ لا يُراعي ذلك. للخروج من نافذة البحث اضغط زرَّ البحث.</p>';
+
 function closeSearch() {
     document.getElementById('searchModal').classList.add('hidden');
     document.getElementById('searchInput').value = '';
-    document.getElementById('searchResults').innerHTML = '<p class="text-center text-gray-500 py-4">اكتب للبحث...</p>';
+    document.getElementById('searchResults').innerHTML = SEARCH_HINT;
 }
 
-document.getElementById('searchButton').addEventListener('click', openSearch);
+document.getElementById('searchButton').addEventListener('click', function() {
+    const modal = document.getElementById('searchModal');
+    modal.classList.contains('hidden') ? openSearch() : closeSearch();
+});
 document.addEventListener('keydown', (e) => {
     if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); openSearch(); }
     if (e.key === 'Escape') closeSearch();
@@ -2467,10 +2535,14 @@ body.dark .search-panel {
     border-bottom: 1px solid rgba(251,146,60,0.15);
     direction: rtl;
     flex-shrink: 0;
+    width: 100%;
+    box-sizing: border-box;
+    min-width: 0;
 }
 body.dark .search-panel-header { border-bottom-color: rgba(255,255,255,0.08); }
 .search-panel-input {
     flex: 1;
+    min-width: 0;
     background: transparent;
     border: none;
     outline: none;
@@ -2484,20 +2556,24 @@ body.dark .search-panel-input { color: #f3f4f6; }
 .search-close-btn {
     display: flex; align-items: center; justify-content: center;
     width: 28px; height: 28px;
+    flex-shrink: 0;
     border: none; border-radius: 0.5rem;
     background: transparent; color: #9ca3af;
-    cursor: pointer; transition: all 0.2s; flex-shrink: 0;
+    cursor: pointer; transition: all 0.2s;
 }
 .search-close-btn:hover { background: rgba(234,88,12,0.1); color: #ea580c; }
 body.dark .search-close-btn:hover { background: rgba(255,255,255,0.1); color: #fbbf24; }
 /* أزرار وضع البحث */
 .search-mode-tabs {
     display: flex;
+    flex-wrap: wrap;
     gap: 6px;
     padding: 8px 14px;
     border-bottom: 1px solid rgba(251,146,60,0.1);
     direction: rtl;
     flex-shrink: 0;
+    width: 100%;
+    box-sizing: border-box;
 }
 body.dark .search-mode-tabs { border-bottom-color: rgba(255,255,255,0.06); }
 .search-mode-btn {
@@ -2511,6 +2587,7 @@ body.dark .search-mode-tabs { border-bottom-color: rgba(255,255,255,0.06); }
     color: #9ca3af;
     transition: all 0.2s;
     font-family: inherit;
+    white-space: nowrap;
 }
 .search-mode-btn:hover { color: #ea580c; border-color: rgba(234,88,12,0.5); }
 .search-mode-active {
@@ -2590,12 +2667,28 @@ body.dark .search-result-excerpt { color: #d1d5db; }
     font-weight: bold;
 }
 body.dark .search-result-excerpt mark { background: rgba(251,191,36,0.25); }
+/* نص تعليمات البحث */
+.search-hint-text {
+    font-size: 0.85rem;
+    color: #6b7280;
+    line-height: 2;
+    direction: rtl;
+    text-align: right;
+    padding: 0.75rem 0.5rem;
+}
+body.dark .search-hint-text { color: #9ca3af; }
+
 @media (max-width: 768px) {
-    #searchModal { padding-top: 130px; }
-    .search-panel { width: calc(100vw - 24px); max-width: 580px; max-height: calc(100vh - 150px); }
-    .search-panel-input { font-size: 0.95rem; }
-    .search-panel-header { padding: 0.7rem 0.9rem; gap: 0.5rem; }
-    .search-mode-tabs { padding: 6px 10px; flex-wrap: wrap; gap: 5px; }
+    #searchModal { padding-top: 100px; align-items: flex-start; }
+    .search-panel {
+        width: calc(100vw - 16px);
+        max-width: none;
+        max-height: calc(100vh - 115px);
+        margin: 0;
+    }
+    .search-panel-input { font-size: 0.92rem; }
+    .search-panel-header { padding: 0.65rem 0.8rem; gap: 0.4rem; }
+    .search-mode-tabs { padding: 6px 10px; gap: 5px; }
     .search-mode-btn { padding: 3px 10px; font-size: 0.78rem; }
     .search-result-count { padding: 3px 4px 6px; }
 }
@@ -2606,7 +2699,7 @@ body.dark .search-result-excerpt mark { background: rgba(251,191,36,0.25); }
     <div class="search-panel">
         <div class="search-panel-header">
             <svg class="w-5 h-5 text-orange-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-            <input type="text" id="searchInput" placeholder="ابحث في الموقع..." class="search-panel-input" dir="rtl" oninput="performSearch(this.value)" autocomplete="off">
+            <input type="text" id="searchInput" placeholder="اكتب للبحث..." class="search-panel-input" dir="rtl" oninput="performSearch(this.value)" autocomplete="off">
             <button onclick="closeSearch()" class="search-close-btn" aria-label="إغلاق">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
             </button>
@@ -2616,7 +2709,7 @@ body.dark .search-result-excerpt mark { background: rgba(251,191,36,0.25); }
             <button id="searchModeApprox" class="search-mode-btn" onclick="setSearchMode('approx')">بحثٌ تقريبيٌّ</button>
         </div>
         <div id="searchResults" class="search-panel-results">
-            <p class="text-center text-gray-500 py-4">اكتب للبحث...</p>
+            <p class="search-hint-text">البحثُ المُطابِق يُراعي الهمزات والنقاط والتشكيل إن وُجِد. أما التقريبيُّ فبحثٌ مُقارِبٌ لا يُراعي ذلك. للخروج من نافذة البحث اضغط زرَّ البحث.</p>
         </div>
     </div>
 </div>
@@ -2997,6 +3090,36 @@ document.addEventListener('DOMContentLoaded', function() {
       ].join(';');
       container.appendChild(star);
     }
+  }
+
+  /* ===== تحريكات الدخول (AOS بسيط) ===== */
+  if (window.IntersectionObserver && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const aosSel = [
+      '.glass-premium-box', '.glass-rajaz-box',
+      '.writing-card', '.question-card',
+      '.box-question', '.box-confirmed', '.box-warning',
+      '.box-error', '.box-info', '.box-quote', '.box-rule'
+    ].join(',');
+
+    const aosObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('aos-visible');
+          aosObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll(aosSel).forEach(function(el, i) {
+      // تأخير خفيف متتالٍ لا يتجاوز 200ms حتى يبدو الدخول طبيعياً
+      el.style.transitionDelay = Math.min(i * 60, 200) + 'ms';
+      aosObserver.observe(el);
+    });
+  } else {
+    // دعم محدود أو تفضيل إلغاء الحركة — نُظهر كل العناصر فوراً
+    document.querySelectorAll(
+      '.glass-premium-box,.glass-rajaz-box,.writing-card,.question-card,.box-question,.box-confirmed,.box-warning,.box-error,.box-info,.box-quote,.box-rule'
+    ).forEach(function(el) { el.classList.add('aos-visible'); });
   }
 });
 </script>
@@ -3394,6 +3517,288 @@ body.dark .writing-card-date { color: #9ca3af; }
 body.dark .writing-card-arrow { color: #fbbf24; }
 .writing-card:hover .writing-card-arrow { opacity: 1; gap: .7rem; }
 </style>
+
+<!-- ===== نظام الهوامش والمراجع ===== -->
+<style>
+/* ── إشارة الهامش في متن النص ── */
+.fn-ref {
+  font-size: 0; /* نخفي حجمه الافتراضي لنتحكم به */
+  line-height: 0;
+  vertical-align: super;
+  position: relative;
+}
+.fn-ref a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.35em;
+  height: 1.35em;
+  padding: 0 0.22em;
+  background: linear-gradient(135deg, #fb923c, #f59e0b);
+  color: #fff !important;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-decoration: none !important;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 0 2px 6px rgba(234,88,12,0.35);
+  cursor: pointer;
+  position: relative;
+  top: -0.1em;
+}
+.fn-ref a:hover {
+  transform: scale(1.18);
+  box-shadow: 0 4px 12px rgba(234,88,12,0.45);
+}
+body.dark .fn-ref a {
+  background: linear-gradient(135deg, #f59e0b, #b45309);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.45);
+}
+
+/* ── نافذة الهامش العائمة (Popup) ── */
+#fn-popup {
+  position: fixed;
+  z-index: 8000;
+  max-width: min(340px, 88vw);
+  width: max-content;
+  background: rgba(255,255,255,0.98);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(251,146,60,0.28);
+  border-radius: 1rem;
+  padding: 0.85rem 1.1rem 0.85rem 1rem;
+  box-shadow: 0 14px 45px rgba(0,0,0,0.14), 0 4px 14px rgba(234,88,12,0.1);
+  direction: rtl;
+  text-align: right;
+  font-size: 0.88rem;
+  line-height: 1.95;
+  color: #374151;
+  white-space: normal;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.18s ease, visibility 0s 0.18s, transform 0.18s ease;
+  transform: translateY(6px);
+}
+#fn-popup.fn-popup-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  transform: translateY(0);
+}
+#fn-popup::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 7px solid transparent;
+  border-top-color: rgba(255,255,255,0.98);
+}
+#fn-popup.fn-arrow-down::after { display: block; }
+#fn-popup.fn-arrow-up::after {
+  top: auto;
+  bottom: 100%;
+  border-top-color: transparent;
+  border-bottom-color: rgba(255,255,255,0.98);
+}
+body.dark #fn-popup {
+  background: rgba(15,20,30,0.97);
+  border-color: rgba(251,191,36,0.22);
+  color: #e5e7eb;
+  box-shadow: 0 14px 45px rgba(0,0,0,0.55);
+}
+body.dark #fn-popup::after { border-top-color: rgba(15,20,30,0.97); }
+body.dark #fn-popup.fn-arrow-up::after {
+  border-top-color: transparent;
+  border-bottom-color: rgba(15,20,30,0.97);
+}
+.fn-popup-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.3em;
+  height: 1.3em;
+  padding: 0 0.2em;
+  background: linear-gradient(135deg, #fb923c, #f59e0b);
+  color: #fff;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  margin-left: 0.45rem;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+body.dark .fn-popup-num { background: linear-gradient(135deg, #f59e0b, #b45309); }
+
+/* ── قسم الهوامش في أسفل المقالة ── */
+.footnotes-section {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(251,146,60,0.25);
+  direction: rtl;
+}
+body.dark .footnotes-section {
+  border-top-color: rgba(255,255,255,0.1);
+}
+.footnotes-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #ea580c;
+  margin-bottom: 1rem;
+}
+body.dark .footnotes-title { color: #f59e0b; }
+.fn-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.fn-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  font-size: 0.87rem;
+  line-height: 2;
+  color: #4b5563;
+  padding: 0.55rem 0.8rem;
+  border-radius: 0.65rem;
+  background: rgba(251,146,60,0.05);
+  transition: background 0.2s;
+  scroll-margin-top: 80px;
+}
+.fn-item:target { background: rgba(251,146,60,0.14); }
+body.dark .fn-item { color: #cbd5e1; background: rgba(255,255,255,0.03); }
+body.dark .fn-item:target { background: rgba(251,191,36,0.12); }
+.fn-num-badge {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  padding: 0 0.2em;
+  background: linear-gradient(135deg, #fb923c, #f59e0b);
+  color: #fff;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  margin-top: 0.25rem;
+}
+body.dark .fn-num-badge { background: linear-gradient(135deg, #f59e0b, #b45309); }
+.fn-text { flex: 1; min-width: 0; }
+.fn-back {
+  color: #fb923c;
+  text-decoration: none;
+  font-size: 1rem;
+  margin-right: 0.35rem;
+  opacity: 0.65;
+  transition: opacity 0.18s;
+  display: inline-block;
+}
+.fn-back:hover { opacity: 1; }
+body.dark .fn-back { color: #fbbf24; }
+</style>
+
+<script>
+/* ===== نظام الهوامش — Popup ===== */
+(function () {
+  'use strict';
+  var popup = null;
+  var activeLink = null;
+
+  function getOrCreatePopup() {
+    if (!popup) {
+      popup = document.createElement('div');
+      popup.id = 'fn-popup';
+      popup.setAttribute('role', 'tooltip');
+      document.body.appendChild(popup);
+    }
+    return popup;
+  }
+
+  function showPopup(link) {
+    var targetId = (link.getAttribute('href') || '').replace(/^#/, '');
+    var fnItem = document.getElementById(targetId);
+    if (!fnItem) return;
+
+    var numBadge = fnItem.querySelector('.fn-num-badge');
+    var fnText   = fnItem.querySelector('.fn-text');
+    if (!fnText) return;
+
+    var p = getOrCreatePopup();
+
+    var numHTML = numBadge
+      ? '<span class="fn-popup-num">' + numBadge.textContent.trim() + '</span>'
+      : '';
+    p.innerHTML = numHTML + fnText.innerHTML;
+
+    /* أزل كلاسات السهم القديمة */
+    p.classList.remove('fn-arrow-down', 'fn-arrow-up', 'fn-popup-visible');
+
+    /* اجعله مرئيًا مؤقتًا لقياس أبعاده */
+    p.style.visibility = 'hidden';
+    p.style.display = 'block';
+    p.classList.add('fn-popup-visible');
+
+    var pw  = p.offsetWidth;
+    var ph  = p.offsetHeight;
+    var vw  = window.innerWidth;
+    var vh  = window.innerHeight;
+    var rect = link.getBoundingClientRect();
+
+    /* موضع أفقي: مركزة على الرابط مع تقييد بالحواف */
+    var left = rect.left + rect.width / 2 - pw / 2;
+    left = Math.max(8, Math.min(left, vw - pw - 8));
+
+    /* موضع رأسي: فوق الرابط إن كان هناك مساحة، وإلا تحته */
+    var topAbove = rect.top - ph - 12;
+    var topBelow = rect.bottom + 12;
+    var top, arrowDir;
+    if (topAbove >= 8) {
+      top = topAbove; arrowDir = 'fn-arrow-down';
+    } else {
+      top = topBelow; arrowDir = 'fn-arrow-up';
+    }
+
+    p.style.left = left + 'px';
+    p.style.top  = top  + 'px';
+    p.style.visibility = '';
+    p.classList.add(arrowDir);
+
+    activeLink = link;
+  }
+
+  function hidePopup() {
+    if (popup) popup.classList.remove('fn-popup-visible');
+    activeLink = null;
+  }
+
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest('.fn-ref a');
+    if (link) {
+      e.preventDefault();
+      if (activeLink === link && popup && popup.classList.contains('fn-popup-visible')) {
+        hidePopup();
+      } else {
+        showPopup(link);
+      }
+      return;
+    }
+    if (!e.target.closest('#fn-popup')) hidePopup();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') hidePopup();
+  });
+})();
+</script>
 
 </body>
 </html>
