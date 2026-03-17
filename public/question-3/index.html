@@ -1,0 +1,3694 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+    <title>
+أشباه ونظائر في النساء | سيف العشيرة
+</title>
+    <link rel="icon" type="image/svg+xml" href="/icon.svg">
+    <link rel="shortcut icon" href="/icon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { darkMode: 'class' }</script>
+    <style>
+        @font-face {
+            font-family: 'Kitab';
+            src: url('/Kitab-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        * {
+            font-family: 'Kitab', sans-serif;
+        }
+
+body {
+    line-height: 2 !important;
+}
+
+p, div, span, a, li {
+    line-height: 2 !important;
+}
+
+.content-section p {
+    line-height: 2.2 !important;
+}
+
+#articleContent {
+    line-height: 2.2 !important;
+}
+
+#articleContent p {
+    line-height: 2.2 !important;
+}
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .dark-glass {
+            background: rgba(0, 0, 0, 0.3);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* احتياط للمتصفحات التي لا تدعم backdrop-filter */
+        @supports not (backdrop-filter: blur(1px)) {
+            .glass { background: rgba(255, 255, 240, 0.97); }
+            .dark-glass { background: rgba(15, 15, 25, 0.97); }
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #f59e0b, #ea580c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: #ea580c;
+        }
+        
+        .dark-gradient-text {
+            background: linear-gradient(135deg, #fbbf24, #fb923c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: #fb923c;
+        }
+
+        @supports not (-webkit-background-clip: text) {
+            .gradient-text { color: #ea580c; background: none; -webkit-text-fill-color: #ea580c; }
+            .dark-gradient-text { color: #fb923c; background: none; -webkit-text-fill-color: #fb923c; }
+        }
+
+.bg-image-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/Background.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.08;
+    z-index: 0;
+    pointer-events: none;
+}
+
+body.dark .bg-image-overlay {
+    opacity: 0;
+    display: none;
+}
+
+/* خلفية الوضع الليلي */
+.bg-night-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: url('/Night mode background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    z-index: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+body.dark .bg-night-overlay {
+    opacity: 0.07;
+}
+
+/* النجوم */
+.stars-container {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+body.dark .stars-container {
+    opacity: 1;
+}
+.star {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.55);
+    animation: twinkle var(--dur, 3s) ease-in-out infinite var(--delay, 0s);
+}
+@keyframes twinkle {
+    0%, 100% { opacity: 0.15; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.3); }
+}
+
+@media (max-width: 768px) {
+    body.dark .bg-image-overlay {
+        opacity: 0.01;
+        filter: blur(2px);
+    }
+}
+        
+        body.dark #navLogo, body.dark #heroLogo {
+            filter: brightness(0) invert(1);
+        }
+        
+        .social-hover-effect {
+            position: relative;
+            overflow: visible;
+            display: inline-flex;
+        }
+
+        .social-tooltip {
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+            backdrop-filter: blur(10px);
+            color: #ea580c;
+            padding: 12px 20px;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            box-shadow: 0 10px 35px rgba(251, 146, 60, 0.25);
+            border: 1px solid rgba(251, 146, 60, 0.15);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .social-tooltip::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 8px;
+            border-style: solid;
+            border-color: rgba(255, 255, 255, 0.95) transparent transparent transparent;
+        }
+
+        .social-hover-effect:hover .social-tooltip {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0px);
+        }
+
+        body.dark .social-tooltip {
+            background: linear-gradient(135deg, rgba(30, 30, 30, 0.98), rgba(40, 40, 40, 0.95));
+            color: #fbbf24;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(251, 191, 36, 0.25);
+        }
+
+        body.dark .social-tooltip::after {
+            border-color: rgba(30, 30, 30, 0.98) transparent transparent transparent;
+        }
+
+        .social-link {
+            position: relative;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .social-hover-effect:hover .social-link {
+            transform: scale(1.1);
+        }
+
+        body.dark .social-link {
+            background: linear-gradient(135deg, rgba(55, 65, 81, 0.8), rgba(75, 85, 99, 0.7)) !important;
+        }
+
+        body.dark .social-link:hover {
+            background: linear-gradient(135deg, rgba(75, 85, 99, 0.9), rgba(55, 65, 81, 0.8)) !important;
+        }
+
+        #youtube-link:hover img {
+            transform: scale(1.2) rotate(5deg);
+            filter: drop-shadow(0 4px 12px rgba(255, 0, 0, 0.3));
+        }
+
+        #telegram-link:hover img {
+            transform: scale(1.2) rotate(-5deg);
+            filter: drop-shadow(0 4px 12px rgba(0, 136, 204, 0.3));
+        }
+
+        #zaqa-link:hover img {
+            transform: scale(1.2) rotate(3deg);
+            filter: drop-shadow(0 4px 12px rgba(106, 13, 173, 0.3));
+        }
+
+        body.dark #youtube-link:hover img {
+            filter: drop-shadow(0 4px 12px rgba(255, 50, 50, 0.4));
+        }
+
+        body.dark #telegram-link:hover img {
+            filter: drop-shadow(0 4px 12px rgba(50, 150, 255, 0.4));
+        }
+
+        body.dark #zaqa-link:hover img {
+            filter: drop-shadow(0 4px 12px rgba(150, 50, 255, 0.4));
+        }
+
+        footer {
+            position: relative;
+            overflow: visible !important;
+        }
+
+        .search-btn {
+            position: relative;
+        }
+
+        body.dark .search-btn {
+            background-color: #1f2937;
+        }
+        body.dark .search-btn:hover {
+            background-color: #374151;
+        }
+        body.dark .search-btn svg {
+            color: #f59e0b;
+        }
+
+        .nav-btn-stack {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .dark-mode-btn {
+            position: relative;
+        }
+
+        .search-btn {
+            position: relative;
+        }
+
+        .search-btn-tooltip {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+            backdrop-filter: blur(10px);
+            color: #ea580c;
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            box-shadow: 0 8px 32px rgba(251, 146, 60, 0.2);
+            border: 1px solid rgba(251, 146, 60, 0.1);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 99999;
+            pointer-events: none;
+            margin-top: 8px;
+        }
+
+        .search-btn-tooltip::after {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 6px;
+            border-style: solid;
+            border-color: transparent transparent rgba(255, 255, 255, 0.95) transparent;
+        }
+
+        .search-btn:hover .search-btn-tooltip {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0px);
+        }
+
+        body.dark .search-btn-tooltip {
+            background: linear-gradient(135deg, rgba(30, 30, 30, 0.98), rgba(40, 40, 40, 0.95));
+            color: #fbbf24;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            border-color: rgba(251, 191, 36, 0.2);
+        }
+
+        body.dark .search-btn-tooltip::after {
+            border-color: transparent transparent rgba(30, 30, 30, 0.98) transparent;
+        }
+
+        /* تلاميح الجوال — تُثبَّت على حافة الزر لتبقى داخل الشاشة */
+        @media (max-width: 768px) {
+            .search-btn-tooltip {
+                left: auto;
+                right: 0;
+                transform: translateY(-10px);
+            }
+            .search-btn:hover .search-btn-tooltip {
+                transform: translateY(0);
+            }
+            .search-btn-tooltip::after {
+                left: auto;
+                right: 12px;
+                transform: none;
+            }
+
+            .dark-mode-tooltip {
+                right: auto;
+                left: 0;
+                transform: translateY(-10px);
+                white-space: normal;
+                width: 72px;
+                text-align: center;
+                font-size: 12px;
+                padding: 5px 8px;
+            }
+            .dark-mode-btn:hover .dark-mode-tooltip {
+                transform: translateY(0);
+            }
+            .dark-mode-tooltip::after {
+                right: auto;
+                left: 12px;
+                transform: none;
+            }
+
+            .social-tooltip {
+                white-space: normal;
+                width: 100px;
+                text-align: center;
+            }
+        }
+
+        .dark-mode-tooltip {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+            backdrop-filter: blur(10px);
+            color: #ea580c;
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            box-shadow: 0 8px 32px rgba(251, 146, 60, 0.2);
+            border: 1px solid rgba(251, 146, 60, 0.1);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 99999;
+            pointer-events: none;
+            margin-top: 8px;
+        }
+
+        .dark-mode-tooltip::after {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 6px;
+            border-style: solid;
+            border-color: transparent transparent rgba(255, 255, 255, 0.95) transparent;
+        }
+
+        .dark-mode-btn:hover .dark-mode-tooltip {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0px);
+        }
+
+body.dark .dark-mode-tooltip {
+    display: none !important;
+}
+
+        body.dark .dark-mode-tooltip::after {
+            border-color: transparent transparent rgba(30, 30, 30, 0.95) transparent;
+        }
+
+        .sun-rotate {
+            animation: sun-rotate 10s linear infinite;
+        }
+
+@keyframes sun-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.dark-mode-btn:hover #sunIcon {
+    animation: sun-spin 4s linear infinite;
+}
+        .menu-btn {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            padding: 12px;
+            z-index: 1100;
+        }
+
+        .menu-btn span {
+            width: 24px;
+            height: 2.5px;
+            background: linear-gradient(135deg, #f59e0b, #ea580c);
+            border-radius: 2px;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        body.dark .menu-btn span {
+            background: linear-gradient(135deg, #fbbf24, #fb923c);
+        }
+
+        .menu-btn:hover span {
+            width: 28px;
+        }
+
+        .menu-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .menu-btn.active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(20px);
+        }
+
+        .menu-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            right: -320px;
+            width: 320px;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1050;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 120px 24px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.05);
+        }
+
+        body.dark .nav-menu {
+            background: rgba(17, 24, 39, 0.95);
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-menu.active {
+            right: 0;
+        }
+
+        .nav-link {
+            padding: 16px 24px;
+            border-radius: 16px;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid transparent;
+        }
+
+        .nav-link:hover {
+            background: linear-gradient(135deg, rgba(251, 146, 60, 0.1), rgba(251, 191, 36, 0.1));
+            border-color: rgba(251, 146, 60, 0.2);
+            transform: translateX(-8px);
+        }
+
+        body.dark .nav-link:hover {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(251, 146, 60, 0.1));
+            border-color: rgba(251, 191, 36, 0.2);
+        }
+
+.nav-icon {
+    width: 28px;
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(4px);
+            z-index: 1040;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .tooltip-word {
+            position: relative;
+            cursor: help;
+            border-bottom: 2px dotted #f59e0b;
+            padding-bottom: 1px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .tooltip-word:hover {
+            color: #ea580c;
+            border-bottom-color: #ea580c;
+        }
+
+        .tooltip-content {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.95));
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: #4b5563;
+            padding: 12px 18px;
+            border-radius: 15px;
+            font-size: 15px;
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            box-shadow: 0 15px 35px rgba(251, 146, 60, 0.2);
+            border: 1px solid rgba(251, 146, 60, 0.15);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 9999;
+            pointer-events: none;
+            margin-bottom: 10px;
+        }
+
+        .tooltip-content::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 8px;
+            border-style: solid;
+            border-color: rgba(255, 255, 255, 0.98) transparent transparent transparent;
+        }
+
+        .tooltip-word:hover .tooltip-content,
+        .tooltip-word.active .tooltip-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0px);
+        }
+
+        body.dark .tooltip-content {
+            background: linear-gradient(135deg, rgba(31, 41, 55, 0.98), rgba(17, 24, 39, 0.95));
+            color: #f3f4f6;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+        }
+
+        body.dark .tooltip-content::after {
+            border-color: rgba(31, 41, 55, 0.98) transparent transparent transparent;
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.7);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            transition: all 0.5s ease;
+        }
+        @supports not (backdrop-filter: blur(1px)) {
+            .content-section { background: rgba(255, 255, 255, 0.97); }
+        }
+
+        body.dark .content-section {
+            background: rgba(31, 41, 55, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        @supports not (backdrop-filter: blur(1px)) {
+            body.dark .content-section { background: #1f2937; }
+        }
+
+/* Target only the main card containers in listings */
+        body.dark a.block > div.rounded-3xl,
+        body.dark a.block > div[class*="shadow"],
+        body.dark a > div.bg-gradient-to-br {
+            background: #1f2937 !important;
+            background-image: none !important;
+        }
+        
+        body.dark a.block:hover > div.rounded-3xl,
+        body.dark a.block:hover > div[class*="shadow"] {
+            background: #374151 !important;
+        }
+        
+        /* Fix input fields */
+        body.dark input,
+        body.dark textarea {
+            background-color: #374151 !important;
+            color: #ffffff !important;
+            border-color: #4b5563 !important;
+        }
+
+        body.dark input::placeholder,
+        body.dark textarea::placeholder {
+            color: #9ca3af !important;
+        }
+        
+        body.dark input:focus,
+        body.dark textarea:focus {
+            background-color: #4b5563 !important;
+        }
+
+body.dark input,
+        body.dark textarea {
+            background-color: #374151 !important;
+            color: #ffffff !important;
+        }
+
+        body.dark input::placeholder,
+        body.dark textarea::placeholder {
+            color: #9ca3af !important;
+        }
+
+        .glow {
+            animation: glow 4s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { opacity: 0.3; transform: scale(1); }
+            to { opacity: 0.5; transform: scale(1.1); }
+        }
+
+        .pattern {
+            background-image: radial-gradient(#f59e0b 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+        }
+
+
+        .logo-wrapper {
+            width: 90px;
+            height: 90px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-text-container {
+            flex: 1;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        #headerPoetry {
+            transition: opacity 0.4s ease, transform 0.4s ease, filter 0.4s ease;
+        }
+
+        #quickNavLinks {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            flex: none;
+            padding: 0;
+            opacity: 0;
+            visibility: hidden;
+            filter: blur(6px);
+            transition: opacity 0.4s ease, filter 0.4s ease, visibility 0s 0.4s;
+        }
+        #quickNavLinks.nav-visible {
+            opacity: 1;
+            visibility: visible;
+            filter: blur(0px);
+            transition: opacity 0.4s ease, filter 0.4s ease, visibility 0s 0s;
+        }
+
+
+        .question-card {
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(251, 146, 60, 0.1);
+            border-radius: 20px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            display: block;
+            text-decoration: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.8);
+            border-color: rgba(251, 146, 60, 0.3);
+            box-shadow: 0 10px 25px rgba(251, 146, 60, 0.1);
+        }
+
+        body.dark .question-card {
+            background: rgba(31, 41, 55, 0.4);
+            border-color: rgba(251, 191, 36, 0.1);
+        }
+
+        body.dark .question-card:hover {
+            background: rgba(31, 41, 55, 0.6);
+            border-color: rgba(251, 191, 36, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+.copy-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #f59e0b, #ea580c);
+    color: white;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 4px 12px rgba(234, 88, 12, 0.2);
+}
+
+.copy-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(234, 88, 12, 0.3);
+}
+
+.copy-btn:active {
+    transform: scale(0.95);
+}
+
+.copy-tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-10px);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+    backdrop-filter: blur(10px);
+    color: #ea580c;
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    box-shadow: 0 8px 32px rgba(251, 146, 60, 0.2);
+    border: 1px solid rgba(251, 146, 60, 0.1);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 99999;
+    pointer-events: none;
+    margin-bottom: 8px;
+}
+
+.copy-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.95) transparent transparent transparent;
+}
+
+.copy-btn:hover .copy-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0px);
+}
+
+body.dark .copy-tooltip {
+    background: linear-gradient(135deg, rgba(30, 30, 30, 0.95), rgba(40, 40, 40, 0.9));
+    color: #fbbf24;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(251, 191, 36, 0.2);
+}
+
+body.dark .copy-tooltip::after {
+    border-color: rgba(30, 30, 30, 0.95) transparent transparent transparent;
+}
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #1f2937;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 10000;
+            opacity: 0;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+body.dark .text-gray-700 {
+    color: #ffffff !important;
+}
+
+body {
+    color: #1f2937;
+}
+
+body.dark {
+    color: #ffffff !important;
+}
+
+body.dark p,
+body.dark div,
+body.dark span,
+body.dark h1,
+body.dark h2,
+body.dark h3,
+body.dark h4,
+body.dark h5,
+body.dark h6,
+body.dark li,
+body.dark a:not(.gradient-text) {
+    color: #ffffff !important;
+}
+
+body p,
+body div,
+body span,
+body h1,
+body h2,
+body h3,
+body h4,
+body h5,
+body h6,
+body li,
+body a:not(.gradient-text):not(.dark-gradient-text) {
+    color: #1f2937;
+}
+
+/* إخبار المتصفح (وiOS Safari تحديدًا) بوضع الألوان الفعلي — يمنع التعديل التلقائي */
+:root { color-scheme: light; }
+body.dark { color-scheme: dark; }
+
+.gradient-text {
+    background: linear-gradient(135deg, #f59e0b, #ea580c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+body.dark .gradient-text {
+    background: linear-gradient(135deg, #fbbf24, #fb923c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    scroll-margin-top: 120px;
+    line-height: 2 !important;
+}
+
+.content-section h2:first-child,
+.content-section h1:first-child {
+    margin-top: 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .flex-container {
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 0 !important;
+    }
+    .nav-text-container {
+        flex: 1;
+        text-align: center;
+        order: 2;
+        padding: 0 10px;
+    }
+    .logo-wrapper {
+        width: 80px !important;
+        height: 80px !important;
+        order: 1;
+        margin-left: 15px;
+    }
+    .nav-controls {
+        display: flex;
+        align-items: flex-start;
+        gap: 6px;
+        order: 3;
+    }
+    .nav-btn-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+    main section { 
+        padding-top: 200px !important; 
+    }
+    
+    nav h1 {
+        font-size: 0.75rem !important;
+        line-height: 1.3 !important;
+    }
+    nav p {
+        font-size: 0.65rem !important;
+        margin-top: 2px;
+    }
+    #quickNavLinks .quick-nav-link {
+        font-size: 0.68rem !important;
+    }
+    #quickNavLinks > div {
+        gap: 6px !important;
+    }
+}
+
+        @media (min-width: 1500px) {
+            .logo-wrapper {
+                width: 120px;
+                height: 120px;
+            }
+            #navLogo {
+                transform: scale(1.2);
+            }
+        }
+
+@media (max-width: 768px) {
+    .prose {
+        font-size: 0.95rem !important;
+    }
+    
+    .prose h2 {
+        font-size: 1.3rem !important;
+    }
+    
+    .prose p {
+        font-size: 0.95rem !important;
+        line-height: 1.8 !important;
+    }
+    
+    article .relative.p-10 {
+        padding: 1.5rem !important;
+    }
+    
+    .text-2xl {
+        font-size: 1.1rem !important;
+    }
+    
+    .text-3xl {
+        font-size: 1.3rem !important;
+    }
+}
+
+        /* Pagefind — تمييز الكلمات في نتائج البحث */
+        #searchResults mark {
+            background: rgba(251, 146, 60, 0.3);
+            color: inherit;
+            border-radius: 0.2rem;
+            padding: 0 0.1rem;
+        }
+        body.dark #searchResults mark {
+            background: rgba(251, 191, 36, 0.25);
+        }
+    </style>
+</head>
+<body class="transition-all duration-500 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 pattern min-h-screen flex flex-col" id="body">
+<script>(function(){
+  if(localStorage.getItem('theme')==='dark'){
+    var b=document.body;
+    b.classList.remove('bg-gradient-to-br','from-orange-50','via-amber-50','to-yellow-50','pattern');
+    b.classList.add('bg-gray-900','dark-pattern','dark');
+  }
+})();</script>
+
+    <div class="bg-image-overlay"></div>
+    <div class="bg-night-overlay"></div>
+    <div class="stars-container" id="starsContainer"></div>
+    <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+
+    <nav class="fixed top-0 left-0 right-0 z-[1000] glass transition-all duration-300" id="navbar" data-pagefind-ignore>
+        <div class="max-w-7xl mx-auto px-4 py-3">
+            <div class="flex items-center justify-between flex-container relative">
+                <a href="/" class="logo-wrapper flex items-center justify-center">
+                    <img src="/logo.svg" alt="شعار سيف العشيرة" class="w-full h-full object-contain" id="navLogo">
+                </a>
+
+<div class="nav-text-container" id="headerPoetry">
+    <a href="/saif-clan/" class="block">
+        <h1 class="text-lg md:text-xl font-black gradient-text leading-tight">«أنا سَيفُ العشيرة فاعرِفوني * حُميدًا قد تَذَرَّيْتُ السَّناما!»</h1>
+    </a>
+    <a href="/mufadati/" class="block">
+        <p class="text-sm text-gray-600 font-light" id="navSubtitle">«عليَّ مُفاضَتي ومعي سِلاحي!»</p>
+    </a>
+</div>
+
+<div class="nav-text-container" id="quickNavLinks">
+    <div class="flex items-center justify-center gap-6">
+        <a href="/" class="text-base md:text-lg text-gray-700 hover:text-orange-600 font-semibold transition-colors whitespace-nowrap quick-nav-link">الصفحة الأُولَى</a>
+        <span class="text-orange-400/50">|</span>
+        <a href="/chanting/" class="text-base md:text-lg text-gray-700 hover:text-orange-600 font-semibold transition-colors whitespace-nowrap quick-nav-link">الإنشاد والحُداء</a>
+        <span class="text-orange-400/50">|</span>
+        <a href="/questions/" class="text-base md:text-lg text-gray-700 hover:text-orange-600 font-semibold transition-colors whitespace-nowrap quick-nav-link">الأسئلة</a>
+        <span class="text-orange-400/50">|</span>
+        <a href="/writings/" class="text-base md:text-lg text-gray-700 hover:text-orange-600 font-semibold transition-colors whitespace-nowrap quick-nav-link">الكِتابات</a>
+    </div>
+</div>
+
+                
+<div class="nav-controls flex items-center gap-3">
+
+    <button id="searchButton" onclick="openSearch()" class="search-btn p-2 rounded-lg bg-orange-100 hover:bg-orange-200 transition-colors" aria-label="بحث في الموقع">
+        <svg class="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <span class="search-btn-tooltip">ابحَثْ في الموقع</span>
+    </button>
+
+    <div class="nav-btn-stack">
+        <button onclick="toggleDarkMode()" class="dark-mode-btn sun-rotate p-2 rounded-lg bg-orange-100 hover:bg-orange-200 transition-colors" id="darkModeBtn">
+            <svg class="w-5 h-5 text-orange-600" id="moonIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+            <svg class="w-5 h-5 text-amber-500 hidden" id="sunIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+            <span class="dark-mode-tooltip">أرح عينَيك!</span>
+        </button>
+        <div class="menu-btn" id="menuBtn" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="nav-menu" id="navMenu">
+        <a href="/" class="text-gray-700 nav-link">
+            <span class="nav-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+            </span>
+            الصفحة الأُولَى
+        </a>
+        <a href="/chanting/" class="text-gray-700 nav-link">
+            <span class="nav-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18.5a6 6 0 0 0 6-6V7a6 6 0 0 0-12 0v5.5a6 6 0 0 0 6 6z"/><path d="M19 10v2.5a7 7 0 0 1-14 0V10"/><line x1="12" y1="22" x2="12" y2="18.5"/><path d="M8 22h8"/></svg>
+            </span>
+            الإنشاد والحُداء
+        </a>
+        <a href="/questions/" class="text-gray-700 nav-link">
+            <span class="nav-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17" stroke-width="2.5"/></svg>
+            </span>
+            الأسئلة
+        </a>
+        <a href="/writings/" class="text-gray-700 nav-link">
+            <span class="nav-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            </span>
+            الكِتابات
+        </a>
+    </div>
+
+    <main class="flex-1 relative z-10">
+        <section class="pt-64 pb-20 px-4 relative">
+            <div class="max-w-5xl mx-auto relative z-10">
+                
+
+<!-- ===== Floating Action Buttons ===== -->
+<div id="floatingActions" class="floating-actions" style="display:none;">
+    
+    <div class="relative button-tooltip-wrapper">
+        <button onclick="shareContent()" class="icon-btn floating-btn" aria-label="شارك">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
+            </svg>
+        </button>
+        <span class="button-tooltip">شارك</span>
+    </div>
+    <div class="relative button-tooltip-wrapper">
+        <button onclick="copyContent()" class="icon-btn floating-btn" aria-label="نسخ النص">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+            </svg>
+        </button>
+        <span class="button-tooltip">نسْخ النص</span>
+    </div>
+    
+</div>
+
+<!-- ===== Floating Back Button ===== -->
+<a href="javascript:history.back()" id="floatingBack" class="floating-back" aria-label="عُد إلى الصفحة السابقة">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
+    </svg>
+    <span class="floating-back-label">السابقة</span>
+</a>
+
+<div class="text-right">
+    <div class="content-section rounded-3xl p-6 md:p-8 lg:p-12 shadow-2xl mb-12">
+        <div class="flex justify-between items-center mb-8 border-b border-orange-200 pb-4">
+            <h2 class="text-xl md:text-2xl lg:text-3xl font-black gradient-text">
+                أشباه ونظائر في النساء
+            </h2>
+            
+            <div class="flex items-center gap-2">
+                <div class="relative button-tooltip-wrapper">
+                    <button onclick="shareContent()" class="icon-btn">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
+                        </svg>
+                    </button>
+                    <span class="button-tooltip">شارك</span>
+                </div>
+                <div class="relative button-tooltip-wrapper">
+                    <button onclick="copyContent()" class="icon-btn">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                        </svg>
+                    </button>
+                    <span class="button-tooltip">نسْخ النص</span>
+                </div>
+            </div>
+            
+        </div>
+
+        <div id="articleContent" class="prose prose-orange max-w-none text-justify leading-relaxed text-gray-700 dark:text-white text-base md:text-lg lg:text-xl" data-pagefind-body>
+            <div class="glass-premium-box">
+  <p class="text-xl md:text-2xl leading-loose text-gray-800 dark-white-text">
+السؤال:
+<p>أنشدَ الخالدِيَّان رحمهما الله (تُوفِّيا بعد 370هـ) في حماستهما «الأشباه والنظائر» أبياتًا للفرزدق، وللبحتريِّ ولابن السُّلَيْك في معنًى واحد. ثم قالا بعد أبيات ابنِ السُّلَيْك: «في ألفاظِ هذا الشعر ‌بعضُ ‌التَّخَلُّف، وإنما كتَبْناه لما فيه من المعنى الذي قدَّمْنا ذكرَهُ ولأنَّ هذا المعنى قليلٌ في الشِّعر جِدًّا». فسُئِلتُ عن معنى التَّخَلُّف هنا.</p>
+  </p>
+</div>
+<style>
+/* ===== التصميم النهاري (أصلي كما في الصندوق الثاني) ===== */
+.glass-premium-box {
+  margin: 2.5rem 0;            /* my-10 */
+  padding: 2rem;               /* p-8 */
+  border-radius: 1rem;         /* rounded-2xl ≈ 1rem */
+  background: linear-gradient(135deg, rgba(255, 237, 213, 0.5), rgba(253, 230, 138, 0.5)); /* from-orange-100/50 to-amber-100/50 */
+  border: 1px solid #fed7aa;   /* border-orange-200 */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+  color: #1f2937;              /* text-gray-800 */
+}
+
+/* ===== الوضع الليلي: تأثير زجاجي أسود-رمادي فخم ===== */
+body.dark .glass-premium-box {
+  background: rgba(18, 18, 22, 0.7);   /* خلفية سوداء مائلة للرمادي مع شفافية */
+  backdrop-filter: blur(12px);         /* تأثير الزجاج */
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);  /* حد أبيض شفاف ناعم */
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.4); /* ظل عميق */
+  color: #f3f4f6;                      /* نص أبيض ناعم */
+}
+
+/* تأمين لون النص في الوضع الليلي */
+body.dark .dark-white-text {
+  color: #f3f4f6 !important;
+}
+</style>
+<hr />
+<p><strong>الجواب:</strong></p>
+<p class="text-lg md:text-xl leading-relaxed text-gray-800 dark:text-white mb-6">
+<p>ظهر لي فيه -والله أعلم-، ثلاثة أوجُه.</p>
+<p><strong>الأول:</strong> أنهما لم يريدا بالتخلُّف خُصوصَ ما جاء في قصيدة ابنِ السُّلَيك، بل أرادا بـ«هذا الشعر» جميع هذه النظائر. فدَعْني أبيِّنْ ما المعنى الذي أراداه من سَوْقهما هذا الشعر، ثم أذكُر معنى التخلُّف.</p>
+<p>قال الله عز وجل: {وَإِذَا بُشِّرَ أَحَدُهُم بِالْأُنثَى ظَلَّ وَجْهُهُ مُسْوَدًا وَهُوَ كَظِيمٌ * يَتَوَارَى مِنَ الْقَوْمِ مِن سُوءِ مَا بُشِّرَ بِهِ أَيُمْسِكُهُ عَلَى هُونٍ أَمْ يَدُسُهُ فِي التَّرَابِ أَلَا سَاءَ مَا يَحْكُمُونَ}.</p>
+<p>فالعَرَبُ -في الجُملة- كانت تكرهُ البناتِ، وتحتقِرُ النِّساءَ، وتَتَبرَّمُ من الأخَواتِ. وسببُ ذلك أنهم كانوا يعتبرونَهُنَّ عِرْضًا لهم، فهم يخافون عليهنَّ من السِّباء إذا أُغِير عليهم، فيعودَ بذلك عليهمُ العَارُ، أو يَخْشَوْنَ أن يطمعَ فيهنَّ غيرُ الأكفاء، أو أن يُهَنَّ بعدهم، أو يكون سببُ ذلك حَمِيَّةً، لأنَّ المرأةَ لا تخرُج فتنازل الأعداءَ وتبارِزُ الأقران، ولا تشهَدُ ناديَ القوم، ولا تشاركُ الرِّجالَ في حَلِّ مُعْضِلات الأمور ورَأْبِ الثَّأَىٰ، ونَحْو ذلك مما يضطَلِع به الرجال. ثم هُنَّ -إلى ذلك- يُحْوِجْنَ الرجالَ إلى الذَّبِّ عنهنَّ وحمايتهنَّ والسَّعْيِ في ما يُرِدْنه، فكانوا يرونهنَّ عِبئًا وثِقلًا.</p>
+<p>وفي ذلك قال الفرزدق:</p>
+<div class="glass-premium-box">
+  <table class="poetry-table">
+    <tr>
+      <td class="shatr first">وأَهْوَنُ مفقودٍ إذا الموتُ غالَهُ</td>
+      <td class="shatr last">على المَرْءِ من أخدانه: مَن تقنَّعا</td>
+    </tr>
+    <tr>
+      <td class="shatr first">وأيسَرُ رُزْءٍ لامْرئٍ غيرِ عاجزٍ:</td>
+      <td class="shatr last">رَزِيَّةُ مُرْتَجِّ الروادفِ أَفْرَعَا</td>
+    </tr>
+    <tr>
+      <td class="shatr first">تُهَزُّ السُّيوفُ المَشْرَفِيَّاتُ دُونَه</td>
+      <td class="shatr last">حِذارًا عليه أن يَذِلَّ ويَفْزَعا</td>
+    </tr>
+    <tr>
+      <td class="shatr first">ولا يَشْهَدُ الهَيْجا، ولا يحضُر الندى</td>
+      <td class="shatr last">ولا يَصْبَحُ الشَّرْبَ المُدامَ الْمُشَعْشَعا</td>
+    </tr>
+    <tr>
+      <td class="shatr first">بَلَىٰ يَلِدُ النائي الشَّطِيرَ مَحَلُّهُ</td>
+      <td class="shatr last">ويُورِثُه المالَ التليدَ المُمَنَّعا!</td>
+    </tr>
+  </table>
+</div>
+<p class="text-lg md:text-xl leading-relaxed text-gray-800 dark:text-white mb-6">
+<p>قولُه: (وأهون رزء.. إلخ): يعني أنَّ أهون من يأتي عليه الموت: النساء، قال ذلك لغلظته وجفاءه. وقولُه: (غير عاجز): الجلد القوي، فكانوا يرون أنَّ مِن الجَلادة تركَ التحبُّبِ إلى النِّساء، وعَدَمَ مُبالاتهنَّ بالا.</p>
+<p>وفي هذا المعنى قال البحتري:</p>
+<div class="glass-premium-box">
+  <table class="poetry-table">
+    <tr>
+      <td class="shatr first">أَتُبَكِّي مَن لا يُنازِلُ بِالرُّمْـ</td>
+      <td class="shatr last">ـحِ مُشِيحًا ولا يَهُزُّ اللِّوَاءَا</td>
+    </tr>
+    <tr>
+      <td class="shatr first">قد ولَدْنَ الأعداء قِدْمًا وورَّثْـ</td>
+      <td class="shatr last">ـنَ التِّلَادَ الأَقاصِيَ البُعَداءَا</td>
+    </tr>
+    <tr>
+      <td class="shatr first">ولَعَمْرِي ما العَجْزُ عنديَ إِلَّا</td>
+      <td class="shatr last">أن تظلَّ الرِّجالُ تَبْكي النِّساءا!</td>
+    </tr>
+  </table>
+</div>
+<p class="text-lg md:text-xl leading-relaxed text-gray-800 dark:text-white mb-6">
+<p>وقال آخر:</p>
+<div class="glass-premium-box">
+  <table class="poetry-table">
+    <tr>
+      <td class="shatr first">إذا ما المرءُ شَبَّ لَهُ بَناتٌ</td>
+      <td class="shatr last">عصَبْنَ برأسِه عَنَتًا وعارا</td>
+    </tr>
+  </table>
+</div>
+<p class="text-lg md:text-xl leading-relaxed text-gray-800 dark:text-white mb-6">
+<p>وقال غيره:</p>
+<div class="glass-premium-box">
+  <table class="poetry-table">
+    <tr>
+      <td class="shatr first">جُعِلْتُ فِداكَ مِن النائباتِ</td>
+      <td class="shatr last">ومُتِّعْتَ -ما عِشتَ- بالطيبات</td>
+    </tr>
+    <tr>
+      <td class="shatr first">سُرورَانِ مَا لهُما ثَالِثٌ</td>
+      <td class="shatr last">حَياةُ البنينِ ومَوْتُ البَناتِ</td>
+    </tr>
+    <tr>
+      <td class="shatr first">وأصدقُ مِن ذَيْنِ قولُ الحكيمِ:</td>
+      <td class="shatr last">دَفْنُ البَنَاتِ مِن المَكْرُمَاتِ</td>
+    </tr>
+  </table>
+</div>
+<p class="text-lg md:text-xl leading-relaxed text-gray-800 dark:text-white mb-6">
+<p>فلأَجْل هذا كانُوا يُحِبُّون لهنَّ الموت، وكانوا يَئدونهنَّ، ليُسْقِط بذلك الوائِدُ عن كاهله الخوفَ والقَلَق والجَزَع من هذه البنت وما قد تَجُرُّه عليه من العار! وكانوا إذا وُلِد لأحدِهم بِنتٌ قالوا له: أمَّنكمُ اللهُ عارَها، وكفاكم مُؤْنتها، وصاهرتُم قبرهَا!</p>
+<p>ولمَّا خُطِبَتْ إلى عَقِيل بن عُلَّفَة المُرِّيِّ ابنتُه الجَرْباءُ قال:</p>
+<div class="glass-rajaz-box">
+  <table class="rajaz-table">
+    <tr><td class="rajaz-shatr">إِنِّي وإن سِيْقَ إِليَّ الْمَهْرُ</td></tr>
+    <tr><td class="rajaz-shatr">أَلْفٌ وعَبْدَانِ وَذَوْدٌ عَشْرُ</td></tr>
+    <tr><td class="rajaz-shatr">أَحَبُّ أصهارِي إليَّ القَبْرُ!</td></tr>
+  </table>
+</div>
+<p class="text-lg md:text-xl leading-relaxed text-gray-800 dark:text-white mb-6">
+<p>وقال آخَرُ:</p>
+<div class="glass-rajaz-box">
+  <table class="rajaz-table">
+    <tr><td class="rajaz-shatr">سمَّيْتُها -إذْ وُلِدَتْ-: تَمُوتُ</td></tr>
+    <tr><td class="rajaz-shatr">والقَبْرُ صِهْرٌ ضامِزٌ زِمِّيْتُ</td></tr>
+    <tr><td class="rajaz-shatr">ليسَ لِمَنْ حَلَّ بِهِ تَرْبِيتُ</td></tr>
+  </table>
+</div>
+<p class="text-lg md:text-xl leading-relaxed text-gray-800 dark:text-white mb-6">
+<p>و(الضامز): الساكت، و(الزِّمِّيْت): مثله، و(التَّرْبِيت): التربية.</p>
+<p>وقال عبدُ الله بن طاهر:</p>
+<div class="glass-premium-box">
+  <table class="poetry-table">
+    <tr>
+      <td class="shatr first">لِكُلِّ أبي بِنْتٍ يُراعي شؤونَها</td>
+      <td class="shatr last">ثلاثةُ أصهارٍ إذا حُمِدَ الصِّهْرُ</td>
+    </tr>
+    <tr>
+      <td class="shatr first">فَبَعْلٌ يُراعِيها، وخِدْرٌ يُكِنُّها</td>
+      <td class="shatr last">وقبرٌ يُوارِيْها، وخيرهمُ القَبْرُ</td>
+    </tr>
+  </table>
+</div>
+<p class="text-lg md:text-xl leading-relaxed text-gray-800 dark:text-white mb-6">
+<p>وقال آخَرُ في ابنةٍ لهُ اسمُها "مَوَدَّة":</p>
+<div class="glass-premium-box">
+  <table class="poetry-table">
+    <tr>
+      <td class="shatr first">مَوَدَّةٌ تَهْوى عُمْرَ شيخٍ يَسُرُّهُ</td>
+      <td class="shatr last">لها الموتُ قبلَ الليلِ، لو أنها تدري!</td>
+    </tr>
+    <tr>
+      <td class="shatr first">يخافُ عليها جَفْوَةَ الناس بعده</td>
+      <td class="shatr last">ولا خَتَنٌ يُرجَىٰ أَوَدُّ من القَبْرِ</td>
+    </tr>
+  </table>
+</div>
+<p class="text-lg md:text-xl leading-relaxed text-gray-800 dark:text-white mb-6">
+<p>وقال ابنُ يَسِير:</p>
+<div class="glass-premium-box">
+  <table class="poetry-table">
+    <tr>
+      <td class="shatr first">لولا البُنَيَّةُ لم أجزَعْ مِن العَدَمِ</td>
+      <td class="shatr last">ولم أَجُبْ في الليالي حِنْدِسَ الظُّلَمِ</td>
+    </tr>
+    <tr>
+      <td class="shatr first">وزادَني رغبةً في العيشِ معرفتي</td>
+      <td class="shatr last">ذُلَّ اليتيمةِ يجفوها ذوو الرَّحِمِ</td>
+    </tr>
+    <tr>
+      <td class="shatr first">أخشى فظاظةَ عَمٍّ أو جفاءَ أخٍ</td>
+      <td class="shatr last">وكنتُ أخشى عليها من أذى الكَلِمِ</td>
+    </tr>
+    <tr>
+      <td class="shatr first">إذا تذكَّرتُ بنتي حِينَ تندُبني</td>
+      <td class="shatr last">جَرَتْ لعبرة بنتي عبرتي بِدَم</td>
+    </tr>
+    <tr>
+      <td class="shatr first">تَهْوَىٰ بقائي، وأهوَىٰ موتَها شفَقًا</td>
+      <td class="shatr last">والموتُ أَكْرَمُ نَزَّالٍ على الحُرَمِ</td>
+    </tr>
+  </table>
+</div>
+<p class="text-lg md:text-xl leading-relaxed text-gray-800 dark:text-white mb-6">
+<p>وقال إسحاق بن خلف:</p>
+<div class="glass-premium-box">
+  <table class="poetry-table">
+    <tr>
+      <td class="shatr first">أمسَتْ أُمَيْمَةُ معمورًا بها الرَّجَمُ</td>
+      <td class="shatr last">لدىٰ صعيدٍ عليه التَّربُ مُرْتَكِمُ</td>
+    </tr>
+    <tr>
+      <td class="shatr first">يا شُقَّة النفس إن النفسَ والهةٌ</td>
+      <td class="shatr last">حَرَّىٰ عليكِ، ودمعُ العين مُنْسَجِمُ</td>
+    </tr>
+    <tr>
+      <td class="shatr first">قد كنتُ أخشى عليها أن يُؤخِّرَها</td>
+      <td class="shatr last">عني الحِمَامُ فيُبْدِي وجهَها العَدَمُ</td>
+    </tr>
+    <tr>
+      <td class="shatr first">فالآنَ نِمتُ فلا هَمٌّ يؤرقني</td>
+      <td class="shatr last">تَهْدَا العُيونُ إِذا ما أَوْدَتِ الْحُرَمُ</td>
+    </tr>
+    <tr>
+      <td class="shatr first">للموتِ عندي أيادٍ لستُ أُنكِرُها</td>
+      <td class="shatr last">أحيا سُرورًا وبي مما أتىٰ أَلَمُ</td>
+    </tr>
+  </table>
+</div>
+<p class="text-lg md:text-xl leading-relaxed text-gray-800 dark:text-white mb-6">
+<p>(الرَّجَمُ): القبر. و(أودَتِ الحُرم): ماتت حريم الرجل ونساؤه. وقال ابن المعتز (ت ٢٩٦ هـ) عن هذه القطعة: (وهذه ألفاظٌ -كما سمعتَ- في عُذوبة الماء الزلال، ومعانٍ أَرَقُّ من السحر الحلال!).</p>
+<p>وقال آخر:</p>
+<div class="glass-premium-box">
+  <table class="poetry-table">
+    <tr>
+      <td class="shatr first">أُحِبُّ بُنَيَّتِي وَوَدِدتُّ أَنِّي</td>
+      <td class="shatr last">دفنتُ بُنَيَّتِي فِي جَوْفِ لَحْدِ</td>
+    </tr>
+    <tr>
+      <td class="shatr first">وما لي بُغْضُهَا غَرَضًا، ولكن</td>
+      <td class="shatr last">مخافةَ مِيتَتِي فتَضِيعَ بَعْدِي</td>
+    </tr>
+    <tr>
+      <td class="shatr first">مخافةَ أن تصير إلىٰ لئيمٍ</td>
+      <td class="shatr last">فيفضحَ والدي ويَشِينَ جَدِّي</td>
+    </tr>
+    <tr>
+      <td class="shatr first">فليتَ اللهَ أكرمَها بقَبْرٍ</td>
+      <td class="shatr last">وإن كانتْ أَعَزَّ الناس عندي</td>
+    </tr>
+    <tr>
+      <td class="shatr first">فتُسْتَرَ عَوْرَتي وتكونَ أَجْرًا</td>
+      <td class="shatr last">إِذا قدَّمتُها وكَتَمْتُ وَجْدِي</td>
+    </tr>
+    <tr>
+      <td class="shatr first">وتُتْبَعَ بعد ذاكَ بِأُمِّ صِدْقٍ</td>
+      <td class="shatr last">فَتُؤْنِسَ بِنتَهَا وَأَعِيشَ وَحْدِي!</td>
+    </tr>
+  </table>
+</div>
+<p class="text-lg md:text-xl leading-relaxed text-gray-800 dark:text-white mb-6">
+<p>وقال أبو خالد القَنانِيُّ الخارِجيُّ:</p>
+<div class="glass-premium-box">
+  <table class="poetry-table">
+    <tr>
+      <td class="shatr first">لقد زادَ الحياة إليَّ حُبًّا</td>
+      <td class="shatr last">بناتي، إنهنَّ من الضِّعافِ</td>
+    </tr>
+    <tr>
+      <td class="shatr first">أُحاذِرُ أن يَرَيْنَ الفقرَ بَعْدِي</td>
+      <td class="shatr last">وأَن يَشْرَبْنَ رَنْقًا بَعْدَ صافي</td>
+    </tr>
+    <tr>
+      <td class="shatr first">وأن يَعْرَيْنَ إِن كَسِيَ الجواري</td>
+      <td class="shatr last">فتنبو العين عن كَرَمٍ عِجَافِ</td>
+    </tr>
+    <tr>
+      <td class="shatr first">وأن يضطرَّهُنَّ الدهرُ بَعْدِي</td>
+      <td class="shatr last">إلى عِلْجٍ غليظِ القلب جاف</td>
+    </tr>
+    <tr>
+      <td class="shatr first">ولولا ذاك قد سَوَّمْتُ مُهْرِي</td>
+      <td class="shatr last">وفي الرحمَـٰن للضُّعَفاء كافي</td>
+    </tr>
+    <tr>
+      <td class="shatr first">أبانا! مَن لنا إن غبتَ عَنَّا؟</td>
+      <td class="shatr last">وصارَ الحَيُّ بعدَك في اخْتِلافِ</td>
+    </tr>
+  </table>
+</div>
+<p class="text-lg md:text-xl leading-relaxed text-gray-800 dark:text-white mb-6">
+<p>وكان امرأةُ أبي حمزةَ الضَّبِّي لا تلدُ له إلا البناتِ، فطال ذلك به، فهجرها، وصار يبيتُ عند جيرانه، فمرَّ بها يوما وهي تُرَقِّصُ ابنتَه وتقول:</p>
+<div class="glass-rajaz-box">
+  <table class="rajaz-table">
+    <tr><td class="rajaz-shatr">ما لأبي حمزةَ لا يأتينا؟</td></tr>
+    <tr><td class="rajaz-shatr">يظَلُّ في البيتِ الذي يلِينا</td></tr>
+    <tr><td class="rajaz-shatr">غَضْبَانَ أَلَّا نَلِدَ البَنِينا</td></tr>
+    <tr><td class="rajaz-shatr">تالله ما ذلك في أيدينا</td></tr>
+    <tr><td class="rajaz-shatr">ليس لنا من أمرنا ما شِيْنا</td></tr>
+    <tr><td class="rajaz-shatr">وإنما نأخُذ ما أُعْطِينا</td></tr>
+    <tr><td class="rajaz-shatr">ونحنُ كالأرض لِزَارِعينا</td></tr>
+    <tr><td class="rajaz-shatr">نُنْبِتُ ما قد زرعوه فينا</td></tr>
+  </table>
+</div>
+<p class="text-lg md:text-xl leading-relaxed text-gray-800 dark:text-white mb-6">
+<p>فدخلَ وقبَّل رأسَ امرأته وابنته.</p>
+<p>وقد سقتُ لك جميعَ ما حضَرني في هذا المعنى، ليتَّضِحَ عندكَ وجهُه، ويزولَ عنك لَبْسُه، وتنكشفَ لك غُرَّتُه. وليس كل ما قيل في هذا المعنى واحدًا، بل منه المذموم، ومنه الحُلْوُ المُسْتَعْذَبُ. وأيضًا ليس كلُّ العرَب كانوا على هذا الحال مع النِّساء، ولكن كانت هذه الحال ظاهرةً في العرب، كثيرةً فيهم.</p>
+<p>فالذي كان عند الجميع: هو الخوف من عواقبِ هذه المرأة وما قد تجرُّه عليه من العار. فمِن العرب من كان يذهب به ذلك وسواه إلى بُغْضِها، وإهانتِها، والتحقيرِ منها، وتصغيرِ شأنها، وذَمِّها بإطلاق، كما كان ذلك عند جُفاة البدو وأمثالِهم، وقد يَصِلُ ذلك ببعضهم إلى التَّجَنِّي عليهنَّ ووصفهنَّ جميعًا بالخيانةِ والغَدْر والتَّلَوُّنِ، ونحو ذلك من الشَّناعات. ومن العربِ من كان يذهبُ به ذلك إلى الإشفاقِ عليها، والمبالغة في إكرامها وصَوْنِها، وشِدَّة الحرص على سَتْرها والمحاماة دونها، ونحو ذلك.</p>
+<p>فلما جاء الإسلامُ حَمِدَ لهم المذهبَ الثانيَ دون الأول. ولما جاء اللهُ بالإسلامِ رفع من شأن المرأة، ونهى عن ازدرائها وإهانتها، وكرَّمَها وأعلاها، وبيَّن حُقوقَها. فقد روى مسلم في صحيحه من حديث جابر الطويل، أنَّ النبي ﷺ قال: (ألا كُلُّ شيء من أمر الجاهلية موضوع تحت قدمي)، وفيه أنه قال: (فاتقوا الله في النساء). وكان هَدْيُه ﷺ معروفًا في إكرامه أهلَه، وتَحَبُّبِه إلى نسائه. وعند الترمذي من حديث عُروة بن الزبير عن عائشة رضي الله عنها أن النبي ﷺ قال: (خيركم خيركم لأهله، وأنا خيركم لأهلي).</p>
+<p>وقد استقرَّ هذا في نفوس الصحابة -رضوان الله عليهم- فتركوا ما كانوا عليه في تَعامُلِهم مع النساء إلى ما جاء به الشرعُ المُطهَّر، ولكنْ بقيَ بعضُ ذلك في تَعامُلِ البَدْو، فكان من ذلك أبياتُ الفرزدقِ المُتَقَدِّمِ ذِكْرُنَاها. ومن عجَبٍ أنَّ الفرزدقَ هو الذي افتخر بجَدِّه صَعْصَعَةَ بن ناجية الذي كان يُحْيِي الوئيد، فقال: (مِنَّا الذي منع الوائِدات * فأحيا الوئيد فلم تُوأَدِ) وقال: (ومنا الذي أحيا الوئيدَ، وغالبٌ * وعَمْرٌ، ومنا حاجبٌ والأقارع). وأحسب أنَّ الفرزدق لولا الإسلام لوأدَ بناته :).</p>
+<p>فظهرَ بما قدَّمْناه -إن شاء الله- أنَّ مُرادَ الخالِديَّيْن بالتخلُّف، هو معنى هذه الأبيات التي ساقُوها، أبياتِ ابنِ السُّلَيْك والأبياتِ التي قبلَهُ في معناه مما ساقوه في موضعه. وتخلُّفُها: ما فيها من التحقير من النساء، والإقذاعِ في سَبِّهِنَّ، ونحوِ ذلك من قلَّة المروءة. وقد يُشكل على ذلك أنهما قالا: (في ألفاظ هذا الشعر بعض التخلف)، فخصَّا الألفاظ، والجوابُ عليه: أنَّ اللفظ هو الذي يُؤدَّى به المعنى، فلا غضاضة في إطلاق أحدهما مرادا به الآخَرُ. ثمَّ إِنَّ الإقذاع قد حصل في الألفاظ، فلذاك وصفاها بالتخَلُّف. والعلمُ عند الله عز وجل.</p>
+<p>هذا وجهٌ.</p>
+<p><strong>والوجْه الثاني:</strong> أنهما أرادا خصوص أبياتِ ابنِ السُّلَيك، وأرادا بالتخلُّف: ما فيها من التعدِّي في الدُّعاء على تلك المرأة، وتمنِّي الشَّرِّ لها ونحو ذلك. وهذا قريبٌ من الوجه الأول.</p>
+<p><strong>والوجه الثالث:</strong> أنهما أرادا خصوص أبياتِ ابنِ السُّلَيك، وأرادا بالتخلُّف: نقدَ هذه الأبيات في تركيبها وبلاغتها وبيانها، وهذا الوجْه صعبٌ إثباتُه، وفيه كلامٌ طويل. وأَظْهَرُ الأَوْجُه عندي الأوَّل.</p>
+<p>والله تعالى أعلم.</p>
+<div class="w-24 h-1 bg-gradient-to-r from-transparent via-amber-500 to-transparent mx-auto my-6"></div>
+
+        </div>
+
+        <div class="mt-12 pt-8 border-t border-orange-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <a href="javascript:history.back()" class="text-orange-600 hover:text-orange-700 font-bold flex items-center gap-2 transition-colors text-sm md:text-base">
+                <span>→</span>
+                عُد إلى الصفحة السابقة
+            </a>
+            
+            <span class="text-gray-400 text-xs md:text-sm font-light">
+                2024-11-03
+            </span>
+            
+        </div>
+
+
+<div class="comments-glass-section" id="comments-section">
+
+    <div class="comments-header">
+        <div class="comments-header-icon">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/>
+            </svg>
+        </div>
+        <h3 class="comments-title">التعليقات</h3>
+        <span id="commentsCount" class="comments-count-badge" style="display:none"></span>
+    </div>
+
+    <div class="comment-form-glass">
+        <form id="commentForm">
+            <div class="form-field">
+                <div class="field-icon">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                    </svg>
+                </div>
+                <input id="authorName" type="text" placeholder="اسمك (إن أردتَّ)" maxlength="50" dir="rtl" class="glass-input">
+            </div>
+            <div class="form-field textarea-field">
+                <div class="field-icon textarea-icon">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                    </svg>
+                </div>
+                <textarea id="commentBody" placeholder="اكتب تعليقك هنا ..." maxlength="1500" required dir="rtl" class="glass-input glass-textarea"
+                    oninput="document.getElementById('charCount').textContent = this.value.length; document.getElementById('submitBtn').classList.toggle('btn-dim', !this.value.trim())"></textarea>
+            </div>
+            <div class="form-footer">
+                <span class="char-counter"><span id="charCount">0</span> / 1500</span>
+                <button type="submit" class="btn-submit-glass btn-dim" id="submitBtn">
+                    <span id="submitLabel">أرسِل التعليق</span>
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                    </svg>
+                </button>
+            </div>
+            <div id="formMsg" class="form-msg hidden"></div>
+        </form>
+    </div>
+
+    <div id="commentsList">
+        <div class="loading-state" id="loadingMsg">
+            <div class="loading-spinner"></div>
+            <span>جارٍ تحميل التعليقات...</span>
+        </div>
+    </div>
+
+</div>
+
+
+        </div>
+    </div>
+</div>
+
+<style>
+/* ===== Dark mode article ===== */
+body.dark #articleContent { color: #ffffff; }
+body.dark #articleContent p, body.dark #articleContent h1,
+body.dark #articleContent h2, body.dark #articleContent h3,
+body.dark #articleContent li { color: #ffffff; }
+body.dark #articleContent .text-orange-600, body.dark #articleContent .text-orange-400,
+body.dark #articleContent .text-gray-400, body.dark #articleContent .text-gray-300 { color: inherit !important; }
+body.dark .border-orange-100 { border-color: rgba(75,85,99,0.3); }
+body.dark .bg-orange-50 { background-color: #1f2937 !important; }
+body.dark a[class*="bg-orange-50"] { background-color: #1f2937 !important; }
+body.dark a[class*="hover:bg-orange-100"]:hover { background-color: #374151 !important; }
+body.dark a[class*="border-orange-200"] { border-color: #374151 !important; }
+body.dark a[class*="hover:border-orange-400"]:hover { border-color: #f97316 !important; }
+body.dark .content-section { background-color: rgba(31,41,55,0.8) !important; }
+body.dark blockquote { background-color: #1f2937 !important; border-color: #f97316 !important; }
+
+/* ===== Page buttons ===== */
+.button-tooltip-wrapper { position: relative; display: inline-flex; }
+.icon-btn {
+    display: flex; align-items: center; justify-content: center;
+    width: 2.5rem; height: 2.5rem;
+    background: linear-gradient(135deg, #fed7aa, #fdba74);
+    border-radius: 0.75rem; border: none; cursor: pointer;
+    transition: all 0.3s ease; color: #ea580c;
+}
+.icon-btn:hover { background: linear-gradient(135deg, #fdba74, #fb923c); transform: scale(1.1); }
+body.dark .icon-btn { background: linear-gradient(135deg,rgba(75,85,99,.8),rgba(55,65,81,.7)); color:#fbbf24; }
+body.dark .icon-btn:hover { background: linear-gradient(135deg,rgba(55,65,81,.9),rgba(75,85,99,.8)); }
+.button-tooltip {
+    position: absolute; top: calc(100% + 10px); left: 50%;
+    transform: translateX(-50%) translateY(-10px);
+    background: linear-gradient(135deg,rgba(255,255,255,.95),rgba(255,255,255,.85));
+    backdrop-filter: blur(10px); color: #ea580c;
+    padding: 8px 16px; border-radius: 12px; font-weight: bold; font-size: 14px;
+    white-space: nowrap; opacity: 0; visibility: hidden;
+    box-shadow: 0 10px 35px rgba(251,146,60,.25); border: 1px solid rgba(251,146,60,.15);
+    transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1); z-index: 9999; pointer-events: none;
+}
+.button-tooltip::before {
+    content:''; position:absolute; top:-8px; left:50%; transform:translateX(-50%);
+    border-width:8px; border-style:solid; border-color:transparent transparent rgba(255,255,255,.95) transparent;
+}
+.button-tooltip-wrapper:hover .button-tooltip { opacity:1; visibility:visible; transform:translateX(-50%) translateY(0); }
+
+/* تلميح خاص بالأزرار العائمة — يظهر عن اليمين (نحو وسط الشاشة) */
+.floating-actions .button-tooltip {
+    top: 50%; left: calc(100% + 12px); right: auto;
+    transform: translateX(-10px) translateY(-50%);
+}
+.floating-actions .button-tooltip::before {
+    top: 50%; left: -14px; right: auto; transform: translateY(-50%);
+    border-color: transparent rgba(255,255,255,.95) transparent transparent;
+}
+.floating-actions .button-tooltip-wrapper:hover .button-tooltip {
+    opacity: 1; visibility: visible; transform: translateX(0) translateY(-50%);
+}
+body.dark .floating-actions .button-tooltip::before {
+    border-color: transparent rgba(30,30,30,.98) transparent transparent;
+}
+body.dark .button-tooltip { background:linear-gradient(135deg,rgba(30,30,30,.98),rgba(40,40,40,.95)); color:#fbbf24; box-shadow:0 10px 35px rgba(0,0,0,.5); border:1px solid rgba(251,191,36,.25); }
+body.dark .button-tooltip::before { border-color:transparent transparent rgba(30,30,30,.98) transparent; }
+
+/* ===== Floating Action Buttons ===== */
+.floating-actions {
+    position: fixed;
+    bottom: 1.75rem;
+    left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    z-index: 1000;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    pointer-events: none;
+}
+.floating-actions.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+.floating-btn {
+    width: 2.75rem !important;
+    height: 2.75rem !important;
+    border-radius: 50% !important;
+    box-shadow: 0 4px 16px rgba(234,88,12,0.3) !important;
+}
+.floating-btn:hover {
+    transform: scale(1.12) !important;
+    box-shadow: 0 6px 20px rgba(234,88,12,0.4) !important;
+}
+body.dark .floating-btn {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5) !important;
+}
+
+/* ===== Floating Back Button ===== */
+.floating-back {
+    position: fixed;
+    bottom: 1.75rem;
+    right: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.6rem 1rem 0.6rem 0.75rem;
+    background: linear-gradient(135deg, #fed7aa, #fdba74);
+    color: #ea580c;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(234,88,12,0.3);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    direction: rtl;
+}
+.floating-back:hover {
+    background: linear-gradient(135deg, #fdba74, #fb923c);
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(234,88,12,0.4);
+    color: #c2410c;
+}
+.floating-back-label { line-height: 1; }
+body.dark .floating-back {
+    background: linear-gradient(135deg, rgba(75,85,99,0.9), rgba(55,65,81,0.85));
+    color: #fbbf24;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+}
+body.dark .floating-back:hover {
+    background: linear-gradient(135deg, rgba(55,65,81,0.95), rgba(75,85,99,0.9));
+    color: #f59e0b;
+}
+
+/* تقليص على الشاشات الصغيرة */
+@media (max-width: 480px) {
+    .floating-back-label { display: none; }
+    .floating-back { padding: 0.65rem; border-radius: 50%; }
+    .floating-actions { bottom: 1.25rem; left: 0.85rem; }
+    .floating-back { bottom: 1.25rem; right: 0.85rem; }
+}
+
+/* ===== COMMENTS SECTION ===== */
+.comments-glass-section {
+    margin-top: 3rem; padding-top: 2rem;
+    border-top: 1px solid rgba(251,146,60,0.2);
+}
+.comments-header {
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-bottom: 1.5rem; direction: rtl;
+}
+.comments-header-icon {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, #f59e0b, #ea580c);
+    border-radius: 12px; display: flex; align-items: center; justify-content: center;
+    color: white; box-shadow: 0 4px 12px rgba(234,88,12,0.35); flex-shrink: 0;
+}
+.comments-title { font-size: 1.2rem; font-weight: 800; color: #1a1a1a; letter-spacing: -0.02em; }
+body.dark .comments-title { color: #f9fafb; }
+.comments-count-badge {
+    background: linear-gradient(135deg,rgba(251,146,60,0.15),rgba(234,88,12,0.1));
+    border: 1px solid rgba(234,88,12,0.25); color: #ea580c;
+    font-size: 0.78rem; font-weight: 700; padding: 0.2rem 0.7rem; border-radius: 999px;
+}
+body.dark .comments-count-badge { background: rgba(234,88,12,0.15); border-color: rgba(234,88,12,0.3); }
+
+/* Form glass */
+.comment-form-glass {
+    background: linear-gradient(135deg, rgba(255,255,255,0.7), rgba(255,248,240,0.6), rgba(255,237,213,0.5));
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(251,146,60,0.25); border-radius: 1.5rem;
+    padding: 1.5rem; margin-bottom: 1.75rem;
+    box-shadow: 0 8px 32px rgba(234,88,12,0.08), inset 0 1px 0 rgba(255,255,255,0.8);
+    position: relative; overflow: hidden;
+}
+.comment-form-glass::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:1px;
+    background: linear-gradient(90deg,transparent,rgba(251,146,60,0.4),transparent);
+}
+body.dark .comment-form-glass {
+    background: linear-gradient(135deg, rgba(17,24,39,0.85), rgba(24,32,44,0.8), rgba(31,41,55,0.75));
+    border-color: rgba(251,146,60,0.15);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+body.dark .comment-form-glass::before {
+    background: linear-gradient(90deg,transparent,rgba(251,146,60,0.2),transparent);
+}
+
+.form-field { position: relative; margin-bottom: 0.85rem; direction: rtl; }
+.field-icon { position:absolute; right:0.9rem; top:50%; transform:translateY(-50%); color:#f97316; pointer-events:none; z-index:1; }
+.textarea-field .field-icon { top:0.9rem; transform:none; }
+
+.glass-input {
+    width:100%; padding:0.8rem 2.5rem 0.8rem 1rem;
+    background:rgba(255,255,255,0.6); backdrop-filter:blur(10px);
+    border:1.5px solid rgba(251,146,60,0.2); border-radius:0.875rem;
+    font-family:inherit; font-size:0.95rem; color:#1a1a1a;
+    outline:none; text-align:right; transition:all 0.25s ease; box-sizing:border-box;
+}
+.glass-input:focus {
+    border-color:#ea580c; background:rgba(255,255,255,0.85);
+    box-shadow:0 0 0 3px rgba(234,88,12,0.12),0 4px 16px rgba(234,88,12,0.08);
+}
+.glass-input::placeholder { color:#c4a882; }
+body.dark .glass-input { background:rgba(255,255,255,0.05)!important; border-color:rgba(251,146,60,0.15)!important; color:#f3f4f6!important; }
+body.dark .glass-input:focus { background:rgba(255,255,255,0.09)!important; border-color:#f97316!important; box-shadow:0 0 0 3px rgba(249,115,22,0.12)!important; }
+body.dark .glass-input::placeholder { color:#4b5563!important; }
+.glass-textarea { min-height:120px; resize:none; padding-top:0.85rem; }
+
+.form-footer { display:flex; justify-content:space-between; align-items:center; gap:1rem; direction:rtl; flex-wrap:wrap; }
+.char-counter { font-size:0.8rem; color:#b0a090; font-variant-numeric:tabular-nums; }
+body.dark .char-counter { color:#6b7280; }
+
+/* زر الإرسال — نفس تصميم أزرار المشاركة والنسخ */
+.btn-submit-glass {
+    display: flex; align-items: center; gap: 0.6rem;
+    padding: 0.7rem 1.4rem;
+    background: linear-gradient(135deg, #fed7aa, #fdba74);
+    color: #ea580c !important;
+    border: none; border-radius: 0.75rem;
+    font-family: inherit; font-size: 0.95rem; font-weight: 700;
+    cursor: pointer; transition: all 0.3s ease;
+    position: relative; overflow: hidden;
+}
+.btn-submit-glass:hover { background: linear-gradient(135deg, #fdba74, #fb923c); transform: scale(1.05); }
+.btn-submit-glass:active { transform: scale(1); }
+.btn-submit-glass:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.btn-submit-glass, .btn-submit-glass span { color: #ea580c !important; }
+.btn-submit-glass.btn-dim { opacity: 0.4; cursor: not-allowed; }
+body.dark .btn-submit-glass { background: linear-gradient(135deg,rgba(75,85,99,0.8),rgba(55,65,81,0.7)); color:#fbbf24!important; }
+body.dark .btn-submit-glass span { color:#fbbf24!important; }
+body.dark .btn-submit-glass:hover { background: linear-gradient(135deg,rgba(55,65,81,0.9),rgba(75,85,99,0.8)); }
+body.dark .btn-submit-glass.btn-dim { opacity: 0.35; }
+
+.form-msg { margin-top:0.6rem; padding:0.6rem 1rem; border-radius:0.75rem; font-size:0.88rem; text-align:center; font-weight:500; }
+.form-msg.success { background:rgba(16,185,129,0.12); color:#059669; border:1px solid rgba(16,185,129,0.25); }
+.form-msg.error { background:rgba(239,68,68,0.1); color:#dc2626; border:1px solid rgba(239,68,68,0.2); }
+.form-msg.hidden { display:none; }
+
+.loading-state { display:flex; align-items:center; justify-content:center; gap:0.75rem; padding:2rem; color:#b0a090; font-size:0.9rem; }
+.loading-spinner { width:20px; height:20px; border:2px solid rgba(234,88,12,0.2); border-top-color:#ea580c; border-radius:50%; animation:spin 0.8s linear infinite; }
+@keyframes spin { to { transform:rotate(360deg); } }
+
+/* ===== COMMENT CARDS ===== */
+.comment-card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.65), rgba(255,248,240,0.55));
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(251,146,60,0.18); border-radius: 1.25rem;
+    padding: 1.1rem 1.25rem; margin-bottom: 0.85rem;
+    direction: rtl; transition: all 0.2s ease;
+    box-shadow: 0 2px 12px rgba(234,88,12,0.05), inset 0 1px 0 rgba(255,255,255,0.7);
+    position: relative;
+}
+.comment-card::before {
+    content:''; position:absolute; top:0; right:0; width:3px; height:100%;
+    background:linear-gradient(180deg,#f59e0b,#ea580c); border-radius:0 1.25rem 1.25rem 0;
+    opacity:0; transition:opacity 0.2s;
+}
+.comment-card:hover { border-color:rgba(234,88,12,0.3); box-shadow:0 6px 24px rgba(234,88,12,0.1); }
+.comment-card:hover::before { opacity:1; }
+body.dark .comment-card { background:linear-gradient(135deg,rgba(17,24,39,0.8),rgba(31,41,55,0.75)); border-color:rgba(251,146,60,0.12); box-shadow:0 2px 12px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.03); }
+body.dark .comment-card:hover { border-color:rgba(249,115,22,0.28); box-shadow:0 6px 24px rgba(0,0,0,0.4); }
+
+/* تعليق مخفي */
+.comment-hidden {
+    opacity: 0.72;
+    border-color: rgba(107,114,128,0.3) !important;
+    background: repeating-linear-gradient(45deg, rgba(107,114,128,0.03), rgba(107,114,128,0.03) 4px, transparent 4px, transparent 12px) !important;
+}
+body.dark .comment-hidden { border-color:rgba(107,114,128,0.25)!important; }
+.comment-hidden-label {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    font-size: 0.68rem; font-weight: 700; color: #9ca3af;
+    background: rgba(107,114,128,0.12); padding: 0.2rem 0.55rem;
+    border-radius: 999px; border: 1px solid rgba(107,114,128,0.2);
+    margin-bottom: 0.5rem;
+}
+
+.comment-meta { display:flex; align-items:center; gap:0.5rem; margin-bottom:0.65rem; flex-wrap:wrap; }
+.comment-avatar {
+    width:46px; height:46px; border-radius:50%;
+    background: linear-gradient(135deg, #fed7aa, #fdba74);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:1rem; color:#ea580c;
+    flex-shrink:0; box-shadow:0 2px 8px rgba(234,88,12,0.2);
+}
+body.dark .comment-avatar {
+    background: linear-gradient(135deg, rgba(75,85,99,0.8), rgba(55,65,81,0.7));
+    color: #fbbf24;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.comment-avatar.admin-av {
+    padding: 0;
+}
+body.dark .comment-avatar.admin-av {
+    padding: 0;
+}
+.comment-avatar.admin-av img {
+    width: 100%; height: 100%; object-fit: contain;
+}
+body.dark .comment-avatar.admin-av img {
+    filter: brightness(0) invert(1);
+}
+.comment-author { font-weight:700; font-size:0.92rem; color:#1a1a1a; }
+body.dark .comment-author { color:#f3f4f6; }
+.comment-uid { font-size:0.7rem; color:#ea580c; background:rgba(234,88,12,0.1); padding:0.1rem 0.45rem; border-radius:999px; border:1px solid rgba(234,88,12,0.2); flex-shrink:0; font-weight:600; }
+body.dark .comment-uid { background:rgba(234,88,12,0.15); border-color:rgba(234,88,12,0.25); }
+.owner-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.22rem 0.65rem 0.22rem 0.5rem;
+    border-radius: 0.55rem;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #fed7aa, #fdba74);
+    color: #ea580c;
+    box-shadow: 0 2px 6px rgba(234,88,12,0.18);
+    border: none;
+}
+body.dark .owner-badge {
+    background: linear-gradient(135deg, rgba(75,85,99,0.8), rgba(55,65,81,0.7));
+    color: #fbbf24;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+.comment-time { font-size:0.73rem; color:#b0a090; margin-right:auto; }
+body.dark .comment-time { color:#6b7280; }
+.comment-body { font-size:0.93rem; color:#374151; line-height:1.8; margin-bottom:0.65rem; word-break:break-word; }
+body.dark .comment-body { color:#d1d5db; }
+
+.comment-actions { display:flex; gap:0.35rem; flex-wrap:wrap; }
+.btn-action {
+    display:flex; align-items:center; gap:0.3rem;
+    font-size:0.75rem; padding:0.28rem 0.65rem;
+    border-radius:0.55rem; border:1px solid transparent;
+    cursor:pointer; background:transparent; font-family:inherit; font-weight:600;
+    transition:all 0.15s ease;
+}
+.btn-reply { color:#ea580c; border-color:rgba(234,88,12,0.25); background:rgba(234,88,12,0.05); }
+.btn-reply:hover { background:rgba(234,88,12,0.12); border-color:rgba(234,88,12,0.4); }
+.btn-edit-c { color:#6b7280; border-color:rgba(107,114,128,0.2); background:rgba(107,114,128,0.05); }
+.btn-edit-c:hover { background:rgba(107,114,128,0.1); }
+.btn-hide { color:#6b7280; border-color:rgba(107,114,128,0.2); background:rgba(107,114,128,0.05); }
+.btn-hide:hover { background:rgba(107,114,128,0.1); }
+.btn-delete { color:#dc2626; border-color:rgba(220,38,38,0.2); background:rgba(220,38,38,0.05); }
+.btn-delete:hover { background:rgba(220,38,38,0.12); border-color:rgba(220,38,38,0.35); }
+.btn-unhide { color:#059669; border-color:rgba(5,150,105,0.25); background:rgba(5,150,105,0.06); }
+.btn-unhide:hover { background:rgba(5,150,105,0.12); }
+body.dark .btn-edit-c, body.dark .btn-hide { border-color:rgba(107,114,128,0.2); color:#9ca3af; }
+body.dark .btn-edit-c:hover, body.dark .btn-hide:hover { background:rgba(107,114,128,0.15); }
+body.dark .btn-reply { border-color:rgba(234,88,12,0.2); background:rgba(234,88,12,0.08); }
+body.dark .btn-delete { border-color:rgba(220,38,38,0.2); background:rgba(220,38,38,0.08); }
+body.dark .btn-unhide { border-color:rgba(5,150,105,0.2); background:rgba(5,150,105,0.08); }
+
+/* الردود */
+.replies-container { margin-top:0.75rem; margin-right:1.5rem; padding-right:1rem; border-right:2px solid rgba(234,88,12,0.25); }
+body.dark .replies-container { border-color:rgba(234,88,12,0.2); }
+.reply-card { background:rgba(255,255,255,0.5); backdrop-filter:blur(10px); border:1px solid rgba(251,146,60,0.15); border-radius:1rem; padding:0.8rem 1rem; margin-top:0.5rem; direction:rtl; transition:all 0.2s; }
+.reply-card:hover { border-color:rgba(234,88,12,0.25); }
+body.dark .reply-card { background:rgba(10,14,23,0.7); border-color:rgba(251,146,60,0.1); }
+
+/* نموذج الرد */
+.reply-form-wrap { margin-top:0.75rem; background:rgba(255,248,240,0.6); backdrop-filter:blur(10px); border:1px solid rgba(234,88,12,0.2); border-radius:1rem; padding:0.85rem; display:flex; flex-direction:column; gap:0.5rem; }
+body.dark .reply-form-wrap { background:rgba(17,24,39,0.7); border-color:rgba(234,88,12,0.18); }
+.reply-form-wrap input { width:100%; padding:0.6rem 0.9rem; background:rgba(255,255,255,0.65); border:1px solid rgba(234,88,12,0.2); border-radius:0.75rem; font-family:inherit; font-size:0.88rem; color:#1a1a1a; outline:none; text-align:right; direction:rtl; transition:all 0.2s; box-sizing:border-box; }
+.reply-form-wrap input:focus { border-color:#ea580c; background:white; box-shadow:0 0 0 3px rgba(234,88,12,0.1); }
+body.dark .reply-form-wrap input { background:rgba(255,255,255,0.05)!important; border-color:rgba(234,88,12,0.2)!important; color:#f3f4f6!important; }
+body.dark .reply-form-wrap input:focus { background:rgba(255,255,255,0.09)!important; border-color:#f97316!important; }
+.reply-form-wrap input::placeholder { color:#c4a882; }
+body.dark .reply-form-wrap input::placeholder { color:#4b5563!important; }
+.btn-send-reply { align-self:flex-end; display:flex; align-items:center; gap:0.4rem; padding:0.55rem 1.1rem; background:linear-gradient(135deg,#f59e0b,#ea580c); color:white; border:none; border-radius:0.75rem; font-family:inherit; font-size:0.85rem; font-weight:700; cursor:pointer; transition:all 0.2s; box-shadow:0 3px 10px rgba(234,88,12,0.3); }
+.btn-send-reply:hover { background:linear-gradient(135deg,#ea580c,#c2410c); transform:translateY(-1px); }
+
+/* تعديل */
+.edit-wrap { margin-top:0.5rem; }
+.edit-wrap textarea { width:100%; padding:0.7rem 1rem; background:rgba(255,255,255,0.7); border:1.5px solid #ea580c; border-radius:0.875rem; font-family:inherit; font-size:0.92rem; color:#1a1a1a; outline:none; text-align:right; direction:rtl; resize:none; min-height:80px; box-sizing:border-box; box-shadow:0 0 0 3px rgba(234,88,12,0.1); }
+body.dark .edit-wrap textarea { background:rgba(17,24,39,0.8)!important; color:#f3f4f6!important; border-color:#f97316!important; }
+.edit-actions { display:flex; gap:0.5rem; margin-top:0.5rem; justify-content:flex-end; }
+.btn-save { display:flex; align-items:center; gap:0.3rem; background:linear-gradient(135deg,#f59e0b,#ea580c); color:white; border:none; border-radius:0.6rem; padding:0.4rem 0.9rem; font-family:inherit; font-size:0.82rem; font-weight:700; cursor:pointer; }
+.btn-cancel { display:flex; align-items:center; gap:0.3rem; background:transparent; color:#6b7280; border:1px solid rgba(107,114,128,0.3); border-radius:0.6rem; padding:0.4rem 0.9rem; font-family:inherit; font-size:0.82rem; cursor:pointer; }
+body.dark .btn-cancel { border-color:rgba(107,114,128,0.3); color:#9ca3af; }
+body.dark .btn-cancel:hover { background:rgba(107,114,128,0.12); }
+
+.empty-comments { text-align:center; padding:2.5rem 1rem; color:#b0a090; font-size:0.92rem; background:rgba(255,248,240,0.4); border-radius:1rem; border:1px dashed rgba(234,88,12,0.2); }
+body.dark .empty-comments { background:rgba(31,41,55,0.4); color:#6b7280; }
+</style>
+
+<script>
+// ====================================================
+// الإعدادات — عدّل ما تشاء هنا
+// ====================================================
+const SUPABASE_URL  = 'https://eoccraiykkgefxgnoqvb.supabase.co';
+const SUPABASE_KEY  = 'sb_publishable_1xUC_60erYhjnL3u294qVg_UZ7rBXto';
+const ADMIN_HASH    = 'e8cde359ae5242c5022ba199a0aebbb351bc154acdd79449ee6e71520861ae20';
+const ADMIN_NAME    = 'سيف العشيرة';
+const ADMIN_BADGE  = 'صاحب الصفحة';
+const ANONYMOUS    = 'مجهول';
+const PAGE_SLUG    = window.location.pathname.replace(/\//g,'_').replace(/^_|_$/g,'') || 'home';
+
+const TXT = {
+    loading:       'جارٍ تحميل التعليقات...',
+    empty:         'كن أوَّلَ مُعلِّق! 🌟',
+    loadError:     'تعذّر تحميل التعليقات.',
+    sending:       'جارٍ الإرسال...',
+    sent:          '✅ نُشر تعليقك!',
+    sendError:     '❌ حدث خطأ، حاول مرة أخرى.',
+    replyEmpty:    'كيف يكون الردُّ فارغًا؟ إذا أردتَّه فارغًا فلا تَرُدّ!',
+    replyError:    'حدث خطأ أثناء إرسال الرد.',
+    hideConfirm:   'إذا أخفيتَ تعليقك، فلن يراهُ إلا صاحب الموقع.',
+    hideError:     'حدث خطأ أثناء الإخفاء.',
+    deleteConfirm: 'سيُحذَف هذا التعليق، تأكَّدْ أنْ تكون مُخطِئًا!',
+    deleteError:   'حدث خطأ أثناء الحذف.',
+    saveError:     'حدث خطأ أثناء الحفظ.',
+    btnReply:      'رد',
+    btnEdit:       'تعديل',
+    btnHide:       'إخفاء',
+    btnDelete:     'حذف',
+    btnSend:       'إرسال التعليق',
+    btnSendReply:  'إرسال',
+    btnSave:       'حفظ',
+    btnCancel:     'إلغاء',
+    now:           'الآن',
+    minutesAgo:    'منذ {n} دقيقة',
+    hoursAgo:      'منذ {n} ساعة',
+    daysAgo:       'منذ {n} يوم',
+};
+// ====================================================
+
+function getMyUid() {
+    let uid = localStorage.getItem('comment_uid');
+    if (!uid) { uid = Math.random().toString(36).substr(2,4); localStorage.setItem('comment_uid', uid); }
+    return uid;
+}
+const MY_UID = getMyUid();
+
+let isAdmin = false;
+
+async function sha256(text) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+async function initAdmin() {
+    if (sessionStorage.getItem('is_admin') === '1') {
+        isAdmin = true;
+    } else {
+        const param = new URLSearchParams(window.location.search).get('admin');
+        if (param && await sha256(param) === ADMIN_HASH) {
+            isAdmin = true;
+            sessionStorage.setItem('is_admin', '1');
+            // نحذف كلمة السر من شريط العنوان دون تحديث الصفحة
+            const clean = window.location.pathname + window.location.hash;
+            history.replaceState(null, '', clean);
+        }
+    }
+    if (isAdmin) {
+        const ni = document.getElementById('authorName');
+        if (ni) { ni.value = ADMIN_NAME; ni.readOnly = true; ni.style.opacity = '0.75'; }
+    }
+    loadComments();
+}
+
+initAdmin();
+
+async function sbFetch(path, opts = {}) {
+    const headers = {
+        'apikey': SUPABASE_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_KEY,
+        'Content-Type': 'application/json',
+        ...(opts.headers || {})
+    };
+    const res = await fetch(SUPABASE_URL + '/rest/v1/' + path, { ...opts, headers });
+    if (!res.ok && res.status !== 204) {
+        const e = await res.json().catch(() => ({}));
+        throw new Error(e.message || 'خطأ');
+    }
+    if (res.status === 204) return null;
+    return res.json();
+}
+
+async function loadComments() {
+    const list = document.getElementById('commentsList');
+    try {
+        const data = await sbFetch(`comments?page_slug=eq.${encodeURIComponent(PAGE_SLUG)}&order=created_at.asc&select=*`);
+        const visible = isAdmin ? data : data.filter(c => !c.is_hidden);
+        const top = visible.filter(c => !c.parent_id);
+        const allReplies = visible.filter(c => c.parent_id);
+
+        const badge = document.getElementById('commentsCount');
+        const publicCount = data.filter(c => !c.parent_id && !c.is_hidden).length;
+        if (badge) {
+            if (publicCount) { badge.textContent = arabicCount(publicCount, 'تعليق', 'تعليقان', 'تعليقات'); badge.style.display = ''; }
+            else { badge.style.display = 'none'; }
+        }
+
+        if (top.length === 0) { list.innerHTML = `<div class="empty-comments">${TXT.empty}</div>`; return; }
+        list.innerHTML = '';
+        top.forEach(c => list.appendChild(buildCard(c, allReplies, false)));
+    } catch(e) {
+        list.innerHTML = `<div class="empty-comments">${TXT.loadError}</div>`;
+    }
+}
+
+function buildCard(c, allReplies, isReply) {
+    const myComment = c.author_uid === MY_UID;
+    const isOwner   = c.author_name === ADMIN_NAME;
+    const hiddenClass = c.is_hidden ? ' comment-hidden' : '';
+    const div = document.createElement('div');
+    div.className = (isReply ? 'reply-card' : 'comment-card') + hiddenClass;
+    div.id = 'comment-' + c.id;
+
+    const initial = (c.author_name || ANONYMOUS)[0];
+    const timeStr = relativeTime(c.created_at);
+    const badgeHtml  = isOwner ? `<span class="owner-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;opacity:0.9"><path d="M5 16L3 6l5.5 4.5L12 3l3.5 7.5L21 6l-2 10H5zm0 2h14v2H5v-2z"/></svg>${ADMIN_BADGE}</span>` : '';
+    const uidHtml    = !isOwner ? `<span class="comment-uid">#${c.author_uid}</span>` : '';
+    const avClass    = isOwner ? 'comment-avatar admin-av' : 'comment-avatar';
+    const hiddenLbl  = c.is_hidden ? `<div class="comment-hidden-label"><svg width="11" height="11" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/></svg> مخفي عن الزوار</div>` : '';
+
+    const icoReply  = `<svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/></svg>`;
+    const icoEdit   = `<svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>`;
+    const icoHide   = `<svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/></svg>`;
+    const icoShow   = `<svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>`;
+    const icoDelete = `<svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>`;
+
+    const avContent = isOwner
+        ? `<img src="/icon.svg" alt="صاحب الموقع">`
+        : initial;
+
+    div.innerHTML = `
+        <div class="comment-meta">
+            <div class="${avClass}">${avContent}</div>
+            <span class="comment-author">${escHtml(c.author_name || ANONYMOUS)}</span>
+            ${uidHtml}
+            ${badgeHtml}
+            <span class="comment-time">${timeStr}</span>
+        </div>
+        ${hiddenLbl}
+        <div class="comment-body" id="body-${c.id}" style="white-space:pre-wrap">${escHtml(c.body)}</div>
+        <div class="comment-actions">
+            ${!isReply ? `<button class="btn-action btn-reply" onclick="toggleReplyForm('${c.id}')">${icoReply} ${TXT.btnReply}</button>` : ''}
+            ${myComment ? `<button class="btn-action btn-edit-c" onclick="toggleEdit('${c.id}',\`${escJs(c.body)}\`)">${icoEdit} ${TXT.btnEdit}</button>` : ''}
+            ${myComment && !c.is_hidden ? `<button class="btn-action btn-hide" onclick="hideComment('${c.id}')">${icoHide} ${TXT.btnHide}</button>` : ''}
+            ${isAdmin && c.is_hidden ? `<button class="btn-action btn-unhide" onclick="unhideComment('${c.id}')">${icoShow} إظهار</button>` : ''}
+            ${(myComment || isAdmin) ? `<button class="btn-action btn-delete" onclick="deleteComment('${c.id}')">${icoDelete} ${TXT.btnDelete}</button>` : ''}
+        </div>
+        <div id="edit-form-${c.id}"></div>
+        <div id="reply-form-${c.id}"></div>
+    `;
+
+    // الردود المباشرة فقط لهذا التعليق
+    const directReplies = allReplies.filter(r => r.parent_id === c.id);
+    if (directReplies.length > 0) {
+        const rd = document.createElement('div');
+        rd.className = 'replies-container';
+        directReplies.forEach(r => rd.appendChild(buildCard(r, allReplies, true)));
+        div.appendChild(rd);
+    }
+    return div;
+}
+
+function toggleReplyForm(commentId) {
+    const container = document.getElementById('reply-form-' + commentId);
+    if (container.innerHTML) { container.innerHTML = ''; return; }
+    const defName = isAdmin ? ADMIN_NAME : '';
+    const roAttr  = isAdmin ? 'readonly style="opacity:0.75"' : '';
+    container.innerHTML = `
+        <div class="reply-form-wrap">
+            <input type="text" id="rn-${commentId}" placeholder="اسمك (اختياري)" maxlength="50" value="${defName}" ${roAttr}>
+            <input type="text" id="rb-${commentId}" placeholder="اكتب ردك..." maxlength="500">
+            <button class="btn-send-reply" onclick="submitReply('${commentId}')">
+                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                ${TXT.btnSendReply}
+            </button>
+        </div>
+    `;
+    document.getElementById('rb-' + commentId).focus();
+}
+
+async function submitReply(commentId) {
+    const name = document.getElementById('rn-' + commentId).value.trim();
+    const body = document.getElementById('rb-' + commentId).value.trim();
+    if (!body) { alert(TXT.replyEmpty); return; }
+    if (!isAdmin && name === ADMIN_NAME) { alert('هذا الاسم محجوز لصاحب الموقع.'); return; }
+    try {
+        await sbFetch('comments', {
+            method: 'POST', headers: { 'Prefer': 'return=representation' },
+            body: JSON.stringify({ page_slug: PAGE_SLUG, author_name: name || ANONYMOUS, author_uid: MY_UID, body, parent_id: commentId })
+        });
+        document.getElementById('reply-form-' + commentId).innerHTML = '';
+        await loadComments();
+    } catch(e) { alert(TXT.replyError); }
+}
+
+function toggleEdit(id, cur) {
+    const con = document.getElementById('edit-form-' + id);
+    const bod = document.getElementById('body-' + id);
+    if (con.innerHTML) { con.innerHTML = ''; bod.style.display = ''; return; }
+    bod.style.display = 'none';
+    const icoSave   = `<svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>`;
+    const icoCancel = `<svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>`;
+    con.innerHTML = `
+        <div class="edit-wrap">
+            <textarea id="et-${id}">${escHtml(cur)}</textarea>
+            <div class="edit-actions">
+                <button class="btn-cancel" onclick="toggleEdit('${id}','')">${icoCancel} ${TXT.btnCancel}</button>
+                <button class="btn-save" onclick="saveEdit('${id}')">${icoSave} ${TXT.btnSave}</button>
+            </div>
+        </div>
+    `;
+}
+
+async function saveEdit(id) {
+    const v = document.getElementById('et-' + id).value.trim();
+    if (!v) return;
+    try {
+        await sbFetch(`comments?id=eq.${id}`, { method: 'PATCH', headers: { 'Prefer': 'return=representation' }, body: JSON.stringify({ body: v }) });
+        await loadComments();
+    } catch(e) { alert(TXT.saveError); }
+}
+
+async function hideComment(id) {
+    if (!confirm(TXT.hideConfirm)) return;
+    try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/comments?id=eq.${id}`, {
+            method: 'PATCH',
+            headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+            body: JSON.stringify({ is_hidden: true })
+        });
+        if (!res.ok && res.status !== 204) { const e = await res.json().catch(()=>({})); throw new Error(e.message||'خطأ'); }
+        await loadComments();
+    } catch(e) { alert(TXT.hideError + ': ' + e.message); }
+}
+
+async function unhideComment(id) {
+    try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/comments?id=eq.${id}`, {
+            method: 'PATCH',
+            headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+            body: JSON.stringify({ is_hidden: false })
+        });
+        if (!res.ok && res.status !== 204) throw new Error('خطأ');
+        await loadComments();
+    } catch(e) { alert('حدث خطأ أثناء الإظهار.'); }
+}
+
+async function deleteComment(id) {
+    if (!confirm(TXT.deleteConfirm)) return;
+    try {
+        await sbFetch(`comments?id=eq.${id}`, { method: 'DELETE', headers: { 'Prefer': 'return=minimal' } });
+        await loadComments();
+    } catch(e) { alert(TXT.deleteError); }
+}
+
+document.getElementById('commentForm')?.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const name = document.getElementById('authorName').value.trim();
+    const body = document.getElementById('commentBody').value.trim();
+    const btn  = document.getElementById('submitBtn');
+    const lbl  = document.getElementById('submitLabel');
+    const msg  = document.getElementById('formMsg');
+    if (!body) return;
+    if (!isAdmin && name === ADMIN_NAME) {
+        msg.textContent = 'هذا الاسم محجوز لصاحب الموقع.';
+        msg.className = 'form-msg error';
+        setTimeout(() => { msg.className = 'form-msg hidden'; }, 3500);
+        return;
+    }
+    btn.disabled = true; lbl.textContent = TXT.sending;
+    msg.className = 'form-msg hidden';
+    try {
+        await sbFetch('comments', {
+            method: 'POST', headers: { 'Prefer': 'return=representation' },
+            body: JSON.stringify({ page_slug: PAGE_SLUG, author_name: name || ANONYMOUS, author_uid: MY_UID, body })
+        });
+        document.getElementById('commentBody').value = '';
+        document.getElementById('charCount').textContent = '0';
+        document.getElementById('submitBtn').classList.add('btn-dim');
+        msg.textContent = TXT.sent; msg.className = 'form-msg success';
+        setTimeout(() => { msg.className = 'form-msg hidden'; }, 3500);
+        await loadComments();
+    } catch(e) {
+        msg.textContent = TXT.sendError; msg.className = 'form-msg error';
+    } finally {
+        btn.disabled = false; lbl.textContent = TXT.btnSend;
+    }
+});
+
+function escHtml(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function escJs(s)   { return String(s||'').replace(/`/g,'\\`').replace(/\$/g,'\\$'); }
+function arabicCount(n, one, two, few, many) {
+    // one = نص المفرد (1)، two = نص المثنى (2)، few = جمع القلة (3-10)، many = جمع الكثرة (11+)
+    // إذا لم يُمرَّر many فنستخدم one لـ 11+
+    if (!many) many = one;
+    if (n === 1) return one;
+    if (n === 2) return two;
+    if (n >= 3 && n <= 10) return `${n} ${few}`;
+    return `${n} ${many}`;
+}
+function relativeTime(iso) {
+    const date = new Date(iso);
+    const d = Math.floor((Date.now() - date) / 1000);
+
+    const HIJRI_MONTHS = ['محرم','صفر','ربيع الأول','ربيع الآخر','جمادى الأولى','جمادى الآخرة','رجب','شعبان','رمضان','شوال','ذو القعدة','ذو الحجة'];
+    const WEEKDAYS = {Sunday:'الأحد',Monday:'الاثنين',Tuesday:'الثلاثاء',Wednesday:'الأربعاء',Thursday:'الخميس',Friday:'الجمعة',Saturday:'السبت'};
+
+    const toWestern = s => String(s).replace(/[٠-٩]/g, d => d.charCodeAt(0) - 0x0660);
+
+    const p = Object.fromEntries(
+        new Intl.DateTimeFormat('ar-SA-u-ca-islamic-umalqura', {
+            weekday:'long', day:'numeric', month:'numeric', year:'numeric',
+            hour:'2-digit', minute:'2-digit', hour12:true
+        }).formatToParts(date).map(({type,value}) => [type,value])
+    );
+
+    const hMonth   = parseInt(toWestern(p.month));
+    const hAmPm    = date.getHours() < 12 ? 'صباحًا' : 'مساءًا';
+    const fullDate = `${p.year} هـ / ${p.month} (${HIJRI_MONTHS[hMonth-1]}) / ${p.day} (${WEEKDAYS[p.weekday]||p.weekday}) — ${p.hour}:${p.minute} ${hAmPm}`;
+
+let relative = '';
+    const mins  = Math.floor(d/60);
+    const hours = Math.floor(d/3600);
+    const dys   = Math.floor(d/86400);
+    if (d < 60)          relative = 'الآن';
+    else if (d < 3600)   relative = 'منذ ' + arabicCount(mins,  'دقيقة واحدة',  'دقيقتين',  'دقائق',  'دقيقة');
+    else if (d < 86400)  relative = 'منذ ' + arabicCount(hours, 'ساعة واحدة',   'ساعتين',   'ساعات',  'ساعة');
+    else if (d < 604800) relative = 'منذ ' + arabicCount(dys,  'يوم واحد',     'يومين',    'أيام',   'يوم');
+
+    return relative ? `${fullDate} &nbsp;·&nbsp; ${relative}` : fullDate;
+}
+</script>
+
+<script>
+// ===== Floating buttons scroll logic =====
+(function() {
+    const actions = document.getElementById('floatingActions');
+    if (!actions) return;
+    const THRESHOLD = 200;
+    function onScroll() {
+        if (window.scrollY > THRESHOLD) {
+            actions.style.display = 'flex';
+            requestAnimationFrame(() => actions.classList.add('visible'));
+        } else {
+            actions.classList.remove('visible');
+            setTimeout(() => { if (window.scrollY <= THRESHOLD) actions.style.display = 'none'; }, 350);
+        }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+})();
+
+function copyContent() {
+  const article = document.getElementById('articleContent');
+  if (!article) return;
+
+  const text = article.innerText
+    .replace(/ـ/g, '')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+
+  navigator.clipboard.writeText(text).then(() => {
+    const toast = document.getElementById('toast');
+    if (toast) {
+      toast.textContent = 'نُسِخ النص!';
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+  }).catch(err => console.warn('فشل النسخ:', err));
+}
+function shareContent() {
+    const title = document.querySelector('h2.gradient-text').innerText;
+    const url = window.location.href;
+    if (navigator.share) {
+        navigator.share({ title, url }).catch(err => console.log('Error sharing:', err));
+    } else {
+        navigator.clipboard.writeText(url).then(() => {
+            const toast = document.getElementById('toast');
+            if (toast) { toast.textContent = 'نُسِخ الرابط!'; toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'),3000); }
+        }).catch(err => console.warn('فشل النسخ:', err));
+    }
+}
+</script>
+
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="glass border-t border-orange-200/50 transition-all duration-300 mt-auto w-full" id="footer" data-pagefind-ignore>
+        <div class="w-full px-4 py-8">
+            <div class="w-full mx-auto">
+                <div class="text-center">
+                    <div class="flex justify-center gap-6 mb-6">
+                        <div class="relative social-hover-effect">
+                            <a href="https://www.youtube.com/@i_o_i_u" target="_blank" 
+                               class="w-14 h-14 rounded-xl bg-gradient-to-r from-orange-100 to-amber-100 hover:from-orange-200 hover:to-amber-200 transition-all duration-300 p-3 social-link flex items-center justify-center"
+                               id="youtube-link">
+                                <img src="/youtube-icon.svg" alt="يوتيوب" class="w-8 h-8 object-contain transition-all duration-300">
+                            </a>
+                            <span class="social-tooltip">قناة اليُتْيوب</span>
+                        </div>
+                        
+                        <div class="relative social-hover-effect">
+                            <a href="https://t.me/i_o_i_u" target="_blank" 
+                               class="w-14 h-14 rounded-xl bg-gradient-to-r from-orange-100 to-amber-100 hover:from-orange-200 hover:to-amber-200 transition-all duration-300 p-3 social-link flex items-center justify-center"
+                               id="telegram-link">
+                                <img src="/telegram-icon.svg" alt="تلجرام" class="w-8 h-8 object-contain transition-all duration-300">
+                            </a>
+                            <span class="social-tooltip">قناة التلجرام</span>
+                        </div>
+                        
+                        <div class="relative social-hover-effect">
+                            <a href="https://zaqa.net/ioiu" target="_blank" 
+                               class="w-14 h-14 rounded-xl bg-gradient-to-r from-orange-100 to-amber-100 hover:from-orange-200 hover:to-amber-200 transition-all duration-300 p-3 social-link flex items-center justify-center"
+                               id="zaqa-link">
+                                <img src="/zaqa-icon.svg" alt="Zaqa" class="w-8 h-8 object-contain transition-all duration-300">
+                            </a>
+                            <span class="social-tooltip">أسئلة المجهولين «زاكٍ»</span>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center">
+<p class="text-gray-600 font-light mb-2" id="copyright">
+    <span class="font-bold" style="color: rgba(31, 41, 55, 0.8);">سيف العشيرة</span>
+    <span class="text-orange-500 mx-2">•</span>
+    <span>كُلُّ الحقوق محفوظة ©</span>
+    <span class="text-orange-500 mx-2">•</span>
+    <span style="color: rgba(251, 146, 60, 0.8);">١٤٤٧هـ</span>
+</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="toast" class="toast">نُسِخ النَّصُّ!</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') { applyDarkMode(); }
+        });
+
+        function toggleMenu() {
+            document.getElementById('menuBtn').classList.toggle('active');
+            document.getElementById('navMenu').classList.toggle('active');
+            document.getElementById('menuOverlay').classList.toggle('active');
+        }
+
+        function applyDarkMode() {
+            const body = document.getElementById('body');
+            body.classList.remove('bg-gradient-to-br', 'from-orange-50', 'via-amber-50', 'to-yellow-50', 'pattern');
+            body.classList.add('bg-gray-900', 'dark-pattern', 'dark');
+            document.getElementById('navbar').classList.replace('glass', 'dark-glass');
+            document.getElementById('navSubtitle').classList.replace('text-gray-600', 'text-gray-400');
+            document.getElementById('moonIcon').classList.add('hidden');
+            document.getElementById('sunIcon').classList.remove('hidden');
+            
+            const darkModeBtn = document.getElementById('darkModeBtn');
+            darkModeBtn.classList.replace('bg-orange-100', 'bg-gray-800');
+            darkModeBtn.classList.remove('hover:bg-orange-200');
+            darkModeBtn.classList.add('hover:bg-gray-800');
+            
+            document.getElementById('copyright').classList.replace('text-gray-600', 'text-gray-400');
+            const quickNavLinks = document.querySelectorAll('.quick-nav-link');
+            quickNavLinks.forEach(link => {
+                link.classList.replace('text-gray-700', 'text-gray-300');
+                link.classList.replace('hover:text-orange-600', 'hover:text-amber-400');
+            });
+     
+   }
+
+        function applyLightMode() {
+            const body = document.getElementById('body');
+            body.classList.add('bg-gradient-to-br', 'from-orange-50', 'via-amber-50', 'to-yellow-50', 'pattern');
+            body.classList.remove('bg-gray-900', 'dark-pattern', 'dark');
+            document.getElementById('navbar').classList.replace('dark-glass', 'glass');
+            document.getElementById('navSubtitle').classList.replace('text-gray-400', 'text-gray-600');
+            document.getElementById('moonIcon').classList.remove('hidden');
+            document.getElementById('sunIcon').classList.add('hidden');
+            
+            const darkModeBtn = document.getElementById('darkModeBtn');
+            darkModeBtn.classList.replace('bg-gray-800', 'bg-orange-100');
+            darkModeBtn.classList.add('hover:bg-orange-200');
+            darkModeBtn.classList.remove('hover:bg-gray-800');
+            
+            document.getElementById('copyright').classList.replace('text-gray-400', 'text-gray-600');
+            const quickNavLinks = document.querySelectorAll('.quick-nav-link');
+            quickNavLinks.forEach(link => {
+                link.classList.replace('text-gray-300', 'text-gray-700');
+                link.classList.replace('hover:text-amber-400', 'hover:text-orange-600');
+            });
+       
+ }
+
+        function toggleDarkMode() {
+            const isDark = document.getElementById('body').classList.contains('dark');
+            isDark ? applyLightMode() : applyDarkMode();
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
+        }
+
+function copyContent() {
+            const article = document.getElementById('articleContent');
+            if (!article) return;
+            // استعادة النص الأصلي مؤقتًا (بدون وصلات المنسِّق) قبل الاستنساخ
+            const saved = [];
+            article.querySelectorAll('.shatr, .rajaz-shatr').forEach(cell => {
+                saved.push({ cell, current: cell.textContent });
+                if (cell.dataset.original) cell.textContent = cell.dataset.original;
+            });
+            const clone = article.cloneNode(true);
+            // استعادة العرض الأصلي فورًا
+            saved.forEach(({ cell, current }) => { cell.textContent = current; });
+            // إزالة العناصر غير المرغوبة
+            clone.querySelectorAll('style, script, [hidden], .hidden').forEach(el => el.remove());
+            const commentsSection = clone.querySelector('#comments-section');
+            if (commentsSection) commentsSection.remove();
+            const footer = clone.querySelector('.mt-12');
+            if (footer) footer.remove();
+            // تحويل أبيات الشعر العمودي إلى نص نظيف (سطر لكل بيت)
+            clone.querySelectorAll('.glass-premium-box').forEach(box => {
+                const rows = box.querySelectorAll('tr');
+                const p = document.createElement('p');
+                if (rows.length > 0) {
+                    // صندوق شعر: استخرج الأشطر
+                    const lines = [];
+                    rows.forEach(row => {
+                        const parts = [...row.querySelectorAll('.shatr')].map(c => c.textContent.trim()).filter(Boolean);
+                        if (parts.length === 2) lines.push(parts[0] + '  ' + parts[1]);
+                        else if (parts.length === 1) lines.push(parts[0]);
+                    });
+                    p.textContent = lines.join('\n');
+                } else {
+                    // صندوق نثر (كمستطيل السؤال): احتفظ بالنص كما هو
+                    p.textContent = box.innerText.trim();
+                }
+                box.replaceWith(p);
+            });
+            // تحويل أبيات الرجز إلى نص نظيف
+            clone.querySelectorAll('.glass-rajaz-box').forEach(box => {
+                const lines = [];
+                box.querySelectorAll('.rajaz-shatr').forEach(cell => {
+                    const text = cell.textContent.trim();
+                    if (text) lines.push(text);
+                });
+                const p = document.createElement('p');
+                p.textContent = lines.join('\n');
+                box.replaceWith(p);
+            });
+            const content = clone.innerText.trim();
+            navigator.clipboard.writeText(content).then(() => {
+                const toast = document.getElementById('toast');
+                toast.classList.add('show');
+                setTimeout(() => { toast.classList.remove('show'); }, 3000);
+            }).catch(err => console.warn('فشل النسخ:', err));
+        }
+
+window.addEventListener('scroll', function() {
+    const headerPoetry = document.getElementById('headerPoetry');
+    const quickNavLinks = document.getElementById('quickNavLinks');
+    if (window.scrollY > 50) {
+        headerPoetry.style.opacity = '0';
+        headerPoetry.style.transform = 'translateY(-10px)';
+        headerPoetry.style.filter = 'blur(6px)';
+        headerPoetry.style.pointerEvents = 'none';
+        quickNavLinks.classList.add('nav-visible');
+    } else {
+        headerPoetry.style.opacity = '1';
+        headerPoetry.style.transform = 'translateY(0)';
+        headerPoetry.style.filter = 'blur(0px)';
+        headerPoetry.style.pointerEvents = 'auto';
+        quickNavLinks.classList.remove('nav-visible');
+    }
+}, { passive: true });
+
+// ── فهرس الصفحات ─────────────────────────────────────────
+const SITE_PAGES = [
+    { url: '/', title: 'سيف العشيرة', breadcrumb: null },
+    { url: '/chanting/', title: 'الإنشاد والحُداء', breadcrumb: null },
+    { url: '/writings/', title: 'الكِتابات', breadcrumb: null },
+    { url: '/questions/', title: 'الأسئلة', breadcrumb: null },
+    { url: '/inshad/', title: 'الإنشاد عند العرب', breadcrumb: 'الكِتابات' },
+    { url: '/metrab/', title: 'تفسير بعض قصيدةٍ لأبي المِطراب', breadcrumb: 'الكِتابات' },
+    { url: '/question-1/', title: 'ما الذي حبَّب إليك العربية؟', breadcrumb: 'الأسئلة' },
+    { url: '/question-2/', title: 'نصيحةٌ لمن يحبُّ علوم اللغة', breadcrumb: 'الأسئلة' },
+    { url: '/nathm/', title: 'نَظْم الشعر وفَهْمُه', breadcrumb: 'الأسئلة' },
+    { url: '/mathal/', title: 'الأمثال من الشعر', breadcrumb: 'الأسئلة' },
+    { url: '/ibn-duraid/', title: 'مقصورة ابن دُرَيد', breadcrumb: 'الأسئلة' },
+    { url: '/takharog/', title: 'بيتٌ للتخرُّج', breadcrumb: 'الأسئلة' },
+    { url: '/saif-clan/', title: 'أنا سيف العشيرة فاعرفوني', breadcrumb: null },
+    { url: '/mufadati/', title: 'عليَّ مُفاضَتي ومعي سِلاحي', breadcrumb: null },
+];
+
+// ── تخزين محتوى الصفحات ─────────────────────────────────
+const _cc = {};
+async function _getText(url) {
+    if (_cc[url] !== undefined) return _cc[url];
+    try {
+        const r = await fetch(url);
+        const html = await r.text();
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        const el = doc.getElementById('articleContent') || doc.querySelector('.content-section');
+        if (!el) { _cc[url] = ''; return ''; }
+        const clone = el.cloneNode(true);
+        clone.querySelectorAll('style, script, svg, button, [data-pagefind-ignore]').forEach(n => n.remove());
+        _cc[url] = (clone.textContent || '').replace(/\s+/g, ' ').trim();
+    } catch { _cc[url] = ''; }
+    return _cc[url];
+}
+
+// ── معالجة النص العربي ──────────────────────────────────
+const _D = '[\\u064B-\\u065F\\u0670]*';
+function _hasDiac(s) { return /[\u064B-\u065F\u0670]/.test(s); }
+function _escR(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+function _escH(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function _normalize(s) {
+    return s.replace(/[\u064B-\u065F\u0670]/g, '')
+            .replace(/[أإآٱ]/g, 'ا')
+            .replace(/ة/g, 'ه')
+            .replace(/ى/g, 'ي');
+}
+const _AV = { 'ا':'[اأإآٱ]','أ':'[اأإآٱ]','إ':'[اأإآٱ]','آ':'[اأإآٱ]','ه':'[هة]','ة':'[هة]','ي':'[يى]','ى':'[يى]' };
+
+function _buildPat(q, mode) {
+    // مطابق مع تشكيل: نص حرفي تام
+    if (mode === 'exact' && _hasDiac(q))
+        return new RegExp(_escR(q));
+    // مطابق بدون تشكيل: يسمح بوجود حركات بين الحروف
+    if (mode === 'exact')
+        return new RegExp(q.split('').map(c => c === ' ' ? '\\s+' : (_escR(c) + _D)).join(''));
+    // تقريبي: يطبّع الحروف (الهمزات، التاء المربوطة، الألف المقصورة)
+    return new RegExp(_normalize(q).split('').map(c =>
+        c === ' ' ? '\\s+' : ((_AV[c] || _escR(c)) + _D)
+    ).join(''));
+}
+
+function _excerpt(q, text, mode, ctx = 90) {
+    let pat;
+    try { pat = _buildPat(q, mode); } catch { return ''; }
+    const m = text.match(pat);
+    if (!m) return '';
+    const idx = m.index;
+    const s = Math.max(0, idx - ctx);
+    const e = Math.min(text.length, idx + m[0].length + ctx);
+    let ex = text.slice(s, e).trim();
+    if (s > 0) ex = '...' + ex;
+    if (e < text.length) ex += '...';
+    const safe = _escH(ex);
+    const sm   = _escH(m[0]);
+    const si   = safe.indexOf(sm);
+    return si >= 0
+        ? safe.slice(0, si) + '<mark>' + sm + '</mark>' + safe.slice(si + sm.length)
+        : safe;
+}
+
+// ── حالة البحث ───────────────────────────────────────────
+let _sMode = 'exact';
+let _sTimer = null;
+let _prefetched = false;
+
+function _prefetchAll() {
+    if (_prefetched) return;
+    _prefetched = true;
+    SITE_PAGES.forEach(p => _getText(p.url));
+}
+
+function setSearchMode(mode) {
+    _sMode = mode;
+    document.getElementById('searchModeExact').classList.toggle('search-mode-active', mode === 'exact');
+    document.getElementById('searchModeApprox').classList.toggle('search-mode-active', mode !== 'exact');
+    const q = document.getElementById('searchInput').value;
+    if (q.trim()) _doSearch(q);
+}
+
+function performSearch(q) {
+    if (_sTimer) clearTimeout(_sTimer);
+    _sTimer = setTimeout(() => _doSearch(q), 220);
+}
+
+async function _doSearch(q) {
+    const results = document.getElementById('searchResults');
+    if (!q.trim()) {
+        results.innerHTML = '<p class="text-center text-gray-500 py-4">اكتب للبحث...</p>';
+        return;
+    }
+    results.innerHTML = '<p class="text-center text-gray-400 py-4">جارٍ البحث...</p>';
+    let pat;
+    try { pat = _buildPat(q, _sMode); } catch {
+        results.innerHTML = '<p class="text-center text-gray-500 py-4">خطأ في صياغة البحث</p>';
+        return;
+    }
+    const found = [];
+    await Promise.all(SITE_PAGES.map(async p => {
+        const text = await _getText(p.url);
+        if (text && pat.test(text))
+            found.push({ ...p, excerpt: _excerpt(q, text, _sMode) });
+    }));
+    if (!found.length) {
+        results.innerHTML = '<p class="text-center text-gray-500 py-4">لا توجد نتائج</p>';
+        return;
+    }
+    const n = found.length;
+    const nStr = n === 1 ? 'نتيجة واحدة' : n === 2 ? 'نتيجتان' : (n >= 3 && n <= 10) ? n + ' نتائج' : n + ' نتيجة';
+    // group by breadcrumb, preserve site order
+    const GROUP_ORDER = [null, 'الكِتابات', 'الأسئلة'];
+    const groups = {};
+    GROUP_ORDER.forEach(k => { groups[k] = []; });
+    found.forEach(m => {
+        const key = GROUP_ORDER.includes(m.breadcrumb) ? m.breadcrumb : null;
+        groups[key].push(m);
+    });
+    let html = '<div class="search-result-count">' + nStr + '</div>';
+    GROUP_ORDER.forEach(key => {
+        if (!groups[key] || !groups[key].length) return;
+        if (key !== null)
+            html += '<div class="search-result-group-header">' + _escH(key) + '</div>';
+        groups[key].forEach(m => {
+            html += '<a href="' + m.url + '" class="search-result-item" onclick="closeSearch()">'
+                + '<div class="search-result-path"><strong>' + _escH(m.title) + '</strong></div>'
+                + '<div class="search-result-excerpt">' + m.excerpt + '</div>'
+                + '</a>';
+        });
+    });
+    results.innerHTML = html;
+}
+
+function openSearch() {
+    document.getElementById('searchModal').classList.remove('hidden');
+    document.getElementById('searchInput').focus();
+    _prefetchAll();
+}
+
+function closeSearch() {
+    document.getElementById('searchModal').classList.add('hidden');
+    document.getElementById('searchInput').value = '';
+    document.getElementById('searchResults').innerHTML = '<p class="text-center text-gray-500 py-4">اكتب للبحث...</p>';
+}
+
+document.getElementById('searchButton').addEventListener('click', openSearch);
+document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); openSearch(); }
+    if (e.key === 'Escape') closeSearch();
+});
+
+
+    </script>
+
+<style>
+#searchModal {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 145px;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+#searchModal.hidden { display: none; }
+.search-panel {
+    position: relative;
+    width: 90%;
+    max-width: 640px;
+    max-height: calc(100vh - 145px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(251, 146, 60, 0.3);
+    border-radius: 1.25rem;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.20), 0 4px 20px rgba(234,88,12,0.10);
+    overflow: hidden;
+    animation: search-pop 0.2s ease;
+}
+@keyframes search-pop {
+    from { opacity: 0; transform: scale(0.96) translateY(-10px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+body.dark .search-panel {
+    background: rgba(17, 24, 39, 0.97);
+    border-color: rgba(255,255,255,0.1);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.55);
+}
+.search-panel-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.85rem 1.25rem;
+    border-bottom: 1px solid rgba(251,146,60,0.15);
+    direction: rtl;
+    flex-shrink: 0;
+}
+body.dark .search-panel-header { border-bottom-color: rgba(255,255,255,0.08); }
+.search-panel-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: 1rem;
+    color: #1f2937;
+    text-align: right;
+}
+body.dark .search-panel-input { color: #f3f4f6; }
+.search-panel-input::placeholder { color: #9ca3af; }
+.search-close-btn {
+    display: flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px;
+    border: none; border-radius: 0.5rem;
+    background: transparent; color: #9ca3af;
+    cursor: pointer; transition: all 0.2s; flex-shrink: 0;
+}
+.search-close-btn:hover { background: rgba(234,88,12,0.1); color: #ea580c; }
+body.dark .search-close-btn:hover { background: rgba(255,255,255,0.1); color: #fbbf24; }
+/* أزرار وضع البحث */
+.search-mode-tabs {
+    display: flex;
+    gap: 6px;
+    padding: 8px 14px;
+    border-bottom: 1px solid rgba(251,146,60,0.1);
+    direction: rtl;
+    flex-shrink: 0;
+}
+body.dark .search-mode-tabs { border-bottom-color: rgba(255,255,255,0.06); }
+.search-mode-btn {
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid rgba(251,146,60,0.3);
+    background: transparent;
+    color: #9ca3af;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+.search-mode-btn:hover { color: #ea580c; border-color: rgba(234,88,12,0.5); }
+.search-mode-active {
+    background: linear-gradient(135deg, rgba(251,146,60,0.12), rgba(251,191,36,0.12));
+    color: #ea580c !important;
+    border-color: rgba(234,88,12,0.4) !important;
+}
+body.dark .search-mode-btn { color: #6b7280; border-color: rgba(255,255,255,0.1); }
+body.dark .search-mode-btn:hover { color: #fbbf24; border-color: rgba(251,191,36,0.4); }
+body.dark .search-mode-active {
+    background: rgba(251,191,36,0.1);
+    color: #fbbf24 !important;
+    border-color: rgba(251,191,36,0.4) !important;
+}
+/* منطقة النتائج */
+.search-panel-results {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0.5rem 0.75rem;
+    direction: rtl;
+}
+.search-result-count {
+    font-size: 0.78rem;
+    color: #9ca3af;
+    text-align: right;
+    padding: 4px 6px 8px;
+    border-bottom: 1px solid rgba(251,146,60,0.1);
+    margin-bottom: 4px;
+}
+body.dark .search-result-count { border-bottom-color: rgba(255,255,255,0.06); }
+.search-result-group-header {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #ea580c;
+    text-align: right;
+    padding: 10px 10px 4px;
+    margin-top: 6px;
+    border-top: 1px solid rgba(251,146,60,0.15);
+    direction: rtl;
+}
+.search-result-group-header:first-of-type { margin-top: 0; border-top: none; }
+body.dark .search-result-group-header { color: #fbbf24; border-top-color: rgba(255,255,255,0.07); }
+.search-result-item {
+    display: block;
+    padding: 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: background 0.15s;
+    margin-bottom: 4px;
+}
+.search-result-item:hover { background: rgba(251,146,60,0.08); }
+body.dark .search-result-item:hover { background: rgba(255,255,255,0.06); }
+.search-result-path {
+    font-size: 0.87rem;
+    font-weight: 700;
+    color: #ea580c;
+    margin-bottom: 4px;
+    direction: rtl;
+}
+body.dark .search-result-path { color: #fbbf24; }
+.search-result-excerpt {
+    font-size: 0.88rem;
+    color: #4b5563;
+    line-height: 1.8;
+    direction: rtl;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+body.dark .search-result-excerpt { color: #d1d5db; }
+.search-result-excerpt mark {
+    background: rgba(251,146,60,0.3);
+    color: inherit;
+    border-radius: 2px;
+    padding: 0 1px;
+    font-weight: bold;
+}
+body.dark .search-result-excerpt mark { background: rgba(251,191,36,0.25); }
+@media (max-width: 768px) {
+    #searchModal { padding-top: 130px; }
+    .search-panel { width: calc(100vw - 24px); max-width: 580px; max-height: calc(100vh - 150px); }
+    .search-panel-input { font-size: 0.95rem; }
+    .search-panel-header { padding: 0.7rem 0.9rem; gap: 0.5rem; }
+    .search-mode-tabs { padding: 6px 10px; flex-wrap: wrap; gap: 5px; }
+    .search-mode-btn { padding: 3px 10px; font-size: 0.78rem; }
+    .search-result-count { padding: 3px 4px 6px; }
+}
+</style>
+
+<div id="searchModal" class="fixed inset-0 z-[999] hidden">
+    <div class="absolute inset-0" onclick="closeSearch()"></div>
+    <div class="search-panel">
+        <div class="search-panel-header">
+            <svg class="w-5 h-5 text-orange-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <input type="text" id="searchInput" placeholder="ابحث في الموقع..." class="search-panel-input" dir="rtl" oninput="performSearch(this.value)" autocomplete="off">
+            <button onclick="closeSearch()" class="search-close-btn" aria-label="إغلاق">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+        </div>
+        <div class="search-mode-tabs">
+            <button id="searchModeExact" class="search-mode-btn search-mode-active" onclick="setSearchMode('exact')">بحثٌ مُطابِق</button>
+            <button id="searchModeApprox" class="search-mode-btn" onclick="setSearchMode('approx')">بحثٌ تقريبيٌّ</button>
+        </div>
+        <div id="searchResults" class="search-panel-results">
+            <p class="text-center text-gray-500 py-4">اكتب للبحث...</p>
+        </div>
+    </div>
+</div>
+
+<style>
+/* ===== القصيدة العمودية ===== */
+.glass-premium-box {
+  margin: 2.5rem auto;
+  padding: 1.5rem 2rem;
+  border-radius: 1rem;
+  max-width: 680px;
+  width: 100%;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, rgba(255,237,213,0.92), rgba(253,230,138,0.88));
+  border: 1px solid #fed7aa;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+  color: #1f2937;
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .glass-premium-box { background: #fff3e0; }
+}
+body.dark .glass-premium-box {
+  background: #0d1117;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 20px 40px -10px rgba(0,0,0,0.4);
+  color: #f3f4f6;
+}
+@supports not (backdrop-filter: blur(1px)) {
+  body.dark .glass-premium-box { background: #0d1117; }
+}
+.poetry-table {
+  width: 100%;
+  border-collapse: collapse;
+  direction: rtl;
+  font-family: 'Amiri', 'Traditional Arabic', 'Scheherazade', serif;
+  font-size: 1.25rem;
+  table-layout: fixed;
+}
+.shatr {
+  width: 50%;
+  padding: 0.4rem 0.6rem;
+  line-height: 2.2;
+  vertical-align: baseline;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.shatr.first {
+  border-left: 2px solid rgba(180,130,50,0.4);
+  text-align: right;
+}
+.shatr.last {
+  text-align: right;
+}
+body.dark .shatr.first {
+  border-left-color: rgba(255,255,255,0.15);
+}
+
+/* ===== الرجز ===== */
+.glass-rajaz-box {
+  margin: 2.5rem auto;
+  padding: 1.5rem 2rem;
+  border-radius: 1rem;
+  max-width: 400px;
+  width: 100%;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, rgba(255,237,213,0.92), rgba(253,230,138,0.88));
+  border: 1px solid #fed7aa;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+  color: #1f2937;
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .glass-rajaz-box { background: #fff3e0; }
+}
+body.dark .glass-rajaz-box {
+  background: #0d1117;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 20px 40px -10px rgba(0,0,0,0.4);
+  color: #f3f4f6;
+}
+@supports not (backdrop-filter: blur(1px)) {
+  body.dark .glass-rajaz-box { background: #0d1117; }
+}
+.rajaz-table {
+  width: 100%;
+  border-collapse: collapse;
+  direction: rtl;
+  font-family: 'Amiri', 'Traditional Arabic', 'Scheherazade', serif;
+  font-size: 1.25rem;
+  table-layout: fixed;
+}
+.rajaz-shatr {
+  width: 100%;
+  padding: 0.3rem 0.6rem;
+  line-height: 2.2;
+  vertical-align: baseline;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: right;
+}
+
+/* ===== الجوال ===== */
+@media (max-width: 640px) {
+  .glass-premium-box, .glass-rajaz-box {
+    padding: 0.75rem;
+    margin: 1rem auto;
+  }
+  .glass-rajaz-box {
+    padding: 0.5rem 0.6rem;
+    margin: 0.75rem auto;
+    max-width: min(280px, calc(100vw - 40px));
+  }
+  .poetry-table {
+    font-size: 0.72rem;
+  }
+  .rajaz-table {
+    font-size: 0.65rem;
+  }
+  .shatr {
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0.2rem 0.4rem;
+    line-height: 2;
+  }
+  .shatr.first {
+    border-left: 1px solid rgba(180,130,50,0.25);
+  }
+  .rajaz-shatr {
+    padding: 0.15rem 0.3rem;
+    line-height: 1.85;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}
+</style>
+
+<script>
+const TASHKEEL = /[\u064B-\u065F\u0670]/;
+const NO_CONNECT_AFTER = new Set(['ا','أ','إ','آ','ٱ','و','ؤ','ز','ذ','د','ر','ى','ة','ء','ئ']);
+const PUNCT = new Set(['،','؛','؟','!','.',',',':','-','–','—','«','»','"','"','(',')','/']);
+const FORBIDDEN_WORDS = new Set(['الله','اللهم','بالله','تالله','والله','فالله','لله']);
+
+function tokenize(word) {
+  const tokens = [];
+  for (let i = 0; i < word.length; i++) {
+    if (TASHKEEL.test(word[i])) {
+      if (tokens.length) tokens[tokens.length - 1].marks += word[i];
+    } else {
+      tokens.push({ base: word[i], marks: '' });
+    }
+  }
+  return tokens;
+}
+
+function tokensToString(tokens) {
+  return tokens.map(t => t.base + t.marks).join('');
+}
+
+function canConnectAfter(base) {
+  return !NO_CONNECT_AFTER.has(base) && !PUNCT.has(base) && /[\u0600-\u06FF]/.test(base);
+}
+
+function getAllInsertPositions(tokens) {
+  const positions = [];
+  let lastValid = tokens.length - 1;
+  while (lastValid > 0 && PUNCT.has(tokens[lastValid].base)) lastValid--;
+  for (let i = lastValid - 1; i >= 1; i--) {
+    if (PUNCT.has(tokens[i + 1]?.base)) continue;
+    const nextBase = tokens[i + 1]?.base;
+    if (tokens[i].base === 'ل' && nextBase && 'اأإآٱ'.includes(nextBase)) continue;
+    if (canConnectAfter(tokens[i].base)) positions.push(i + 1);
+  }
+  // ترتيب تصاعدي: يبدأ التوزيع من مطلع الكلمة (يمين) فتتوزع الزيادة بالتساوي
+  return positions.sort((a, b) => a - b);
+}
+
+function measureText(text, font) {
+  const c = measureText._canvas || (measureText._canvas = document.createElement('canvas'));
+  const ctx = c.getContext('2d');
+  ctx.font = font;
+  return ctx.measureText(text).width;
+}
+
+function getCtx(font) {
+  const c = measureText._canvas || (measureText._canvas = document.createElement('canvas'));
+  const ctx = c.getContext('2d');
+  ctx.font = font;
+  return ctx;
+}
+
+// تبني الكلمة من نقاط الإدراج وعدد الوصلات لكل موضع
+function buildWordFromSlots(tokens, slots) {
+  // slots: Map من موضع => عدد وصلات
+  // نبني من اليمين إلى اليسار (ترتيب tokens)
+  const result = [];
+  for (let i = 0; i < tokens.length; i++) {
+    result.push(tokens[i]);
+    const count = slots.get(i + 1) || 0;
+    for (let k = 0; k < count; k++) result.push({ base: 'ـ', marks: '' });
+  }
+  return result;
+}
+
+// توزّع n وصلة على positions بشكل دوري (round-robin) فتكون موزّعة بالتساوي
+function distributeEvenly(positions, n) {
+  const slots = new Map();
+  if (!positions.length || n <= 0) return slots;
+  for (let k = 0; k < n; k++) {
+    const pos = positions[k % positions.length];
+    slots.set(pos, (slots.get(pos) || 0) + 1);
+  }
+  return slots;
+}
+
+function stretchCell(cell, font) {
+  const available = cell.clientWidth
+    - parseFloat(getComputedStyle(cell).paddingLeft)
+    - parseFloat(getComputedStyle(cell).paddingRight);
+  // إذا كانت الخلية غير مرئية بعد (الجوال يؤخر الرسم) نتجاهلها
+  if (available <= 10) return;
+  if (!cell.dataset.original) cell.dataset.original = cell.textContent.trim();
+  const originalWords = cell.dataset.original.split(/\s+/);
+  const ctx = getCtx(font);
+
+  // نجمع الكلمات القابلة للمدّ مع مواضعها
+  const wordData = originalWords.map(w => {
+    const orig = w.replace(/[\u064B-\u065F\u0670]/g, '');
+    const forbidden = [...FORBIDDEN_WORDS].some(fw => orig.includes(fw));
+    const tokens = tokenize(w);
+    const positions = forbidden ? [] : getAllInsertPositions(tokens);
+    return { tokens, positions, forbidden, baseWidth: ctx.measureText(tokensToString(tokens)).width };
+  });
+
+  // العرض الحالي بدون أي وصلات
+  const tatweelWidth = ctx.measureText('ـ').width;
+  const spaceWidth = ctx.measureText(' ').width;
+  const baseTotal = wordData.reduce((s, w) => s + w.baseWidth, 0)
+    + spaceWidth * Math.max(0, wordData.length - 1);
+
+  // هامش أمان 2% لتجنب فيضان النص بسبب فوارق قياس الخطوط
+  const totalGap = (available - baseTotal) * 0.98;
+  if (totalGap <= 0.5) {
+    cell.textContent = originalWords.join(' ');
+    return;
+  }
+
+  // إجمالي المواضع الصالحة في الشطر كله
+  const totalSlots = wordData.reduce((s, w) => s + w.positions.length, 0);
+  if (totalSlots === 0) {
+    cell.textContent = originalWords.join(' ');
+    return;
+  }
+
+  // عدد الوصلات الإجمالي المطلوب
+  const totalTatweels = Math.floor(totalGap / tatweelWidth);
+  if (totalTatweels <= 0) {
+    cell.textContent = originalWords.join(' ');
+    return;
+  }
+
+  // توزيع بطريقة "أكبر باقٍ" لضمان أن مجموع الوصلات الموزَّعة = totalTatweels بالضبط
+  const exactShares = wordData.map(w => totalTatweels * w.positions.length / totalSlots);
+  const floors = exactShares.map(v => Math.floor(v));
+  let remainder = totalTatweels - floors.reduce((a, b) => a + b, 0);
+  const order = exactShares
+    .map((v, i) => ({ i, frac: v - floors[i] }))
+    .sort((a, b) => b.frac - a.frac);
+  for (let k = 0; k < remainder; k++) floors[order[k].i]++;
+
+  const result = wordData.map((w, idx) => {
+    if (!w.positions.length) return tokensToString(w.tokens);
+    const slots = distributeEvenly(w.positions, floors[idx]);
+    return tokensToString(buildWordFromSlots(w.tokens, slots));
+  });
+
+  cell.textContent = result.join(' ');
+}
+
+function stretchAll() {
+  document.querySelectorAll('.poetry-table').forEach(table => {
+    table.querySelectorAll('.shatr').forEach(cell => {
+      if (cell.dataset.original) cell.textContent = cell.dataset.original;
+    });
+    const sample = table.querySelector('.shatr');
+    if (!sample) return;
+    const cs = getComputedStyle(sample);
+    const font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize}/${cs.lineHeight} ${cs.fontFamily}`;
+    table.querySelectorAll('.shatr').forEach(cell => stretchCell(cell, font));
+  });
+  document.querySelectorAll('.rajaz-table').forEach(table => {
+    table.querySelectorAll('.rajaz-shatr').forEach(cell => {
+      if (cell.dataset.original) cell.textContent = cell.dataset.original;
+    });
+    const sample = table.querySelector('.rajaz-shatr');
+    if (!sample) return;
+    const cs = getComputedStyle(sample);
+    const font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize}/${cs.lineHeight} ${cs.fontFamily}`;
+    table.querySelectorAll('.rajaz-shatr').forEach(cell => stretchCell(cell, font));
+  });
+}
+
+function initStretch() {
+  function run() {
+    stretchAll();
+    // محاولات متكررة للجوال الذي يؤخر رسم العناصر
+    setTimeout(stretchAll, 300);
+    setTimeout(stretchAll, 700);
+    setTimeout(stretchAll, 1500);
+    setTimeout(stretchAll, 3000);
+  }
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(run);
+  } else {
+    setTimeout(run, 300);
+  }
+  // ResizeObserver: يُعيد الحساب عند تغيير حجم أي جدول (موثوق على الجوال)
+  if (window.ResizeObserver) {
+    const ro = new ResizeObserver(() => stretchAll());
+    document.querySelectorAll('.glass-premium-box, .glass-rajaz-box').forEach(el => ro.observe(el));
+    // نراقب أيضًا الجداول التي ستُضاف لاحقًا
+    const mo = new MutationObserver(() => {
+      document.querySelectorAll('.glass-premium-box, .glass-rajaz-box').forEach(el => {
+        if (!el._roObserved) { ro.observe(el); el._roObserved = true; }
+      });
+    });
+    mo.observe(document.body, { childList: true, subtree: true });
+  }
+  // IntersectionObserver: يُشغّل التنسيق حين تدخل مربعات الشعر نطاق الرؤية
+  // يحلّ مشكلة الأبيات التي تكون أسفل الصفحة عند التحميل فتُتجاهل أولاً
+  if (window.IntersectionObserver) {
+    const io = new IntersectionObserver(entries => {
+      if (entries.some(e => e.isIntersecting)) stretchAll();
+    }, { threshold: 0.05 });
+    document.querySelectorAll('.glass-premium-box, .glass-rajaz-box').forEach(el => io.observe(el));
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initStretch);
+} else {
+  initStretch();
+}
+window.addEventListener('resize', stretchAll);
+
+/* ===== التلميحات في الجوال ===== */
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.tooltip-word').forEach(function(el) {
+    el.addEventListener('touchstart', function(e) {
+      e.preventDefault();
+      document.querySelectorAll('.tooltip-word.active').forEach(function(other) {
+        if (other !== el) other.classList.remove('active');
+      });
+      el.classList.toggle('active');
+    }, { passive: false });
+  });
+  document.addEventListener('touchstart', function(e) {
+    if (!e.target.closest('.tooltip-word')) {
+      document.querySelectorAll('.tooltip-word.active').forEach(function(el) {
+        el.classList.remove('active');
+      });
+    }
+  });
+
+  /* ===== توليد النجوم ===== */
+  const container = document.getElementById('starsContainer');
+  if (container) {
+    const count = 90;
+    for (let i = 0; i < count; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      const size = Math.random() * 2 + 1;
+      star.style.cssText = [
+        'width:' + size + 'px',
+        'height:' + size + 'px',
+        'top:' + Math.random() * 100 + '%',
+        'left:' + Math.random() * 100 + '%',
+        '--dur:' + (Math.random() * 3 + 2) + 's',
+        '--delay:-' + (Math.random() * 4) + 's'
+      ].join(';');
+      container.appendChild(star);
+    }
+  }
+});
+</script>
+
+
+<style>
+/* ===== صندوق السؤال (برتقالي) ===== */
+.box-question {
+  margin: 2rem auto;
+  padding: 1.25rem 1.5rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(255,237,213,0.5), rgba(253,230,138,0.5));
+  border: 1px solid #fed7aa;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+  color: #1f2937;
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  direction: rtl;
+}
+body.dark .box-question {
+  background: rgba(18,18,22,0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 20px 40px -10px rgba(0,0,0,0.4);
+  color: #f3f4f6;
+}
+.box-question .box-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+ 
+/* ===== صندوق المعلومة المؤكدة (أخضر) ===== */
+.box-confirmed {
+  margin: 2rem auto; padding: 1.25rem 1.5rem; border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(209,250,229,0.92), rgba(167,243,208,0.88));
+  border: 1px solid #6ee7b7; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.07);
+  color: #1f2937; display: flex; gap: 0.75rem; align-items: flex-start; direction: rtl;
+}
+@supports not (backdrop-filter: blur(1px)) { .box-confirmed { background: #d1fae5; } }
+body.dark .box-confirmed {
+  background: rgba(6,78,59,0.92); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border: 1px solid rgba(110,231,183,0.25); color: #f3f4f6;
+}
+@supports not (backdrop-filter: blur(1px)) { body.dark .box-confirmed { background: #064e3b; } }
+ 
+/* ===== صندوق التنبيه (أصفر) ===== */
+.box-warning {
+  margin: 2rem auto; padding: 1.25rem 1.5rem; border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(254,249,195,0.92), rgba(253,230,138,0.88));
+  border: 1px solid #fde047; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.07);
+  color: #1f2937; display: flex; gap: 0.75rem; align-items: flex-start; direction: rtl;
+}
+@supports not (backdrop-filter: blur(1px)) { .box-warning { background: #fef9c3; } }
+body.dark .box-warning {
+  background: rgba(78,63,6,0.92); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border: 1px solid rgba(253,224,71,0.25); color: #f3f4f6;
+}
+@supports not (backdrop-filter: blur(1px)) { body.dark .box-warning { background: #4e3f06; } }
+ 
+/* ===== صندوق الخطأ / التحذير (أحمر) ===== */
+.box-error {
+  margin: 2rem auto; padding: 1.25rem 1.5rem; border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(254,226,226,0.92), rgba(252,165,165,0.88));
+  border: 1px solid #fca5a5; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.07);
+  color: #1f2937; display: flex; gap: 0.75rem; align-items: flex-start; direction: rtl;
+}
+@supports not (backdrop-filter: blur(1px)) { .box-error { background: #fee2e2; } }
+body.dark .box-error {
+  background: rgba(127,29,29,0.92); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border: 1px solid rgba(252,165,165,0.25); color: #f3f4f6;
+}
+@supports not (backdrop-filter: blur(1px)) { body.dark .box-error { background: #7f1d1d; } }
+ 
+/* ===== صندوق الفائدة / النكتة (أزرق) ===== */
+.box-info {
+  margin: 2rem auto; padding: 1.25rem 1.5rem; border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(219,234,254,0.92), rgba(191,219,254,0.88));
+  border: 1px solid #93c5fd; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.07);
+  color: #1f2937; display: flex; gap: 0.75rem; align-items: flex-start; direction: rtl;
+}
+@supports not (backdrop-filter: blur(1px)) { .box-info { background: #dbeafe; } }
+body.dark .box-info {
+  background: rgba(23,37,84,0.92); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border: 1px solid rgba(147,197,253,0.25); color: #f3f4f6;
+}
+@supports not (backdrop-filter: blur(1px)) { body.dark .box-info { background: #172554; } }
+ 
+/* ===== صندوق الاقتباس / الشاهد (بنفسجي) ===== */
+.box-quote {
+  margin: 2rem auto; padding: 1.25rem 1.5rem; border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(237,233,254,0.92), rgba(221,214,254,0.88));
+  border: 1px solid #c4b5fd; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.07);
+  color: #1f2937; display: flex; gap: 0.75rem; align-items: flex-start; direction: rtl; font-style: italic;
+}
+@supports not (backdrop-filter: blur(1px)) { .box-quote { background: #ede9fe; } }
+body.dark .box-quote {
+  background: rgba(46,16,101,0.92); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border: 1px solid rgba(196,181,253,0.25); color: #f3f4f6;
+}
+@supports not (backdrop-filter: blur(1px)) { body.dark .box-quote { background: #2e1065; } }
+ 
+/* ===== صندوق القاعدة / الضابط (رمادي فخم) ===== */
+.box-rule {
+  margin: 2rem auto; padding: 1.25rem 1.5rem; border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(243,244,246,0.95), rgba(229,231,235,0.92));
+  border-right: 4px solid #f97316; border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb; border-left: 1px solid #e5e7eb;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.07); color: #1f2937; direction: rtl;
+}
+@supports not (backdrop-filter: blur(1px)) { .box-rule { background: #f3f4f6; } }
+body.dark .box-rule {
+  background: rgba(31,41,55,0.95); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border-right: 4px solid #f97316; border-top: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08); border-left: 1px solid rgba(255,255,255,0.08); color: #f3f4f6;
+}
+@supports not (backdrop-filter: blur(1px)) { body.dark .box-rule { background: #1f2937; } }
+.box-rule .box-rule-title {
+  font-weight: 800;
+  font-size: 1rem;
+  color: #f97316;
+  margin-bottom: 0.5rem;
+}
+ 
+/* ===== فاصل زخرفي ===== */
+.divider-ornament {
+  text-align: center;
+  color: #f97316;
+  font-size: 1.3rem;
+  letter-spacing: 0.5em;
+  margin: 2rem auto;
+  opacity: 0.6;
+}
+body.dark .divider-ornament { color: #fbbf24; }
+ 
+/* ===== نص بارز (هايلايت) ===== */
+.highlight-text {
+  display: inline;
+  background: linear-gradient(120deg, rgba(253,230,138,0.6) 0%, rgba(253,230,138,0.6) 100%);
+  border-radius: 0.25rem;
+  padding: 0.05rem 0.3rem;
+}
+body.dark .highlight-text {
+  background: linear-gradient(120deg, rgba(120,80,0,0.5) 0%, rgba(120,80,0,0.5) 100%);
+}
+
+.box-new {
+  position: relative;
+  margin: 2rem auto;
+  padding: 1.5rem 1.75rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(254,243,199,0.6), rgba(253,230,138,0.4), rgba(255,237,213,0.5));
+  border: 1px solid #fbbf24;
+  box-shadow: 0 10px 40px -10px rgba(251,191,36,0.3);
+  color: #1f2937;
+  direction: rtl;
+  overflow: hidden;
+}
+body.dark .box-new {
+  background: linear-gradient(135deg, rgba(78,63,6,0.5), rgba(55,40,0,0.4));
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(251,191,36,0.35);
+  color: #f3f4f6;
+}
+.box-new::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #f59e0b, #ea580c, #f59e0b);
+}
+.box-new-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #d97706;
+  margin-bottom: 0.4rem;
+}
+body.dark .box-new-title { color: #fbbf24; }
+.box-new-body {
+  font-size: 1rem;
+  line-height: 1.9;
+  color: #374151;
+}
+body.dark .box-new-body { color: #d1d5db; }
+
+/* ===== شارات جديد ===== */
+.badge-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #fff7ed;
+  border: .5px solid #fed7aa;
+  color: #c2410c;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: .75rem;
+}
+body.dark .badge-inline {
+  background: #431407;
+  border-color: #7c2d12;
+  color: #fb923c;
+}
+.badge-corner {
+  position: absolute;
+  top: 14px;
+  left: -22px;
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 28px;
+  transform: rotate(-45deg);
+  transform-origin: center;
+  letter-spacing: .05em;
+}
+.badge-strip {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #f97316;
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 6px 14px 6px 10px;
+  border-radius: 0 var(--border-radius-lg, 12px) 0 var(--border-radius-lg, 12px);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+body.dark .badge-strip { background: #c2410c; }
+.badge-pulse {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fff7ed;
+  border: .5px solid #fed7aa;
+  color: #c2410c;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: .75rem;
+}
+body.dark .badge-pulse {
+  background: #431407;
+  border-color: #7c2d12;
+  color: #fb923c;
+}
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #f97316;
+  position: relative;
+  flex-shrink: 0;
+}
+.pulse-dot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1.5px solid #f97316;
+  animation: pulse-ring 1.5s ease-out infinite;
+  opacity: 0;
+}
+@keyframes pulse-ring {
+  0% { transform: scale(.8); opacity: .8; }
+  100% { transform: scale(2); opacity: 0; }
+}
+.badge-float {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: linear-gradient(135deg, #f59e0b, #ea580c);
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: .75rem;
+  animation: badge-float 3s ease-in-out infinite;
+}
+@keyframes badge-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+.badge-dot {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #c2410c;
+  margin-bottom: .75rem;
+}
+body.dark .badge-dot { color: #fb923c; }
+.red-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #f97316;
+  flex-shrink: 0;
+  animation: blink-dot 1.2s ease-in-out infinite;
+}
+@keyframes blink-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .3; }
+}
+.card-accent {
+  border-right: 3px solid #f97316 !important;
+  border-radius: 0 1rem 1rem 0 !important;
+}
+.new-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: .75rem;
+  font-size: 13px;
+  color: #ea580c;
+  text-decoration: none;
+  font-weight: 600;
+  transition: gap .2s;
+}
+.new-card-link:hover { gap: 10px; }
+body.dark .new-card-link { color: #fb923c; }
+.new-card-ico { width: 12px; height: 12px; flex-shrink: 0; }
+
+/* ===== بطاقة كتابة ===== */
+.writing-card {
+  display: block;
+  position: relative;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  border: 1px solid #fed7aa;
+  background: linear-gradient(135deg, rgba(255,237,213,0.5), rgba(253,230,138,0.3));
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow .3s, transform .3s;
+  margin: 2rem auto;
+}
+.writing-card:hover {
+  box-shadow: 0 20px 40px -10px rgba(251,191,36,0.25);
+  transform: translateY(-2px);
+}
+body.dark .writing-card {
+  background: rgba(18,18,22,0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+body.dark .writing-card:hover {
+  box-shadow: 0 20px 40px -10px rgba(251,191,36,0.15);
+}
+.writing-card-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #f59e0b, #ea580c, #f59e0b);
+}
+.writing-card-body {
+  padding: 1.75rem 2rem;
+  direction: rtl;
+}
+.writing-card-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #c2410c;
+  margin-bottom: .6rem;
+  transition: color .2s;
+}
+body.dark .writing-card-title { color: #fbbf24; }
+.writing-card:hover .writing-card-title { color: #9a3412; }
+body.dark .writing-card:hover .writing-card-title { color: #fde68a; }
+.writing-card-date {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: .85rem;
+  color: #6b7280;
+  margin-bottom: 1rem;
+}
+body.dark .writing-card-date { color: #9ca3af; }
+.writing-card-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: .85rem;
+  color: #ea580c;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity .2s, gap .2s;
+}
+body.dark .writing-card-arrow { color: #fbbf24; }
+.writing-card:hover .writing-card-arrow { opacity: 1; gap: .7rem; }
+</style>
+
+</body>
+</html>
