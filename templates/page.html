@@ -73,7 +73,7 @@
         </div>
 
         <div class="mt-12 pt-8 border-t border-orange-100 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <a href="javascript:history.back()" class="text-orange-600 hover:text-orange-700 font-bold flex items-center gap-2 transition-colors text-sm md:text-base">
+            <a href="javascript:history.back()" class="back-link font-bold flex items-center gap-2 transition-colors text-sm md:text-base">
                 <span>→</span>
                 عُد إلى الصفحة السابقة
             </a>
@@ -297,12 +297,20 @@ body.dark .floating-back:hover {
 }
 .comments-header-icon {
     width: 40px; height: 40px;
-    background: linear-gradient(135deg, #f59e0b, #ea580c);
+    background: linear-gradient(135deg, #fed7aa, #fdba74);
     border-radius: 12px; display: flex; align-items: center; justify-content: center;
-    color: white; box-shadow: 0 4px 12px rgba(234,88,12,0.35); flex-shrink: 0;
+    color: #ea580c; box-shadow: 0 4px 12px rgba(234,88,12,0.20); flex-shrink: 0;
 }
-.comments-title { font-size: 1.2rem; font-weight: 800; color: #1a1a1a; letter-spacing: -0.02em; }
-body.dark .comments-title { color: #f9fafb; }
+body.dark .comments-header-icon {
+    background: linear-gradient(135deg,rgba(75,85,99,0.8),rgba(55,65,81,0.7));
+    color: #fbbf24 !important; box-shadow: none;
+}
+.comments-title { font-size: 1.2rem; font-weight: 800; color: #ea580c; letter-spacing: -0.02em; }
+body.dark .comments-title { color: #fbbf24 !important; }
+.back-link { color: #ea580c !important; text-decoration: none; }
+.back-link:hover { color: #c2410c !important; }
+body.dark a.back-link { color: #fbbf24 !important; }
+body.dark a.back-link:hover { color: #f59e0b !important; }
 .comments-count-badge {
     background: linear-gradient(135deg,rgba(251,146,60,0.15),rgba(234,88,12,0.1));
     border: 1px solid rgba(234,88,12,0.25); color: #ea580c;
@@ -636,7 +644,7 @@ async function loadComments() {
         const badge = document.getElementById('commentsCount');
         const publicCount = data.filter(c => !c.parent_id && !c.is_hidden).length;
         if (badge) {
-            if (publicCount) { badge.textContent = arabicCount(publicCount, 'تعليق', 'تعليقان', 'تعليقات'); badge.style.display = ''; }
+            if (publicCount) { badge.textContent = arabicCount(publicCount, 'تعليقٌ واحد', 'تعليقان', 'تعليقات'); badge.style.display = ''; }
             else { badge.style.display = 'none'; }
         }
 
@@ -686,7 +694,7 @@ function buildCard(c, allReplies, isReply) {
         <div class="comment-actions">
             ${!isReply ? `<button class="btn-action btn-reply" onclick="toggleReplyForm('${c.id}')">${icoReply} ${TXT.btnReply}</button>` : ''}
             ${myComment ? `<button class="btn-action btn-edit-c" onclick="toggleEdit('${c.id}',\`${escJs(c.body)}\`)">${icoEdit} ${TXT.btnEdit}</button>` : ''}
-            ${myComment && !c.is_hidden ? `<button class="btn-action btn-hide" onclick="hideComment('${c.id}')">${icoHide} ${TXT.btnHide}</button>` : ''}
+            ${(myComment || isAdmin) && !c.is_hidden ? `<button class="btn-action btn-hide" onclick="hideComment('${c.id}')">${icoHide} ${TXT.btnHide}</button>` : ''}
             ${isAdmin && c.is_hidden ? `<button class="btn-action btn-unhide" onclick="unhideComment('${c.id}')">${icoShow} إظهار</button>` : ''}
             ${(myComment || isAdmin) ? `<button class="btn-action btn-delete" onclick="deleteComment('${c.id}')">${icoDelete} ${TXT.btnDelete}</button>` : ''}
         </div>

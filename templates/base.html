@@ -1569,7 +1569,7 @@ function performSearch(q) {
 async function _doSearch(q) {
     const results = document.getElementById('searchResults');
     if (!q.trim()) {
-        results.innerHTML = '<p class="text-center text-gray-500 py-4">اكتب للبحث...</p>';
+        results.innerHTML = SEARCH_HINT;
         return;
     }
     results.innerHTML = '<p class="text-center text-gray-400 py-4">جارٍ البحث...</p>';
@@ -1604,7 +1604,8 @@ async function _doSearch(q) {
         if (key !== null)
             html += '<div class="search-result-group-header">' + _escH(key) + '</div>';
         groups[key].forEach(m => {
-            html += '<a href="' + m.url + '" class="search-result-item" onclick="closeSearch()">'
+            const hlParam = '?hl=' + encodeURIComponent(q);
+            html += '<a href="' + m.url + hlParam + '" class="search-result-item" onclick="closeSearch()">'
                 + '<div class="search-result-path"><strong>' + _escH(m.title) + '</strong></div>'
                 + '<div class="search-result-excerpt">' + m.excerpt + '</div>'
                 + '</a>';
@@ -1619,7 +1620,7 @@ function openSearch() {
     _prefetchAll();
 }
 
-const SEARCH_HINT = '<p class="search-hint-text">البحثُ المُطابِق يُراعي الهمزات والنقاط والتشكيل إن وُجِد. أما التقريبيُّ فبحثٌ مُقارِبٌ لا يُراعي ذلك. للخروج من نافذة البحث اضغط زرَّ البحث.</p>';
+const SEARCH_HINT = '<p class="search-hint-text">البحثُ المُطابِق يُراعي الهمزات والنقاط والتشكيل إن وُجِد. أما التقريبيُّ فبحثٌ مُقارِبٌ لا يُراعي ذلك. للخروج من نافذة البحث اضغط زرَّ البحث، أو انقر على أي مكان فارغ.</p>';
 
 function closeSearch() {
     document.getElementById('searchModal').classList.add('hidden');
@@ -1636,6 +1637,57 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeSearch();
 });
 
+// ── تظليل كلمة البحث والتمرير إليها عند فتح الصفحة ─────
+(function() {
+    const hl = new URLSearchParams(window.location.search).get('hl');
+    if (!hl) return;
+    history.replaceState(null, '', window.location.pathname + window.location.hash);
+
+    function buildHlPat(q) {
+        const D = '[\\u064B-\\u065F\\u0670]*';
+        const AV = { 'ا':'[اأإآٱ]','أ':'[اأإآٱ]','إ':'[اأإآٱ]','آ':'[اأإآٱ]','ه':'[هة]','ة':'[هة]','ي':'[يى]','ى':'[يى]' };
+        function escR(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+        function normalize(s) {
+            return s.replace(/[\u064B-\u065F\u0670]/g, '')
+                    .replace(/[أإآٱ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي');
+        }
+        return new RegExp(normalize(q).split('').map(c =>
+            c === ' ' ? '\\s+' : ((AV[c] || escR(c)) + D)
+        ).join(''));
+    }
+
+    function doHighlight() {
+        const content = document.getElementById('articleContent');
+        if (!content) return;
+        let pat;
+        try { pat = buildHlPat(hl); } catch { return; }
+        const walker = document.createTreeWalker(content, NodeFilter.SHOW_TEXT, {
+            acceptNode: n => n.parentElement.closest('.hemistich') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT
+        });
+        let node;
+        while ((node = walker.nextNode())) {
+            const text = node.nodeValue;
+            const m = text.match(pat);
+            if (!m) continue;
+            const mark = document.createElement('mark');
+            mark.className = 'search-hl';
+            mark.textContent = text.slice(m.index, m.index + m[0].length);
+            const after = node.splitText(m.index);
+            after.nodeValue = text.slice(m.index + m[0].length);
+            node.parentNode.insertBefore(mark, after);
+            setTimeout(() => mark.scrollIntoView({ behavior: 'smooth', block: 'center' }), 120);
+            document.addEventListener('click', () => mark.replaceWith(mark.textContent), { once: true });
+            break;
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', doHighlight);
+    } else {
+        doHighlight();
+    }
+})();
+
 
     </script>
 
@@ -1644,7 +1696,7 @@ document.addEventListener('keydown', (e) => {
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    padding-top: 145px;
+    padding-top: 185px;
     background: rgba(0, 0, 0, 0.55);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
@@ -1654,7 +1706,7 @@ document.addEventListener('keydown', (e) => {
     position: relative;
     width: 90%;
     max-width: 640px;
-    max-height: calc(100vh - 145px);
+    max-height: calc(100vh - 185px);
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -1822,17 +1874,17 @@ body.dark .search-result-excerpt mark { background: rgba(251,191,36,0.25); }
     color: #6b7280;
     line-height: 2;
     direction: rtl;
-    text-align: right;
+    text-align: justify;
     padding: 0.75rem 0.5rem;
 }
 body.dark .search-hint-text { color: #9ca3af; }
 
 @media (max-width: 768px) {
-    #searchModal { padding-top: 100px; align-items: flex-start; }
+    #searchModal { padding-top: 120px; align-items: flex-start; }
     .search-panel {
         width: calc(100vw - 16px);
         max-width: none;
-        max-height: calc(100vh - 115px);
+        max-height: calc(100vh - 120px);
         margin: 0;
     }
     .search-panel-input { font-size: 0.92rem; }
@@ -1840,6 +1892,19 @@ body.dark .search-hint-text { color: #9ca3af; }
     .search-mode-tabs { padding: 6px 10px; gap: 5px; }
     .search-mode-btn { padding: 3px 10px; font-size: 0.78rem; }
     .search-result-count { padding: 3px 4px 6px; }
+}
+mark.search-hl {
+    background: #fde68a;
+    color: inherit;
+    border-radius: 3px;
+    padding: 0 2px;
+    outline: 2px solid #f59e0b;
+    outline-offset: 1px;
+    scroll-margin-top: 120px;
+}
+body.dark mark.search-hl {
+    background: rgba(251,191,36,0.35);
+    outline-color: #fbbf24;
 }
 </style>
 
@@ -1858,7 +1923,7 @@ body.dark .search-hint-text { color: #9ca3af; }
             <button id="searchModeApprox" class="search-mode-btn" onclick="setSearchMode('approx')">بحثٌ تقريبيٌّ</button>
         </div>
         <div id="searchResults" class="search-panel-results">
-            <p class="search-hint-text">البحثُ المُطابِق يُراعي الهمزات والنقاط والتشكيل إن وُجِد. أما التقريبيُّ فبحثٌ مُقارِبٌ لا يُراعي ذلك. للخروج من نافذة البحث اضغط زرَّ البحث.</p>
+            <p class="search-hint-text">البحثُ المُطابِق يُراعي الهمزات والنقاط والتشكيل إن وُجِد. أما التقريبيُّ فبحثٌ مُقارِبٌ لا يُراعي ذلك. للخروج من نافذة البحث اضغط زرَّ البحث، أو انقر على أي مكان فارغ.</p>
         </div>
     </div>
 </div>
