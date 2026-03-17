@@ -5,6 +5,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
+# Install Node dependencies (first time only)
+npm install
+
+# Build Tailwind CSS (required after adding new Tailwind classes)
+npm run build:css
+
+# Watch Tailwind CSS during development (run alongside zola serve)
+npm run watch:css
+
 # Local development server with live reload
 zola serve
 
