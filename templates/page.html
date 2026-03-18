@@ -35,7 +35,7 @@
 <!-- ===== Floating Back Button ===== -->
 <a href="javascript:history.back()" id="floatingBack" class="floating-back" aria-label="عُد إلى الصفحة السابقة">
     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
     </svg>
     <span class="floating-back-label">السابقة</span>
 </a>
@@ -74,7 +74,9 @@
 
         <div class="mt-12 pt-8 border-t border-orange-100 flex flex-col sm:flex-row justify-between items-center gap-4">
             <a href="javascript:history.back()" class="back-link font-bold flex items-center gap-2 transition-colors text-sm md:text-base">
-                <span>→</span>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+                </svg>
                 عُد إلى الصفحة السابقة
             </a>
             {% if page.date %}
@@ -542,7 +544,8 @@ body.dark .edit-wrap textarea { background:rgba(17,24,39,0.8)!important; color:#
 body.dark .btn-cancel { border-color:rgba(107,114,128,0.3); color:#9ca3af; }
 body.dark .btn-cancel:hover { background:rgba(107,114,128,0.12); }
 
-.empty-comments { text-align:center; padding:2.5rem 1rem; color:#b0a090; font-size:0.92rem; background:rgba(255,248,240,0.4); border-radius:1rem; border:1px dashed rgba(234,88,12,0.2); }
+.empty-comments { display:flex; align-items:center; justify-content:center; width:100%; box-sizing:border-box; gap:0.85rem; padding:1.6rem 1.2rem; color:#b0a090; font-size:0.92rem; background:rgba(255,248,240,0.4); border-radius:1rem; border:1px dashed rgba(234,88,12,0.2); }
+.empty-comments svg { flex-shrink:0; opacity:0.5; }
 body.dark .empty-comments { background:rgba(31,41,55,0.4); color:#6b7280; }
 </style>
 
@@ -560,7 +563,7 @@ const PAGE_SLUG    = window.location.pathname.replace(/\//g,'_').replace(/^_|_$/
 
 const TXT = {
     loading:       'جارٍ تحميل التعليقات...',
-    empty:         'كن أوَّلَ مُعلِّق! 🌟',
+    empty:         'كن أوَّلَ مُعلِّق! <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><circle cx="9" cy="10" r="0.5" fill="currentColor"/><circle cx="12" cy="10" r="0.5" fill="currentColor"/><circle cx="15" cy="10" r="0.5" fill="currentColor"/></svg>',
     loadError:     'تعذّر تحميل التعليقات.',
     sending:       'جارٍ الإرسال...',
     sent:          '✅ نُشر تعليقك!',
