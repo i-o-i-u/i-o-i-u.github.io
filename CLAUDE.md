@@ -65,7 +65,7 @@ The site uses a custom Arabic poetry formatter built into `base.html`:
 ## Comments System
 
 - Backend: Supabase (free tier)
-- Supports nested replies up to two levels only
+- Supports nested replies up to three levels only
 - Admin controls: hide/show comments, admin badge display
 - Dates displayed in Arabic with relative time (e.g. "منذ ساعتين")
 - Arabic grammatical number agreement handled via `arabicCount()` helper function

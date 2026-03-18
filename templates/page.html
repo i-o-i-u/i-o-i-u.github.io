@@ -510,6 +510,9 @@ body.dark .btn-unhide { border-color:rgba(5,150,105,0.2); background:rgba(5,150,
 /* الردود */
 .replies-container { margin-top:0.75rem; margin-right:1.5rem; padding-right:1rem; border-right:2px solid rgba(234,88,12,0.25); }
 body.dark .replies-container { border-color:rgba(234,88,12,0.2); }
+/* المستوى الثالث: إزاحة أخف */
+.replies-container .replies-container { margin-right:1rem; padding-right:0.75rem; border-right-width:1.5px; border-right-color:rgba(234,88,12,0.15); }
+body.dark .replies-container .replies-container { border-right-color:rgba(234,88,12,0.12); }
 .reply-card { background:rgba(255,255,255,0.5); backdrop-filter:blur(10px); border:1px solid rgba(251,146,60,0.15); border-radius:1rem; padding:0.8rem 1rem; margin-top:0.5rem; direction:rtl; transition:all 0.2s; }
 .reply-card:hover { border-color:rgba(234,88,12,0.25); }
 body.dark .reply-card { background:rgba(10,14,23,0.7); border-color:rgba(251,146,60,0.1); }
@@ -523,8 +526,11 @@ body.dark .reply-form-wrap input { background:rgba(255,255,255,0.05)!important; 
 body.dark .reply-form-wrap input:focus { background:rgba(255,255,255,0.09)!important; border-color:#f97316!important; }
 .reply-form-wrap input::placeholder { color:#c4a882; }
 body.dark .reply-form-wrap input::placeholder { color:#4b5563!important; }
-.btn-send-reply { align-self:flex-end; display:flex; align-items:center; gap:0.4rem; padding:0.55rem 1.1rem; background:linear-gradient(135deg,#f59e0b,#ea580c); color:white; border:none; border-radius:0.75rem; font-family:inherit; font-size:0.85rem; font-weight:700; cursor:pointer; transition:all 0.2s; box-shadow:0 3px 10px rgba(234,88,12,0.3); }
-.btn-send-reply:hover { background:linear-gradient(135deg,#ea580c,#c2410c); transform:translateY(-1px); }
+.btn-send-reply { align-self:flex-end; display:flex; align-items:center; gap:0.5rem; padding:0.6rem 1.2rem; background:linear-gradient(135deg,#fed7aa,#fdba74); color:#ea580c !important; border:none; border-radius:0.75rem; font-family:inherit; font-size:0.88rem; font-weight:700; cursor:pointer; transition:all 0.3s ease; }
+.btn-send-reply:hover { background:linear-gradient(135deg,#fdba74,#fb923c); transform:scale(1.05); }
+.btn-send-reply:active { transform:scale(1); }
+body.dark .btn-send-reply { background:linear-gradient(135deg,rgba(75,85,99,0.8),rgba(55,65,81,0.7)); color:#fbbf24!important; }
+body.dark .btn-send-reply:hover { background:linear-gradient(135deg,rgba(55,65,81,0.9),rgba(75,85,99,0.8)); }
 
 /* تعديل */
 .edit-wrap { margin-top:0.5rem; }
@@ -581,12 +587,27 @@ const TXT = {
 };
 // ====================================================
 
-function getMyUid() {
-    let uid = localStorage.getItem('comment_uid');
-    if (!uid) { uid = Math.random().toString(36).substr(2,4); localStorage.setItem('comment_uid', uid); }
-    return uid;
+async function getMyUid() {
+    // بصمة ثابتة من خصائص المتصفح — تبقى حتى لو مُسح localStorage
+    const parts = [
+        navigator.language || '',
+        screen.width, screen.height, screen.colorDepth,
+        navigator.hardwareConcurrency || '',
+        Intl.DateTimeFormat().resolvedOptions().timeZone,
+        navigator.maxTouchPoints != null ? navigator.maxTouchPoints : '',
+    ];
+    try {
+        const cv = document.createElement('canvas');
+        const cx = cv.getContext('2d');
+        cx.font = '11px serif';
+        cx.fillText('\u0633\u064a\u0641', 2, 12);
+        parts.push(cv.toDataURL().slice(-24));
+    } catch(e) {}
+    const raw = parts.join('|');
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(raw));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('').slice(0, 6);
 }
-const MY_UID = getMyUid();
+let MY_UID = '';
 
 let isAdmin = false;
 
@@ -615,7 +636,7 @@ async function initAdmin() {
     loadComments();
 }
 
-initAdmin();
+(async () => { MY_UID = await getMyUid(); await initAdmin(); })();
 
 async function sbFetch(path, opts = {}) {
     const headers = {
@@ -650,15 +671,16 @@ async function loadComments() {
 
         if (top.length === 0) { list.innerHTML = `<div class="empty-comments">${TXT.empty}</div>`; return; }
         list.innerHTML = '';
-        top.forEach(c => list.appendChild(buildCard(c, allReplies, false)));
+        top.forEach(c => list.appendChild(buildCard(c, allReplies, 0)));
     } catch(e) {
         list.innerHTML = `<div class="empty-comments">${TXT.loadError}</div>`;
     }
 }
 
-function buildCard(c, allReplies, isReply) {
+function buildCard(c, allReplies, depth) {
     const myComment = c.author_uid === MY_UID;
     const isOwner   = c.author_name === ADMIN_NAME;
+    const isReply   = depth > 0;
     const hiddenClass = c.is_hidden ? ' comment-hidden' : '';
     const div = document.createElement('div');
     div.className = (isReply ? 'reply-card' : 'comment-card') + hiddenClass;
@@ -692,7 +714,7 @@ function buildCard(c, allReplies, isReply) {
         ${hiddenLbl}
         <div class="comment-body" id="body-${c.id}" style="white-space:pre-wrap">${escHtml(c.body)}</div>
         <div class="comment-actions">
-            ${!isReply ? `<button class="btn-action btn-reply" onclick="toggleReplyForm('${c.id}')">${icoReply} ${TXT.btnReply}</button>` : ''}
+            ${depth < 2 ? `<button class="btn-action btn-reply" onclick="toggleReplyForm('${c.id}')">${icoReply} ${TXT.btnReply}</button>` : ''}
             ${myComment ? `<button class="btn-action btn-edit-c" onclick="toggleEdit('${c.id}',\`${escJs(c.body)}\`)">${icoEdit} ${TXT.btnEdit}</button>` : ''}
             ${(myComment || isAdmin) && !c.is_hidden ? `<button class="btn-action btn-hide" onclick="hideComment('${c.id}')">${icoHide} ${TXT.btnHide}</button>` : ''}
             ${isAdmin && c.is_hidden ? `<button class="btn-action btn-unhide" onclick="unhideComment('${c.id}')">${icoShow} إظهار</button>` : ''}
@@ -702,13 +724,15 @@ function buildCard(c, allReplies, isReply) {
         <div id="reply-form-${c.id}"></div>
     `;
 
-    // الردود المباشرة فقط لهذا التعليق
-    const directReplies = allReplies.filter(r => r.parent_id === c.id);
-    if (directReplies.length > 0) {
-        const rd = document.createElement('div');
-        rd.className = 'replies-container';
-        directReplies.forEach(r => rd.appendChild(buildCard(r, allReplies, true)));
-        div.appendChild(rd);
+    // الردود المباشرة — يعرضها حتى المستوى الثالث (depth 0 و 1)
+    if (depth < 2) {
+        const directReplies = allReplies.filter(r => r.parent_id === c.id);
+        if (directReplies.length > 0) {
+            const rd = document.createElement('div');
+            rd.className = 'replies-container';
+            directReplies.forEach(r => rd.appendChild(buildCard(r, allReplies, depth + 1)));
+            div.appendChild(rd);
+        }
     }
     return div;
 }
