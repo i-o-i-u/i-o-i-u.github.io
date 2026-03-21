@@ -66,14 +66,20 @@ p, div, span, a, li {
             -webkit-text-fill-color: transparent;
             background-clip: text;
             color: #ea580c;
+            padding-top: 0.3em;
+            padding-bottom: 0.3em;
+            display: inline-block;
         }
-        
+
         .dark-gradient-text {
             background: linear-gradient(135deg, #fbbf24, #fb923c);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             color: #fb923c;
+            padding-top: 0.3em;
+            padding-bottom: 0.3em;
+            display: inline-block;
         }
 
         @supports not (-webkit-background-clip: text) {
@@ -1224,7 +1230,6 @@ h1, h2, h3, h4, h5, h6 {
     <span class="text-gray-300 dark:text-gray-600">|</span>
     <a href="/writings/" class="text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-amber-400 font-semibold transition-colors">الكِتابات</a>
 </div>
-</nav>
 
 
                     <div class="content-section rounded-3xl p-8 md:p-12 shadow-2xl mb-12 text-right">
@@ -1444,6 +1449,11 @@ function copyContent() {
                 const p = document.createElement('p');
                 p.textContent = lines.join('\n');
                 box.replaceWith(p);
+            });
+            // استبدال رموز خط المصحف بالنص القرآني العادي عند النسخ
+            clone.querySelectorAll('.quran-verse').forEach(el => {
+                const plainText = el.getAttribute('data-quran-text') || '';
+                el.replaceWith(document.createTextNode(plainText));
             });
             const content = clone.innerText.trim();
             navigator.clipboard.writeText(content).then(() => {
@@ -3370,6 +3380,24 @@ body.dark .fn-back:hover { background: rgba(251,191,36,0.2); color: #f59e0b; }
     if (e.key === 'Escape') hidePopup();
   });
 })();
+
+function shareInshad(url) {
+    try {
+        var ta = document.createElement('textarea');
+        ta.value = url;
+        ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0';
+        document.body.appendChild(ta);
+        ta.focus(); ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+    } catch(e) {}
+    var t = document.getElementById('toast');
+    if (t) {
+        t.textContent = 'نُسِخ الرابط!';
+        t.classList.add('show');
+        setTimeout(function(){ t.classList.remove('show'); }, 3000);
+    }
+}
 </script>
 
 </body>

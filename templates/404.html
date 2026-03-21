@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}404 — الصفحة غير موجودة | {{ config.title }}{% endblock title %}
+
+{% block content %}
+<style>
+.error-card {
+    background: linear-gradient(135deg,
+        rgba(255,255,255,0.92) 0%,
+        rgba(255,248,240,0.88) 50%,
+        rgba(255,237,213,0.84) 100%);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(251,146,60,0.25);
+    box-shadow:
+        0 32px 64px rgba(0,0,0,0.12),
+        0 0 0 1px rgba(255,255,255,0.6) inset;
+}
+body.dark .error-card {
+    background: linear-gradient(135deg,
+        rgba(17,24,39,0.92) 0%,
+        rgba(24,32,44,0.88) 50%,
+        rgba(31,41,55,0.84) 100%);
+    border: 1px solid rgba(251,146,60,0.18);
+    box-shadow:
+        0 32px 64px rgba(0,0,0,0.4),
+        0 0 0 1px rgba(255,255,255,0.04) inset;
+}
+.num-404 {
+    font-size: clamp(5rem, 18vw, 9rem);
+    font-weight: 900;
+    line-height: 1;
+    background: linear-gradient(135deg, #f97316, #ea580c, #fb923c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -2px;
+}
+.hero-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+.icon-404 {
+    width: 80px; height: 80px;
+    flex-shrink: 0;
+    color: #f97316;
+    opacity: 0.85;
+}
+body.dark .icon-404 { color: #fb923c; }
+.divider-404 {
+    width: 60px; height: 3px;
+    background: linear-gradient(90deg, #f97316, #fb923c);
+    border-radius: 999px;
+    margin: 1.25rem auto 1.75rem;
+}
+.home-btn {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-weight: 700;
+    padding: 0.75rem 2rem;
+    border-radius: 1rem;
+    background: linear-gradient(135deg, #fed7aa, #fdba74);
+    color: #9a3412;
+    transition: all 0.2s;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(249,115,22,0.25);
+}
+.home-btn:hover {
+    background: linear-gradient(135deg, #fdba74, #fb923c);
+    color: #7c2d12;
+    box-shadow: 0 6px 20px rgba(249,115,22,0.35);
+    transform: translateY(-1px);
+}
+body.dark .home-btn {
+    background: linear-gradient(135deg, rgba(75,85,99,0.9), rgba(55,65,81,0.85));
+    color: #fbbf24;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+}
+body.dark .home-btn:hover {
+    background: linear-gradient(135deg, rgba(55,65,81,0.95), rgba(75,85,99,0.9));
+    color: #f59e0b;
+}
+</style>
+
+<div class="flex flex-col items-center justify-center min-h-[75vh] px-4 py-12">
+    <div class="error-card rounded-3xl p-10 md:p-14 w-full max-w-lg text-center">
+
+        <!-- الرقم مع الأيقونة جنبه -->
+        <div class="hero-row">
+            <div class="num-404">٤٠٤</div>
+            <!-- أيقونة: مسار مقطوع / صفحة غير موجودة -->
+            <svg class="icon-404" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="M21 21l-4.35-4.35"/>
+                <path d="M11 8v3m0 3h.01" stroke-width="2"/>
+            </svg>
+        </div>
+
+        <div class="divider-404"></div>
+
+        <!-- النص -->
+        <h1 class="text-2xl md:text-3xl font-black text-gray-800 dark:text-white mb-3">
+            الصفحة غير موجودة
+        </h1>
+        <p class="text-gray-500 dark:text-gray-400 text-base md:text-lg leading-relaxed mb-8">
+            لعلَّ هذه الصفحة نُقِلت أو حُذفت،<br>أو لم تكن موجودةً أصلًا.
+        </p>
+
+        <!-- زر العودة -->
+        <a href="/" class="home-btn">
+            <!-- أيقونة البيت من القائمة الجانبية -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/>
+                <path d="M9 21V12h6v9"/>
+            </svg>
+            عُد إلى الصفحة الأُوْلَى
+        </a>
+
+    </div>
+</div>
+{% endblock content %}
