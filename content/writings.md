@@ -3,13 +3,15 @@ title = "الكِتابات"
 slug = "writings"
 +++
 
+<div class="max-w-3xl mx-auto">
+
 <a href="/inshad/" class="writing-card">
   <div class="writing-card-bar"></div>
   <div class="writing-card-body">
     <div class="writing-card-title">الإنشاد عند العرب</div>
     <div class="writing-card-date">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-      14 شعبان 1447 هـ
+      ١٤ شعبان ١٤٤٧ هـ
     </div>
     <div class="writing-card-arrow">
       اقرأ
@@ -24,7 +26,7 @@ slug = "writings"
     <div class="writing-card-title">تفسير بعضِ قصيدةٍ لأبي المِطراب</div>
     <div class="writing-card-date">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-      23 رجب 1446 هـ
+      ٢٣ رجب ١٤٤٦ هـ
     </div>
     <div class="writing-card-arrow">
       اقرأ
@@ -32,3 +34,5 @@ slug = "writings"
     </div>
   </div>
 </a>
+
+</div>

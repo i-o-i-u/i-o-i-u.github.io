@@ -10,6 +10,23 @@
 
 {% block content %}
 
+{% if page.slug == "questions" or page.slug == "writings" %}
+  {% set parent_url = "/" %}
+  {% set parent_name = "" %}
+{% elif page.slug == "inshad" or page.slug == "metrab" %}
+  {% set parent_url = "/writings/" %}
+  {% set parent_name = "الكِتابات" %}
+{% elif page.slug == "arjuzat-al-radi" %}
+  {% set parent_url = "/chanting/" %}
+  {% set parent_name = "الإنشاد والحُداء" %}
+{% elif page.slug == "chanting" or page.slug == "saif-clan" or page.slug == "mufadati" %}
+  {% set parent_url = "/" %}
+  {% set parent_name = "" %}
+{% else %}
+  {% set parent_url = "/questions/" %}
+  {% set parent_name = "الأسئلة" %}
+{% endif %}
+
 <!-- ===== Floating Action Buttons ===== -->
 <div id="floatingActions" class="floating-actions" style="display:none;">
     {% if page.slug != "questions" and page.slug != "writings" %}
@@ -33,7 +50,7 @@
 </div>
 
 <!-- ===== Floating Back Button ===== -->
-<a href="javascript:history.back()" id="floatingBack" class="floating-back" aria-label="عُد إلى الصفحة السابقة">
+<a href="{{ parent_url }}" id="floatingBack" class="floating-back" aria-label="عُد إلى الصفحة السابقة">
     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
     </svg>
@@ -42,9 +59,27 @@
 
 <div class="text-right">
     <div class="content-section rounded-3xl p-6 md:p-8 lg:p-12 shadow-2xl mb-12">
+
+        {% if parent_name %}
+        <nav class="breadcrumb-nav" aria-label="مسار التنقل">
+            <a href="/" class="breadcrumb-link">
+                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="display:inline;vertical-align:-1px"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+                الصفحة الأُولَى
+            </a>
+            <span class="breadcrumb-sep">
+                <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+            </span>
+            <a href="{{ parent_url }}" class="breadcrumb-link">{{ parent_name }}</a>
+            <span class="breadcrumb-sep">
+                <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+            </span>
+            <span class="breadcrumb-current">{{ page.title }}</span>
+        </nav>
+        {% endif %}
+
         <div class="flex justify-between items-center mb-8 border-b border-orange-200 pb-4">
-            <h2 class="text-xl md:text-2xl lg:text-3xl font-black gradient-text">
-                {{ page.title }}
+            <h2 class="text-xl md:text-2xl lg:text-3xl font-black" style="line-height:1.8;overflow:visible;">
+                <span class="gradient-text">{{ page.title }}</span>
             </h2>
             {% if page.slug != "questions" and page.slug != "writings" %}
             <div class="flex items-center gap-2">
@@ -73,7 +108,7 @@
         </div>
 
         <div class="mt-12 pt-8 border-t border-orange-100 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <a href="javascript:history.back()" class="back-link font-bold flex items-center gap-2 transition-colors text-sm md:text-base">
+            <a href="{{ parent_url }}" class="back-link font-bold flex items-center gap-2 transition-colors text-sm md:text-base">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
                 </svg>
@@ -241,6 +276,50 @@ body.dark .button-tooltip::before { border-color:transparent transparent rgba(30
 body.dark .floating-btn {
     box-shadow: 0 4px 16px rgba(0,0,0,0.5) !important;
 }
+
+/* ===== Breadcrumb ===== */
+.breadcrumb-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+    padding: 0.55rem 1rem;
+    background: linear-gradient(135deg, rgba(251,146,60,0.08), rgba(234,88,12,0.05));
+    border: 1px solid rgba(251,146,60,0.18);
+    border-radius: 0.75rem;
+    width: fit-content;
+}
+.breadcrumb-link {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #c2410c;
+    text-decoration: none;
+    transition: color 0.18s;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+.breadcrumb-link:hover { color: #9a3412; }
+.breadcrumb-sep { color: #d97706; opacity: 0.5; display: flex; align-items: center; }
+.breadcrumb-current {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #92400e;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 18rem;
+}
+body.dark .breadcrumb-nav {
+    background: linear-gradient(135deg, rgba(251,146,60,0.07), rgba(234,88,12,0.04));
+    border-color: rgba(251,146,60,0.15);
+}
+body.dark .breadcrumb-link { color: #fb923c; }
+body.dark .breadcrumb-link:hover { color: #fdba74; }
+body.dark .breadcrumb-sep { color: #f59e0b; }
+body.dark .breadcrumb-current { color: #fbbf24; }
 
 /* ===== Floating Back Button ===== */
 .floating-back {
@@ -948,7 +1027,7 @@ function copyContent() {
   }).catch(err => console.warn('فشل النسخ:', err));
 }
 function shareContent() {
-    const title = document.querySelector('h2.gradient-text').innerText;
+    const title = (document.querySelector('h2 .gradient-text') || document.querySelector('h2.gradient-text')).innerText;
     const url = window.location.href;
     if (navigator.share) {
         navigator.share({ title, url }).catch(err => console.log('Error sharing:', err));

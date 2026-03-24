@@ -3,16 +3,6 @@ title = "الأسئلة"
 slug = "questions"
 +++
 
-<style>
-.question-card {
-    background-color: #ffffff !important;
-}
-body.dark .question-card {
-    background-color: #1f2937 !important;
-    border-color: #374151 !important;
-}
-</style>
-
 <div class="text-center mb-16">
     <div class="relative inline-block">
         <div class="absolute inset-0 bg-gradient-to-r from-amber-400/20 to-orange-500/20 blur-3xl rounded-full"></div>
@@ -25,73 +15,111 @@ body.dark .question-card {
     <div class="w-32 h-1 bg-gradient-to-r from-transparent via-amber-500 to-transparent mx-auto mt-8"></div>
 </div>
 
-<div class="grid gap-8 max-w-3xl mx-auto">
+<div class="max-w-3xl mx-auto">
 
-
-<a href="/mathal/" class="question-card group block relative overflow-hidden rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-orange-100 dark:border-gray-700 backdrop-blur-sm">
-<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-400 via-orange-500 to-amber-400"></div>
-<div class="relative">
-<h3 class="text-xl font-bold text-orange-600 dark:text-amber-300 mb-3 group-hover:text-orange-700 dark:group-hover:text-amber-200 transition-colors">التمثُّل بالشِّعر</h3>
-<div class="flex items-center gap-2 text-gray-500 dark:text-gray-300 text-sm"><span>📅</span><span>١٠ ذو القَعْدة ١٤٤٦ هـ</span></div>
-</div>
-<div class="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity text-orange-500 dark:text-amber-400">← اقرأ</div>
+<a href="/mathal/" class="writing-card">
+  <div class="writing-card-bar"></div>
+  <div class="writing-card-body">
+    <div class="writing-card-title">التمثُّل بالشِّعر</div>
+    <div class="writing-card-date">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      ١٠ ذو القَعْدة ١٤٤٦ هـ
+    </div>
+    <div class="writing-card-arrow">
+      اقرأ
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </div>
 </a>
 
-<a href="/takharog/" class="question-card group block relative overflow-hidden rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-orange-100 dark:border-gray-700 backdrop-blur-sm">
-<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-400 via-orange-500 to-amber-400"></div>
-<div class="relative">
-<h3 class="text-xl font-bold text-orange-600 dark:text-amber-300 mb-3 group-hover:text-orange-700 dark:group-hover:text-amber-200 transition-colors">بيتٌ يُتمثَّل به عند التخرُّج</h3>
-<div class="flex items-center gap-2 text-gray-500 dark:text-gray-300 text-sm"><span>📅</span><span>١٠ ذو القَعْدة ١٤٤٦ هـ</span></div>
-</div>
-<div class="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity text-orange-500 dark:text-amber-400">← اقرأ</div>
+<a href="/takharog/" class="writing-card">
+  <div class="writing-card-bar"></div>
+  <div class="writing-card-body">
+    <div class="writing-card-title">بيتٌ يُتمثَّل به عند التخرُّج</div>
+    <div class="writing-card-date">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      ١٠ ذو القَعْدة ١٤٤٦ هـ
+    </div>
+    <div class="writing-card-arrow">
+      اقرأ
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </div>
 </a>
 
-<a href="/question-1/" class="question-card group block relative overflow-hidden rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-orange-100 dark:border-gray-700 backdrop-blur-sm">
-<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-400 via-orange-500 to-amber-400"></div>
-<div class="relative">
-<h3 class="text-xl font-bold text-orange-600 dark:text-amber-300 mb-3 group-hover:text-orange-700 dark:group-hover:text-amber-200 transition-colors">ما الذي حبَّب إليك العربية، ولمَ لستَ متخصِّصًا فيها؟</h3>
-<div class="flex items-center gap-2 text-gray-500 dark:text-gray-300 text-sm"><span>📅</span><span>١٦ رجب ١٤٤٦ هـ</span></div>
-</div>
-<div class="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity text-orange-500 dark:text-amber-400">← اقرأ</div>
+<a href="/question-1/" class="writing-card">
+  <div class="writing-card-bar"></div>
+  <div class="writing-card-body">
+    <div class="writing-card-title">ما الذي حبَّب إليك العربية، ولمَ لستَ متخصِّصًا فيها؟</div>
+    <div class="writing-card-date">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      ١٦ رجب ١٤٤٦ هـ
+    </div>
+    <div class="writing-card-arrow">
+      اقرأ
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </div>
 </a>
 
-<a href="/ibn-duraid/" class="question-card group block relative overflow-hidden rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-orange-100 dark:border-gray-700 backdrop-blur-sm">
-<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-400 via-orange-500 to-amber-400"></div>
-<div class="relative">
-<h3 class="text-xl font-bold text-orange-600 dark:text-amber-300 mb-3 group-hover:text-orange-700 dark:group-hover:text-amber-200 transition-colors">مقصورة أبي بكر بنِ دُرَيد رحمه الله</h3>
-<div class="flex items-center gap-2 text-gray-500 dark:text-gray-300 text-sm"><span>📅</span><span>٢٠ جمادى الآخِرة ١٤٤٦ هـ</span></div>
-</div>
-<div class="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity text-orange-500 dark:text-amber-400">← اقرأ</div>
+<a href="/ibn-duraid/" class="writing-card">
+  <div class="writing-card-bar"></div>
+  <div class="writing-card-body">
+    <div class="writing-card-title">مقصورة أبي بكر بنِ دُرَيد رحمه الله</div>
+    <div class="writing-card-date">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      ٢٠ جمادى الآخِرة ١٤٤٦ هـ
+    </div>
+    <div class="writing-card-arrow">
+      اقرأ
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </div>
 </a>
 
-<a href="/question-2/" class="question-card group block relative overflow-hidden rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-orange-100 dark:border-gray-700 backdrop-blur-sm">
-<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-400 via-orange-500 to-amber-400"></div>
-<div class="relative">
-<h3 class="text-xl font-bold text-orange-600 dark:text-amber-300 mb-3 group-hover:text-orange-700 dark:group-hover:text-amber-200 transition-colors">نصيحةٌ لمن يحبُّ علوم اللغة، ويستبطئ الإتقان.</h3>
-<div class="flex items-center gap-2 text-gray-500 dark:text-gray-300 text-sm"><span>📅</span><span>١٦ جمادى الآخِر ١٤٤٦ هـ</span></div>
-</div>
-<div class="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity text-orange-500 dark:text-amber-400">← اقرأ</div>
+<a href="/question-2/" class="writing-card">
+  <div class="writing-card-bar"></div>
+  <div class="writing-card-body">
+    <div class="writing-card-title">نصيحةٌ لمن يحبُّ علوم اللغة، ويستبطئ الإتقان.</div>
+    <div class="writing-card-date">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      ١٦ جمادى الآخِر ١٤٤٦ هـ
+    </div>
+    <div class="writing-card-arrow">
+      اقرأ
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </div>
 </a>
 
-<a href="/nathm/" class="question-card group block relative overflow-hidden rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-orange-100 dark:border-gray-700 backdrop-blur-sm">
-<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-400 via-orange-500 to-amber-400"></div>
-<div class="relative">
-<h3 class="text-xl font-bold text-orange-600 dark:text-amber-300 mb-3 group-hover:text-orange-700 dark:group-hover:text-amber-200 transition-colors">سؤالٌ عن نَظْم الشعر وفهمه</h3>
-<div class="flex items-center gap-2 text-gray-500 dark:text-gray-300 text-sm"><span>📅</span><span>٢٥ جمادى الأُوْلَى ١٤٤٦ هـ</span></div>
-</div>
-<div class="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity text-orange-500 dark:text-amber-400">← اقرأ</div>
+<a href="/nathm/" class="writing-card">
+  <div class="writing-card-bar"></div>
+  <div class="writing-card-body">
+    <div class="writing-card-title">سؤالٌ عن نَظْم الشعر وفهمه</div>
+    <div class="writing-card-date">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      ٢٥ جمادى الأُوْلَى ١٤٤٦ هـ
+    </div>
+    <div class="writing-card-arrow">
+      اقرأ
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </div>
 </a>
 
-<a href="/question-3/" class="question-card group block relative overflow-hidden rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-orange-100 dark:border-gray-700 backdrop-blur-sm">
-<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-400 via-orange-500 to-amber-400"></div>
-<div class="relative">
-<h3 class="text-xl font-bold text-orange-600 dark:text-amber-300 mb-3 group-hover:text-orange-700 dark:group-hover:text-amber-200 transition-colors">أشباه ونظائر في النساء</h3>
-<div class="flex items-center gap-2 text-gray-500 dark:text-gray-300 text-sm"><span>📅</span><span>٢ جمادى الأُولى ١٤٤٦ هـ</span></div>
-</div>
-<div class="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity text-orange-500 dark:text-amber-400">← اقرأ</div>
+<a href="/question-3/" class="writing-card">
+  <div class="writing-card-bar"></div>
+  <div class="writing-card-body">
+    <div class="writing-card-title">أشباه ونظائر في النساء</div>
+    <div class="writing-card-date">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      ٢ جمادى الأُولى ١٤٤٦ هـ
+    </div>
+    <div class="writing-card-arrow">
+      اقرأ
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </div>
 </a>
-
-
-
 
 </div>

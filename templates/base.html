@@ -66,14 +66,20 @@ p, div, span, a, li {
             -webkit-text-fill-color: transparent;
             background-clip: text;
             color: #ea580c;
+            padding-top: 0.3em;
+            padding-bottom: 0.3em;
+            display: inline-block;
         }
-        
+
         .dark-gradient-text {
             background: linear-gradient(135deg, #fbbf24, #fb923c);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             color: #fb923c;
+            padding-top: 0.3em;
+            padding-bottom: 0.3em;
+            display: inline-block;
         }
 
         @supports not (-webkit-background-clip: text) {
@@ -1224,7 +1230,6 @@ h1, h2, h3, h4, h5, h6 {
     <span class="text-gray-300 dark:text-gray-600">|</span>
     <a href="/writings/" class="text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-amber-400 font-semibold transition-colors">الكِتابات</a>
 </div>
-</nav>
 
 
                     <div class="content-section rounded-3xl p-8 md:p-12 shadow-2xl mb-12 text-right">
@@ -1420,12 +1425,22 @@ function copyContent() {
                 const rows = box.querySelectorAll('tr');
                 const p = document.createElement('p');
                 if (rows.length > 0) {
-                    // صندوق شعر: استخرج الأشطر
                     const lines = [];
+                    var rajazNum = 0;
                     rows.forEach(row => {
+                        // شعر عمودي
                         const parts = [...row.querySelectorAll('.shatr')].map(c => c.textContent.trim()).filter(Boolean);
-                        if (parts.length === 2) { lines.push(parts[0]); lines.push(parts[1]); }
+                        if (parts.length === 2) { lines.push(parts[0] + '    ' + parts[1]); }
                         else if (parts.length === 1) lines.push(parts[0]);
+                        else {
+                            // رجز داخل glass-premium-box
+                            const rajaz = [...row.querySelectorAll('.rajaz-shatr')].map(c => c.textContent.trim()).filter(Boolean);
+                            if (rajaz.length > 0) {
+                                rajazNum++;
+                                const num = String(rajazNum).replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+                                rajaz.forEach(v => lines.push(num + '- ' + v));
+                            }
+                        }
                     });
                     p.textContent = lines.join('\n');
                 } else {
@@ -1444,6 +1459,11 @@ function copyContent() {
                 const p = document.createElement('p');
                 p.textContent = lines.join('\n');
                 box.replaceWith(p);
+            });
+            // استبدال رموز خط المصحف بالنص القرآني العادي عند النسخ
+            clone.querySelectorAll('[data-quran-text]').forEach(el => {
+                const plainText = el.getAttribute('data-quran-text') || '';
+                el.replaceWith(document.createTextNode(plainText));
             });
             const content = clone.innerText.trim();
             navigator.clipboard.writeText(content).then(() => {
@@ -2073,6 +2093,96 @@ body.dark .glass-premium-box {
 @supports not (backdrop-filter: blur(1px)) {
   body.dark .glass-premium-box { background: #0d1117; }
 }
+
+/* ===== إزالة الصندوق عن القصائد وتوسيطها ===== */
+.glass-premium-box:has(.poetry-table),
+.glass-premium-box:has(.rajaz-table),
+.glass-rajaz-box {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding: 0.25rem 0 !important;
+  border-radius: 0 !important;
+}
+body.dark .glass-premium-box:has(.poetry-table),
+body.dark .glass-premium-box:has(.rajaz-table),
+body.dark .glass-rajaz-box {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+/* القصيدة العمودية: عرض معقول ومتوسِّط */
+.glass-premium-box:has(.poetry-table) {
+  max-width: 620px !important;
+  margin: 1rem auto !important;
+}
+/* الرجز: أضيق من العمودية */
+.glass-premium-box:has(.rajaz-table),
+.glass-rajaz-box {
+  max-width: 360px !important;
+  margin: 1rem auto !important;
+}
+
+/* ===== أرقام الأبيات ===== */
+.verse-num {
+  width: 2.8em;
+  min-width: 2.8em;
+  padding: 0.4rem 0 0.4rem 0.5rem;
+  color: rgba(160,110,30,0.8);
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: right;
+  vertical-align: baseline;
+  white-space: nowrap;
+  line-height: 2.2;
+}
+body.dark .verse-num {
+  color: rgba(251,191,36,0.65);
+}
+/* تضييق الأشطر لاستيعاب عمود الرقم */
+.poetry-table.numbered .shatr { width: calc(50% - 1.4em); }
+.rajaz-table.numbered .rajaz-shatr { width: calc(100% - 2.8em); }
+/* ===== الجوال: الرقم في نفس سطر الشطر الأول ===== */
+@media (max-width: 640px) {
+  /* الصف يصبح flex ليجمع الرقم مع الشطر الأول في سطر واحد */
+  .poetry-table.numbered tr {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+  }
+  .verse-num {
+    width: auto;
+    min-width: 2.4em;
+    padding: 0.25rem 0 0.25rem 0.4rem;
+    font-size: 0.85rem;
+    line-height: 2.1;
+    text-align: left;
+  }
+  /* الشطر الأول يملأ باقي السطر مع الرقم */
+  .poetry-table.numbered .shatr.first {
+    flex: 1;
+    width: auto;
+    display: block;
+  }
+  /* الشطر الثاني ينزل إلى سطر مستقل */
+  .poetry-table.numbered .shatr.last {
+    flex: 0 0 100%;
+    display: block;
+  }
+  /* الرجز المرقّم: الرقم مع الشطر في نفس السطر */
+  .rajaz-table.numbered tr {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: baseline;
+  }
+  .rajaz-table.numbered .rajaz-shatr {
+    flex: 1;
+    width: auto;
+  }
+}
+
 .poetry-table {
   width: 100%;
   border-collapse: collapse;
@@ -2149,6 +2259,14 @@ body.dark .glass-rajaz-box {
     padding: 0.75rem;
     margin: 1rem auto;
   }
+  /* تأكيد تنسيق حاويات الشعر على الجوال */
+  .glass-premium-box:has(.poetry-table),
+  .glass-premium-box:has(.rajaz-table),
+  .glass-rajaz-box {
+    max-width: calc(100vw - 1rem) !important;
+    margin: 0.75rem auto !important;
+    padding: 0 !important;
+  }
   .glass-rajaz-box {
     padding: 0.5rem 0.75rem;
     margin: 0.75rem auto;
@@ -2178,13 +2296,12 @@ body.dark .glass-rajaz-box {
     border-left: none;
     padding-bottom: 0.15rem;
   }
-  .poetry-table tr:not(:last-child) .shatr.last {
-    border-bottom: 1px solid rgba(180,130,50,0.25);
-    padding-bottom: 0.45rem;
-    margin-bottom: 0.15rem;
+  .poetry-table tr:not(:last-child) {
+    margin-bottom: 0.5rem;
   }
-  body.dark .poetry-table tr:not(:last-child) .shatr.last {
-    border-bottom-color: rgba(255,255,255,0.15);
+  .poetry-table tr:not(:last-child) .shatr.last {
+    border-bottom: none;
+    padding-bottom: 0;
   }
   .rajaz-table {
     font-size: 0.9rem; /* موحَّد مع poetry-table */
@@ -2399,10 +2516,41 @@ function initStretch() {
   }
 }
 
+function addVerseNumbers() {
+  function toAr(n) { return String(n).split('').reverse().join('').replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]); }
+  function addNums(selector) {
+    document.querySelectorAll(selector).forEach(function(table) {
+      var rows = table.querySelectorAll('tr');
+      if (rows.length < 2) return;
+      table.classList.add('numbered');
+      rows.forEach(function(row, i) {
+        var n = i + 1;
+        row.id = 'verse-' + n;
+        var td = document.createElement('td');
+        td.className = 'verse-num';
+        var inner = '<bdo dir="rtl">' + toAr(n) + '-</bdo>';
+        var expEl = document.getElementById('exp-' + n);
+        if (expEl) {
+          var a = document.createElement('a');
+          a.href = '#exp-' + n;
+          a.innerHTML = inner;
+          a.style.cssText = 'text-decoration:none;color:inherit;display:block;';
+          td.appendChild(a);
+        } else {
+          td.innerHTML = inner;
+        }
+        row.insertBefore(td, row.firstChild);
+      });
+    });
+  }
+  addNums('.poetry-table');
+  addNums('.rajaz-table');
+}
+
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initStretch);
+  document.addEventListener('DOMContentLoaded', function() { addVerseNumbers(); initStretch(); });
 } else {
-  initStretch();
+  addVerseNumbers(); initStretch();
 }
 window.addEventListener('resize', stretchAll);
 
@@ -3370,6 +3518,24 @@ body.dark .fn-back:hover { background: rgba(251,191,36,0.2); color: #f59e0b; }
     if (e.key === 'Escape') hidePopup();
   });
 })();
+
+function shareInshad(url) {
+    try {
+        var ta = document.createElement('textarea');
+        ta.value = url;
+        ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0';
+        document.body.appendChild(ta);
+        ta.focus(); ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+    } catch(e) {}
+    var t = document.getElementById('toast');
+    if (t) {
+        t.textContent = 'نُسِخ الرابط!';
+        t.classList.add('show');
+        setTimeout(function(){ t.classList.remove('show'); }, 3000);
+    }
+}
 </script>
 
 </body>
