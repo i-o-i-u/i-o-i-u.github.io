@@ -1425,12 +1425,22 @@ function copyContent() {
                 const rows = box.querySelectorAll('tr');
                 const p = document.createElement('p');
                 if (rows.length > 0) {
-                    // صندوق شعر: استخرج الأشطر
                     const lines = [];
+                    var rajazNum = 0;
                     rows.forEach(row => {
+                        // شعر عمودي
                         const parts = [...row.querySelectorAll('.shatr')].map(c => c.textContent.trim()).filter(Boolean);
-                        if (parts.length === 2) { lines.push(parts[0]); lines.push(parts[1]); }
+                        if (parts.length === 2) { lines.push(parts[0] + '    ' + parts[1]); }
                         else if (parts.length === 1) lines.push(parts[0]);
+                        else {
+                            // رجز داخل glass-premium-box
+                            const rajaz = [...row.querySelectorAll('.rajaz-shatr')].map(c => c.textContent.trim()).filter(Boolean);
+                            if (rajaz.length > 0) {
+                                rajazNum++;
+                                const num = String(rajazNum).replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+                                rajaz.forEach(v => lines.push(num + '- ' + v));
+                            }
+                        }
                     });
                     p.textContent = lines.join('\n');
                 } else {
@@ -1451,7 +1461,7 @@ function copyContent() {
                 box.replaceWith(p);
             });
             // استبدال رموز خط المصحف بالنص القرآني العادي عند النسخ
-            clone.querySelectorAll('.quran-verse').forEach(el => {
+            clone.querySelectorAll('[data-quran-text]').forEach(el => {
                 const plainText = el.getAttribute('data-quran-text') || '';
                 el.replaceWith(document.createTextNode(plainText));
             });
@@ -2083,6 +2093,96 @@ body.dark .glass-premium-box {
 @supports not (backdrop-filter: blur(1px)) {
   body.dark .glass-premium-box { background: #0d1117; }
 }
+
+/* ===== إزالة الصندوق عن القصائد وتوسيطها ===== */
+.glass-premium-box:has(.poetry-table),
+.glass-premium-box:has(.rajaz-table),
+.glass-rajaz-box {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding: 0.25rem 0 !important;
+  border-radius: 0 !important;
+}
+body.dark .glass-premium-box:has(.poetry-table),
+body.dark .glass-premium-box:has(.rajaz-table),
+body.dark .glass-rajaz-box {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+/* القصيدة العمودية: عرض معقول ومتوسِّط */
+.glass-premium-box:has(.poetry-table) {
+  max-width: 620px !important;
+  margin: 1rem auto !important;
+}
+/* الرجز: أضيق من العمودية */
+.glass-premium-box:has(.rajaz-table),
+.glass-rajaz-box {
+  max-width: 360px !important;
+  margin: 1rem auto !important;
+}
+
+/* ===== أرقام الأبيات ===== */
+.verse-num {
+  width: 2.8em;
+  min-width: 2.8em;
+  padding: 0.4rem 0 0.4rem 0.5rem;
+  color: rgba(160,110,30,0.8);
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: right;
+  vertical-align: baseline;
+  white-space: nowrap;
+  line-height: 2.2;
+}
+body.dark .verse-num {
+  color: rgba(251,191,36,0.65);
+}
+/* تضييق الأشطر لاستيعاب عمود الرقم */
+.poetry-table.numbered .shatr { width: calc(50% - 1.4em); }
+.rajaz-table.numbered .rajaz-shatr { width: calc(100% - 2.8em); }
+/* ===== الجوال: الرقم في نفس سطر الشطر الأول ===== */
+@media (max-width: 640px) {
+  /* الصف يصبح flex ليجمع الرقم مع الشطر الأول في سطر واحد */
+  .poetry-table.numbered tr {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+  }
+  .verse-num {
+    width: auto;
+    min-width: 2.4em;
+    padding: 0.25rem 0 0.25rem 0.4rem;
+    font-size: 0.85rem;
+    line-height: 2.1;
+    text-align: left;
+  }
+  /* الشطر الأول يملأ باقي السطر مع الرقم */
+  .poetry-table.numbered .shatr.first {
+    flex: 1;
+    width: auto;
+    display: block;
+  }
+  /* الشطر الثاني ينزل إلى سطر مستقل */
+  .poetry-table.numbered .shatr.last {
+    flex: 0 0 100%;
+    display: block;
+  }
+  /* الرجز المرقّم: الرقم مع الشطر في نفس السطر */
+  .rajaz-table.numbered tr {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: baseline;
+  }
+  .rajaz-table.numbered .rajaz-shatr {
+    flex: 1;
+    width: auto;
+  }
+}
+
 .poetry-table {
   width: 100%;
   border-collapse: collapse;
@@ -2159,6 +2259,14 @@ body.dark .glass-rajaz-box {
     padding: 0.75rem;
     margin: 1rem auto;
   }
+  /* تأكيد تنسيق حاويات الشعر على الجوال */
+  .glass-premium-box:has(.poetry-table),
+  .glass-premium-box:has(.rajaz-table),
+  .glass-rajaz-box {
+    max-width: calc(100vw - 1rem) !important;
+    margin: 0.75rem auto !important;
+    padding: 0 !important;
+  }
   .glass-rajaz-box {
     padding: 0.5rem 0.75rem;
     margin: 0.75rem auto;
@@ -2188,13 +2296,12 @@ body.dark .glass-rajaz-box {
     border-left: none;
     padding-bottom: 0.15rem;
   }
-  .poetry-table tr:not(:last-child) .shatr.last {
-    border-bottom: 1px solid rgba(180,130,50,0.25);
-    padding-bottom: 0.45rem;
-    margin-bottom: 0.15rem;
+  .poetry-table tr:not(:last-child) {
+    margin-bottom: 0.5rem;
   }
-  body.dark .poetry-table tr:not(:last-child) .shatr.last {
-    border-bottom-color: rgba(255,255,255,0.15);
+  .poetry-table tr:not(:last-child) .shatr.last {
+    border-bottom: none;
+    padding-bottom: 0;
   }
   .rajaz-table {
     font-size: 0.9rem; /* موحَّد مع poetry-table */
@@ -2409,10 +2516,41 @@ function initStretch() {
   }
 }
 
+function addVerseNumbers() {
+  function toAr(n) { return String(n).split('').reverse().join('').replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]); }
+  function addNums(selector) {
+    document.querySelectorAll(selector).forEach(function(table) {
+      var rows = table.querySelectorAll('tr');
+      if (rows.length < 2) return;
+      table.classList.add('numbered');
+      rows.forEach(function(row, i) {
+        var n = i + 1;
+        row.id = 'verse-' + n;
+        var td = document.createElement('td');
+        td.className = 'verse-num';
+        var inner = '<bdo dir="rtl">' + toAr(n) + '-</bdo>';
+        var expEl = document.getElementById('exp-' + n);
+        if (expEl) {
+          var a = document.createElement('a');
+          a.href = '#exp-' + n;
+          a.innerHTML = inner;
+          a.style.cssText = 'text-decoration:none;color:inherit;display:block;';
+          td.appendChild(a);
+        } else {
+          td.innerHTML = inner;
+        }
+        row.insertBefore(td, row.firstChild);
+      });
+    });
+  }
+  addNums('.poetry-table');
+  addNums('.rajaz-table');
+}
+
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initStretch);
+  document.addEventListener('DOMContentLoaded', function() { addVerseNumbers(); initStretch(); });
 } else {
-  initStretch();
+  addVerseNumbers(); initStretch();
 }
 window.addEventListener('resize', stretchAll);
 
