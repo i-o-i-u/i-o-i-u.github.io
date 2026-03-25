@@ -1508,6 +1508,10 @@ const SITE_PAGES = [
     { url: '/question-3/', title: 'أشباه ونظائر في النساء', breadcrumb: 'الأسئلة' },
     { url: '/saif-clan/', title: 'أنا سيف العشيرة فاعرفوني', breadcrumb: null },
     { url: '/mufadati/', title: 'عليَّ مُفاضَتي ومعي سِلاحي', breadcrumb: null },
+    { url: '/arjuzat-abi-al-aliya/', title: 'شرح أرجوزة أبي العالية', breadcrumb: 'الكِتابات' },
+    { url: '/marthiya-ziad-al-ajam/', title: 'شرح مرثية زياد الأعجم', breadcrumb: 'الكِتابات' },
+    { url: '/arjuzat-al-radi/', title: 'شرح أرجوزة الرضي', breadcrumb: 'الكِتابات' },
+
 ];
 
 // ── تخزين محتوى الصفحات ─────────────────────────────────
@@ -1674,15 +1678,15 @@ document.addEventListener('keydown', (e) => {
     history.replaceState(null, '', window.location.pathname + window.location.hash);
 
     function buildHlPat(q) {
-        const D = '[\\u064B-\\u065F\\u0670]*';
+        const D = '[\\u0640\\u064B-\\u065F\\u0670]*';
         const AV = { 'ا':'[اأإآٱ]','أ':'[اأإآٱ]','إ':'[اأإآٱ]','آ':'[اأإآٱ]','ه':'[هة]','ة':'[هة]','ي':'[يى]','ى':'[يى]' };
         function escR(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
         function normalize(s) {
-            return s.replace(/[\u064B-\u065F\u0670]/g, '')
+            return s.replace(/[\u0640\u064B-\u065F\u0670]/g, '')
                     .replace(/[أإآٱ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي');
         }
         return new RegExp(normalize(q).split('').map(c =>
-            c === ' ' ? '\\s+' : ((AV[c] || escR(c)) + D)
+            c === ' ' ? '[\\u0640\\u064B-\\u065F\\u0670\\s]+' : ((AV[c] || escR(c)) + D)
         ).join(''));
     }
 
@@ -1692,7 +1696,7 @@ document.addEventListener('keydown', (e) => {
         let pat;
         try { pat = buildHlPat(hl); } catch { return; }
         const walker = document.createTreeWalker(content, NodeFilter.SHOW_TEXT, {
-            acceptNode: n => n.parentElement.closest('.hemistich') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT
+            acceptNode: n => n.parentElement.closest('script, style, [data-pagefind-ignore]') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT
         });
         let node;
         while ((node = walker.nextNode())) {
@@ -1711,6 +1715,7 @@ document.addEventListener('keydown', (e) => {
         }
     }
 
+    window._doPageHighlight = doHighlight;
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', doHighlight);
     } else {
@@ -1968,7 +1973,7 @@ body.dark .fn-ref:hover { color: #f97316; }
     font-weight: 400;
     max-width: 280px;
     white-space: normal;
-    text-align: right;
+    text-align: justify;
     direction: rtl;
     line-height: 1.75;
     opacity: 0;
@@ -2478,6 +2483,7 @@ function stretchAll() {
     const font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize}/${cs.lineHeight} ${cs.fontFamily}`;
     table.querySelectorAll('.rajaz-shatr').forEach(cell => stretchCell(cell, font));
   });
+  if (window._doPageHighlight) window._doPageHighlight();
 }
 
 function initStretch() {
@@ -3225,7 +3231,7 @@ body.dark .fn-ref-hl { animation: fn-ref-hl-dark 2s ease forwards; }
   padding: 0.85rem 1.1rem 0.85rem 1rem;
   box-shadow: 0 14px 45px rgba(0,0,0,0.14), 0 4px 14px rgba(234,88,12,0.1);
   direction: rtl;
-  text-align: right;
+  text-align: justify;
   font-size: 0.88rem;
   line-height: 1.95;
   color: #374151;
