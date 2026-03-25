@@ -12,6 +12,9 @@ date = 2026-03-24
   background: linear-gradient(135deg, rgba(255,237,213,0.5), rgba(253,230,138,0.5));
   border: 1px solid #fed7aa;
   box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+  box-sizing: border-box;
+  width: 100%;
+  overflow-wrap: break-word;
 }
 body.dark .intro-box {
   background: rgba(18,18,22,0.7);
@@ -39,6 +42,7 @@ body.dark .exp-section h2 { color: #fb923c; border-bottom-color: rgba(251,146,60
   border-right: 3px solid rgba(234,88,12,0.35);
   background: rgba(255,237,213,0.25);
   border-radius: 0 0.6rem 0.6rem 0;
+  scroll-margin-top: 80px;
 }
 body.dark .exp-item {
   background: rgba(251,146,60,0.06);
@@ -80,18 +84,29 @@ body.dark .exp-text { color: #d1d5db; }
   line-height: 2.4;
   direction: rtl;
   unicode-bidi: bidi-override;
-  display: inline;
-  white-space: nowrap;
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+  vertical-align: middle;
   color: #1f2937;
 }
 body.dark .quran-43,
 body.dark .quran-18,
 body.dark .quran-20,
 body.dark .quran-40 { color: #f3f4f6; }
+
+.rajaz-table tr { scroll-margin-top: 80px; }
+
+@media (max-width: 640px) {
+  .quran-43, .quran-18, .quran-20, .quran-40 {
+    font-size: 1rem;
+    line-height: 2.2;
+  }
+}
 </style>
 
 <div class="intro-box">
-<p>قال <strong>أبو الحَسَن محمدُ بنُ الحُسَين الشَّريف الرَّضِيّ</strong> (ت٤٠٦هـ)، يهجو، قالَها في شعبانَ سنة (٣٩٤هـ).</p>
+<p>قال <strong>أبو الحَسَن محمدُ بنُ الحُسَينِ بنِ مُوسَىٰ بنِ محمدِ بنِ مُوسَىٰ بنِ إبراهيمَ بنِ جَعْفَرِ بنِ محمدِ بنِ عليِّ بنِ الحُسَينِ بنِ عليِّ بنِ أبي طالب، المعروفُ بـ«الشَّريف الرَّضِيّ»</strong>، (ت٤٠٦هـ)، يهجو، قالَها في شعبانَ سنة (٣٩٤هـ).</p>
 </div>
 
 <div class="glass-premium-box">
