@@ -42,7 +42,7 @@ body.dark .exp-section h2 { color: #fb923c; border-bottom-color: rgba(251,146,60
   border-right: 3px solid rgba(234,88,12,0.35);
   background: rgba(255,237,213,0.25);
   border-radius: 0 0.6rem 0.6rem 0;
-  scroll-margin-top: 80px;
+  scroll-margin-top: 100px;
   line-height: 2;
 }
 body.dark .exp-item {

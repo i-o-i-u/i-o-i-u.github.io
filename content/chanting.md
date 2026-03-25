@@ -214,7 +214,7 @@ body.dark .share-btn:hover { background: rgba(249,115,22,0.7); color: #fff; bord
       </div>
       <div class="flex items-center gap-2 flex-wrap">
         <span style="font-size:0.82rem;color:#92400e;font-weight:700;">شرح الأبيات:</span>
-        <a href="/%D8%B1%D8%AC%D8%B2%20%D8%A3%D8%A8%D9%8A%20%D8%A7%D9%84%D8%B9%D8%A7%D9%84%D9%8A%D8%A9.pdf" target="_blank" class="pdf-btn pdf-btn-view">
+        <a href="/arjuzat-abi-al-aliya/" class="pdf-btn pdf-btn-view">
           <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
           عرض
         </a>
