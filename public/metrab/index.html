@@ -2449,24 +2449,25 @@ function copyContent() {
                 const rows = box.querySelectorAll('tr');
                 const p = document.createElement('p');
                 if (rows.length > 0) {
-                    const lines = [];
+                    const isRajaz = !!box.querySelector('.rajaz-table');
+                    const verses = [];
                     var rajazNum = 0;
                     rows.forEach(row => {
                         // شعر عمودي
                         const parts = [...row.querySelectorAll('.shatr')].map(c => c.textContent.trim()).filter(Boolean);
-                        if (parts.length === 2) { lines.push(parts[0] + '    ' + parts[1]); }
-                        else if (parts.length === 1) lines.push(parts[0]);
+                        if (parts.length === 2) { verses.push(parts[0] + '\n' + parts[1]); }
+                        else if (parts.length === 1) verses.push(parts[0]);
                         else {
                             // رجز داخل glass-premium-box
                             const rajaz = [...row.querySelectorAll('.rajaz-shatr')].map(c => c.textContent.trim()).filter(Boolean);
                             if (rajaz.length > 0) {
                                 rajazNum++;
                                 const num = String(rajazNum).replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
-                                rajaz.forEach(v => lines.push(num + '- ' + v));
+                                rajaz.forEach(v => verses.push(num + '- ' + v));
                             }
                         }
                     });
-                    p.textContent = lines.join('\n');
+                    p.textContent = verses.join(isRajaz ? '\n' : '\n\n');
                 } else {
                     // صندوق نثر (كمستطيل السؤال): احتفظ بالنص كما هو
                     p.textContent = box.innerText.trim();
@@ -2584,23 +2585,28 @@ function _buildPat(q, mode) {
     ).join(''));
 }
 
-function _excerpt(q, text, mode, ctx = 90) {
-    let pat;
-    try { pat = _buildPat(q, mode); } catch { return ''; }
-    const m = text.match(pat);
-    if (!m) return '';
-    const idx = m.index;
-    const s = Math.max(0, idx - ctx);
-    const e = Math.min(text.length, idx + m[0].length + ctx);
-    let ex = text.slice(s, e).trim();
-    if (s > 0) ex = '...' + ex;
-    if (e < text.length) ex += '...';
-    const safe = _escH(ex);
-    const sm   = _escH(m[0]);
-    const si   = safe.indexOf(sm);
-    return si >= 0
-        ? safe.slice(0, si) + '<mark>' + sm + '</mark>' + safe.slice(si + sm.length)
-        : safe;
+function _allExcerpts(q, text, mode, ctx = 90) {
+    let src;
+    try { src = _buildPat(q, mode).source; } catch { return []; }
+    const gPat = new RegExp(src, 'g');
+    const results = [];
+    let m;
+    while ((m = gPat.exec(text)) !== null) {
+        const idx = m.index;
+        const s = Math.max(0, idx - ctx);
+        const e = Math.min(text.length, idx + m[0].length + ctx);
+        let ex = text.slice(s, e).trim();
+        if (s > 0) ex = '...' + ex;
+        if (e < text.length) ex += '...';
+        const safe = _escH(ex);
+        const sm   = _escH(m[0]);
+        const si   = safe.indexOf(sm);
+        results.push(si >= 0
+            ? safe.slice(0, si) + '<mark>' + sm + '</mark>' + safe.slice(si + sm.length)
+            : safe);
+        if (m[0].length === 0) gPat.lastIndex++;
+    }
+    return results;
 }
 
 // ── حالة البحث ───────────────────────────────────────────
@@ -2629,30 +2635,28 @@ function performSearch(q) {
 
 async function _doSearch(q) {
     const results = document.getElementById('searchResults');
-    if (!q.trim()) {
-        results.innerHTML = SEARCH_HINT;
+    if (!q.trim()) { results.innerHTML = SEARCH_HINT; return; }
+    if (q.trim().length < 3) {
+        results.innerHTML = '<p class="search-hint-text">أدخِل ثلاثةَ أحرف على الأقل للبحث.</p>';
         return;
     }
     results.innerHTML = '<p class="text-center text-gray-400 py-4">جارٍ البحث...</p>';
-    let pat;
-    try { pat = _buildPat(q, _sMode); } catch {
-        results.innerHTML = '<p class="text-center text-gray-500 py-4">خطأ في صياغة البحث</p>';
-        return;
-    }
     const found = [];
     await Promise.all(SITE_PAGES.map(async p => {
         const text = await _getText(p.url);
-        if (text && pat.test(text))
-            found.push({ ...p, excerpt: _excerpt(q, text, _sMode) });
+        if (!text) return;
+        const excerpts = _allExcerpts(q, text, _sMode);
+        excerpts.forEach(excerpt => found.push({ ...p, excerpt }));
     }));
     if (!found.length) {
         results.innerHTML = '<p class="text-center text-gray-500 py-4">لا توجد نتائج</p>';
         return;
     }
     const n = found.length;
-    const nStr = n === 1 ? 'نتيجة واحدة' : n === 2 ? 'نتيجتان' : (n >= 3 && n <= 10) ? n + ' نتائج' : n + ' نتيجة';
+    const nAr = String(n).replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+    const nStr = n === 1 ? 'نتيجة واحدة' : n === 2 ? 'نتيجتان' : (n >= 3 && n <= 10) ? nAr + ' نتائج' : nAr + ' نتيجة';
     // group by breadcrumb, preserve site order
-    const GROUP_ORDER = [null, 'الكِتابات', 'الأسئلة'];
+    const GROUP_ORDER = [null, 'الكِتابات', 'الأسئلة', 'الإنشاد والحُداء'];
     const groups = {};
     GROUP_ORDER.forEach(k => { groups[k] = []; });
     found.forEach(m => {
@@ -2681,7 +2685,7 @@ function openSearch() {
     _prefetchAll();
 }
 
-const SEARCH_HINT = '<p class="search-hint-text">البحثُ المُطابِق يُراعي الهمزات والنقاط والتشكيل إن وُجِد. أما التقريبيُّ فبحثٌ مُقارِبٌ لا يُراعي ذلك. للخروج من نافذة البحث اضغط زرَّ البحث، أو انقر على أي مكان فارغ.</p>';
+const SEARCH_HINT = '<p class="search-hint-text">اكتب ثلاثةَ أحرف فأكثر للبحث. البحثُ المُطابِق يُراعي الهمزات والنقاط والتشكيل إن وُجِد. أما التقريبيُّ فبحثٌ مُقارِبٌ لا يُراعي ذلك. للخروج اضغط زرَّ البحث أو انقر على أي مكان فارغ.</p>';
 
 function closeSearch() {
     document.getElementById('searchModal').classList.add('hidden');
@@ -2704,19 +2708,6 @@ document.addEventListener('keydown', (e) => {
     if (!hl) return;
     history.replaceState(null, '', window.location.pathname + window.location.hash);
 
-    function buildHlPat(q) {
-        const D = '[\\u0640\\u064B-\\u065F\\u0670]*';
-        const AV = { 'ا':'[اأإآٱ]','أ':'[اأإآٱ]','إ':'[اأإآٱ]','آ':'[اأإآٱ]','ه':'[هة]','ة':'[هة]','ي':'[يى]','ى':'[يى]' };
-        function escR(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
-        function normalize(s) {
-            return s.replace(/[\u0640\u064B-\u065F\u0670]/g, '')
-                    .replace(/[أإآٱ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي');
-        }
-        return new RegExp(normalize(q).split('').map(c =>
-            c === ' ' ? '[\\u0640\\u064B-\\u065F\\u0670\\s]+' : ((AV[c] || escR(c)) + D)
-        ).join(''));
-    }
-
     function clearHL(content) {
         content.querySelectorAll('mark.search-hl').forEach(m => m.replaceWith(document.createTextNode(m.textContent)));
         content.querySelectorAll('[data-quran-text].search-hl').forEach(s => s.classList.remove('search-hl'));
@@ -2729,7 +2720,7 @@ document.addEventListener('keydown', (e) => {
         // لا تُعِد التظليل إذا كان موجوداً بالفعل
         if (content.querySelector('mark.search-hl, tr.search-hl-row, [data-quran-text].search-hl')) return;
         let pat;
-        try { pat = buildHlPat(hl); } catch { return; }
+        try { pat = _buildPat(hl, 'approx'); } catch { return; }
 
         // أولاً: ابحث في عقد النص العادية (الأبيات وغيرها)
         const walker = document.createTreeWalker(content, NodeFilter.SHOW_TEXT, {
@@ -3464,21 +3455,15 @@ function getAllInsertPositions(tokens) {
     if (PUNCT.has(tokens[i + 1]?.base)) continue;
     const nextBase = tokens[i + 1]?.base;
     if (tokens[i].base === 'ل' && nextBase && 'اأإآٱ'.includes(nextBase)) continue;
+    if (nextBase === 'ء') continue;
     if (canConnectAfter(tokens[i].base)) positions.push(i + 1);
   }
   // ترتيب تصاعدي: يبدأ التوزيع من مطلع الكلمة (يمين) فتتوزع الزيادة بالتساوي
   return positions.sort((a, b) => a - b);
 }
 
-function measureText(text, font) {
-  const c = measureText._canvas || (measureText._canvas = document.createElement('canvas'));
-  const ctx = c.getContext('2d');
-  ctx.font = font;
-  return ctx.measureText(text).width;
-}
-
 function getCtx(font) {
-  const c = measureText._canvas || (measureText._canvas = document.createElement('canvas'));
+  const c = getCtx._canvas || (getCtx._canvas = document.createElement('canvas'));
   const ctx = c.getContext('2d');
   ctx.font = font;
   return ctx;
@@ -3600,9 +3585,7 @@ function initStretch() {
     stretchAll();
     // محاولات متكررة للجوال الذي يؤخر رسم العناصر
     setTimeout(stretchAll, 300);
-    setTimeout(stretchAll, 700);
     setTimeout(stretchAll, 1500);
-    setTimeout(stretchAll, 3000);
   }
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(run);
@@ -3611,7 +3594,7 @@ function initStretch() {
   }
   // ResizeObserver: يُعيد الحساب عند تغيير حجم أي جدول (موثوق على الجوال)
   if (window.ResizeObserver) {
-    const ro = new ResizeObserver(() => stretchAll());
+    const ro = new ResizeObserver(_debStretch);
     document.querySelectorAll('.glass-premium-box, .glass-rajaz-box').forEach(el => ro.observe(el));
     // نراقب أيضًا الجداول التي ستُضاف لاحقًا
     const mo = new MutationObserver(() => {
@@ -3672,21 +3655,22 @@ function addCopyVerseButtons() {
     btn.setAttribute('aria-label', 'نسخ الأبيات');
     btn.innerHTML = copyIcon;
     btn.onclick = function() {
-      var lines = [];
+      var isRajaz = table.classList.contains('rajaz-table');
+      var verses = [];
       table.querySelectorAll('tr').forEach(function(row) {
         var shatrs = Array.from(row.querySelectorAll('.shatr')).map(function(c) {
           return (c.dataset.original || c.textContent).trim();
         }).filter(Boolean);
-        if (shatrs.length === 2) lines.push(shatrs[0] + '    ' + shatrs[1]);
-        else if (shatrs.length === 1) lines.push(shatrs[0]);
+        if (shatrs.length === 2) verses.push(shatrs[0] + '\n' + shatrs[1]);
+        else if (shatrs.length === 1) verses.push(shatrs[0]);
         else {
           Array.from(row.querySelectorAll('.rajaz-shatr')).forEach(function(c) {
             var t = (c.dataset.original || c.textContent).trim();
-            if (t) lines.push(t);
+            if (t) verses.push(t);
           });
         }
       });
-      navigator.clipboard.writeText(lines.join('\n')).then(function() {
+      navigator.clipboard.writeText(verses.join(isRajaz ? '\n' : '\n\n')).then(function() {
         btn.classList.add('cv-copied');
         setTimeout(function() { btn.classList.remove('cv-copied'); }, 2000);
       }).catch(function() {});
@@ -3722,7 +3706,8 @@ if (document.readyState === 'loading') {
 } else {
   addVerseNumbers(); addCopyVerseButtons(); initStretch(); fixQuranOrphans();
 }
-window.addEventListener('resize', stretchAll);
+var _debStretch = (function() { var t; return function() { clearTimeout(t); t = setTimeout(stretchAll, 120); }; })();
+window.addEventListener('resize', _debStretch);
 
 // تمرير سلس لروابط الأبيات والشرح
 document.addEventListener('click', function(e) {
@@ -3733,8 +3718,10 @@ document.addEventListener('click', function(e) {
   const target = document.getElementById(id);
   if (!target) return;
   e.preventDefault();
-  var offset = 200;
-  window.scrollTo({ top: window.scrollY + target.getBoundingClientRect().top - offset, behavior: 'smooth' });
+  const nav = document.getElementById('navbar');
+  const navH = nav ? nav.getBoundingClientRect().height : 0;
+  const gap = 12; // مسافة صغيرة تحت الـ navbar
+  window.scrollTo({ top: window.scrollY + target.getBoundingClientRect().top - navH - gap, behavior: 'smooth' });
   if (history.pushState) history.pushState(null, '', '#' + id);
 });
 
