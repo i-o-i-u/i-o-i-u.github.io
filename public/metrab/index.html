@@ -2533,7 +2533,7 @@ const SITE_PAGES = [
     { url: '/saif-clan/', title: 'أنا سيف العشيرة فاعرفوني', breadcrumb: null },
     { url: '/mufadati/', title: 'عليَّ مُفاضَتي ومعي سِلاحي', breadcrumb: null },
     { url: '/arjuzat-abi-al-aliya/', title: 'شرح أرجوزة أبي العالية', breadcrumb: 'الكِتابات' },
-    { url: '/marthiya-ziad-al-ajam/', title: 'شرح مرثية زياد الأعجم', breadcrumb: 'الكِتابات' },
+    { url: '/marthiya-ziad-al-ajam/', title: 'شرح مرثية زياد الأعجم', breadcrumb: 'الإنشاد والحُداء' },
     { url: '/arjuzat-al-radi/', title: 'شرح أرجوزة الرضي', breadcrumb: 'الكِتابات' },
 
 ];
@@ -2704,8 +2704,6 @@ document.addEventListener('keydown', (e) => {
     if (!hl) return;
     history.replaceState(null, '', window.location.pathname + window.location.hash);
 
-    let _hlScrolled = false;
-
     function buildHlPat(q) {
         const D = '[\\u0640\\u064B-\\u065F\\u0670]*';
         const AV = { 'ا':'[اأإآٱ]','أ':'[اأإآٱ]','إ':'[اأإآٱ]','آ':'[اأإآٱ]','ه':'[هة]','ة':'[هة]','ي':'[يى]','ى':'[يى]' };
@@ -2722,12 +2720,14 @@ document.addEventListener('keydown', (e) => {
     function clearHL(content) {
         content.querySelectorAll('mark.search-hl').forEach(m => m.replaceWith(document.createTextNode(m.textContent)));
         content.querySelectorAll('[data-quran-text].search-hl').forEach(s => s.classList.remove('search-hl'));
+        content.querySelectorAll('tr.search-hl-row').forEach(r => r.classList.remove('search-hl-row'));
     }
 
     function doHighlight() {
         const content = document.getElementById('articleContent');
         if (!content) return;
-        clearHL(content);
+        // لا تُعِد التظليل إذا كان موجوداً بالفعل
+        if (content.querySelector('mark.search-hl, tr.search-hl-row, [data-quran-text].search-hl')) return;
         let pat;
         try { pat = buildHlPat(hl); } catch { return; }
 
@@ -2741,13 +2741,20 @@ document.addEventListener('keydown', (e) => {
             const text = node.nodeValue;
             const m = text.match(pat);
             if (!m) continue;
-            const mark = document.createElement('mark');
-            mark.className = 'search-hl';
-            mark.textContent = text.slice(m.index, m.index + m[0].length);
-            const after = node.splitText(m.index);
-            after.nodeValue = text.slice(m.index + m[0].length);
-            node.parentNode.insertBefore(mark, after);
-            found = mark;
+            const shatr = node.parentElement.closest('.shatr, .rajaz-shatr');
+            if (shatr) {
+                // نضلّل السطر <tr> بدل <mark> داخل الخلية (stretchCell تمسحها)
+                const tr = shatr.closest('tr');
+                if (tr) { tr.classList.add('search-hl-row'); found = tr; }
+            } else {
+                const mark = document.createElement('mark');
+                mark.className = 'search-hl';
+                mark.textContent = text.slice(m.index, m.index + m[0].length);
+                const after = node.splitText(m.index);
+                after.nodeValue = text.slice(m.index + m[0].length);
+                node.parentNode.insertBefore(mark, after);
+                found = mark;
+            }
             break;
         }
 
@@ -2762,10 +2769,12 @@ document.addEventListener('keydown', (e) => {
             });
         }
 
-        if (found && !_hlScrolled) {
-            _hlScrolled = true;
-            setTimeout(() => found.scrollIntoView({ behavior: 'smooth', block: 'center' }), 120);
-            document.addEventListener('click', () => clearHL(content), { once: true });
+        if (found) {
+            setTimeout(() => found.scrollIntoView({ behavior: 'smooth', block: 'center' }), 80);
+            document.addEventListener('click', () => {
+                clearHL(content);
+                window._doPageHighlight = null;
+            }, { once: true });
         }
     }
 
@@ -3006,21 +3015,33 @@ body.dark [data-quran-text].search-hl {
     background: rgba(251,191,36,0.35);
     outline-color: #fbbf24;
 }
+tr.search-hl-row .shatr, tr.search-hl-row .rajaz-shatr {
+    background: rgba(253,230,138,0.55);
+    transition: background 0.3s;
+    scroll-margin-top: 120px;
+}
+body.dark tr.search-hl-row .shatr, body.dark tr.search-hl-row .rajaz-shatr {
+    background: rgba(234,179,8,0.2);
+}
 
 /* ===== زر نسخ الأبيات ===== */
 .copy-verses-btn {
-    position: absolute;
-    bottom: 0.35rem;
-    left: 0.35rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-bottom: 0.5rem;
     background: rgba(251,146,60,0.1);
     border: 1px solid rgba(251,146,60,0.28);
     border-radius: 0.35rem;
-    padding: 0.22rem 0.38rem;
+    padding: 0.22rem 0.55rem;
     cursor: pointer;
     color: #92400e;
-    line-height: 1;
+    font-size: 0.8rem;
+    line-height: 1.6;
     transition: background 0.15s, color 0.15s;
-    z-index: 2;
+}
+.copy-verses-wrap {
+    text-align: start;
 }
 .copy-verses-btn:hover { background: rgba(234,88,12,0.18); }
 body.dark .copy-verses-btn { color: #fb923c; background: rgba(251,146,60,0.07); border-color: rgba(251,146,60,0.22); }
@@ -3327,7 +3348,7 @@ body.dark .glass-rajaz-box {
   body.dark .glass-rajaz-box { background: #0d1117; }
 }
 .poetry-table tr,
-.rajaz-table tr { scroll-margin-top: 100px; }
+.rajaz-table tr { scroll-margin-top: 130px; }
 
 .rajaz-table {
   width: 100%;
@@ -3572,7 +3593,6 @@ function stretchAll() {
     const font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize}/${cs.lineHeight} ${cs.fontFamily}`;
     table.querySelectorAll('.rajaz-shatr').forEach(cell => stretchCell(cell, font));
   });
-  if (window._doPageHighlight) window._doPageHighlight();
 }
 
 function initStretch() {
@@ -3647,7 +3667,6 @@ function addCopyVerseButtons() {
   document.querySelectorAll('.glass-premium-box').forEach(function(box) {
     var table = box.querySelector('.poetry-table.numbered, .rajaz-table.numbered');
     if (!table) return;
-    box.style.position = 'relative';
     var btn = document.createElement('button');
     btn.className = 'copy-verses-btn';
     btn.setAttribute('aria-label', 'نسخ الأبيات');
@@ -3672,7 +3691,11 @@ function addCopyVerseButtons() {
         setTimeout(function() { btn.classList.remove('cv-copied'); }, 2000);
       }).catch(function() {});
     };
-    box.appendChild(btn);
+    btn.innerHTML = copyIcon + '<span>نسخ الأبيات</span>';
+    var wrap = document.createElement('div');
+    wrap.className = 'copy-verses-wrap';
+    wrap.appendChild(btn);
+    box.parentNode.insertBefore(wrap, box);
   });
 }
 
@@ -3682,6 +3705,18 @@ if (document.readyState === 'loading') {
   addVerseNumbers(); addCopyVerseButtons(); initStretch();
 }
 window.addEventListener('resize', stretchAll);
+
+// تمرير سلس لروابط الأبيات والشرح
+document.addEventListener('click', function(e) {
+  const a = e.target.closest('a[href^="#"]');
+  if (!a) return;
+  const id = CSS.escape ? a.getAttribute('href').slice(1) : a.getAttribute('href').slice(1);
+  const target = document.getElementById(id);
+  if (!target) return;
+  e.preventDefault();
+  target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (history.pushState) history.pushState(null, '', '#' + id);
+});
 
 /* ===== التلميحات في الجوال ===== */
 document.addEventListener('DOMContentLoaded', function() {

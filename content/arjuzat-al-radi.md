@@ -42,7 +42,7 @@ body.dark .exp-section h2 { color: #fb923c; border-bottom-color: rgba(251,146,60
   border-right: 3px solid rgba(234,88,12,0.35);
   background: rgba(255,237,213,0.25);
   border-radius: 0 0.6rem 0.6rem 0;
-  scroll-margin-top: 100px;
+  scroll-margin-top: 130px;
 }
 body.dark .exp-item {
   background: rgba(251,146,60,0.06);
@@ -95,7 +95,7 @@ body.dark .quran-18,
 body.dark .quran-20,
 body.dark .quran-40 { color: #f3f4f6; }
 
-.rajaz-table tr { scroll-margin-top: 80px; }
+.rajaz-table tr { scroll-margin-top: 130px; }
 
 @media (max-width: 640px) {
   .quran-43, .quran-18, .quran-20, .quran-40 {

@@ -42,7 +42,7 @@ body.dark .exp-section h2 { color: #fb923c; border-bottom-color: rgba(251,146,60
   border-right: 3px solid rgba(234,88,12,0.35);
   background: rgba(255,237,213,0.25);
   border-radius: 0 0.6rem 0.6rem 0;
-  scroll-margin-top: 100px;
+  scroll-margin-top: 130px;
   line-height: 2;
 }
 body.dark .exp-item {
@@ -84,9 +84,11 @@ body.dark .exp-closing { color: #fb923c; }
   line-height: 2.4;
   direction: rtl;
   unicode-bidi: bidi-override;
-  display: inline;
+  display: block;
+  overflow-x: auto;
   white-space: nowrap;
   color: #1f2937;
+  margin: 0.4rem 0;
 }
 body.dark .quran-15,
 body.dark .quran-29 { color: #f3f4f6; }
