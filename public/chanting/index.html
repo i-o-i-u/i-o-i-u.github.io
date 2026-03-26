@@ -3819,22 +3819,42 @@ function addCopyVerseButtons() {
   });
 }
 
+// منع انعزال قوسَي الآية في سطر وحده
+function fixQuranOrphans() {
+  document.querySelectorAll('[data-quran-text]').forEach(function(span) {
+    var txt = span.textContent;
+    // أول مسافة: تمنع انفراد قوس البداية ﴿ في سطر وحده
+    var firstSpace = txt.indexOf(' ');
+    if (firstSpace >= 0) {
+      txt = txt.slice(0, firstSpace) + '\u00A0' + txt.slice(firstSpace + 1);
+    }
+    // آخر مسافة: تمنع انفراد قوس الختام ﴾ في سطر وحده
+    var lastSpace = txt.lastIndexOf(' ');
+    if (lastSpace >= 0 && lastSpace !== firstSpace) {
+      txt = txt.slice(0, lastSpace) + '\u00A0' + txt.slice(lastSpace + 1);
+    }
+    span.textContent = txt;
+  });
+}
+
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', function() { addVerseNumbers(); addCopyVerseButtons(); initStretch(); });
+  document.addEventListener('DOMContentLoaded', function() { addVerseNumbers(); addCopyVerseButtons(); initStretch(); fixQuranOrphans(); });
 } else {
-  addVerseNumbers(); addCopyVerseButtons(); initStretch();
+  addVerseNumbers(); addCopyVerseButtons(); initStretch(); fixQuranOrphans();
 }
 window.addEventListener('resize', stretchAll);
 
 // تمرير سلس لروابط الأبيات والشرح
 document.addEventListener('click', function(e) {
+  if (e.defaultPrevented) return; // تجاهل ما عولج بالفعل
   const a = e.target.closest('a[href^="#"]');
   if (!a) return;
-  const id = CSS.escape ? a.getAttribute('href').slice(1) : a.getAttribute('href').slice(1);
+  const id = a.getAttribute('href').slice(1);
   const target = document.getElementById(id);
   if (!target) return;
   e.preventDefault();
-  target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  var offset = 200;
+  window.scrollTo({ top: window.scrollY + target.getBoundingClientRect().top - offset, behavior: 'smooth' });
   if (history.pushState) history.pushState(null, '', '#' + id);
 });
 
@@ -4012,8 +4032,8 @@ document.addEventListener('DOMContentLoaded', function() {
       el.classList.remove('fn-ref-hl');
     });
 
-    target.style.scrollMarginTop = '120px';
-    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    var offset = 200;
+    window.scrollTo({ top: window.scrollY + target.getBoundingClientRect().top - offset, behavior: 'smooth' });
 
     if (link) {
       // إعادة تشغيل الأنيميشن
@@ -4032,8 +4052,8 @@ document.addEventListener('DOMContentLoaded', function() {
       el.classList.remove('fn-item-hl');
     });
 
-    item.style.scrollMarginTop = '100px';
-    item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    var offset = 200;
+    window.scrollTo({ top: window.scrollY + item.getBoundingClientRect().top - offset, behavior: 'smooth' });
 
     item.classList.remove('fn-item-hl');
     void item.offsetWidth;

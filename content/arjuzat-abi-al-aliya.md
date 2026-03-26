@@ -84,11 +84,9 @@ body.dark .exp-closing { color: #fb923c; }
   line-height: 2.4;
   direction: rtl;
   unicode-bidi: bidi-override;
-  display: block;
-  overflow-x: auto;
-  white-space: nowrap;
+  display: inline;
+  white-space: normal;
   color: #1f2937;
-  margin: 0.4rem 0;
 }
 body.dark .quran-15,
 body.dark .quran-29 { color: #f3f4f6; }
