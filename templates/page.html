@@ -16,7 +16,7 @@
 {% elif page.slug == "inshad" or page.slug == "metrab" %}
   {% set parent_url = "/writings/" %}
   {% set parent_name = "الكِتابات" %}
-{% elif page.slug == "arjuzat-al-radi" %}
+{% elif page.slug == "arjuzat-al-radi" or page.slug == "arjuzat-jabbar" or page.slug == "arjuzat-abi-al-aliya" or page.slug == "marthiya-ziad-al-ajam" %}
   {% set parent_url = "/chanting/" %}
   {% set parent_name = "الإنشاد والحُداء" %}
 {% elif page.slug == "chanting" or page.slug == "saif-clan" or page.slug == "mufadati" %}
@@ -306,9 +306,6 @@ body.dark .floating-btn {
     font-weight: 700;
     color: #92400e;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 18rem;
 }
 body.dark .breadcrumb-nav {
     background: linear-gradient(135deg, rgba(251,146,60,0.07), rgba(234,88,12,0.04));

@@ -152,7 +152,14 @@ body.dark .share-btn:hover { background: rgba(249,115,22,0.7); color: #fff; bord
       </div>
       <div class="flex items-center gap-2 flex-wrap">
         <span style="font-size:0.82rem;color:#92400e;font-weight:700;">شرح الأبيات:</span>
-        <span style="font-size:0.82rem;color:#78716c;font-style:italic;">موجودٌ في وصف المقطع.</span>
+        <a href="/arjuzat-jabbar/" class="pdf-btn pdf-btn-view">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          عرض
+        </a>
+        <a href="/%D8%B4%D8%B1%D8%AD%20%D8%A3%D8%B1%D8%AC%D9%88%D8%B2%D8%A9%20%D8%AC%D8%A8%D9%91%D8%A7%D8%B1.pdf" download="شرح أرجوزة جبَّار.pdf" class="pdf-btn pdf-btn-dl">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          احتمال
+        </a>
       </div>
     </div>
     <div class="p-4 rounded-xl bg-orange-50 dark:bg-orange-900/20 hover:bg-orange-100 dark:hover:bg-orange-900/30 border-2 border-orange-200 dark:border-orange-800 hover:border-orange-400 dark:hover:border-orange-600 transition-all duration-300 group" dir="rtl">

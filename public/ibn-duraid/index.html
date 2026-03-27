@@ -70,6 +70,7 @@ p, div, span, a, li {
             color: #ea580c;
             padding-top: 0.3em;
             padding-bottom: 0.3em;
+            padding-inline-end: 0.25em;
             display: inline-block;
         }
 
@@ -81,6 +82,7 @@ p, div, span, a, li {
             color: #fb923c;
             padding-top: 0.3em;
             padding-bottom: 0.3em;
+            padding-inline-end: 0.25em;
             display: inline-block;
         }
 
@@ -1339,26 +1341,34 @@ body.dark .dark-white-text {
 <p>٥- أنها سهلة الحفظ، لكونها على بحر الرجز.</p>
 <p>فلو أخذها الطالب، وحفظها، وفهم معانيها، واستشرحها لانتفع بها انتفاعا عظيما.</p>
 <p>ومن أشهر أبياتها قوله:</p>
-<div class="glass-rajaz-box">
-  <table class="rajaz-table">
-    <tr><td class="rajaz-shatr">والناسُ: ألفٌ منهمُ كواحدٍ</td></tr>
-    <tr><td class="rajaz-shatr">وواحِدٌ كالألف إن أمرٌ عنى</td></tr>
+<div class="glass-premium-box">
+  <table class="poetry-table">
+    <tr>
+      <td class="shatr first">والناسُ: ألفٌ منهمُ كواحدٍ</td>
+      <td class="shatr last">وواحِدٌ كالألف إن أمرٌ عنى</td>
+    </tr>
   </table>
 </div>
 <p>ومن جيد المدح فيها قوله:</p>
-<div class="glass-rajaz-box">
-  <table class="rajaz-table">
-    <tr><td class="rajaz-shatr">نفسِي الفِداءُ لأَمِيريَّ ومَنْ</td></tr>
-    <tr><td class="rajaz-shatr">تحتَ السَّماء لأمِيريَّ الفدا!</td></tr>
+<div class="glass-premium-box">
+  <table class="poetry-table">
+    <tr>
+      <td class="shatr first">نفسِي الفِداءُ لأَمِيريَّ ومَنْ</td>
+      <td class="shatr last">تحتَ السَّماء لأمِيريَّ الفدا!</td>
+    </tr>
   </table>
 </div>
 <p>وقال في وصف السيف:</p>
-<div class="glass-rajaz-box">
-  <table class="rajaz-table">
-    <tr><td class="rajaz-shatr">أَبْيَضُ كالملح، إذا انتضيتُه</td></tr>
-    <tr><td class="rajaz-shatr">لم يَلْقَ شَيئًا حَدُّه إِلَّا فَرَى</td></tr>
-    <tr><td class="rajaz-shatr">إِذا هَوَى فِي جُثَّةٍ غادرها</td></tr>
-    <tr><td class="rajaz-shatr">من بعد ما كانتْ خَسًا وَهْيَ زَكَا!</td></tr>
+<div class="glass-premium-box">
+  <table class="poetry-table">
+    <tr>
+      <td class="shatr first">أَبْيَضُ كالملح، إذا انتضيتُه</td>
+      <td class="shatr last">لم يَلْقَ شَيئًا حَدُّه إِلَّا فَرَى</td>
+    </tr>
+    <tr>
+      <td class="shatr first">إِذا هَوَى فِي جُثَّةٍ غادرها</td>
+      <td class="shatr last">من بعد ما كانتْ خَسًا وَهْيَ زَكَا!</td>
+    </tr>
   </table>
 </div>
 <p>الخسا: العدد الفردي، والزكا: العدد الزوجي. يعني أنَّ سيفه إذا وقع على الجسد فلقه فلقتين، فصار بعد أن كان قطعةً واحدةً فردي العدد، صار قطعتين زوجي العدد! فانظر إلى هذا المعنى اللطيف.</p>
@@ -1369,7 +1379,7 @@ body.dark .dark-white-text {
 <div class="glass-premium-box">
   <table class="poetry-table">
     <tr>
-      <td class="shatr first">فَوَاحَزَنَى أَن لا حَياةَ لذيذة</td>
+      <td class="shatr first">فَوَاحَزَنَىٰ أَن لا حَياةَ لذيذةٌ</td>
       <td class="shatr last">ولا عَمَلٌ يرضى بهِ اللهُ صَالِحُ!</td>
     </tr>
   </table>
@@ -1577,9 +1587,6 @@ body.dark .floating-btn {
     font-weight: 700;
     color: #92400e;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 18rem;
 }
 body.dark .breadcrumb-nav {
     background: linear-gradient(135deg, rgba(251,146,60,0.07), rgba(234,88,12,0.04));
@@ -2534,9 +2541,10 @@ const SITE_PAGES = [
     { url: '/question-3/', title: 'أشباه ونظائر في النساء', breadcrumb: 'الأسئلة' },
     { url: '/saif-clan/', title: 'أنا سيف العشيرة فاعرفوني', breadcrumb: null },
     { url: '/mufadati/', title: 'عليَّ مُفاضَتي ومعي سِلاحي', breadcrumb: null },
-    { url: '/arjuzat-abi-al-aliya/', title: 'شرح أرجوزة أبي العالية', breadcrumb: 'الكِتابات' },
+    { url: '/arjuzat-abi-al-aliya/', title: 'شرح أرجوزة أبي العالية', breadcrumb: 'الإنشاد والحُداء' },
     { url: '/marthiya-ziad-al-ajam/', title: 'شرح مرثية زياد الأعجم', breadcrumb: 'الإنشاد والحُداء' },
-    { url: '/arjuzat-al-radi/', title: 'شرح أرجوزة الرضي', breadcrumb: 'الكِتابات' },
+    { url: '/arjuzat-al-radi/', title: 'شرح أرجوزة الرضي', breadcrumb: 'الإنشاد والحُداء' },
+    { url: '/arjuzat-jabbar/', title: 'شرح أرجوزة جبَّار', breadcrumb: 'الإنشاد والحُداء' },
 
 ];
 

@@ -1,4 +1,4 @@
-+++
+﻿+++
 title = "مقصورة أبي بكر بنِ دُرَيد رحمه الله"
 slug = "ibn-duraid"
 date = 2024-12-21
@@ -61,32 +61,42 @@ body.dark .dark-white-text {
 
 ومن أشهر أبياتها قوله:
 
-<div class="glass-rajaz-box">
-  <table class="rajaz-table">
-    <tr><td class="rajaz-shatr">والناسُ: ألفٌ منهمُ كواحدٍ</td></tr>
-    <tr><td class="rajaz-shatr">وواحِدٌ كالألف إن أمرٌ عنى</td></tr>
+<div class="glass-premium-box">
+  <table class="poetry-table">
+    <tr>
+      <td class="shatr first">والناسُ: ألفٌ منهمُ كواحدٍ</td>
+      <td class="shatr last">وواحِدٌ كالألف إن أمرٌ عنى</td>
+    </tr>
   </table>
 </div>
 
 ومن جيد المدح فيها قوله:
 
-<div class="glass-rajaz-box">
-  <table class="rajaz-table">
-    <tr><td class="rajaz-shatr">نفسِي الفِداءُ لأَمِيريَّ ومَنْ</td></tr>
-    <tr><td class="rajaz-shatr">تحتَ السَّماء لأمِيريَّ الفدا!</td></tr>
+<div class="glass-premium-box">
+  <table class="poetry-table">
+    <tr>
+      <td class="shatr first">نفسِي الفِداءُ لأَمِيريَّ ومَنْ</td>
+      <td class="shatr last">تحتَ السَّماء لأمِيريَّ الفدا!</td>
+    </tr>
   </table>
 </div>
+
 
 وقال في وصف السيف:
 
-<div class="glass-rajaz-box">
-  <table class="rajaz-table">
-    <tr><td class="rajaz-shatr">أَبْيَضُ كالملح، إذا انتضيتُه</td></tr>
-    <tr><td class="rajaz-shatr">لم يَلْقَ شَيئًا حَدُّه إِلَّا فَرَى</td></tr>
-    <tr><td class="rajaz-shatr">إِذا هَوَى فِي جُثَّةٍ غادرها</td></tr>
-    <tr><td class="rajaz-shatr">من بعد ما كانتْ خَسًا وَهْيَ زَكَا!</td></tr>
+<div class="glass-premium-box">
+  <table class="poetry-table">
+    <tr>
+      <td class="shatr first">أَبْيَضُ كالملح، إذا انتضيتُه</td>
+      <td class="shatr last">لم يَلْقَ شَيئًا حَدُّه إِلَّا فَرَى</td>
+    </tr>
+    <tr>
+      <td class="shatr first">إِذا هَوَى فِي جُثَّةٍ غادرها</td>
+      <td class="shatr last">من بعد ما كانتْ خَسًا وَهْيَ زَكَا!</td>
+    </tr>
   </table>
 </div>
+
 
 الخسا: العدد الفردي، والزكا: العدد الزوجي. يعني أنَّ سيفه إذا وقع على الجسد فلقه فلقتين، فصار بعد أن كان قطعةً واحدةً فردي العدد، صار قطعتين زوجي العدد! فانظر إلى هذا المعنى اللطيف.
 
@@ -101,7 +111,7 @@ body.dark .dark-white-text {
 <div class="glass-premium-box">
   <table class="poetry-table">
     <tr>
-      <td class="shatr first">فَوَاحَزَنَى أَن لا حَياةَ لذيذة</td>
+      <td class="shatr first">فَوَاحَزَنَىٰ أَن لا حَياةَ لذيذةٌ</td>
       <td class="shatr last">ولا عَمَلٌ يرضى بهِ اللهُ صَالِحُ!</td>
     </tr>
   </table>
