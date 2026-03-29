@@ -69,7 +69,16 @@
             <span class="breadcrumb-sep">
                 <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
             </span>
-            <a href="{{ parent_url }}" class="breadcrumb-link">{{ parent_name }}</a>
+            <a href="{{ parent_url }}" class="breadcrumb-link">
+                {% if parent_name == "الأسئلة" %}
+                    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="display:inline;vertical-align:-1px"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17" stroke-width="2.5"/></svg>
+                {% elif parent_name == "الكِتابات" %}
+                    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="display:inline;vertical-align:-1px"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                {% elif parent_name == "الإنشاد والحُداء" %}
+                    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="display:inline;vertical-align:-1px"><path d="M12 18.5a6 6 0 0 0 6-6V7a6 6 0 0 0-12 0v5.5a6 6 0 0 0 6 6z"/><path d="M19 10v2.5a7 7 0 0 1-14 0V10"/><line x1="12" y1="22" x2="12" y2="18.5"/><path d="M8 22h8"/></svg>
+                {% endif %}
+                {{ parent_name }}
+            </a>
             <span class="breadcrumb-sep">
                 <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
             </span>
@@ -81,7 +90,9 @@
             <h2 class="text-xl md:text-2xl lg:text-3xl font-black" style="line-height:1.8;overflow:visible;">
                 <span class="gradient-text">{{ page.title }}</span>
             </h2>
-            {% if page.slug != "questions" and page.slug != "writings" %}
+            {% if page.slug == "questions" %}
+            <img src="/zaqa-icon.svg" alt="زاكٍ" style="width:2.4em;height:2.4em;flex-shrink:0;opacity:0.85;">
+            {% elif page.slug != "writings" %}
             <div class="flex items-center gap-2">
                 <div class="relative button-tooltip-wrapper">
                     <button onclick="shareContent()" class="icon-btn">
@@ -582,6 +593,20 @@ body.dark .btn-edit-c:hover, body.dark .btn-hide:hover { background:rgba(107,114
 body.dark .btn-reply { border-color:rgba(234,88,12,0.2); background:rgba(234,88,12,0.08); }
 body.dark .btn-delete { border-color:rgba(220,38,38,0.2); background:rgba(220,38,38,0.08); }
 body.dark .btn-unhide { border-color:rgba(5,150,105,0.2); background:rgba(5,150,105,0.08); }
+.btn-like { color:#9ca3af; border-color:rgba(156,163,175,0.2); background:rgba(156,163,175,0.05); }
+.btn-like:hover { color:#ef4444; border-color:rgba(239,68,68,0.3); background:rgba(239,68,68,0.07); }
+.btn-like.liked { color:#ef4444; border-color:rgba(239,68,68,0.35); background:rgba(239,68,68,0.1); }
+body.dark .btn-like { border-color:rgba(156,163,175,0.15); color:#6b7280; }
+body.dark .btn-like:hover { color:#f87171; border-color:rgba(239,68,68,0.25); background:rgba(239,68,68,0.1); }
+body.dark .btn-like.liked { color:#f87171; border-color:rgba(239,68,68,0.3); background:rgba(239,68,68,0.12); }
+.admin-liked-badge { display:inline-flex; margin-top:0.4rem; position:relative; cursor:default; }
+.admin-liked-icon { position:relative; width:2rem; height:2rem; }
+.admin-liked-icon img { width:2rem; height:2rem; border-radius:50%; border:1.5px solid rgba(234,88,12,0.25); }
+.admin-liked-icon svg { position:absolute; bottom:-3px; left:-3px; background:white; border-radius:50%; padding:1.5px; color:#ef4444; width:14px; height:14px; box-shadow:0 1px 3px rgba(0,0,0,0.2); }
+body.dark .admin-liked-icon img { border-color:rgba(251,146,60,0.25); filter:brightness(0) invert(1); }
+body.dark .admin-liked-icon svg { background:#111827; box-shadow:0 1px 3px rgba(0,0,0,0.5); }
+.admin-liked-tip { position:absolute; bottom:calc(100% + 6px); right:50%; transform:translateX(50%); background:rgba(0,0,0,0.78); color:white; font-size:0.72rem; padding:3px 9px; border-radius:6px; white-space:nowrap; opacity:0; pointer-events:none; transition:opacity 0.15s; z-index:10; }
+.admin-liked-badge:hover .admin-liked-tip, .admin-liked-badge:focus .admin-liked-tip { opacity:1; }
 
 /* الردود */
 .replies-container { margin-top:0.75rem; margin-right:1.5rem; padding-right:1rem; border-right:2px solid rgba(234,88,12,0.25); }
@@ -634,6 +659,8 @@ const ADMIN_NAME    = 'سيف العشيرة';
 const ADMIN_BADGE  = 'صاحب الصفحة';
 const ANONYMOUS    = 'مجهول';
 const PAGE_SLUG    = window.location.pathname.replace(/\//g,'_').replace(/^_|_$/g,'') || 'home';
+const LIKED_KEY    = 'liked_' + PAGE_SLUG;
+function getLikedSet() { try { return new Set(JSON.parse(localStorage.getItem(LIKED_KEY)||'[]')); } catch(e) { return new Set(); } }
 
 const TXT = {
     loading:       'جارٍ تحميل التعليقات...',
@@ -776,6 +803,22 @@ function buildCard(c, allReplies, depth) {
     const icoShow   = `<svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>`;
     const icoDelete = `<svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>`;
 
+    const likeCount  = c.likes || 0;
+    const likedBy    = Array.isArray(c.liked_by) ? c.liked_by : [];
+    const userLiked  = isAdmin ? Boolean(c.admin_liked) : likedBy.includes(MY_UID);
+    const toE = n => String(n).replace(/[0-9]/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+    const likeLabel  = likeCount === 0 ? 'إعجاب'
+                     : likeCount === 1 ? 'إعْجابٌ واحد'
+                     : likeCount === 2 ? 'إعْجابان'
+                     : likeCount <= 10 ? toE(likeCount) + ' إعجابات'
+                     : toE(likeCount) + ' إعجابًا';
+    const icoHeart   = (f) => `<svg width="12" height="12" viewBox="0 0 24 24" fill="${f?'currentColor':'none'}" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
+    const adminLikedHtml = c.admin_liked ? `<div class="admin-liked-badge" tabindex="0"><div class="admin-liked-icon"><img src="/icon.svg" alt=""><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><span class="admin-liked-tip">أَعْجَبَ صاحبَ الصفحة</span></div>` : '';
+
+    div.dataset.likes      = likeCount;
+    div.dataset.likedBy    = JSON.stringify(likedBy);
+    div.dataset.adminLiked = String(Boolean(c.admin_liked));
+
     const avContent = isOwner
         ? `<img src="/icon.svg" alt="صاحب الموقع">`
         : initial;
@@ -790,7 +833,9 @@ function buildCard(c, allReplies, depth) {
         </div>
         ${hiddenLbl}
         <div class="comment-body" id="body-${c.id}" style="white-space:pre-wrap">${escHtml(c.body)}</div>
+        ${adminLikedHtml}
         <div class="comment-actions">
+            <button class="btn-action btn-like${userLiked?' liked':''}" onclick="likeComment('${c.id}')">${icoHeart(userLiked)} ${likeLabel}</button>
             ${depth < 2 ? `<button class="btn-action btn-reply" onclick="toggleReplyForm('${c.id}')">${icoReply} ${TXT.btnReply}</button>` : ''}
             ${myComment ? `<button class="btn-action btn-edit-c" onclick="toggleEdit('${c.id}',\`${escJs(c.body)}\`)">${icoEdit} ${TXT.btnEdit}</button>` : ''}
             ${(myComment || isAdmin) && !c.is_hidden ? `<button class="btn-action btn-hide" onclick="hideComment('${c.id}')">${icoHide} ${TXT.btnHide}</button>` : ''}
@@ -905,6 +950,28 @@ async function deleteComment(id) {
         await sbFetch(`comments?id=eq.${id}`, { method: 'DELETE', headers: { 'Prefer': 'return=minimal' } });
         await loadComments();
     } catch(e) { alert(TXT.deleteError); }
+}
+
+async function likeComment(id) {
+    const card = document.getElementById('comment-' + id);
+    if (!card) return;
+    if (isAdmin) {
+        const adminLiked = card.dataset.adminLiked === 'true';
+        const currentLikes = parseInt(card.dataset.likes || '0');
+        const newLikes = adminLiked ? Math.max(0, currentLikes - 1) : currentLikes + 1;
+        try {
+            await sbFetch(`comments?id=eq.${id}`, { method: 'PATCH', headers: { 'Prefer': 'return=minimal' }, body: JSON.stringify({ admin_liked: !adminLiked, likes: newLikes }) });
+            await loadComments();
+        } catch(e) { alert('حدث خطأ.'); }
+        return;
+    }
+    let likedBy; try { likedBy = JSON.parse(card.dataset.likedBy || '[]'); } catch { likedBy = []; }
+    const wasLiked = likedBy.includes(MY_UID);
+    const newLikedBy = wasLiked ? likedBy.filter(u => u !== MY_UID) : [...likedBy, MY_UID];
+    try {
+        await sbFetch(`comments?id=eq.${id}`, { method: 'PATCH', headers: { 'Prefer': 'return=minimal' }, body: JSON.stringify({ likes: newLikedBy.length, liked_by: newLikedBy }) });
+        await loadComments();
+    } catch(e) { alert('حدث خطأ.'); }
 }
 
 document.getElementById('commentForm')?.addEventListener('submit', async function(e) {
