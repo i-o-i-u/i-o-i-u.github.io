@@ -1663,6 +1663,15 @@ body.dark .privacy-btn:hover { color: #fbbf24; border-color: rgba(251,146,60,0.4
     box-shadow: 0 12px 36px rgba(0,0,0,0.13), 0 2px 8px rgba(234,88,12,0.07);
     line-height: 1.95; font-size: 0.88rem; color: #374151; text-align: justify;
 }
+@media (max-width: 480px) {
+    .privacy-popup {
+        position: fixed; inset-inline-end: auto;
+        left: 1rem; right: 1rem; top: auto;
+        bottom: 1rem; width: auto;
+        border-radius: 1.1rem;
+        font-size: 0.85rem;
+    }
+}
 body.dark .privacy-popup {
     background: rgba(18,12,6,0.98); border-color: rgba(251,146,60,0.18);
     color: #d1d5db; box-shadow: 0 12px 36px rgba(0,0,0,0.55);
@@ -2070,8 +2079,8 @@ async function sbFetch(path, opts = {}) {
         const e = await res.json().catch(() => ({}));
         throw new Error(e.message || 'خطأ');
     }
-    if (res.status === 204) return null;
-    return res.json();
+    const text = await res.text();
+    return text ? JSON.parse(text) : null;
 }
 
 
