@@ -1667,6 +1667,12 @@ async function _doSearch(q) {
         results.innerHTML = '<p class="text-center text-gray-500 py-4">لا توجد نتائج</p>';
         return;
     }
+    // تتبع رقم التكرار لكل رابط (لتظليل النتيجة الصحيحة عند الضغط)
+    const _occMap = {};
+    found.forEach(m => {
+        if (_occMap[m.url] === undefined) _occMap[m.url] = 0;
+        m.occ = _occMap[m.url]++;
+    });
     const n = found.length;
     const nAr = String(n).replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
     const nStr = n === 1 ? 'نتيجة واحدة' : n === 2 ? 'نتيجتان' : (n >= 3 && n <= 10) ? nAr + ' نتائج' : nAr + ' نتيجة';
@@ -1684,7 +1690,7 @@ async function _doSearch(q) {
         if (key !== null)
             html += '<div class="search-result-group-header">' + _escH(key) + '</div>';
         groups[key].forEach(m => {
-            const hlParam = '?hl=' + encodeURIComponent(q);
+            const hlParam = '?hl=' + encodeURIComponent(q) + (m.occ ? '&occ=' + m.occ : '');
             html += '<a href="' + m.url + hlParam + '" class="search-result-item" onclick="closeSearch()">'
                 + '<div class="search-result-path"><strong>' + _escH(m.title) + '</strong></div>'
                 + '<div class="search-result-excerpt">' + m.excerpt + '</div>'
@@ -1720,6 +1726,8 @@ document.addEventListener('keydown', (e) => {
 // ── تظليل كلمة البحث والتمرير إليها عند فتح الصفحة ─────
 (function() {
     const hl = new URLSearchParams(window.location.search).get('hl');
+    const _occStr = new URLSearchParams(window.location.search).get('occ');
+    const _targetOcc = _occStr !== null ? parseInt(_occStr, 10) : 0;
     if (!hl) return;
     history.replaceState(null, '', window.location.pathname + window.location.hash);
 
@@ -1742,6 +1750,7 @@ document.addEventListener('keydown', (e) => {
             acceptNode: n => n.parentElement.closest('script, style, [data-pagefind-ignore]') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT
         });
         let found = null;
+        let _occIdx = 0;
         let node;
         while ((node = walker.nextNode())) {
             const text = node.nodeValue;
@@ -1751,17 +1760,22 @@ document.addEventListener('keydown', (e) => {
             if (shatr) {
                 // نضلّل السطر <tr> بدل <mark> داخل الخلية (stretchCell تمسحها)
                 const tr = shatr.closest('tr');
-                if (tr) { tr.classList.add('search-hl-row'); found = tr; }
+                if (tr) {
+                    if (_occIdx === _targetOcc) { tr.classList.add('search-hl-row'); found = tr; break; }
+                    _occIdx++;
+                }
             } else {
-                const mark = document.createElement('mark');
-                mark.className = 'search-hl';
-                mark.textContent = text.slice(m.index, m.index + m[0].length);
-                const after = node.splitText(m.index);
-                after.nodeValue = text.slice(m.index + m[0].length);
-                node.parentNode.insertBefore(mark, after);
-                found = mark;
+                if (_occIdx === _targetOcc) {
+                    const mark = document.createElement('mark');
+                    mark.className = 'search-hl';
+                    mark.textContent = text.slice(m.index, m.index + m[0].length);
+                    const after = node.splitText(m.index);
+                    after.nodeValue = text.slice(m.index + m[0].length);
+                    node.parentNode.insertBefore(mark, after);
+                    found = mark; break;
+                }
+                _occIdx++;
             }
-            break;
         }
 
         // ثانياً: إذا لم يُوجد، ابحث في نصوص الآيات القرآنية
@@ -1770,8 +1784,8 @@ document.addEventListener('keydown', (e) => {
                 if (found) return;
                 const qt = span.getAttribute('data-quran-text') || '';
                 if (!qt.match(pat)) return;
-                span.classList.add('search-hl');
-                found = span;
+                if (_occIdx === _targetOcc) { span.classList.add('search-hl'); found = span; }
+                _occIdx++;
             });
         }
 
@@ -2009,6 +2023,21 @@ mark.search-hl {
 body.dark mark.search-hl {
     background: rgba(251,191,36,0.35);
     outline-color: #fbbf24;
+}
+/* الآيات القرآنية: تقسيم على الأسطر عند الحاجة، بلا تمطيط ولا تمرير */
+[data-quran-text] {
+    white-space: normal !important;
+    overflow: visible !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
+    display: inline !important;
+    text-align: justify !important;
+}
+@media (max-width: 640px) {
+    [data-quran-text] {
+        font-size: 1rem !important;
+        line-height: 1.9 !important;
+    }
 }
 [data-quran-text].search-hl {
     background: #fde68a;
@@ -2717,9 +2746,29 @@ function fixQuranOrphans() {
 }
 
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', function() { addVerseNumbers(); addCopyVerseButtons(); initStretch(); fixQuranOrphans(); });
+  function toEasternInContent() {
+    const content = document.getElementById('articleContent');
+    const fnSection = document.querySelector('.footnotes-section');
+    const privacyPopup = document.getElementById('privacyPopup');
+    const roots = [content, fnSection, privacyPopup].filter(Boolean);
+    if (!roots.length) return;
+    roots.forEach(function(root) {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode: function(n) {
+        return n.parentElement.closest('script,style,code,pre') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    let node;
+    while ((node = walker.nextNode())) {
+      const s = node.nodeValue;
+      const c = s.replace(/[0-9]/g, function(d) { return '٠١٢٣٤٥٦٧٨٩'[d]; });
+      if (c !== s) node.nodeValue = c;
+    }
+    });
+  }
+  document.addEventListener('DOMContentLoaded', function() { addVerseNumbers(); addCopyVerseButtons(); initStretch(); fixQuranOrphans(); toEasternInContent(); });
 } else {
-  addVerseNumbers(); addCopyVerseButtons(); initStretch(); fixQuranOrphans();
+  addVerseNumbers(); addCopyVerseButtons(); initStretch(); fixQuranOrphans(); toEasternInContent();
 }
 var _debStretch = (function() { var t; return function() { clearTimeout(t); t = setTimeout(stretchAll, 120); }; })();
 window.addEventListener('resize', _debStretch);
@@ -2900,6 +2949,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     article.appendChild(section);
+    toEasternInContent();
   }
 
   function goToFnRef(n) {

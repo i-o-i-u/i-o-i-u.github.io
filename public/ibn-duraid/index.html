@@ -1406,6 +1406,16 @@ body.dark .dark-white-text {
         </div>
         <h3 class="comments-title">التعليقات</h3>
         <span id="commentsCount" class="comments-count-badge" style="display:none"></span>
+        <div class="privacy-wrap">
+            <button class="privacy-btn" onclick="togglePrivacy(event)">خَصُوصيَّتك</button>
+            <div class="privacy-popup" id="privacyPopup" role="dialog">
+                <p class="privacy-title">كلمة عن خَصوصِيَّة <sup class="privacy-sup">(١)</sup> مستخدِم التعليقات:</p>
+                <p>جعلتُ نظام التعليقات مفتوحًا، بدون اسمٍ ولا تسجيل، ولكن لئلَّا ينتحلَ مُعلِّقٌ أسامِيَ عديدة، أو يضغط الإعجاب على تعليقٍ واحد عشَرات المرَّات، أعدَدتُّ نِظامَ أَمانٍ يسيرًا:</p>
+                <p>إذا زُرتَ الصفحة واستخدمْتَ نظام التعليقات، فإن الصفحة تجمَعُ معلوماتٍ تقنيةٍ يسيرة، عن مُتصفِّحك وجهازك، لتنشئَ لك بصمةً خاصَّةً، ومُعرِّفًا فريدًا، يتذكَّرُ إعجاباتِك، وتعليقاتِك. لا تُجمَع هذه المعلومات إلا لهذا الغرَض فحسْب. فاطْمئنَّ&nbsp;:)</p>
+                <div class="privacy-sep">_______________________________</div>
+                <p class="privacy-footnote">(١): الخَصُوصِيَّة -بفتح الخاء-: ما يخصُّ المرء من مُختلِف شُؤونِه. وفتح الخاء فيها أفصح، نصَّ عليه أبو يُوسُف ابنُ السِّكِّيت (ت244هـ) في «إصلاح المنطِق»، والإمام أبو العَبَّاس ثَعْلَب (ت291هـ) في «الفصيح».</p>
+            </div>
+        </div>
     </div>
 
     <div class="comment-form-glass">
@@ -1669,6 +1679,44 @@ body.dark a.back-link:hover { color: #f59e0b !important; }
     font-size: 0.78rem; font-weight: 700; padding: 0.2rem 0.7rem; border-radius: 999px;
 }
 body.dark .comments-count-badge { background: rgba(234,88,12,0.15); border-color: rgba(234,88,12,0.3); }
+
+/* زر الخصوصية */
+.privacy-wrap { margin-inline-start: auto; position: relative; }
+.privacy-btn {
+    background: none; border: 1px solid rgba(234,88,12,0.18); cursor: pointer;
+    font-family: inherit; font-size: 0.8rem; color: rgba(146,64,14,0.55);
+    padding: 0.18rem 0.55rem; border-radius: 999px;
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+    white-space: nowrap;
+}
+.privacy-btn:hover { color: #ea580c; border-color: rgba(234,88,12,0.4); background: rgba(234,88,12,0.06); }
+body.dark .privacy-btn { color: rgba(251,191,60,0.45); border-color: rgba(251,146,60,0.18); }
+body.dark .privacy-btn:hover { color: #fbbf24; border-color: rgba(251,146,60,0.45); background: rgba(251,146,60,0.08); }
+.privacy-popup {
+    display: none; position: absolute;
+    top: calc(100% + 8px); inset-inline-end: 0;
+    width: min(430px, calc(100vw - 2rem));
+    z-index: 200; direction: rtl; text-align: right;
+    background: rgba(255,251,245,0.98); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(234,88,12,0.18); border-radius: 1rem;
+    padding: 1.2rem 1.4rem 1rem;
+    box-shadow: 0 12px 36px rgba(0,0,0,0.13), 0 2px 8px rgba(234,88,12,0.07);
+    line-height: 1.95; font-size: 0.88rem; color: #374151; text-align: justify;
+}
+body.dark .privacy-popup {
+    background: rgba(18,12,6,0.98); border-color: rgba(251,146,60,0.18);
+    color: #d1d5db; box-shadow: 0 12px 36px rgba(0,0,0,0.55);
+}
+.privacy-wrap:hover .privacy-popup, .privacy-popup.open { display: block; }
+.privacy-title { font-weight: 700; color: #92400e; margin-bottom: 0.65rem; font-size: 0.92rem; }
+body.dark .privacy-title { color: #fbbf24; }
+.privacy-popup p { margin: 0 0 0.55rem; }
+.privacy-popup p:last-child { margin-bottom: 0; }
+.privacy-sup { font-size: 0.7em; vertical-align: super; }
+.privacy-sep { color: rgba(146,64,14,0.25); margin: 0.65rem 0 0.45rem; font-size: 0.72rem; }
+body.dark .privacy-sep { color: rgba(251,146,60,0.2); }
+.privacy-footnote { font-size: 0.79rem; color: #6b7280; line-height: 1.75; }
+body.dark .privacy-footnote { color: #9ca3af; }
 
 /* Form glass */
 .comment-form-glass {
@@ -1956,27 +2004,70 @@ const TXT = {
 };
 // ====================================================
 
-async function getMyUid() {
-    // بصمة ثابتة من خصائص المتصفح — تبقى حتى لو مُسح localStorage
+async function _fingerprint() {
     const parts = [
-        navigator.language || '',
-        screen.width, screen.height, screen.colorDepth,
-        navigator.hardwareConcurrency || '',
+        navigator.userAgent || '',
+        screen.width + 'x' + screen.height,
         Intl.DateTimeFormat().resolvedOptions().timeZone,
-        navigator.maxTouchPoints != null ? navigator.maxTouchPoints : '',
+        navigator.hardwareConcurrency || '',
+        navigator.language || '',
     ];
+    // AudioContext fingerprint
+    try {
+        const ac = new OfflineAudioContext(1, 44100, 44100);
+        const osc = ac.createOscillator();
+        const cmp = ac.createDynamicsCompressor();
+        osc.connect(cmp); cmp.connect(ac.destination);
+        osc.start(0);
+        const buf = await new Promise(r => { ac.oncomplete = e => r(e.renderedBuffer); ac.startRendering(); });
+        const d = buf.getChannelData(0);
+        let s = 0;
+        for (let i = 4500; i < 5000; i++) s += Math.abs(d[i] || 0);
+        parts.push(s.toFixed(8));
+    } catch(e) {}
+    // Canvas fingerprint
     try {
         const cv = document.createElement('canvas');
         const cx = cv.getContext('2d');
-        cx.font = '11px serif';
-        cx.fillText('\u0633\u064a\u0641', 2, 12);
-        parts.push(cv.toDataURL().slice(-24));
+        cx.textBaseline = 'top';
+        cx.font = '14px Arial';
+        cx.fillStyle = '#e67e22';
+        cx.fillRect(0, 0, 10, 10);
+        cx.fillStyle = '#2c3e50';
+        cx.fillText('\u0633\u064a\u0641', 2, 2);
+        parts.push(cv.toDataURL().slice(-20));
     } catch(e) {}
-    const raw = parts.join('|');
-    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(raw));
-    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('').slice(0, 6);
+    return parts.join('|');
+}
+
+async function getMyUid() {
+    const LS_KEY = '_saif_vid';
+    try {
+        // إذا حُسب المعرّف من قبل، استخدمه مباشرة (يضمن الثبات حتى لو تغيّرت البصمة لاحقًا)
+        const cached = localStorage.getItem(LS_KEY);
+        if (cached) return cached;
+        // UUID عشوائي
+        const arr = new Uint8Array(8);
+        crypto.getRandomValues(arr);
+        const uuid = Array.from(arr).map(b => b.toString(16).padStart(2,'0')).join('');
+        // بصمة الجهاز
+        const fp = await _fingerprint();
+        // دمجهما في معرّف واحد ثابت
+        const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(uuid + '|' + fp));
+        const uid = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('').slice(0, 16);
+        localStorage.setItem(LS_KEY, uid);
+        return uid;
+    } catch(e) {
+        // fallback: بصمة الجهاز فقط بلا localStorage
+        try {
+            const fp = await _fingerprint();
+            const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(fp));
+            return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('').slice(0, 16);
+        } catch(e2) { return 'anon'; }
+    }
 }
 let MY_UID = '';
+let _myLikes = new Set(); // معرّفات التعليقات التي أعجب بها هذا الزائر
 
 let isAdmin = false;
 
@@ -2023,10 +2114,24 @@ async function sbFetch(path, opts = {}) {
     return res.json();
 }
 
+
 async function loadComments() {
     const list = document.getElementById('commentsList');
     try {
-        const data = await sbFetch(`comments?page_slug=eq.${encodeURIComponent(PAGE_SLUG)}&order=created_at.asc&select=*`);
+        // جلب التعليقات وإعجابات الزائر الحالي وعداد كل تعليق — بالتوازي
+        const [data, myLikesData, allLikesData] = await Promise.all([
+            sbFetch(`comments?page_slug=eq.${encodeURIComponent(PAGE_SLUG)}&order=created_at.asc&select=*`),
+            isAdmin ? Promise.resolve([]) : sbFetch(`likes?visitor_id=eq.${encodeURIComponent(MY_UID)}&select=comment_id`),
+            sbFetch(`likes?select=comment_id`)
+        ]);
+        // معرّفات التعليقات التي أعجب بها هذا الزائر
+        _myLikes = new Set((myLikesData || []).map(r => r.comment_id));
+        // عدد الإعجابات لكل تعليق (من جدول likes — المصدر الوحيد للحقيقة)
+        const likeCounts = {};
+        (allLikesData || []).forEach(r => {
+            likeCounts[r.comment_id] = (likeCounts[r.comment_id] || 0) + 1;
+        });
+
         const visible = isAdmin ? data : data.filter(c => !c.is_hidden);
         const top = visible.filter(c => !c.parent_id);
         const allReplies = visible.filter(c => c.parent_id);
@@ -2040,13 +2145,13 @@ async function loadComments() {
 
         if (top.length === 0) { list.innerHTML = `<div class="empty-comments">${TXT.empty}</div>`; return; }
         list.innerHTML = '';
-        top.forEach(c => list.appendChild(buildCard(c, allReplies, 0)));
+        top.forEach(c => list.appendChild(buildCard(c, allReplies, 0, likeCounts)));
     } catch(e) {
         list.innerHTML = `<div class="empty-comments">${TXT.loadError}</div>`;
     }
 }
 
-function buildCard(c, allReplies, depth) {
+function buildCard(c, allReplies, depth, likeCounts) {
     const myComment = c.author_uid === MY_UID;
     const isOwner   = c.author_name === ADMIN_NAME;
     const isReply   = depth > 0;
@@ -2068,9 +2173,9 @@ function buildCard(c, allReplies, depth) {
     const icoShow   = `<svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>`;
     const icoDelete = `<svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>`;
 
-    const likeCount  = c.likes || 0;
-    const likedBy    = Array.isArray(c.liked_by) ? c.liked_by : [];
-    const userLiked  = isAdmin ? Boolean(c.admin_liked) : likedBy.includes(MY_UID);
+    // العدد من جدول likes (مصدر الحقيقة) + إعجاب الأدمن إن وُجد
+    const likeCount  = (likeCounts ? (likeCounts[c.id] || 0) : 0) + (c.admin_liked ? 1 : 0);
+    const userLiked  = isAdmin ? Boolean(c.admin_liked) : _myLikes.has(c.id);
     const toE = n => String(n).replace(/[0-9]/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
     const likeLabel  = likeCount === 0 ? 'إعجاب'
                      : likeCount === 1 ? 'إعْجابٌ واحد'
@@ -2081,7 +2186,6 @@ function buildCard(c, allReplies, depth) {
     const adminLikedHtml = c.admin_liked ? `<div class="admin-liked-badge" tabindex="0"><div class="admin-liked-icon"><img src="/icon.svg" alt=""><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><span class="admin-liked-tip">أَعْجَبَ صاحبَ الصفحة</span></div>` : '';
 
     div.dataset.likes      = likeCount;
-    div.dataset.likedBy    = JSON.stringify(likedBy);
     div.dataset.adminLiked = String(Boolean(c.admin_liked));
 
     const avContent = isOwner
@@ -2117,7 +2221,7 @@ function buildCard(c, allReplies, depth) {
         if (directReplies.length > 0) {
             const rd = document.createElement('div');
             rd.className = 'replies-container';
-            directReplies.forEach(r => rd.appendChild(buildCard(r, allReplies, depth + 1)));
+            directReplies.forEach(r => rd.appendChild(buildCard(r, allReplies, depth + 1, likeCounts)));
             div.appendChild(rd);
         }
     }
@@ -2222,19 +2326,19 @@ async function likeComment(id) {
     if (!card) return;
     if (isAdmin) {
         const adminLiked = card.dataset.adminLiked === 'true';
-        const currentLikes = parseInt(card.dataset.likes || '0');
-        const newLikes = adminLiked ? Math.max(0, currentLikes - 1) : currentLikes + 1;
         try {
-            await sbFetch(`comments?id=eq.${id}`, { method: 'PATCH', headers: { 'Prefer': 'return=minimal' }, body: JSON.stringify({ admin_liked: !adminLiked, likes: newLikes }) });
+            await sbFetch(`comments?id=eq.${id}`, { method: 'PATCH', headers: { 'Prefer': 'return=minimal' }, body: JSON.stringify({ admin_liked: !adminLiked }) });
             await loadComments();
         } catch(e) { alert('حدث خطأ.'); }
         return;
     }
-    let likedBy; try { likedBy = JSON.parse(card.dataset.likedBy || '[]'); } catch { likedBy = []; }
-    const wasLiked = likedBy.includes(MY_UID);
-    const newLikedBy = wasLiked ? likedBy.filter(u => u !== MY_UID) : [...likedBy, MY_UID];
+    const wasLiked = _myLikes.has(id);
     try {
-        await sbFetch(`comments?id=eq.${id}`, { method: 'PATCH', headers: { 'Prefer': 'return=minimal' }, body: JSON.stringify({ likes: newLikedBy.length, liked_by: newLikedBy }) });
+        if (wasLiked) {
+            await sbFetch(`likes?comment_id=eq.${id}&visitor_id=eq.${encodeURIComponent(MY_UID)}`, { method: 'DELETE', headers: { 'Prefer': 'return=minimal' } });
+        } else {
+            await sbFetch(`likes`, { method: 'POST', headers: { 'Prefer': 'return=minimal,resolution=ignore-duplicates' }, body: JSON.stringify({ comment_id: id, visitor_id: MY_UID }) });
+        }
         await loadComments();
     } catch(e) { alert('حدث خطأ.'); }
 }
@@ -2272,6 +2376,23 @@ document.getElementById('commentForm')?.addEventListener('submit', async functio
         btn.disabled = false; lbl.textContent = TXT.btnSend;
     }
 });
+
+function togglePrivacy(e) {
+    e.stopPropagation();
+    const popup = document.getElementById('privacyPopup');
+    if (!popup) return;
+    const opening = !popup.classList.contains('open');
+    popup.classList.toggle('open', opening);
+    if (opening) {
+        const close = function(ev) {
+            if (!ev.target.closest('.privacy-wrap')) {
+                popup.classList.remove('open');
+                document.removeEventListener('click', close);
+            }
+        };
+        setTimeout(() => document.addEventListener('click', close), 0);
+    }
+}
 
 function escHtml(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function escJs(s)   { return String(s||'').replace(/`/g,'\\`').replace(/\$/g,'\\$'); }
@@ -2712,6 +2833,12 @@ async function _doSearch(q) {
         results.innerHTML = '<p class="text-center text-gray-500 py-4">لا توجد نتائج</p>';
         return;
     }
+    // تتبع رقم التكرار لكل رابط (لتظليل النتيجة الصحيحة عند الضغط)
+    const _occMap = {};
+    found.forEach(m => {
+        if (_occMap[m.url] === undefined) _occMap[m.url] = 0;
+        m.occ = _occMap[m.url]++;
+    });
     const n = found.length;
     const nAr = String(n).replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
     const nStr = n === 1 ? 'نتيجة واحدة' : n === 2 ? 'نتيجتان' : (n >= 3 && n <= 10) ? nAr + ' نتائج' : nAr + ' نتيجة';
@@ -2729,7 +2856,7 @@ async function _doSearch(q) {
         if (key !== null)
             html += '<div class="search-result-group-header">' + _escH(key) + '</div>';
         groups[key].forEach(m => {
-            const hlParam = '?hl=' + encodeURIComponent(q);
+            const hlParam = '?hl=' + encodeURIComponent(q) + (m.occ ? '&occ=' + m.occ : '');
             html += '<a href="' + m.url + hlParam + '" class="search-result-item" onclick="closeSearch()">'
                 + '<div class="search-result-path"><strong>' + _escH(m.title) + '</strong></div>'
                 + '<div class="search-result-excerpt">' + m.excerpt + '</div>'
@@ -2765,6 +2892,8 @@ document.addEventListener('keydown', (e) => {
 // ── تظليل كلمة البحث والتمرير إليها عند فتح الصفحة ─────
 (function() {
     const hl = new URLSearchParams(window.location.search).get('hl');
+    const _occStr = new URLSearchParams(window.location.search).get('occ');
+    const _targetOcc = _occStr !== null ? parseInt(_occStr, 10) : 0;
     if (!hl) return;
     history.replaceState(null, '', window.location.pathname + window.location.hash);
 
@@ -2787,6 +2916,7 @@ document.addEventListener('keydown', (e) => {
             acceptNode: n => n.parentElement.closest('script, style, [data-pagefind-ignore]') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT
         });
         let found = null;
+        let _occIdx = 0;
         let node;
         while ((node = walker.nextNode())) {
             const text = node.nodeValue;
@@ -2796,17 +2926,22 @@ document.addEventListener('keydown', (e) => {
             if (shatr) {
                 // نضلّل السطر <tr> بدل <mark> داخل الخلية (stretchCell تمسحها)
                 const tr = shatr.closest('tr');
-                if (tr) { tr.classList.add('search-hl-row'); found = tr; }
+                if (tr) {
+                    if (_occIdx === _targetOcc) { tr.classList.add('search-hl-row'); found = tr; break; }
+                    _occIdx++;
+                }
             } else {
-                const mark = document.createElement('mark');
-                mark.className = 'search-hl';
-                mark.textContent = text.slice(m.index, m.index + m[0].length);
-                const after = node.splitText(m.index);
-                after.nodeValue = text.slice(m.index + m[0].length);
-                node.parentNode.insertBefore(mark, after);
-                found = mark;
+                if (_occIdx === _targetOcc) {
+                    const mark = document.createElement('mark');
+                    mark.className = 'search-hl';
+                    mark.textContent = text.slice(m.index, m.index + m[0].length);
+                    const after = node.splitText(m.index);
+                    after.nodeValue = text.slice(m.index + m[0].length);
+                    node.parentNode.insertBefore(mark, after);
+                    found = mark; break;
+                }
+                _occIdx++;
             }
-            break;
         }
 
         // ثانياً: إذا لم يُوجد، ابحث في نصوص الآيات القرآنية
@@ -2815,8 +2950,8 @@ document.addEventListener('keydown', (e) => {
                 if (found) return;
                 const qt = span.getAttribute('data-quran-text') || '';
                 if (!qt.match(pat)) return;
-                span.classList.add('search-hl');
-                found = span;
+                if (_occIdx === _targetOcc) { span.classList.add('search-hl'); found = span; }
+                _occIdx++;
             });
         }
 
@@ -3054,6 +3189,21 @@ mark.search-hl {
 body.dark mark.search-hl {
     background: rgba(251,191,36,0.35);
     outline-color: #fbbf24;
+}
+/* الآيات القرآنية: تقسيم على الأسطر عند الحاجة، بلا تمطيط ولا تمرير */
+[data-quran-text] {
+    white-space: normal !important;
+    overflow: visible !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
+    display: inline !important;
+    text-align: justify !important;
+}
+@media (max-width: 640px) {
+    [data-quran-text] {
+        font-size: 1rem !important;
+        line-height: 1.9 !important;
+    }
 }
 [data-quran-text].search-hl {
     background: #fde68a;
@@ -3762,9 +3912,29 @@ function fixQuranOrphans() {
 }
 
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', function() { addVerseNumbers(); addCopyVerseButtons(); initStretch(); fixQuranOrphans(); });
+  function toEasternInContent() {
+    const content = document.getElementById('articleContent');
+    const fnSection = document.querySelector('.footnotes-section');
+    const privacyPopup = document.getElementById('privacyPopup');
+    const roots = [content, fnSection, privacyPopup].filter(Boolean);
+    if (!roots.length) return;
+    roots.forEach(function(root) {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode: function(n) {
+        return n.parentElement.closest('script,style,code,pre') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    let node;
+    while ((node = walker.nextNode())) {
+      const s = node.nodeValue;
+      const c = s.replace(/[0-9]/g, function(d) { return '٠١٢٣٤٥٦٧٨٩'[d]; });
+      if (c !== s) node.nodeValue = c;
+    }
+    });
+  }
+  document.addEventListener('DOMContentLoaded', function() { addVerseNumbers(); addCopyVerseButtons(); initStretch(); fixQuranOrphans(); toEasternInContent(); });
 } else {
-  addVerseNumbers(); addCopyVerseButtons(); initStretch(); fixQuranOrphans();
+  addVerseNumbers(); addCopyVerseButtons(); initStretch(); fixQuranOrphans(); toEasternInContent();
 }
 var _debStretch = (function() { var t; return function() { clearTimeout(t); t = setTimeout(stretchAll, 120); }; })();
 window.addEventListener('resize', _debStretch);
@@ -3945,6 +4115,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     article.appendChild(section);
+    toEasternInContent();
   }
 
   function goToFnRef(n) {
