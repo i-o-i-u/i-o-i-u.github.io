@@ -2685,19 +2685,24 @@ function addCopyVerseButtons() {
   });
 }
 
-// منع انعزال قوسَي الآية في سطر وحده
+// منع انعزال أقواس الآيات في سطر وحده
 function fixQuranOrphans() {
   document.querySelectorAll('[data-quran-text]').forEach(function(span) {
     var txt = span.textContent;
-    // أول مسافة: تمنع انفراد قوس البداية ﴿ في سطر وحده
+    var nbsp = '\u00A0';
+    // بعد كل ﴾ (U+FD3F): مسافة غير منكسرة تُلصق الكلمة التالية بالقوس
+    txt = txt.replace(/\uFD3F /g, '\uFD3F' + nbsp);
+    // قبل كل ﴿ (U+FD3E): مسافة غير منكسرة تمنع انفراد القوس في سطر
+    txt = txt.replace(/ \uFD3E/g, nbsp + '\uFD3E');
+    // أول مسافة: تمنع انفراد أول حرف في سطر وحده (احتياط)
     var firstSpace = txt.indexOf(' ');
     if (firstSpace >= 0) {
-      txt = txt.slice(0, firstSpace) + '\u00A0' + txt.slice(firstSpace + 1);
+      txt = txt.slice(0, firstSpace) + nbsp + txt.slice(firstSpace + 1);
     }
-    // آخر مسافة: تمنع انفراد قوس الختام ﴾ في سطر وحده
+    // آخر مسافة: تمنع انفراد آخر حرف في سطر وحده (احتياط)
     var lastSpace = txt.lastIndexOf(' ');
     if (lastSpace >= 0 && lastSpace !== firstSpace) {
-      txt = txt.slice(0, lastSpace) + '\u00A0' + txt.slice(lastSpace + 1);
+      txt = txt.slice(0, lastSpace) + nbsp + txt.slice(lastSpace + 1);
     }
     span.textContent = txt;
   });

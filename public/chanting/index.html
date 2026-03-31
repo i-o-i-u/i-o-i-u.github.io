@@ -1509,10 +1509,37 @@ body.dark .share-btn:hover { background: rgba(249,115,22,0.7); color: #fff; bord
         </div>
 
 
+<div id="adminLoginWrap" class="admin-login-wrap">
+    <div class="admin-login-glass">
+        <div class="admin-pw-field">
+            <div class="admin-pw-icon">
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                </svg>
+            </div>
+            <input id="adminPwInput" type="password" placeholder="كلمة السر" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="glass-input admin-pw-input">
+            <button type="button" class="admin-eye-btn" id="adminEyeBtn" onclick="toggleAdminPwVisibility()" title="إظهار/إخفاء كلمة السر" aria-label="إظهار كلمة السر">
+                <svg id="eyeIconShow" width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                </svg>
+                <svg id="eyeIconHide" width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display:none">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
+                </svg>
+            </button>
+        </div>
+        <button type="button" onclick="submitAdminPw()" class="btn-submit-glass admin-submit-btn">
+            <span>دخول</span>
+            <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M11 16l-4-4m0 0l4-4m-4 4h14"/>
+            </svg>
+        </button>
+    </div>
+</div>
 <div class="comments-glass-section" id="comments-section">
 
     <div class="comments-header">
-        <div class="comments-header-icon">
+        <div class="comments-header-icon" id="commentsHeaderIcon">
             <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/>
             </svg>
@@ -1793,6 +1820,45 @@ body.dark a.back-link:hover { color: #f59e0b !important; }
 }
 body.dark .comments-count-badge { background: rgba(234,88,12,0.15); border-color: rgba(234,88,12,0.3); }
 
+/* نموذج دخول المدير */
+.admin-login-wrap { display: none; margin-bottom: 1rem; }
+.admin-login-glass {
+    display: flex; align-items: center; gap: 0.6rem;
+    background: linear-gradient(135deg, rgba(255,255,255,0.7), rgba(255,248,240,0.6), rgba(255,237,213,0.5));
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(251,146,60,0.25); border-radius: 1.2rem;
+    padding: 0.75rem 1rem;
+}
+body.dark .admin-login-glass {
+    background: linear-gradient(135deg, rgba(17,24,39,0.85), rgba(24,32,44,0.8));
+    border-color: rgba(251,146,60,0.15);
+}
+.admin-pw-field {
+    position: relative; flex: 1;
+}
+.admin-pw-icon {
+    position: absolute; right: 0.85rem; top: 50%; transform: translateY(-50%);
+    color: #f97316; pointer-events: none; z-index: 1;
+}
+.admin-pw-input {
+    padding-left: 2.5rem !important;
+    direction: ltr; text-align: left;
+    margin-bottom: 0 !important;
+}
+.admin-eye-btn {
+    position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%);
+    background: none; border: none; cursor: pointer; padding: 0.15rem;
+    color: rgba(156,107,60,0.5); z-index: 1; line-height: 0;
+    transition: color 0.15s;
+}
+.admin-eye-btn:hover { color: #ea580c; }
+body.dark .admin-eye-btn { color: rgba(251,191,36,0.4); }
+body.dark .admin-eye-btn:hover { color: #fbbf24; }
+.admin-submit-btn {
+    flex-shrink: 0; padding: 0.65rem 1.1rem !important; gap: 0.4rem !important;
+    white-space: nowrap;
+}
+
 /* زر الخصوصية */
 .privacy-wrap { margin-inline-start: auto; position: relative; }
 .privacy-btn {
@@ -1816,13 +1882,13 @@ body.dark .privacy-btn:hover { color: #fbbf24; border-color: rgba(251,146,60,0.4
     box-shadow: 0 12px 36px rgba(0,0,0,0.13), 0 2px 8px rgba(234,88,12,0.07);
     line-height: 1.95; font-size: 0.88rem; color: #374151; text-align: justify;
 }
-@media (max-width: 480px) {
+@media (max-width: 600px) {
     .privacy-popup {
-        position: fixed; inset-inline-end: auto;
-        left: 1rem; right: 1rem; top: auto;
-        bottom: 1rem; width: auto;
-        border-radius: 1.1rem;
+        top: auto; bottom: calc(100% + 8px);
+        inset-inline-end: 0;
+        width: min(340px, calc(100vw - 2rem));
         font-size: 0.85rem;
+        max-height: 70vh; overflow-y: auto;
     }
 }
 body.dark .privacy-popup {
@@ -2218,6 +2284,41 @@ async function initAdmin() {
     loadComments();
 }
 
+function toggleAdminPwVisibility() {
+    const input = document.getElementById('adminPwInput');
+    const show = document.getElementById('eyeIconShow');
+    const hide = document.getElementById('eyeIconHide');
+    if (!input) return;
+    if (input.type === 'password') {
+        input.type = 'text';
+        show.style.display = 'none';
+        hide.style.display = '';
+    } else {
+        input.type = 'password';
+        show.style.display = '';
+        hide.style.display = 'none';
+    }
+}
+
+async function submitAdminPw() {
+    const input = document.getElementById('adminPwInput');
+    const val = (input.value || '').trim();
+    if (!val) return;
+    const hash = await sha256(val);
+    if (hash === ADMIN_HASH) {
+        isAdmin = true;
+        sessionStorage.setItem('is_admin', '1');
+        document.getElementById('adminLoginWrap').style.display = 'none';
+        input.value = '';
+        const ni = document.getElementById('authorName');
+        if (ni) { ni.value = ADMIN_NAME; ni.readOnly = true; ni.style.opacity = '0.75'; }
+        loadComments();
+    } else {
+        input.style.borderColor = '#ef4444';
+        setTimeout(() => { input.style.borderColor = ''; }, 1500);
+    }
+}
+
 (async () => { MY_UID = await getMyUid(); await initAdmin(); })();
 
 async function sbFetch(path, opts = {}) {
@@ -2515,6 +2616,35 @@ function togglePrivacy(e) {
         setTimeout(() => document.addEventListener('click', close), 0);
     }
 }
+
+// Triple-click on comments icon → show admin login form
+(function() {
+    let _tapCount = 0, _tapTimer = null;
+    function onTap() {
+        _tapCount++;
+        if (_tapTimer) clearTimeout(_tapTimer);
+        if (_tapCount >= 3) {
+            _tapCount = 0;
+            if (!isAdmin) {
+                const wrap = document.getElementById('adminLoginWrap');
+                if (wrap) {
+                    wrap.style.display = wrap.style.display === 'none' ? 'block' : 'none';
+                    if (wrap.style.display === 'block') {
+                        document.getElementById('adminPwInput').focus();
+                    }
+                }
+            }
+        } else {
+            _tapTimer = setTimeout(() => { _tapCount = 0; }, 600);
+        }
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        const icon = document.getElementById('commentsHeaderIcon');
+        if (icon) { icon.addEventListener('click', onTap); icon.style.cursor = 'pointer'; }
+        const input = document.getElementById('adminPwInput');
+        if (input) { input.addEventListener('keydown', function(e) { if (e.key === 'Enter') submitAdminPw(); }); }
+    });
+})();
 
 function escHtml(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function escJs(s)   { return String(s||'').replace(/`/g,'\\`').replace(/\$/g,'\\$'); }
@@ -4015,19 +4145,24 @@ function addCopyVerseButtons() {
   });
 }
 
-// منع انعزال قوسَي الآية في سطر وحده
+// منع انعزال أقواس الآيات في سطر وحده
 function fixQuranOrphans() {
   document.querySelectorAll('[data-quran-text]').forEach(function(span) {
     var txt = span.textContent;
-    // أول مسافة: تمنع انفراد قوس البداية ﴿ في سطر وحده
+    var nbsp = '\u00A0';
+    // بعد كل ﴾ (U+FD3F): مسافة غير منكسرة تُلصق الكلمة التالية بالقوس
+    txt = txt.replace(/\uFD3F /g, '\uFD3F' + nbsp);
+    // قبل كل ﴿ (U+FD3E): مسافة غير منكسرة تمنع انفراد القوس في سطر
+    txt = txt.replace(/ \uFD3E/g, nbsp + '\uFD3E');
+    // أول مسافة: تمنع انفراد أول حرف في سطر وحده (احتياط)
     var firstSpace = txt.indexOf(' ');
     if (firstSpace >= 0) {
-      txt = txt.slice(0, firstSpace) + '\u00A0' + txt.slice(firstSpace + 1);
+      txt = txt.slice(0, firstSpace) + nbsp + txt.slice(firstSpace + 1);
     }
-    // آخر مسافة: تمنع انفراد قوس الختام ﴾ في سطر وحده
+    // آخر مسافة: تمنع انفراد آخر حرف في سطر وحده (احتياط)
     var lastSpace = txt.lastIndexOf(' ');
     if (lastSpace >= 0 && lastSpace !== firstSpace) {
-      txt = txt.slice(0, lastSpace) + '\u00A0' + txt.slice(lastSpace + 1);
+      txt = txt.slice(0, lastSpace) + nbsp + txt.slice(lastSpace + 1);
     }
     span.textContent = txt;
   });
