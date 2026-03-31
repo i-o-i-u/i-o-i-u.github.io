@@ -4146,25 +4146,24 @@ function addCopyVerseButtons() {
 }
 
 // منع انعزال أقواس الآيات في سطر وحده
+// أقواس QCF المشفَّرة: U+F8E0 = ﴿  و U+F8E1 = ﴾  (وليست U+FD3E/U+FD3F القياسية)
 function fixQuranOrphans() {
+  var nbsp = '\u00A0';
   document.querySelectorAll('[data-quran-text]').forEach(function(span) {
     var txt = span.textContent;
-    var nbsp = '\u00A0';
-    // بعد كل ﴾ (U+FD3F): مسافة غير منكسرة تُلصق الكلمة التالية بالقوس
-    txt = txt.replace(/\uFD3F /g, '\uFD3F' + nbsp);
-    // قبل كل ﴿ (U+FD3E): مسافة غير منكسرة تمنع انفراد القوس في سطر
-    txt = txt.replace(/ \uFD3E/g, nbsp + '\uFD3E');
-    // أول مسافة: تمنع انفراد أول حرف في سطر وحده (احتياط)
-    var firstSpace = txt.indexOf(' ');
-    if (firstSpace >= 0) {
-      txt = txt.slice(0, firstSpace) + nbsp + txt.slice(firstSpace + 1);
+    // أزل المسافات الزائدة في النهاية أولاً حتى لا تُضلِّل البحث عن آخر مسافة
+    var trimmed = txt.replace(/\s+$/, '');
+    var trailing = txt.slice(trimmed.length);
+    // الصق القوس الختامي QCF (U+F8E1) بما قبله لمنع انفراده في سطر
+    trimmed = trimmed.replace(/ \uF8E1/g, nbsp + '\uF8E1');
+    // الصق القوس الافتتاحي QCF (U+F8E0) بما بعده لمنع انفراده في سطر
+    trimmed = trimmed.replace(/\uF8E0 /g, '\uF8E0' + nbsp);
+    // احتياط: الصق الكلمة الأولى بالثانية (بعد معالجة القوس الافتتاحي)
+    var firstSpace = trimmed.indexOf(' ');
+    if (firstSpace > 0) {
+      trimmed = trimmed.slice(0, firstSpace) + nbsp + trimmed.slice(firstSpace + 1);
     }
-    // آخر مسافة: تمنع انفراد آخر حرف في سطر وحده (احتياط)
-    var lastSpace = txt.lastIndexOf(' ');
-    if (lastSpace >= 0 && lastSpace !== firstSpace) {
-      txt = txt.slice(0, lastSpace) + nbsp + txt.slice(lastSpace + 1);
-    }
-    span.textContent = txt;
+    span.textContent = trimmed + trailing;
   });
 }
 
