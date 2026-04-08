@@ -95,7 +95,7 @@ p, div, span, a, li {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('/Background 1.png');
+    background-image: url('/Background 1.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -114,7 +114,7 @@ body.dark .bg-image-overlay {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background-image: url('/Night mode background 1.png');
+    background-image: url('/Night mode background 1.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -1518,6 +1518,7 @@ async function _getText(url) {
     if (_cc[url] !== undefined) return _cc[url];
     try {
         const r = await fetch(url);
+        if (!r.ok) { _cc[url] = ''; return ''; }
         const html = await r.text();
         const doc = new DOMParser().parseFromString(html, 'text/html');
         const el = doc.getElementById('articleContent') || doc.querySelector('.content-section');
@@ -3718,20 +3719,27 @@ body.dark .fn-back:hover { background: rgba(251,191,36,0.2); color: #f59e0b; }
 })();
 
 function shareInshad(url) {
-    try {
-        var ta = document.createElement('textarea');
-        ta.value = url;
-        ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0';
-        document.body.appendChild(ta);
-        ta.focus(); ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-    } catch(e) {}
     var t = document.getElementById('toast');
-    if (t) {
-        t.textContent = 'نُسِخ الرابط!';
-        t.classList.add('show');
-        setTimeout(function(){ t.classList.remove('show'); }, 3000);
+    function _show() {
+        if (t) {
+            t.textContent = 'نُسِخ الرابط!';
+            t.classList.add('show');
+            setTimeout(function(){ t.classList.remove('show'); }, 3000);
+        }
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(_show).catch(_show);
+    } else {
+        try {
+            var ta = document.createElement('textarea');
+            ta.value = url;
+            ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0';
+            document.body.appendChild(ta);
+            ta.focus(); ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+        } catch(e) {}
+        _show();
     }
 }
 </script>

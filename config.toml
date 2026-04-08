@@ -4,5 +4,5 @@ description = "مدونة شخصية في اللغة والأدب"
 default_language = "ar"
 
 compile_sass = true
-minify_html = false
+minify_html = true
 build_search_index = false

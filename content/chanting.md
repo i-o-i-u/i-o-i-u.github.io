@@ -118,12 +118,12 @@ body.dark .share-btn:hover { background: rgba(249,115,22,0.7); color: #fff; bord
   <div class="space-y-3">
     <div class="p-4 rounded-xl bg-orange-50 dark:bg-orange-900/20 hover:bg-orange-100 dark:hover:bg-orange-900/30 border-2 border-orange-200 dark:border-orange-800 hover:border-orange-400 dark:hover:border-orange-600 transition-all duration-300 group" dir="rtl">
       <div class="flex items-center gap-3 mb-3">
-        <a href="https://youtu.be/N1_PaurYnvQ?si=ELCjLEAT36uJdEYh" target="_blank" rel="noopener noreferrer" class="flex-1 flex items-center gap-3 min-w-0" style="text-decoration:none;">
+        <a href="https://youtu.be/3pX4P-wqCKA?si=3TF56jT0aA1j8Vi8" target="_blank" rel="noopener noreferrer" class="flex-1 flex items-center gap-3 min-w-0" style="text-decoration:none;">
           <span class="text-orange-600 dark:text-orange-400 font-bold text-lg flex-shrink-0">1-</span>
           <span class="flex-1 text-lg">«إنَّا لَجُهَّالٌ مِن الجُهَّالِ»</span>
           <svg class="w-5 h-5 text-gray-400 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
         </a>
-        <button class="share-btn" onclick="shareInshad('https://youtu.be/N1_PaurYnvQ?si=ELCjLEAT36uJdEYh')" aria-label="مشاركة">
+        <button class="share-btn" onclick="shareInshad('https://youtu.be/3pX4P-wqCKA?si=3TF56jT0aA1j8Vi8')" aria-label="مشاركة">
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
         </button>
       </div>
@@ -228,6 +228,25 @@ body.dark .share-btn:hover { background: rgba(249,115,22,0.7); color: #fff; bord
         <a href="/%D8%B1%D8%AC%D8%B2%20%D8%A3%D8%A8%D9%8A%20%D8%A7%D9%84%D8%B9%D8%A7%D9%84%D9%8A%D8%A9.pdf" download="رجز أبي العالية.pdf" class="pdf-btn pdf-btn-dl">
           <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           احتمال
+        </a>
+      </div>
+    </div>
+    <div class="p-4 rounded-xl bg-orange-50 dark:bg-orange-900/20 hover:bg-orange-100 dark:hover:bg-orange-900/30 border-2 border-orange-200 dark:border-orange-800 hover:border-orange-400 dark:hover:border-orange-600 transition-all duration-300 group" dir="rtl">
+      <div class="flex items-center gap-3 mb-3">
+        <a href="https://youtu.be/t2aDZOH9p8o?si=WiNHk14EwJk_JLQH" target="_blank" rel="noopener noreferrer" class="flex-1 flex items-center gap-3 min-w-0" style="text-decoration:none;">
+          <span class="text-orange-600 dark:text-orange-400 font-bold text-lg flex-shrink-0">٦-</span>
+          <span class="flex-1 text-lg">«ما هاجَ عَيْنَيكَ مِن الأَطْلالِ»</span>
+          <svg class="w-5 h-5 text-gray-400 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </a>
+        <button class="share-btn" onclick="shareInshad('https://youtu.be/t2aDZOH9p8o?si=WiNHk14EwJk_JLQH')" aria-label="مشاركة">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        </button>
+      </div>
+      <div class="flex items-center gap-2 flex-wrap">
+        <span style="font-size:0.82rem;color:#92400e;font-weight:700;">شرح الأبيات:</span>
+        <a href="/arjuzat-dhu-al-rumma/" class="pdf-btn pdf-btn-view">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          عرض
         </a>
       </div>
     </div>
