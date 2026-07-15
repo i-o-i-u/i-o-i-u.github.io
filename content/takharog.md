@@ -2,6 +2,12 @@
 title = "بيتٌ يُتمثَّل به عند التخرُّج"
 slug = "takharog"
 date = 2024-05-19
+
+[extra]
+kind = "questions"
+order = 2
+card_title = "بيتٌ يُتمثَّل به عند التخرُّج."
+hijri_date = "١٠ ذو القَعْدة ١٤٤٦ هـ"
 +++
 
 <div class="glass-premium-box">

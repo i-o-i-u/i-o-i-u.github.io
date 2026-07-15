@@ -2,6 +2,12 @@
 title = "ما الذي حبَّب إليك العربية، ولمَ لستَ متخصِّصًا فيها؟"
 slug = "question-1"
 date = 2026-01-19
+
+[extra]
+kind = "questions"
+order = 3
+card_title = "ما الذي حبَّب إليك العربية، ولمَ لستَ متخصِّصًا فيها؟"
+hijri_date = "١٦ رجب ١٤٤٦ هـ"
 +++
 
 <div class="glass-premium-box">

@@ -2,6 +2,12 @@
 title = "التمثُّل بالشِّعر"
 slug = "mathal"
 date = 2024-05-18
+
+[extra]
+kind = "questions"
+order = 1
+card_title = "التمثُّل بالشِّعر."
+hijri_date = "١٠ ذو القَعْدة ١٤٤٦ هـ"
 +++
 
 <div class="glass-premium-box">

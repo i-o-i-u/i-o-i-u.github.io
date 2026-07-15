@@ -36,7 +36,7 @@ This is a [Zola](https://www.getzola.org/) static site — a personal Arabic-lan
 
 ### Template structure
 
-`base.html` contains all shared CSS (inline `<style>`) and JavaScript, including:
+Shared CSS and JavaScript live in `static/site.css` + `static/site.js` (loaded from `base.html`) and `static/page.css` + `static/page.js` (loaded from `page.html` via the `head_extra` block). Scripts use `defer`. The only inline script left in `base.html` is the pre-paint dark-theme snippet. The site includes:
 - Dark/light mode toggle persisted to `localStorage`, driven by a `body.dark` class
 - Tailwind CSS loaded via CDN
 - Custom Arabic font `Kitab` loaded from `/Kitab-Regular.ttf`
@@ -48,13 +48,13 @@ This is a [Zola](https://www.getzola.org/) static site — a personal Arabic-lan
 ### Content conventions
 
 - Frontmatter uses TOML between `+++` delimiters.
-- Index/listing pages (`writings.md`, `questions.md`) contain raw HTML card markup in the Markdown body rather than using Zola's built-in section or taxonomy system — new entries must be added manually to these files.
+- Listing pages (`writings.md`, `questions.md`) set `extra.list_kind`; their cards are generated automatically in `page.html` from each content page's frontmatter (`extra.kind`, `extra.order`, `extra.card_title`, `extra.hijri_date`). To list a new page, add those four fields to its frontmatter — do not edit the listing files.
 - Individual content pages contain Arabic prose/poetry, often with inline `style` attributes for text alignment and spacing.
 - Dates in frontmatter use the Gregorian calendar; dates displayed to readers in content use the Hijri calendar.
 
 ## Poetry Formatting System
 
-The site uses a custom Arabic poetry formatter built into `base.html`:
+The site uses a custom Arabic poetry formatter (in `static/site.js`):
 
 - Each hemistich (شطر) is stretched using the Arabic tatweel character (ـ) to fill the full line width
 - Tatweel is NEVER added after non-connecting letters: (ا، د، ذ، ر، ز، و، ة، ء، أ، إ، آ، ؤ، ئ)
@@ -64,7 +64,8 @@ The site uses a custom Arabic poetry formatter built into `base.html`:
 
 ## Comments System
 
-- Backend: Supabase (free tier)
+- Backend: Supabase (free tier); client logic in `static/page.js`
+- Security: RLS policies + SECURITY DEFINER RPCs defined in `supabase/setup.sql` (must be run once in the Supabase SQL Editor). Visitors can only read visible comments, post, and like; edit/hide/delete go through RPCs that verify ownership (`author_uid`) or the admin password server-side.
 - Supports nested replies up to three levels only
 - Admin controls: hide/show comments, admin badge display
 - Dates displayed in Arabic with relative time (e.g. "منذ ساعتين")

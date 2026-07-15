@@ -2,6 +2,12 @@
 title = "مقصورة ابنِ دُرَيد"
 slug = "ibn-duraid"
 date = 2024-12-21
+
+[extra]
+kind = "questions"
+order = 4
+card_title = "مقصورة ابنِ دُرَيد."
+hijri_date = "٢٠ جمادى الآخِرة ١٤٤٦ هـ"
 +++
 
 <style>

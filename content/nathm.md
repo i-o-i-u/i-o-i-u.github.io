@@ -2,6 +2,12 @@
 title = "سؤالٌ عن نَظْم الشعر وفهمه"
 slug = "nathm"
 date = 2024-11-27
+
+[extra]
+kind = "questions"
+order = 6
+card_title = "سؤالٌ عن نَظْم الشعر وفهمه."
+hijri_date = "٢٥ جمادى الأُوْلَى ١٤٤٦ هـ"
 +++
 
 <div class="text-center mb-16">

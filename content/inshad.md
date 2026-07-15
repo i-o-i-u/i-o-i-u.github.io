@@ -2,6 +2,12 @@
 title = "الإنشاد عند العرب"
 slug = "inshad"
 date = 2026-02-02
+
+[extra]
+kind = "writings"
+order = 1
+card_title = "الإنشاد عند العرب."
+hijri_date = "١٤ شعبان ١٤٤٧ هـ"
 +++
 
 <div class="text-center mb-16">

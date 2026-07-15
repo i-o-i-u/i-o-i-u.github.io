@@ -2,6 +2,12 @@
 title = "نصيحةٌ لمن يحبُّ علوم اللغة، ويستبطئ الإتقان."
 slug = "question-2"
 date = 2025-12-05
+
+[extra]
+kind = "questions"
+order = 5
+card_title = "نصيحةٌ لمن يحبُّ علوم اللغة، ويستبطئ الإتقان."
+hijri_date = "١٦ جمادى الآخِر ١٤٤٦ هـ"
 +++
 
 <div class="glass-premium-box">

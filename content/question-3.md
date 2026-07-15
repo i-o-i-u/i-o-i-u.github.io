@@ -2,6 +2,12 @@
 title = "أشباه ونظائر في النساء"
 slug = "question-3"
 date = 2024-11-03
+
+[extra]
+kind = "questions"
+order = 7
+card_title = "أشباهٌ ونظائرُ في النساء."
+hijri_date = "٢ جمادى الأُولى ١٤٤٦ هـ"
 +++
 
 <div class="glass-premium-box">
