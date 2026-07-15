@@ -5,7 +5,7 @@ date = 2025-01-23
 
 [extra]
 kind = "writings"
-order = 2
+order = 3
 card_title = "تفسير بعضِ قصيدةٍ لأبي المِطراب."
 hijri_date = "٢٣ رجب ١٤٤٦ هـ"
 +++

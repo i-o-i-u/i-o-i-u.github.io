@@ -159,6 +159,7 @@ const SITE_PAGES = [
     { url: '/questions/', title: 'الأسئلة', breadcrumb: null },
     { url: '/inshad/', title: 'الإنشاد عند العرب', breadcrumb: 'الكِتابات' },
     { url: '/metrab/', title: 'تفسير بعض قصيدةٍ لأبي المِطراب', breadcrumb: 'الكِتابات' },
+    { url: '/taqrizat-abi-fihr/', title: 'جمْعٌ لبعض تقريظات أبي فِهْر', breadcrumb: 'الكِتابات' },
     { url: '/question-1/', title: 'ما الذي حبَّب إليك العربية؟', breadcrumb: 'الأسئلة' },
     { url: '/question-2/', title: 'نصيحةٌ لمن يحبُّ علوم اللغة', breadcrumb: 'الأسئلة' },
     { url: '/nathm/', title: 'نَظْم الشعر وفَهْمُه', breadcrumb: 'الأسئلة' },
