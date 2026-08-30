@@ -435,7 +435,9 @@ document.addEventListener('keydown', (e) => {
 })();
 
 const TASHKEEL = /[\u064B-\u065F\u0670]/;
-const NO_CONNECT_AFTER = new Set(['ا','أ','إ','آ','ٱ','و','ؤ','ز','ذ','د','ر','ى','ة','ء','ئ']);
+const NO_CONNECT_AFTER = new Set(['ا','أ','إ','آ','ٱ','و','ؤ','ز','ذ','د','ر','ى','ة','ء','ئ','ۥ','ۦ']);
+// حروفٌ لا تُوصَل بما قبلها: الهمزةُ المفردة، والواوُ الصغيرة والياءُ الصغيرة
+const NO_CONNECT_BEFORE = new Set(['ء','ۥ','ۦ']);
 const PUNCT = new Set(['،','؛','؟','!','.',',',':','-','–','—','«','»','"','"','(',')','/']);
 const FORBIDDEN_WORDS = new Set(['الله','اللهم','بالله','تالله','والله','فالله','لله']);
 
@@ -467,7 +469,7 @@ function getAllInsertPositions(tokens) {
     if (PUNCT.has(tokens[i + 1]?.base)) continue;
     const nextBase = tokens[i + 1]?.base;
     if (tokens[i].base === 'ل' && nextBase && 'اأإآٱ'.includes(nextBase)) continue;
-    if (nextBase === 'ء') continue;
+    if (NO_CONNECT_BEFORE.has(nextBase)) continue;
     if (canConnectAfter(tokens[i].base)) positions.push(i + 1);
   }
   // ترتيب تصاعدي: يبدأ التوزيع من مطلع الكلمة (يمين) فتتوزع الزيادة بالتساوي

@@ -25,6 +25,8 @@
   const fontVal  = $('tp-font-val');
   const inputLbl = $('tp-input-label');
   const ckNums   = $('tp-numbers');
+  const inStart  = $('tp-start');
+  const startWrap= $('tp-start-wrap');
   const ckFrame  = $('tp-frame');
   const stage    = document.querySelector('.tp-stage-scroll');
   const holder   = $('tp-holder');
@@ -66,6 +68,16 @@
     if (n === 2) return two;
     if (n >= 3 && n <= 10) return toArabicNum(n) + ' ' + few;
     return toArabicNum(n) + ' ' + many;
+  }
+
+  function fromArabicNum(s) {
+    return String(s).replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[^0-9]/g, '');
+  }
+
+  // رقمُ أوّلِ بيت، لمن أخذ الأبياتَ مجتزأةً من قصيدةٍ أطول
+  function startNumber() {
+    const n = parseInt(fromArabicNum(inStart.value), 10);
+    return (isFinite(n) && n > 0) ? Math.min(n, 9999) : 1;
   }
 
   function stripTatweel(s) { return s.replace(/ـ/g, ''); }
@@ -258,10 +270,10 @@
     return d;
   }
 
-  function buildPageNum(i, total) {
+  function buildPageNum(i) {
     const d = document.createElement('div');
     d.className = 'tp-pagenum';
-    d.textContent = toArabicNum(i) + ' / ' + toArabicNum(total);
+    d.textContent = toArabicNum(i);
     return d;
   }
 
@@ -271,7 +283,7 @@
     const sep   = separator();
     const cols  = (ckNums.checked ? 1 : 0) + (amudi ? 3 : 1);
     const rows  = [];
-    let n = 0;
+    let n = startNumber() - 1;
 
     items.forEach(item => {
       const tr = document.createElement('tr');
@@ -324,7 +336,7 @@
       rows.push(tr);
     });
 
-    return { rows, verses: n };
+    return { rows, verses: n - (startNumber() - 1) };
   }
 
   function newTable() {
@@ -423,7 +435,7 @@
     const attrib = buildAttrib();
     if (attrib) measure._col.appendChild(attrib);
 
-    const mNum = buildPageNum(1, 2);
+    const mNum = buildPageNum(1);
     measure._col.appendChild(mNum);
 
     // عَرْضُ العمود يُحسَب أوّلًا، فقد يتغيَّر به ارتفاعُ السطور الممتدّة
@@ -465,6 +477,8 @@
     groups.forEach((g, idx) => {
       const page = createPage();
       page.style.setProperty('--tp-colw', COLW + 'px');
+      // التوسيطُ الرأسيُّ لصفحةٍ واحدةٍ فقط؛ وإلّا بدأ النصُّ من أعلى الورقة
+      if (many) page.classList.add('tp-multi');
       if (idx === 0 && head) page._col.appendChild(head);
 
       if (g.to > g.from) {
@@ -473,7 +487,7 @@
         page._col.appendChild(t);
       }
       if (g.attrib && attrib) page._col.appendChild(attrib);
-      if (many) page._col.appendChild(buildPageNum(idx + 1, groups.length));
+      if (many) page._inner.appendChild(buildPageNum(idx + 1));
 
       pagesEl.appendChild(page);
       applyBackground(page);
@@ -805,7 +819,8 @@
     ['tp-attr', 'value'], ['tp-theme', 'value'], ['tp-pattern', 'value'],
     ['tp-width', 'value'],
     ['tp-family', 'value'],
-    ['tp-font', 'value'], ['tp-numbers', 'checked'], ['tp-frame', 'checked']
+    ['tp-font', 'value'], ['tp-start', 'value'],
+    ['tp-numbers', 'checked'], ['tp-frame', 'checked']
   ];
 
   function saveState() {
@@ -846,6 +861,7 @@
     fontVal.textContent = toArabicNum(rngFont.value);
     input.placeholder = PLACEHOLDERS[selMode.value] || PLACEHOLDERS.amudi;
     inputLbl.textContent = selMode.value === 'rajaz' ? 'الرَّجَز' : 'القصيدة';
+    startWrap.classList.toggle('tp-hidden', !ckNums.checked);
   }
 
   ['tp-input', 'tp-title', 'tp-poet', 'tp-sep-custom'].forEach(id =>
@@ -853,7 +869,14 @@
   ['tp-mode', 'tp-sep', 'tp-width', 'tp-attr', 'tp-theme', 'tp-pattern', 'tp-family'].forEach(id =>
     $(id).addEventListener('change', () => { syncControls(); renderSoon(); }));
   ['tp-numbers', 'tp-frame'].forEach(id =>
-    $(id).addEventListener('change', renderSoon));
+    $(id).addEventListener('change', () => { syncControls(); renderSoon(); }));
+
+  inStart.addEventListener('input', renderSoon);
+  // يُقبَل الرقمُ بالخانات الشرقيّة والغربيّة، ويُعرَض شرقيًّا بعد الفراغ منه
+  inStart.addEventListener('blur', () => {
+    inStart.value = toArabicNum(startNumber());
+    renderSoon();
+  });
   rngFont.addEventListener('input', () => { syncControls(); renderSoon(); });
 
   $('tp-png').addEventListener('click', exportPNG);
