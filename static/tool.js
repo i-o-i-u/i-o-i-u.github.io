@@ -33,8 +33,19 @@
   const countEl  = $('tp-count');
   const toastEl  = $('tp-toast');
   const pngLabel = $('tp-png-label');
+  const modal      = $('tp-modal');
+  const modalList  = $('tp-modal-list');
+  const modalClose = $('tp-modal-close');
+  const modalAll   = $('tp-modal-all');
+  const modalShare = $('tp-modal-share');
 
   const STORE_KEY = 'tp-state-v2';
+
+  // نسبةُ تصغير المعاينة. القياسُ بـ getBoundingClientRect يتأثّر بها،
+  // فتُقسَم عليه الأبعادُ لتعود إلى مقاس الورق الحقيقيّ.
+  // وبهذا لا يُنزَع التحجيمُ أثناء الرسم، فلا يقفز التمريرُ بالقارئ
+  let curScale = 1;
+  function rectH(el) { return el.getBoundingClientRect().height / curScale; }
 
   // مقاسات الورقة: ترتفع بقَدْر ما فيها، ولا تتجاوز صفحةَ A4
   const SHEET_W = 794;
@@ -107,7 +118,7 @@
 
   function outerHeight(el) {
     const cs = getComputedStyle(el);
-    return el.getBoundingClientRect().height
+    return rectH(el)
       + parseFloat(cs.marginTop) + parseFloat(cs.marginBottom);
   }
 
@@ -413,6 +424,7 @@
 
     // ١) ارتفاع منطقة المحتوى في صفحةٍ ممتلئة
     const probe = createPage();
+    probe.classList.add('tp-probe');
     probe.style.height = MAX_H + 'px';
     pagesEl.appendChild(probe);
     const AVAIL  = contentHeight(probe);
@@ -443,7 +455,7 @@
     measure.style.setProperty('--tp-colw', COLW + 'px');
 
     const headH   = head ? outerHeight(head) : 0;
-    const rowHs   = rows.map(tr => tr.getBoundingClientRect().height);
+    const rowHs   = rows.map(tr => rectH(tr));
     const attribH = attrib ? outerHeight(attrib) : 0;
     const numH    = outerHeight(mNum);
     measure.remove();
@@ -496,7 +508,7 @@
         page.style.height = MAX_H + 'px';
       } else {
         page.style.height = 'auto';
-        const h = page.getBoundingClientRect().height;
+        const h = rectH(page);
         page.style.height = Math.min(MAX_H, Math.max(MIN_H, Math.ceil(h))) + 'px';
       }
     });
@@ -514,6 +526,26 @@
 
   /* ---------------- المدّ ---------------- */
 
+  // ما بقي من فراغٍ بعد المدّ يُوزَّع على ما بين الكلمات فتستوي حاشيتا الشطر.
+  // وهو المخرَجُ للشطر الذي لا موضعَ فيه للوصل أصلًا، كالذي تنتهي كلماتُه
+  // بحروفٍ لا تتّصل بما بعدها (ا د ذ ر ز و ة ء…) أو فيه لفظُ الجلالة
+  const JUSTIFY_CAP = 1.2;   // أقصى فراغٍ بين كلمتين، بنسبة حجم الخطّ
+
+  function justifyCell(cell, font) {
+    cell.style.wordSpacing = '';
+    const cs = getComputedStyle(cell);
+    const avail = cell.clientWidth
+      - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    if (avail <= 10) return;
+    const text = cell.textContent.trim();
+    const gaps = (text.match(/\s+/g) || []).length;
+    if (!gaps) return;
+    const rest = avail - getCtx(font).measureText(text).width - 1;
+    if (rest <= 0.5) return;
+    const cap = parseFloat(cs.fontSize) * JUSTIFY_CAP;
+    cell.style.wordSpacing = Math.min(rest / gaps, cap).toFixed(2) + 'px';
+  }
+
   function stretchAllSheets() {
     const sample = pagesEl.querySelector('.tp-shatr');
     if (!sample) return;
@@ -522,6 +554,7 @@
     pagesEl.querySelectorAll('.tp-shatr').forEach(cell => {
       cell.textContent = cell.dataset.original;
       stretchCell(cell, font);
+      justifyCell(cell, font);
     });
   }
 
@@ -533,9 +566,10 @@
     if (!avail) return;            // اللوحةُ غير مرئيّةٍ بعد
     lastFitW = avail;
     const s = Math.min(1, avail / SHEET_W);
+    curScale = s;
     pagesEl.style.transform = s < 1 ? `scale(${s})` : '';
     // الحاوية تأخذ مقاسَ الورق بعد التحجيم، فيصحُّ التمريرُ داخل اللوحة
-    holder.style.width  = Math.floor(SHEET_W * s) + 'px';
+    holder.style.width  = Math.ceil(SHEET_W * s) + 'px';
     holder.style.height = Math.ceil(pagesEl.getBoundingClientRect().height) + 'px';
   }
 
@@ -544,11 +578,8 @@
   let timer = null;
   const fontTried = new Set();
   function render() {
-    const prev = pagesEl.style.transform;
-    pagesEl.style.transform = '';   // القياسُ يجب أن يكون بلا تحجيم
     buildPages();
     stretchAllSheets();
-    pagesEl.style.transform = prev;
     fitPages();
     saveState();
 
@@ -600,9 +631,10 @@
 
   async function renderPage(page, scale) {
     const cs = getComputedStyle(page);
+    const S = curScale || 1;   // المعاينةُ قد تكون مصغَّرة
     const box = page.getBoundingClientRect();
-    const W = Math.round(box.width);
-    const H = Math.round(box.height);
+    const W = Math.round(box.width / S);
+    const H = Math.round(box.height / S);
 
     const canvas = document.createElement('canvas');
     canvas.width  = W * scale;
@@ -643,8 +675,9 @@
 
     const rel = el => {
       const r = el.getBoundingClientRect();
-      return { x: r.left - box.left, y: r.top - box.top, w: r.width, h: r.height,
-               right: r.right - box.left };
+      return { x: (r.left - box.left) / S, y: (r.top - box.top) / S,
+               w: r.width / S, h: r.height / S,
+               right: (r.right - box.left) / S };
     };
 
     const inner = page._inner || page.querySelector('.tp-sheet-inner');
@@ -693,12 +726,25 @@
 
     // الأشطر
     page.querySelectorAll('.tp-shatr').forEach(cell => {
+      const ccs = getComputedStyle(cell);
       const r = rel(cell);
-      const pad = parseFloat(getComputedStyle(cell).paddingRight);
+      const pad = parseFloat(ccs.paddingRight);
       ctx.font = fontOf(cell);
       ctx.fillStyle = ink;
       ctx.textAlign = 'right';
-      ctx.fillText(cell.textContent, r.right - pad, r.y + r.h / 2);
+      const y = r.y + r.h / 2;
+      const ws = parseFloat(ccs.wordSpacing) || 0;
+      if (ws > 0.3) {
+        // فراغٌ موزَّعٌ بين الكلمات، فتُرسَم كلمةً كلمة
+        const gap = ctx.measureText(' ').width + ws;
+        let x = r.right - pad;
+        cell.textContent.trim().split(/\s+/).forEach(w => {
+          ctx.fillText(w, x, y);
+          x -= ctx.measureText(w).width + gap;
+        });
+      } else {
+        ctx.fillText(cell.textContent, r.right - pad, y);
+      }
     });
 
     // الأرقام
@@ -764,6 +810,51 @@
     return canvas;
   }
 
+  // متصفّحاتُ الجوال لا تقبل إلّا تنزيلًا واحدًا في كلِّ لمسة، فإذا تعدَّدت
+  // الصُّوَرُ عُرِضت في لوحةٍ تُحفَظ منها واحدةً واحدة، أو تُشارَك جميعًا
+  let shots = [];
+
+  function clearShots() {
+    shots.forEach(s => URL.revokeObjectURL(s.url));
+    shots = [];
+  }
+
+  function shotFiles() {
+    return shots.map(s => new File([s.blob], s.name, { type: 'image/png' }));
+  }
+
+  function openShots() {
+    modalList.innerHTML = '';
+    shots.forEach((s, idx) => {
+      const item = document.createElement('div');
+      item.className = 'tp-shot';
+
+      const img = document.createElement('img');
+      img.src = s.url;
+      img.alt = s.name;
+      item.appendChild(img);
+
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'tp-btn tp-btn-main';
+      b.textContent = 'حفظ الصورة ' + toArabicNum(idx + 1);
+      b.addEventListener('click', () => download(s.blob, s.name));
+      item.appendChild(b);
+
+      modalList.appendChild(item);
+    });
+
+    let ok = false;
+    try {
+      ok = !!(navigator.canShare && navigator.share && navigator.canShare({ files: shotFiles() }));
+    } catch (e) { ok = false; }
+    modalShare.classList.toggle('tp-hidden', !ok);
+
+    modal.hidden = false;
+  }
+
+  function closeShots() { modal.hidden = true; }
+
   async function exportPNG() {
     const pages = [...pagesEl.querySelectorAll('.tp-sheet')];
     if (!pages.length || !pagesEl.querySelector('.tp-shatr')) {
@@ -771,26 +862,36 @@
       return;
     }
 
-    // نُلغي التحجيمَ البصريَّ حتى تكون الإحداثيّاتُ حقيقيّة
-    const prev = pagesEl.style.transform;
-    pagesEl.style.transform = '';
+    const btn = $('tp-png');
+    btn.disabled = true;
+    if (pages.length > 1) toast('يجري تجهيزُ الصُّوَر…');
 
-    const base = safeName('قصيدة');
-    let i = 0;
-    for (const page of pages) {
-      const canvas = await renderPage(page, 3);
-      const blob = await new Promise(res => canvas.toBlob(res, 'image/png'));
-      i++;
-      if (blob) {
-        download(blob, pages.length > 1 ? base + '-' + toArabicNum(i) + '.png' : base + '.png');
-        if (i < pages.length) await new Promise(r => setTimeout(r, 450));
+    try {
+      const base = safeName('قصيدة');
+      clearShots();
+      let i = 0;
+      for (const page of pages) {
+        const canvas = await renderPage(page, 3);
+        const blob = await new Promise(res => canvas.toBlob(res, 'image/png'));
+        i++;
+        if (!blob) continue;
+        shots.push({
+          blob,
+          url: URL.createObjectURL(blob),
+          name: (pages.length > 1 ? base + '-' + toArabicNum(i) : base) + '.png'
+        });
       }
-    }
 
-    pagesEl.style.transform = prev;
-    toast(pages.length > 1
-      ? 'حُفِظت ' + arCount(pages.length, 'صورة', 'صورتان', 'صور', 'صورة') + '.'
-      : 'حُفِظت الصورة.');
+      if (!shots.length) { toast('تعذَّر التصدير.'); return; }
+      if (shots.length === 1) {
+        download(shots[0].blob, shots[0].name);
+        toast('حُفِظت الصورة.');
+        return;
+      }
+      openShots();
+    } finally {
+      btn.disabled = false;
+    }
   }
 
   /* ---------------- نسخ النصّ ---------------- */
@@ -881,11 +982,23 @@
 
   $('tp-png').addEventListener('click', exportPNG);
   $('tp-copy').addEventListener('click', exportCopy);
-  $('tp-pdf').addEventListener('click', () => {
-    const prev = pagesEl.style.transform;
-    pagesEl.style.transform = '';
-    window.print();
-    setTimeout(() => { pagesEl.style.transform = prev; fitPages(); }, 500);
+  // تنسيقُ الطباعة في tp-css يتكفّل بإلغاء التحجيم وإخفاء الواجهة
+  $('tp-pdf').addEventListener('click', () => window.print());
+
+  modalClose.addEventListener('click', closeShots);
+  modalAll.addEventListener('click', async () => {
+    for (let i = 0; i < shots.length; i++) {
+      download(shots[i].blob, shots[i].name);
+      if (i < shots.length - 1) await new Promise(r => setTimeout(r, 450));
+    }
+  });
+  modalShare.addEventListener('click', async () => {
+    try { await navigator.share({ files: shotFiles(), title: inTitle.value.trim() || 'قصيدة' }); }
+    catch (e) { /* أُلغِيت المشاركة */ }
+  });
+  modal.addEventListener('click', e => { if (e.target === modal) closeShots(); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && !modal.hidden) closeShots();
   });
 
   window.addEventListener('resize', fitPages);

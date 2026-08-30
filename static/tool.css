@@ -265,7 +265,14 @@ body.dark .tp-count { color: #94a3b8; }
   overflow-y: auto;
   overflow-x: hidden;
 }
-.tp-holder { margin: 0 auto; }
+/* الورقُ داخلها مصغَّرٌ بـ transform وهي على مقاسه، والقَصُّ يمنع أن يفيض
+   ارتفاعُ الورق على المستند لحظةَ إعادة البناء فيقفزَ التمريرُ بالقارئ.
+   وهامشُ القصِّ يُبقي ظِلالَ الورق ظاهرة */
+.tp-holder {
+  margin: 0 auto;
+  overflow: clip;
+  overflow-clip-margin: 40px;
+}
 
 .tp-pages {
   width: 794px;
@@ -336,14 +343,17 @@ body.dark .tp-count { color: #94a3b8; }
   --tp-line: #6b5622; --tp-accent: #e6c168;
 }
 
-/* ورقة القياس: خارج الشاشة، ارتفاعها حرّ */
-.tp-measure {
-  position: absolute !important;
+/* أوراق القياس: خارج الشاشة، ومُثبَتةٌ (fixed) كي لا تدخل في ارتفاع المستند
+   ولا في عَرْضه، فلا يقفز التمريرُ بالقارئ كلَّما أُعيد الرسم */
+.tp-measure,
+.tp-probe {
+  position: fixed !important;
   left: -10000px; top: 0;
-  height: auto !important;
   visibility: hidden;
   pointer-events: none;
+  z-index: -1;
 }
+.tp-measure { height: auto !important; }
 
 .tp-sheet-inner {
   position: relative;
@@ -537,24 +547,136 @@ body.dark .tp-count { color: #94a3b8; }
 .tp-toast.tp-show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
 /* ============================================================
+   لوحة الصُّوَر المصدَّرة
+   ============================================================ */
+.tp-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(28,25,23,.62);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+.tp-modal[hidden] { display: none; }
+
+.tp-modal-box {
+  width: min(38rem, 100%);
+  max-height: 88vh;
+  max-height: 88dvh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 1.1rem 1.2rem 1.2rem;
+  background: #fffaf3;
+  border: 1px solid #fed7aa;
+  border-radius: 1rem;
+  box-shadow: 0 24px 50px -12px rgba(0,0,0,.5);
+}
+body.dark .tp-modal-box {
+  background: #14161c;
+  border-color: rgba(255,255,255,.14);
+}
+
+.tp-modal-head {
+  flex: 0 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: .5rem;
+}
+.tp-modal-title { font-weight: 700; color: #7c2d12; }
+body.dark .tp-modal-title { color: #fbbf24; }
+.tp-modal-x {
+  font-size: 1.5rem; line-height: 1;
+  padding: .1rem .5rem;
+  color: #78716c;
+  border-radius: .5rem;
+}
+.tp-modal-x:hover { background: rgba(0,0,0,.07); }
+body.dark .tp-modal-x { color: #cbd5e1; }
+body.dark .tp-modal-x:hover { background: rgba(255,255,255,.1); }
+
+.tp-modal-hint {
+  flex: 0 0 auto;
+  font-size: .84rem; line-height: 1.95; color: #78716c;
+  margin: .5rem 0 .9rem;
+}
+body.dark .tp-modal-hint { color: #94a3b8; }
+
+.tp-modal-list {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+.tp-shot { display: flex; flex-direction: column; align-items: center; gap: .6rem; }
+.tp-shot img {
+  width: 100%;
+  height: auto;
+  border: 1px solid #e7c9a2;
+  border-radius: .5rem;
+}
+body.dark .tp-shot img { border-color: rgba(255,255,255,.14); }
+
+.tp-modal-foot {
+  flex: 0 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin-top: 1rem;
+}
+
+/* ============================================================
    الطباعة: لا يظهر إلا الورق
    ============================================================ */
 @media print {
   @page { size: A4 portrait; margin: 0; }
-  body { background: #fff !important; }
-  nav, footer, .tp-header, .tp-panel, .tp-stage-bar, .tp-toast,
+  /* الورقةُ ٧٩٤ بكسلًا، وهو عَرْضُ A4 عند ٩٦ نقطةً في البوصة،
+     فيُضبَط عليه عَرْضُ المستند كلِّه حتى لا يُزاح الورقُ على الجوال */
+  html, body {
+    background: #fff !important;
+    width: 794px !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block !important;
+  }
+  nav, footer, .tp-header, .tp-appbar, .tp-panel, .tp-stage-bar, .tp-toast,
+  .tp-modal, .tp-measure, .tp-probe,
   .bg-image-overlay, .bg-night-overlay, .stars-container,
   .menu-overlay, .nav-menu, .search-overlay { display: none !important; }
   main, main > section, main > section > div {
     padding: 0 !important; margin: 0 !important; max-width: none !important;
   }
-  .tp-grid { display: block !important; }
+  .tp-app {
+    display: block !important;
+    height: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .tp-grid { display: block !important; gap: 0 !important; }
   .tp-stage {
+    display: block !important;
     background: none !important; border: none !important;
     box-shadow: none !important; padding: 0 !important;
   }
   .tp-stage-scroll { overflow: visible !important; height: auto !important; }
-  .tp-pages { transform: none !important; gap: 0 !important; }
+  /* المعاينةُ مصغَّرةٌ بـ transform وللحاوية مقاسٌ مضبوطٌ بالسكربت،
+     فيُلغَى ذلك كلُّه لتُطبَع الورقةُ بمقاسها الحقيقيّ */
+  .tp-holder {
+    width: 794px !important; height: auto !important; margin: 0 !important;
+  }
+  .tp-pages {
+    display: block !important;
+    width: 794px !important;
+    transform: none !important;
+    gap: 0 !important;
+    margin: 0 !important;
+  }
   .tp-sheet {
     box-shadow: none !important;
     break-after: page;
