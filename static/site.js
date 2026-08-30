@@ -324,7 +324,9 @@ async function _doSearch(q) {
 }
 
 function openSearch() {
-    document.getElementById('searchModal').classList.remove('hidden');
+    const modal = document.getElementById('searchModal');
+    if (!modal) return;   // صفحاتٌ بلا نافذة بحث (كصفحة الأداة)
+    modal.classList.remove('hidden');
     document.getElementById('searchInput').focus();
     _prefetchAll();
 }
@@ -332,12 +334,15 @@ function openSearch() {
 const SEARCH_HINT = '<p class="search-hint-text">اكتب ثلاثةَ أحرف فأكثر للبحث. البحثُ المُطابِق يُراعي الهمزات والنقاط والتشكيل إن وُجِد. أما التقريبيُّ فبحثٌ مُقارِبٌ لا يُراعي ذلك. للخروج اضغط زرَّ البحث أو انقر على أي مكان فارغ.</p>';
 
 function closeSearch() {
-    document.getElementById('searchModal').classList.add('hidden');
+    const modal = document.getElementById('searchModal');
+    if (!modal) return;
+    modal.classList.add('hidden');
     document.getElementById('searchInput').value = '';
     document.getElementById('searchResults').innerHTML = SEARCH_HINT;
 }
 
-document.getElementById('searchButton').addEventListener('click', function() {
+const _searchBtn = document.getElementById('searchButton');
+if (_searchBtn) _searchBtn.addEventListener('click', function() {
     const modal = document.getElementById('searchModal');
     modal.classList.contains('hidden') ? openSearch() : closeSearch();
 });
@@ -500,19 +505,15 @@ function distributeEvenly(positions, n) {
   return slots;
 }
 
-function stretchCell(cell, font) {
-  const available = cell.clientWidth
-    - parseFloat(getComputedStyle(cell).paddingLeft)
-    - parseFloat(getComputedStyle(cell).paddingRight);
-  // إذا كانت الخلية غير مرئية بعد (الجوال يؤخر الرسم) نتجاهلها
-  if (available <= 10) return;
-  if (!cell.dataset.original) cell.dataset.original = cell.textContent.trim();
-  const originalWords = cell.dataset.original.split(/\s+/);
-  const ctx = getCtx(font);
+// النواة الخالصة: تأخذ نصّ الشطر وعرضًا متاحًا وسياق قياس، وتُرجع النصّ ممدودًا
+function stretchArabicLine(text, available, ctx) {
+  const originalWords = String(text).trim().split(/\s+/).filter(Boolean);
+  if (!originalWords.length) return '';
+  const plain = originalWords.join(' ');
 
   // نجمع الكلمات القابلة للمدّ مع مواضعها
   const wordData = originalWords.map(w => {
-    const orig = w.replace(/[\u064B-\u065F\u0670]/g, '');
+    const orig = w.replace(/[ً-ٰٟ]/g, '');
     const forbidden = [...FORBIDDEN_WORDS].some(fw => orig.includes(fw));
     const tokens = tokenize(w);
     const positions = forbidden ? [] : getAllInsertPositions(tokens);
@@ -521,30 +522,24 @@ function stretchCell(cell, font) {
 
   // العرض الحالي بدون أي وصلات
   const tatweelWidth = ctx.measureText('ـ').width;
+  // خطٌّ لا وصلةَ فيه (أو لم يُحمَّل بعد) يعطي عرضًا صفرًا،
+  // فتصير القسمةُ عليه لانهائيةً ويتجمَّد التوزيع؛ فيُترك الشطرُ على حاله
+  if (!(tatweelWidth > 0.01)) return plain;
   const spaceWidth = ctx.measureText(' ').width;
   const baseTotal = wordData.reduce((s, w) => s + w.baseWidth, 0)
     + spaceWidth * Math.max(0, wordData.length - 1);
 
   // هامش أمان 2% لتجنب فيضان النص بسبب فوارق قياس الخطوط
   const totalGap = (available - baseTotal) * 0.98;
-  if (totalGap <= 0.5) {
-    cell.textContent = originalWords.join(' ');
-    return;
-  }
+  if (totalGap <= 0.5) return plain;
 
   // إجمالي المواضع الصالحة في الشطر كله
   const totalSlots = wordData.reduce((s, w) => s + w.positions.length, 0);
-  if (totalSlots === 0) {
-    cell.textContent = originalWords.join(' ');
-    return;
-  }
+  if (totalSlots === 0) return plain;
 
   // عدد الوصلات الإجمالي المطلوب
   const totalTatweels = Math.floor(totalGap / tatweelWidth);
-  if (totalTatweels <= 0) {
-    cell.textContent = originalWords.join(' ');
-    return;
-  }
+  if (totalTatweels <= 0) return plain;
 
   // توزيع بطريقة "أكبر باقٍ" لضمان أن مجموع الوصلات الموزَّعة = totalTatweels بالضبط
   const exactShares = wordData.map(w => totalTatweels * w.positions.length / totalSlots);
@@ -555,13 +550,21 @@ function stretchCell(cell, font) {
     .sort((a, b) => b.frac - a.frac);
   for (let k = 0; k < remainder; k++) floors[order[k].i]++;
 
-  const result = wordData.map((w, idx) => {
+  return wordData.map((w, idx) => {
     if (!w.positions.length) return tokensToString(w.tokens);
     const slots = distributeEvenly(w.positions, floors[idx]);
     return tokensToString(buildWordFromSlots(w.tokens, slots));
-  });
+  }).join(' ');
+}
 
-  cell.textContent = result.join(' ');
+function stretchCell(cell, font) {
+  const available = cell.clientWidth
+    - parseFloat(getComputedStyle(cell).paddingLeft)
+    - parseFloat(getComputedStyle(cell).paddingRight);
+  // إذا كانت الخلية غير مرئية بعد (الجوال يؤخر الرسم) نتجاهلها
+  if (available <= 10) return;
+  if (!cell.dataset.original) cell.dataset.original = cell.textContent.trim();
+  cell.textContent = stretchArabicLine(cell.dataset.original, available, getCtx(font));
 }
 
 function stretchAll() {

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+    <title>{{ page.title }} | {{ config.title }}</title>
+    <meta name="description" content="{{ page.description }}">
+    <link rel="icon" type="image/svg+xml" href="/icon.svg">
+    <link rel="shortcut icon" href="/icon.svg">
+    <link rel="stylesheet" href="/tailwind.css">
+    <link rel="stylesheet" href="/site.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&family=Reem+Kufi:wght@400;700&display=swap">
+    <link rel="stylesheet" href="/tool.css">
+    <script defer src="/site.js"></script>
+    <script defer src="/tool.js"></script>
+</head>
+<body class="transition-all duration-500 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 pattern flex flex-col" id="body">
+<script>(function(){
+  if(localStorage.getItem('theme')==='dark'){
+    var b=document.body;
+    b.classList.remove('bg-gradient-to-br','from-orange-50','via-amber-50','to-yellow-50','pattern');
+    b.classList.add('bg-gray-900','dark-pattern','dark');
+  }
+})();</script>
+
+<div class="bg-image-overlay"></div>
+<div class="bg-night-overlay"></div>
+
+<!-- ==================== شاشة الأداة: ملءَ النافذة بلا تمرير ==================== -->
+<div class="tp-app" data-pagefind-ignore>
+
+  <header class="tp-appbar">
+    <a href="/" class="tp-brand" aria-label="سيف العشيرة">
+      <img src="/logo.svg" alt="شعار سيف العشيرة">
+    </a>
+
+    <div class="tp-appbar-center">
+      <h1 class="tp-appbar-title">أداة تنسيق الشِّعر</h1>
+      <p class="tp-appbar-lead">
+        ضَعْ قصيدتك، كلَّ شَطْرٍ في سطر، فتُمَدَّ الأشطُر بالوصلات مدًّا موزونًا،
+        ثم صدِّرها صورةً أو مستندًا.
+      </p>
+    </div>
+
+    <a href="/" class="tp-back">
+      <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+      <span>الرجوع إلى المدوّنة</span>
+    </a>
+  </header>
+
+  <div class="tp-grid">
+
+    <!-- ==================== لوحة الإدخال ==================== -->
+    <section class="tp-panel" aria-label="إعدادات التنسيق">
+
+      <div class="tp-field">
+        <label class="tp-label" for="tp-title">عنوان القصيدة <span class="tp-opt">(اختياري)</span></label>
+        <input id="tp-title" class="tp-input" type="text" placeholder="عنوان القصيدة">
+      </div>
+
+      <div class="tp-field">
+        <label class="tp-label" for="tp-input" id="tp-input-label">القصيدة</label>
+        <textarea id="tp-input" class="tp-textarea" spellcheck="false" rows="8"></textarea>
+        <p class="tp-hint">
+          كلُّ شَطْرٍ في سطر، ويُفصَل بين بيتٍ وبيتٍ بسطرٍ خالٍ.
+          والسطرُ الذي يقوم وحدَه يُعرَض ممتدًّا على العَرْض كلِّه (يصلح للعناوين).
+        </p>
+      </div>
+
+      <div class="tp-row">
+        <div class="tp-field">
+          <label class="tp-label" for="tp-mode">نوع الشعر</label>
+          <select id="tp-mode" class="tp-select">
+            <option value="amudi" selected>قصيد</option>
+            <option value="rajaz">رَجَز</option>
+          </select>
+        </div>
+
+        <div class="tp-field" id="tp-sep-field">
+          <label class="tp-label" for="tp-sep">الفاصل بين الشَّطرين</label>
+          <select id="tp-sep" class="tp-select">
+            <option value="line" selected>خطٌّ رأسيّ</option>
+            <option value="none">فراغ (بلا فاصل)</option>
+            <option value="star">نجمة *</option>
+            <option value="rub">۞</option>
+            <option value="dots">؞</option>
+            <option value="custom">فاصلٌ آخر…</option>
+          </select>
+          <input id="tp-sep-custom" class="tp-input tp-hidden" type="text" maxlength="4" placeholder="اكتب الفاصل">
+        </div>
+      </div>
+
+      <div class="tp-field">
+        <label class="tp-label" for="tp-width">ضبط عَرض النصّ</label>
+        <select id="tp-width" class="tp-select">
+          <option value="auto" selected>تلقائيّ</option>
+          <option value="100">العَرْض كلُّه ١٠٠٪</option>
+          <option value="90">٩٠٪</option>
+          <option value="80">٨٠٪</option>
+          <option value="70">٧٠٪</option>
+          <option value="60">٦٠٪</option>
+          <option value="50">٥٠٪</option>
+          <option value="40">٤٠٪</option>
+        </select>
+      </div>
+
+      <div class="tp-row">
+        <div class="tp-field">
+          <label class="tp-label" for="tp-poet">العَزْو <span class="tp-opt">(اختياري)</span></label>
+          <input id="tp-poet" class="tp-input" type="text" placeholder="اسم الشاعر أو المصدر">
+        </div>
+        <div class="tp-field">
+          <label class="tp-label" for="tp-attr">موضع العَزْو</label>
+          <select id="tp-attr" class="tp-select">
+            <option value="head" selected>تحت العنوان</option>
+            <option value="right">أسفلَ النصِّ إلى اليمين</option>
+            <option value="left">أسفلَ النصِّ إلى اليسار</option>
+            <option value="box">أسفلَ النصِّ في إطار</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="tp-row">
+        <div class="tp-field">
+          <label class="tp-label" for="tp-theme">السِّمة</label>
+          <select id="tp-theme" class="tp-select">
+            <option value="saif" selected>سيف العشيرة</option>
+            <option value="paper">ورقيّة</option>
+            <option value="light">بيضاء</option>
+            <option value="dark">داكنة</option>
+            <option value="gold">ذهبيّة</option>
+          </select>
+        </div>
+        <div class="tp-field">
+          <label class="tp-label" for="tp-pattern">الزخرفة</label>
+          <select id="tp-pattern" class="tp-select">
+            <option value="none" selected>بلا زخرفة</option>
+            <option value="stars">نجومٌ ثمانيّة</option>
+            <option value="rhombi">معيَّنات</option>
+            <option value="circles">دوائرُ متشابكة</option>
+            <option value="grid">شبكةٌ ناعمة</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="tp-row">
+        <div class="tp-field">
+          <label class="tp-label" for="tp-family">الخطّ</label>
+          <select id="tp-family" class="tp-select">
+            <option value="kitab" selected>كِتاب</option>
+            <option value="amiri">أميري</option>
+            <option value="scheherazade">شهرزاد</option>
+            <option value="naskh">نسخ نوتو</option>
+            <option value="kufi">ريم كوفي</option>
+          </select>
+        </div>
+        <div class="tp-field">
+          <label class="tp-label" for="tp-font">حجم الخطّ: <span id="tp-font-val">٢٢</span></label>
+          <input id="tp-font" class="tp-range" type="range" min="16" max="28" step="1" value="22">
+        </div>
+      </div>
+
+      <div class="tp-checks">
+        <label class="tp-check"><input type="checkbox" id="tp-numbers" checked> ترقيم الأبيات</label>
+        <label class="tp-check"><input type="checkbox" id="tp-frame" checked> إطار</label>
+      </div>
+
+      <hr class="tp-sep-line">
+
+      <div class="tp-actions">
+        <button type="button" class="tp-btn tp-btn-main" id="tp-png">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span id="tp-png-label">صورة PNG</span>
+        </button>
+        <button type="button" class="tp-btn" id="tp-pdf">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><rect x="6" y="14" width="12" height="8"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/></svg>
+          طباعة / PDF
+        </button>
+        <button type="button" class="tp-btn" id="tp-copy">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          نسخ النصّ
+        </button>
+      </div>
+
+      <p class="tp-note">
+        ترتفع الصورةُ بقَدْر ما تكتب حتى تبلغ صفحةَ A4،
+        فإذا زادت الأبياتُ انقسمت على صُوَرٍ مرقَّمة.
+      </p>
+
+    </section>
+
+    <!-- ==================== لوحة المعاينة ==================== -->
+    <section class="tp-stage" aria-label="المعاينة">
+      <div class="tp-stage-bar">
+        <span class="tp-stage-title">المعاينة</span>
+        <span class="tp-count" id="tp-count"></span>
+      </div>
+      <div class="tp-stage-scroll">
+        <div class="tp-holder" id="tp-holder">
+          <div class="tp-pages" id="tp-pages"></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<div class="tp-toast" id="tp-toast"></div>
+
+</body>
+</html>
