@@ -529,7 +529,6 @@
   // ما بقي من فراغٍ بعد المدّ يُوزَّع على ما بين الكلمات فتستوي حاشيتا الشطر.
   // وهو المخرَجُ للشطر الذي لا موضعَ فيه للوصل أصلًا، كالذي تنتهي كلماتُه
   // بحروفٍ لا تتّصل بما بعدها (ا د ذ ر ز و ة ء…) أو فيه لفظُ الجلالة
-  const JUSTIFY_CAP = 1.2;   // أقصى فراغٍ بين كلمتين، بنسبة حجم الخطّ
 
   function justifyCell(cell, font) {
     cell.style.wordSpacing = '';
@@ -542,8 +541,8 @@
     if (!gaps) return;
     const rest = avail - getCtx(font).measureText(text).width - 1;
     if (rest <= 0.5) return;
-    const cap = parseFloat(cs.fontSize) * JUSTIFY_CAP;
-    cell.style.wordSpacing = Math.min(rest / gaps, cap).toFixed(2) + 'px';
+    // بلا سقف: أهمُّ ما في الأداة أن تنتهي الأشطُر كلُّها عند نقطةٍ واحدة
+    cell.style.wordSpacing = (rest / gaps).toFixed(2) + 'px';
   }
 
   function stretchAllSheets() {

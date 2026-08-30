@@ -465,7 +465,9 @@ function getAllInsertPositions(tokens) {
   const positions = [];
   let lastValid = tokens.length - 1;
   while (lastValid > 0 && PUNCT.has(tokens[lastValid].base)) lastValid--;
-  for (let i = lastValid - 1; i >= 1; i--) {
+  // يبدأ من الحرف الأوّل (i = 0)، فالوصلُ بعده جائزٌ كسائر الحروف الواصلة:
+  // «هَوًى» تصير «هــوًى»، ولولا ذلك لم يكن في الكلمة الثلاثيّة موضعٌ للمدّ
+  for (let i = lastValid - 1; i >= 0; i--) {
     if (PUNCT.has(tokens[i + 1]?.base)) continue;
     const nextBase = tokens[i + 1]?.base;
     if (tokens[i].base === 'ل' && nextBase && 'اأإآٱ'.includes(nextBase)) continue;
